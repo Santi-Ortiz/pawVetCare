@@ -1,6 +1,8 @@
 # pawVetCare
 
 Descripción
+![image](https://github.com/user-attachments/assets/ab2b24cc-dc97-4096-aef1-8c382a7054d0)
+
 
 PawVetCare es una clínica veterinaria ubicada en Bogotá, Colombia, dedicada a proporcionar el mejor cuidado y bienestar para tus mascotas. Este proyecto web tiene como objetivo digitalizar y optimizar la gestión de la clínica, ofreciendo a los usuarios una experiencia interactiva y completa para el cuidado de sus mascotas.
 
