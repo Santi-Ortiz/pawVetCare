@@ -755,6 +755,16 @@ body {
     color: #FFFFFFFF;
 }
 
+.container-satisfechos {
+    position: absolute; 
+    top: 3963px; 
+    left: 1px; 
+    width: 100%; 
+    height: 1173px; 
+    background: #BFD5D8FF; 
+    border-radius: 0px; 
+}
+
 .satisfecho1img {
     position: absolute; 
     top: 146px; 
