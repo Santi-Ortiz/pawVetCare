@@ -13,20 +13,20 @@
 <body>
     <!-- Barra superior con navegación -->
     <header class="top-bar">
-        <a href="../landingPage.html">
+        <a th:href="@{/home}">
             <img src="../assets/isologoAzul.png" alt="Logo Azul">
         </a>
         <!-- Botones de navegación -->
         <nav>
             <div class="header-menu">
-                <a href="../landingPage.html" class="header-menu-item selected">HOME<div class="indicator"></div></a>
-                <a href="../html/equipo.html" class="header-menu-item">EQUIPO</a>
-                <a href="../html/contacto.html" class="header-menu-item">CONTACTO</a>
+                <a th:href="@{/home}" class="header-menu-item selected">HOME<div class="indicator"></div></a>
+                <a th:href="@{/equipo}" class="header-menu-item">EQUIPO</a>
+                <a href="../contacto.html" class="header-menu-item">CONTACTO</a>
             </div>
         </nav>
         <div class="button-container">
-            <a href="../html/iniciarSesion.html" class="buttonSoyPVC">Soy PVC</a>
-            <a href="../html/registro.html" class="buttonSinCuenta">NO TENGO CUENTA</a>
+            <a href="../iniciarSesion.html" class="buttonSoyPVC">Soy PVC</a>
+            <a href="../registro.html" class="buttonSinCuenta">NO TENGO CUENTA</a>
         </div>
     </header>
     <main>

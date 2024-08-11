@@ -13,16 +13,16 @@
 <body>
     <!-- Barra superior con navegación -->
     <header class="top-bar">
-        <a href="../landingPage.html">
+        <a th:href="@{/home}">
             <img src="../assets/isologoAzul.png" alt="Logo Azul">
         </a>
         <!-- Botones de navegación -->
         <nav>
             <div class="header-menu">
-                <a href="../landingPage.html" class="header-menu-item">
+                <a th:href="@{/home}" class="header-menu-item">
                     HOME
                 </a>
-                <a href="../html/equipo.html" class="header-menu-item selected">
+                <a th:href="@{/equipo}" class="header-menu-item selected">
                     EQUIPO
                     <div class="indicator"></div>
                 </a>
