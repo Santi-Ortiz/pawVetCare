@@ -21,12 +21,12 @@
             <div class="header-menu">
                 <a th:href="@{/home}" class="header-menu-item selected">HOME<div class="indicator"></div></a>
                 <a th:href="@{/equipo}" class="header-menu-item">EQUIPO</a>
-                <a href="../contacto.html" class="header-menu-item">CONTACTO</a>
+                <a th:href="@{/contacto}" class="header-menu-item">CONTACTO</a>
             </div>
         </nav>
         <div class="button-container">
-            <a href="../iniciarSesion.html" class="buttonSoyPVC">Soy PVC</a>
-            <a href="../registro.html" class="buttonSinCuenta">NO TENGO CUENTA</a>
+            <a th:href="@{/iniciarSesion}" class="buttonSoyPVC">Soy PVC</a>
+            <a th:href="@{/registro}" class="buttonSinCuenta">NO TENGO CUENTA</a>
         </div>
     </header>
     <main>
@@ -34,8 +34,8 @@
         <section class="content">
             <p class="primerTitulo">¡El amor tiene cuatro patas!</p>
             <p class="primerSubtitulo">Sabemos lo importante que es para ti tener un segundo hogar donde tu mascota sea el centro de todo</p>
-            <button class="cuidarButton" onclick="location.href='../html/registro.html'" type="button">Quiero cuidar a mi mascota</button>
-            <p class="yaSoyButton" onclick="location.href='../html/iniciarSesion.html'">YA SOY PetVetCitizen</p>
+            <a class="cuidarButton" th:href="@{/registro}" type="button">Quiero cuidar a mi mascota</a>
+            <a class="yaSoyButton" th:href="@{/iniciarSesion}">YA SOY PetVetCitizen</a>
             <img class="perroPortadaRosa" src="../assets/goldenPortadaRosa.png" alt="Perro Principal Rosa">
             <img class="perroPortada" src="../assets/goldenPortada.png" alt="Perro Principal">
             <img class="gatoPortadaAzul" src="../assets/gatoPortadaAzul.png" alt="Gato Principal Azul">
@@ -131,7 +131,8 @@
                 <p class="septimoTitulo">¡Sé un PetVetCitizen ya!</p>
                 <img class="enganche1img" src="../assets/enganche1.png" alt="Enganche 1">
                 <img class="enganche2img" src="../assets/enganche2.png" alt="Enganche 2">
-                <button class="buttonUltimoCuidar" onclick="location.href='../html/registro.html'" type="button">Cuidar ya a mi mascota</button>
+                <a class="buttonUltimoCuidar" th:href="@{/registro}" type="button">Cuidar ya a mi mascota</a>
+
             </div>
         </section>
         <!-- Pie de página -->
