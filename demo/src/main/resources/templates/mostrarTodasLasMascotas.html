@@ -6,7 +6,7 @@
     <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
     <title>PawVetCare | Mostrar Todas Las Mascotas</title>
     <!-- Enlace al archivo CSS específico para la página -->
-    <link rel="stylesheet" href="../css/mostrar_todas_mascotas.css">
+    <link rel="stylesheet" href="../css/mostrarTodasLasMascotas.css">
     <!-- Favicon -->
     <link rel="shortcut icon" href="../assets/imagotipoAzul.png" type="image/x-icon">
 </head>
@@ -29,40 +29,35 @@
             <a th:href="@{/registro}" class="buttonSinCuenta">NO TENGO CUENTA</a>
         </div>
     </header>
-    <h1>MASCOTAS</h1>
-    <section>
-    <ul>    
-        <li th:each="animal: ${mascotas}" th:text="${animal.nombre}"></li>
-    </ul>
-    <br>
-    <br>
-    <div>
-        <table class="tabla">
-            <thead>
-                <tr>
-                    <th>NOMBRE</th>
-                    <th>RAZA</th>
-                    <th>EDAD</th>
-                    <th>PESO</th>
-                    <th>ENFERMEDAD</th>
-                    <th>FOTO</th>
-                    <th>ESTADO</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="animal: ${mascotas}">
-                    <td th:text="${animal.nombre}"></td>
-                    <td th:text="${animal.raza}"></td>
-                    <td th:text="${animal.edad}"></td>
-                    <td th:text="${animal.peso}"></td>
-                    <td th:text="${animal.enfermedad}"></td>
-                    <td><img th:src="${animal.foto}" alt="cat"></td>
-                    <td th:text="${animal.estado}"></td>
-                </tr>
-            </tbody>
+    <section class = "content">
+        <div class="container-mascotas">
+            <p class="primerTitulo">Mascotas</p>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>NOMBRE</th>
+                        <th>RAZA</th>
+                        <th>EDAD</th>
+                        <th>PESO</th>
+                        <th>ENFERMEDAD</th>
+                        <th>FOTO</th>
+                        <th>ESTADO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="animal: ${mascotas}">
+                        <td th:text="${animal.nombre}"></td>
+                        <td th:text="${animal.raza}"></td>
+                        <td th:text="${animal.edad}"></td>
+                        <td th:text="${animal.peso}"></td>
+                        <td th:text="${animal.enfermedad}"></td>
+                        <td><img th:src="${animal.foto}" alt="cat"></td>
+                        <td th:text="${animal.estado}"></td>
+                    </tr>
+                </tbody>
 
-        </table>
-    </div>
+            </table>
+        </div>
     </section>
     <!-- Pie de página -->
     <footer class="footer">
