@@ -52,7 +52,12 @@
                         <td th:text="${animal.peso}"></td>
                         <td th:text="${animal.enfermedad}"></td>
                         <td><img th:src="${animal.foto}" alt="cat"></td>
-                        <td th:text="${animal.estado}"></td>
+                        <td>
+                            <div class="estado">
+                                <img th:if="${animal.estado == true}" th:src="@{/assets/check.png}" alt="Check icon">
+                                <img th:if="${animal.estado == false}" th:src="@{/assets/wrong.png}" alt="Wrong icon">
+                            </div> 
+                        </td>
                     </tr>
                 </tbody>
 

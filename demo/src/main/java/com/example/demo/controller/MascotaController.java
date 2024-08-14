@@ -14,7 +14,7 @@ public class MascotaController {
 
     @Autowired
     MascotaService mascotaService;
-    
+          
     // http://localhost:8080/mascota/todas
      @GetMapping("/todas")
      public String mostrarMascotas(Model model){

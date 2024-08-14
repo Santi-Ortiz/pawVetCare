@@ -212,6 +212,12 @@ th, td {
     border-radius: 12px;
 }
 
+.estado img {
+    width: 100px;
+    border-radius: 0px;
+    margin: 0;
+}
+
 .footer {
     position: fixed;
     background: #171A1FFF;
