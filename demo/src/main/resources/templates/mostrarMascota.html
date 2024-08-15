@@ -46,12 +46,12 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td> <img th:src="${mascota.foto}" alt="cat"></td>
                             <td th:text="${mascota.nombre}"></td>
                             <td th:text="${mascota.raza}"></td>
                             <td th:text="${mascota.edad}"></td>
                             <td th:text="${mascota.peso}"></td>
                             <td th:text="${mascota.enfermedad}"></td>
-                            <td> <img th:src="${mascota.foto}" alt="cat"></td>
                             <td>
                                 <div class="estado">
                                     <img th:if="${mascota.estado == true}" th:src="@{/assets/check.png}" alt="Check icon">

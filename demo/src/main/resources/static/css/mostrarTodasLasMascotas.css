@@ -192,8 +192,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: auto;
+    border: 1px solid black;
     opacity: 1; 
-    border-radius: 6px;
 }
 
 th, td {
