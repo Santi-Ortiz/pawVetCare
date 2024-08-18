@@ -15,7 +15,7 @@ public class LandingController {
         return "landingPage";
     }
 
-        @GetMapping("/login")
+    @GetMapping("/login")
     public String mostrarLogin(Model model){
         return "loginCliente";
     }

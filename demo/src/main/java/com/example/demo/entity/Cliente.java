@@ -20,14 +20,14 @@ public class Cliente{
     //@OneToMany(mappedBy = "cliente")
     private Map<Long, Mascota> mascotas = new HashMap<>();
 
-    public Cliente(Integer cedula, String nombre, String correo, Long celular) {
+    public Cliente(Long id,Integer cedula, String nombre, String correo, Long celular, Map<Long, Mascota> mascotas) {
+        this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
+        this.mascotas = mascotas;
     }
-
-    
 
     public Long getId() {
         return id;

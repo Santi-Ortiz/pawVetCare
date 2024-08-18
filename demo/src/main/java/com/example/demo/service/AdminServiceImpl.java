@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.repository.AdminRepository;
+import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.MascotaRepository;
 
 import java.util.*;
@@ -17,6 +19,9 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     AdminRepository repoAdmin;
 
+    @Autowired
+    ClienteRepository repoCliente;
+
     @Override
     public Mascota SearchPetById(Long id) {
         return repoMascota.findById(id);
@@ -26,5 +31,14 @@ public class AdminServiceImpl implements AdminService {
     public Collection<Mascota> SearchAllPets() {
         return repoMascota.findAll();
     }
+
+    @Override
+    public Collection<Cliente> SearchAllClients(){
+        return repoCliente.findAll();
+    }
     
+    @Override
+    public Cliente SearchClientById(Long id){
+        return repoCliente.findById(id);
+    }
 }

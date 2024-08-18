@@ -2,8 +2,7 @@ package com.example.demo.service;
 
 import java.util.Collection;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 public interface AdminService {
 
@@ -11,4 +10,7 @@ public interface AdminService {
  
     public Collection<Mascota> SearchAllPets();
 
+    public Collection<Cliente> SearchAllClients();
+
+    public Cliente SearchClientById(Long id);
 }

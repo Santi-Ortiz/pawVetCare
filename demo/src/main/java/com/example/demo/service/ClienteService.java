@@ -15,6 +15,10 @@ public interface ClienteService {
     
     public Cliente eliminarCliente(Cliente cliente);
 
+    public Collection<Mascota> buscarMascotas();
+
+    public Mascota buscarMascotaPorID(Long id);
+
     public void agregarMascota(Long cliente_id, Mascota mascota);
 
     public void eliminarMascota(Long cliente_id, Mascota mascota);

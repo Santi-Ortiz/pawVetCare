@@ -33,6 +33,16 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente eliminarCliente(Cliente cliente){
         return clienteRepository.delete(cliente);
     }
+
+    @Override
+    public Collection<Mascota> buscarMascotas(){
+        return clienteRepository.findAllPets();
+    }
+
+    @Override
+    public Mascota buscarMascotaPorID(Long id){
+        return clienteRepository.findPetById(id);
+    }
     
     @Override
     public void agregarMascota(Long cliente_id, Mascota mascota){

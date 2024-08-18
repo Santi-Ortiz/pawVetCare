@@ -31,8 +31,17 @@ public class MascotaController {
      // http://localhost:8090/mascota/find/
      @GetMapping("/find/{id}")
      public String mostrarInfoMascota(Model model, @PathVariable("id") Long identificacion ){
-        model.addAttribute("mascota", mascotaService.SearchById(identificacion)); 
-        return "mostrarMascotaAdmin";
+
+         Mascota mascota = mascotaService.SearchById(identificacion);
+
+         if(mascota != null){
+            model.addAttribute("mascota", mascota); 
+         } else {
+            throw new NotPetFoundException(identificacion);
+         }
+
+         model.addAttribute("mascota", mascotaService.SearchById(identificacion));
+         return "mostrarMascotaAdmin";
      }
 
      // http://localhost:8090/mascota/add
@@ -57,7 +66,7 @@ public class MascotaController {
         return "redirect:/mascota/todas";
      }
 
-    // http://localhost:8090/mascota/update/1
+    // http://localhost:8090/mascota/update/{id}
      @GetMapping("/update/{id}")
      public String actualizarInfoMascota(@PathVariable("id") Long identificacion, Model model) {
       Mascota mascota = mascotaService.SearchById(identificacion);
@@ -65,7 +74,7 @@ public class MascotaController {
       return "mostrarMascotaAdmin"; // Asegúrate de que esta vista tenga el formulario
    }
 
-     // http://localhost:8090/mascota/update/1
+     // http://localhost:8090/mascota/update/{id}
      @PostMapping("/update/{id}")
      public String actualizarMascota(@PathVariable("id") int  identificacion, @ModelAttribute("mascota") Mascota mascota) {
          mascotaService.updateMascota(mascota);
