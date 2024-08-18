@@ -37,8 +37,8 @@ function enviarDatos() {
         estado: estado,
         url: url
     };
-
-    fetch('URL_DEL_SERVIDOR', {
+    
+    /*fetch('URL_DEL_SERVIDOR', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -60,5 +60,5 @@ function enviarDatos() {
     })
     .catch((error) => {
         console.error('Error:', error);
-    });
+    });*/
 }
