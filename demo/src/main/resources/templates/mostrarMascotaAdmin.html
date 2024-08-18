@@ -71,11 +71,13 @@
                             <span class="icon">✎</span>
                             <span class="text">Editar todo</span>
                         </button>
-                        <button class="eliminar-btn" id="eliminarBtn" onclick="toggleEliminar()">
-                            <span class="icon">x</span>
-                            <span class="text">Eliminar</span>
-                        </button>
                     </div>
+                </form>
+                <form id="mascota_delete" th:action="@{/mascota/delete/{id}(id=${mascota.id})}">
+                    <button class="eliminar-btn" id="eliminarBtn" onclick="toggleEliminar()">
+                        <span class="icon">x</span>
+                        <span class="text">Eliminar</span>
+                    </button>
                 </form>
             </div>  
         </section>

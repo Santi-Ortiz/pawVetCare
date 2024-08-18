@@ -1,8 +1,9 @@
 function toggleEliminar() {
     const botonEliminar = document.getElementById("eliminarBtn");
     botonEliminar.classList.toggle("expanded");
+
     if (botonEliminar.classList.contains("expanded")) {
-        form.submit();
+        mascota_delete.submit();
     } else {
         botonEliminar.classList.add("expanded");
     }
