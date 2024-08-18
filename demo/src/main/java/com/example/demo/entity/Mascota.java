@@ -18,11 +18,12 @@ public class Mascota{
     private String enfermedad;
     private String foto;
     private Boolean estado;
-
+    private Long idCliente;
     //@ManyToOne
-    private Cliente cliente;
+    //private Cliente cliente;
 
-    public Mascota(String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto, Boolean estado) {
+    public Mascota(Long id, String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto, Boolean estado, Long idCliente) {
+        this.id = id;
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -30,6 +31,7 @@ public class Mascota{
         this.enfermedad = enfermedad;
         this.foto = foto;
         this.estado = estado;
+        this.idCliente = idCliente;
     }
 
     
@@ -97,6 +99,17 @@ public class Mascota{
         this.estado = estado;
     }
 
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    /* 
     public Cliente getCliente() {
         return cliente;
     }
@@ -104,4 +117,7 @@ public class Mascota{
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+    */
+
+    
 }

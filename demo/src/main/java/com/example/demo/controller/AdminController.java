@@ -29,5 +29,6 @@ public class AdminController {
         model.addAttribute("mascota", adminService.SearchPetById(identificacion)); 
         return "mostrarMascotaAdmin";
     }
+
     
 }
