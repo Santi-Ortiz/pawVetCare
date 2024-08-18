@@ -17,7 +17,7 @@ public class AdminController {
     private AdminService adminService;
 
 
-    @GetMapping("/todas")
+    @GetMapping("/mascotas")
     public String mostrarMascotasAdmin(Model model){
         model.addAttribute("mascotas", adminService.SearchAllPets());
         return "mascotasAdmin";
