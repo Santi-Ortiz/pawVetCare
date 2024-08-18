@@ -19,15 +19,18 @@
         </a>
         <!-- Botones de navegación -->
         <nav>
-            <div class="header-menu">
-                <a th:href="@{/home}" class="header-menu-item selected">HOME<div class="indicator"></div></a>
-                <a th:href="@{/equipo}" class="header-menu-item">EQUIPO</a>
-                <a th:href="@{/contacto}" class="header-menu-item">CONTACTO</a>
-            </div>
+            <nav>
+                <div class="header-menu">
+                    <a th:href="@{/home}" class="header-menu-item">DASHBOARD<div class="indicator"></div></a>
+                    <a th:href="@{/admin/mascotas}" class="header-menu-item selected">MASCOTAS<div class="indicator"></div></a>
+                    <a th:href="@{/contacto}" class="header-menu-item">VETERINARIOS</a>
+                    <a th:href="@{/contacto}" class="header-menu-item">CLIENTES</a>
+                    <a th:href="@{/contacto}" class="header-menu-item">INICIALIZACIÓN</a>
+                </div>
+            </nav>
         </nav>
         <div class="button-container">
-            <a th:href="@{/iniciarSesion}" class="buttonSoyPVC">Soy PVC</a>
-            <a th:href="@{/registro}" class="buttonSinCuenta">NO TENGO CUENTA</a>
+            <a th:href="@{/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
         </div>
     </header>
     <section class = "content">
