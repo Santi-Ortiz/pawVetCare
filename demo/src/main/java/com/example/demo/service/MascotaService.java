@@ -5,7 +5,13 @@ import java.util.Collection;
 import com.example.demo.entity.Mascota;
 public interface MascotaService {
 
-    public Mascota SearchById(int id);
+    public Mascota SearchById(Long id);
  
     public Collection<Mascota> SearchAll();
+
+    public void deleteById(Long id);
+
+    public void updateMascota(Mascota mascota);
+
+    public void add(Mascota mascota);
 }

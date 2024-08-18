@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
     <title>PawVetCare | Mostrar Todas Las Mascotas</title>
@@ -42,6 +43,7 @@
                         <th>PESO</th>
                         <th>ENFERMEDAD</th>
                         <th>ESTADO</th>
+                        <th>INFORMACIÓN ESPECÍFICA</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +59,9 @@
                                 <img th:if="${animal.estado == true}" th:src="@{/assets/check.png}" alt="Check icon">
                                 <img th:if="${animal.estado == false}" th:src="@{/assets/wrong.png}" alt="Wrong icon">
                             </div> 
+                        </td>
+                        <td>
+                            <a th:href=""></a>
                         </td>
                     </tr>
                 </tbody>

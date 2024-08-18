@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class EquipoController {
     
+    // localhost:8090/equipo
     @GetMapping("/equipo")
     public String home(){
         return "equipo";

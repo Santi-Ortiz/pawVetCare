@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class LandingController {
     
+    // localhost:8090/home
     @GetMapping("/home")
     public String home(){
         return "landingPage";

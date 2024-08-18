@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class IniciarSesionController {
     
+    // localhost:8090/iniciarSesion
     @GetMapping("/iniciarSesion")
     public String home(){
         return "iniciarSesion";

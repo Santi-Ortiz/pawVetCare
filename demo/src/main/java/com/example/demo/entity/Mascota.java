@@ -1,17 +1,16 @@
 package com.example.demo.entity;
 
-/*import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;*/
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 
 public class Mascota{
-    /* 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    */
-    //private Long id;
+
+    /*@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)*/
+    private Long id;
     private String nombre;
     private String raza;
     private Integer edad;
@@ -20,8 +19,10 @@ public class Mascota{
     private String foto;
     private Boolean estado;
 
-   public Mascota(String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto, Boolean estado) {
-        //this.id = id;
+    //@ManyToOne
+    private Cliente cliente;
+
+    public Mascota(String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto, Boolean estado) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -31,7 +32,7 @@ public class Mascota{
         this.estado = estado;
     }
 
-    /*
+    
     public Long getId() {
         return id;
     }
@@ -39,8 +40,7 @@ public class Mascota{
     public void setId(Long id) {
         this.id = id;
     }
-    */
-
+    
     public String getNombre() {
         return nombre;
     }
@@ -97,5 +97,11 @@ public class Mascota{
         this.estado = estado;
     }
 
-    
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 }

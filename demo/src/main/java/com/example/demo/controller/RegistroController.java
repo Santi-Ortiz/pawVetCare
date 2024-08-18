@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class RegistroController {
+
+    // localhost:8090/registro
     @GetMapping("/registro")
     public String home(){
         return "registro";
