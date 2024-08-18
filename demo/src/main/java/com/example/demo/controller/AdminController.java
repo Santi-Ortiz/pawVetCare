@@ -25,8 +25,8 @@ public class AdminController {
     }
 
     @GetMapping("/mascotas/{id}")
-    public String mostrarInfoMascota(Model model, @PathVariable("id") Long identificacion){
-        model.addAttribute("mascotas", adminService.SearchPetById(identificacion)); 
+    public String mostrarInfoMascotaAdmin(Model model, @PathVariable("id") Long identificacion){
+        model.addAttribute("mascota", adminService.SearchPetById(identificacion)); 
         return "mostrarMascotaAdmin";
     }
     
