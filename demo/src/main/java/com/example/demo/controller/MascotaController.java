@@ -19,14 +19,14 @@ public class MascotaController {
      @GetMapping("/todas")
      public String mostrarMascotas(Model model){
         model.addAttribute("mascotas", mascotaService.SearchAll());
-        return "mostrarTodasLasMascotas";
+        return "mascotasAdmin";
      }
 
      // http://localhost:8080/mascota/find/
      @GetMapping("/find/{id}")
      public String mostrarInfoMascota(Model model, @PathVariable("id") int identificacion ){
         model.addAttribute("mascota", mascotaService.SearchById(identificacion)); 
-        return "mostrarMascota";
+        return "mostrarMascotaAdmin";
      }
 
 }

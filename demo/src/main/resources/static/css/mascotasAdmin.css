@@ -207,13 +207,37 @@ th, td {
     border-collapse: collapse;
 }
 
+.tabla th {
+  background-color: #BFD4D7;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.tabla tr:nth-child(even) {
+    background-color: #ffffff;
+    color: black;
+}
+  
+.tabla tr:nth-child(odd) {
+    background-color: #FAFAFB;
+    color: black;
+}
+  
+.tabla tr:hover {
+    background-color: #9eff36;
+}
+
 .tabla img {
-    width: 200px;
-    border-radius: 12px;
+    width: 87px; 
+    height: 87px;
+    border-radius: 44px;
 }
 
 .estado img {
-    width: 100px;
+    width: 40px; 
+    height: 40px;
     border-radius: 0px;
     margin: 0;
 }

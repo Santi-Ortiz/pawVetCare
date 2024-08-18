@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
+        <title>PawVetCare | Mostrar Mascota</title>
+        <!-- Enlace al archivo CSS específico para la página -->
+        <link rel="stylesheet" th:href="@{/css/mostrarMascotaAdmin.css}">
+        <!-- Favicon -->
+        <link rel="shortcut icon" th:href="@{/assets/imagotipoAzul.png}" type="image/x-icon">
+    </head>
+    <body>
+        <!-- Barra superior con navegación -->
+        <header class="top-bar">
+            <a th:href="@{/home}">
+                <img th:src="@{/assets/isologoAzul.png}" alt="Logo Azul">
+            </a>
+            <!-- Botones de navegación -->
+            <nav>
+                <div class="header-menu">
+                    <a th:href="@{/home}" class="header-menu-item selected">HOME<div class="indicator"></div></a>
+                    <a th:href="@{/equipo}" class="header-menu-item">EQUIPO</a>
+                    <a th:href="@{/contacto}" class="header-menu-item">CONTACTO</a>
+                </div>
+            </nav>
+            <div class="button-container">
+                <a th:href="@{/iniciarSesion}" class="buttonSoyPVC">Soy PVC</a>
+                <a th:href="@{/registro}" class="buttonSinCuenta">NO TENGO CUENTA</a>
+            </div>
+        </header>
+        <section class = "content">
+            <div class="container-informacion">
+                <p class="primerTitulo">Información Mascota</p>
+                <div class="containerMascota">
+                    <p class="tituloAcciones">Acciones:</p>
+                    <div class="info-item">
+                        <small class="info-title">Nombre:</small>
+                        <label class="info-label" id="nombreLabel" th:text="${mascota.nombre}"></label>
+                    </div>
+                    <img class="estadoimg" id="estadoImg" th:if="${mascota.estado == true}" th:src="@{/assets/check.png}" alt="Estado">
+                    <img class="estadoimg" id="estadoImg" th:if="${mascota.estado == false}" th:src="@{/assets/wrong.png}" alt="Estado">
+                    <div class="info-itemRaza">
+                        <small class="info-title">Raza:</small>
+                        <label class="info-label" th:text="${mascota.raza}"></label>
+                    </div>
+                    <div class="info-itemEdad">
+                        <small class="info-title">Edad:</small>
+                        <label class="info-label" th:text="${mascota.edad}"></label>
+                    </div>
+                    <div class="info-itemPeso">
+                        <small class="info-title">Peso:</small>
+                        <label class="info-label" th:text="${mascota.peso}"></label>
+                    </div>
+                    <div class="info-itemEnfermedad">
+                        <small class="info-title">Enfermedad:</small>
+                        <label class="info-label" th:text="${mascota.enfermedad}"></label>
+                    </div>
+                    <div class="info-itemDueño">
+                        <small class="info-title">Dueño C.C.:</small>
+                        <label class="info-label" th:text="${mascota.enfermedad}"></label>
+                    </div>
+                    <div class="info-itemFoto">
+                        <small class="info-title">URL Foto:</small>
+                        <label class="info-label" th:text="${mascota.enfermedad}"></label>
+                    </div>
+                    <img class="mascotaimg" th:src="${mascota.foto}" alt="cat">
+                    <div class="container-botones">
+                        <button class="editar-btn" id="editarBtn" onclick="toggleEditar()">
+                            <span class="icon">✎</span>
+                            <span class="text">Editar todo</span>
+                        </button>
+                        <button class="eliminar-btn" id="eliminarBtn" onclick="toggleEliminar()">
+                            <span class="icon">x</span>
+                            <span class="text">Eliminar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>  
+        </section>
+        <!-- Pie de página -->
+        <footer class="footer">
+            <img th:src="@{/assets/logotipoRosado.png}" alt="Logo Footer">
+            <p class="direccion">Carrera 13 #140 - 52A, Bogotá, Colombia</p>
+            <p class="correo">info@petvetc.com</p>
+            <p class="derechos">© 2024 SLM, Inc.</p>
+            <div class="iconos">
+                <img th:src="@{/assets/iconos.png}" alt="Iconos Footer">
+            </div>
+        </footer>
+    </body>
+    <script th:src="@{/js/mostrarMascotaAdmin.js}"></script>
+</html>
