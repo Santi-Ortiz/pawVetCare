@@ -418,7 +418,19 @@ img.mascotaimg {
     flex-direction: column;
     top: 240px; 
     left: 90px;
-    width: 678px;
+    width: 340px;
+    background-color: #fff;
+    padding: 18px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemEstado{
+    position: absolute;
+    flex-direction: column;
+    top: 240px; 
+    left: 485px;
+    width: 283px;
     background-color: #fff;
     padding: 18px;
     border-radius: 15px;

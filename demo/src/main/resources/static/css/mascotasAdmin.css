@@ -183,56 +183,421 @@ body {
     font-weight: bold;
 }
 
-
-.tabla {
-    margin-top: 100px; 
-    font-family: Poppins, arial, sans-serif;
-    border-collapse: collapse;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: auto;
-    border: 1px solid black;
-    opacity: 1; 
+.primerTitulo {
+    position: absolute; 
+    top: 90px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #9095A0;
 }
 
-th, td {
+.segundoTitulo {
+    position: absolute; 
+    top: 160px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842FF;
+}
+
+.tercerTitulo {
+    position: absolute; 
+    top: 480px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842FF;
+}
+
+.carrusel-container {
+    position: relative;
+    margin-top: 120px;
+    left: 88px; 
+    width: 1540px; 
+    height: 200px;
+    background: #BFD5D8FF;
+    border-radius: 12px;
+    box-shadow: 0px 0px 1px #89989b, 0px 0px 2px #89989b;
+    padding: 20px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: left;
+}
+
+.carrusel {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+.mascota-item {
+    min-width: 100%;
+    box-sizing: border-box;
     padding: 10px;
-    text-align: center;
-    font-family: Outfit;
-    align-items: center;
-    border: 1px solid black;
-    font-family: Poppins, arial, sans-serif;
-    margin: 0 auto;
-    border-collapse: collapse;
+    margin-left:100px;
+    text-align: left;
 }
 
-.tabla th {
-  background-color: #BFD4D7;
-  font-size: 20px;
-  color: white;
-  font-weight: bold;
-  text-align: center;
+.mascota-foto {
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
 }
 
-.tabla tr:nth-child(even) {
-    background-color: #ffffff;
-    color: black;
-}
-  
-.tabla tr:nth-child(odd) {
-    background-color: #FAFAFB;
-    color: black;
-}
-  
-.tabla tr:hover {
-    background-color: #9eff36;
+.carrusel-prev, .carrusel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
 }
 
-.tabla img {
-    width: 87px; 
-    height: 87px;
-    border-radius: 44px;
+.carrusel-prev img, .carrusel-next img {
+    width: 40px;
+    height: auto;
+}
+
+.carrusel-prev {
+    left: 10px;
+}
+
+.carrusel-next {
+    right: 10px;
+}
+
+.estado-icon {
+    font-size: 1.5em;
+}
+
+.info-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-text {
+    width: 150%;
+    height: 0;
+    padding: 10px;
+    font-family: Poppins;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.estadoimg {
+    position: absolute;
+    width: 50px; 
+    height: 50px; 
+    top: 60px;
+    margin-left: 20px;
+}
+
+.info-itemNombre {
+    position: absolute;
+    width: 200px;
+    top: 55px;
+    margin-left: 240px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemRaza {
+    position: absolute;
+    width: 200px;
+    top: 55px;
+    margin-left: 480px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemEdad {
+    position: absolute;
+    width: 80px;
+    top: 55px;
+    margin-left: 720px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemPeso {
+    position: absolute;
+    width: 100px;
+    top: 55px;
+    margin-left: 840px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemEnfermedad {
+    position: absolute;
+    width: 230px;
+    top: 55px;
+    margin-left: 980px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.info-button {
+    position: absolute;
+    top: 60px;
+    width: 80px;
+    height: 44px;
+    justify-content: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    color: #BED6D8;
+    background: #1A292B;
+    border: none;
+    border-radius: 22px;
+    text-decoration: none;
+    margin-left: 1100px;
+}
+
+.info-button:hover {
+    color: #FFFFFFFF;
+    background: #89989b;
+}
+
+.carrusel-container {
+    position: relative;
+    top: 200px;
+    left: 88px; 
+    width: 1540px; 
+    height: 200px;
+    background: #BFD5D8FF;
+    border-radius: 12px;
+    padding: 20px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: left;
+}
+
+.carrusel {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+.mascota-item {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-left:100px;
+    text-align: left;
+}
+
+.mascota-foto {
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
+}
+
+.carrusel-prev, .carrusel-next {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+.carrusel-prev img, .carrusel-next img {
+    width: 40px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.carrusel-prev {
+    left: 40px;
+}
+
+.carrusel-next {
+    right: 80px;
+}
+
+.estado-icon {
+    font-size: 1.5em;
+}
+
+.info-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-text {
+    width: 150%;
+    height: 0;
+    padding: 10px;
+    font-family: Poppins;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.estadoimg {
+    position: absolute;
+    width: 50px; 
+    height: 50px; 
+    top: 60px;
+    margin-left: 20px;
+}
+
+.info-itemNombre {
+    position: absolute;
+    width: 200px;
+    top: 55px;
+    margin-left: 240px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemRaza {
+    position: absolute;
+    width: 200px;
+    top: 55px;
+    margin-left: 480px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemEdad {
+    position: absolute;
+    width: 80px;
+    top: 55px;
+    margin-left: 720px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemPeso {
+    position: absolute;
+    width: 100px;
+    top: 55px;
+    margin-left: 840px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemEnfermedad {
+    position: absolute;
+    width: 230px;
+    top: 55px;
+    margin-left: 980px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.info-button {
+    position: absolute;
+    top: 60px;
+    width: 80px;
+    height: 44px;
+    justify-content: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    color: #BED6D8;
+    background: #1A292B;
+    border: none;
+    border-radius: 22px;
+    text-decoration: none;
+    margin-left: 1100px;
+}
+
+.info-button:hover {
+    color: #FFFFFFFF;
+    background: #89989b;
 }
 
 .estado img {
@@ -240,6 +605,159 @@ th, td {
     height: 40px;
     border-radius: 0px;
     margin: 0;
+}
+
+.agregar-container {
+    position: relative;
+    margin-top: 320px;
+    left: 88px; 
+    width: 1540px; 
+    height: 330px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+    padding: 20px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: left;
+}
+
+.infoadd-itemNombre {
+    position: absolute;
+    left: 20px;
+    width: 550px;
+    flex-direction: column;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+}
+
+.infoadd-itemRaza {
+    position: absolute;
+    left: 620px;
+    width: 325px;
+    flex-direction: column;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+}
+
+.infoadd-itemPeso {
+    position: absolute;
+    left: 995px;
+    flex-direction: column;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+}
+
+.infoadd-itemEdad {
+    position: absolute;
+    left: 1265px;
+    flex-direction: column;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+}
+
+.infoadd-itemEnfermedad {
+    position: absolute;
+    left: 20px;
+    top:140px;
+    flex-direction: column;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+}
+
+.infoadd-itemDueño {
+    position: absolute;
+    left: 375px;
+    width: 300px;
+    top:140px;
+    flex-direction: column;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+}
+
+.infoadd-itemEstado {
+    position: absolute;
+    left: 725px;
+    width: 220px;
+    top:140px;
+    flex-direction: column;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+}
+
+
+.infoadd-itemURL {
+    position: absolute;
+    left: 994px;
+    width: 500px;
+    top:140px;
+    flex-direction: column;
+    background-color: #F3F4F6;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+}
+
+.infoadd-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.inputadd-text {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+}
+
+.agregar-button {
+    width: 300px;
+    margin-top: 240px;
+    margin-left: 600px;
+    padding: 12px;
+    background-color: #BFD5D8FF;
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.agregar-button:hover {
+    background-color: #97b3b5;
 }
 
 .footer {

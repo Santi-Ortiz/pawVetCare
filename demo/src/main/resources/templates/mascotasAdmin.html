@@ -31,44 +31,85 @@
         </div>
     </header>
     <section class = "content">
-        <div class="container-mascotas">
-            <p class="primerTitulo">Mascotas</p>
-            <table class="tabla">
-                <thead>
-                    <tr>
-                        <th>FOTO</th>
-                        <th>NOMBRE</th>
-                        <th>RAZA</th>
-                        <th>EDAD</th>
-                        <th>PESO</th>
-                        <th>ENFERMEDAD</th>
-                        <th>ESTADO</th>
-                        <th>INFORMACIÓN ESPECÍFICA</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="animal: ${mascotas}">
-                        <td><img th:src="${animal.foto}" alt="cat"></td>
-                        <td th:text="${animal.nombre}"></td>
-                        <td th:text="${animal.raza}"></td>
-                        <td th:text="${animal.edad}"></td>
-                        <td th:text="${animal.peso}"></td>
-                        <td th:text="${animal.enfermedad}"></td>
-                        <td>
-                            <div class="estado">
-                                <img th:if="${animal.estado == true}" th:src="@{/assets/check.png}" alt="Check icon">
-                                <img th:if="${animal.estado == false}" th:src="@{/assets/wrong.png}" alt="Wrong icon">
-                            </div> 
-                        </td>
-                        <td>
-                            Hola
-                            <!--<a th:href="">Más información</a> -->
-                        </td>
-                    </tr>
-                </tbody>
-
-            </table>
+        <p class="primerTitulo">Hola, admin</p>
+        <p class="segundoTitulo">Aquí están todas las mascotas:</p>
+        <p class="tercerTitulo">Agrega mascotas:</p>
+        <div class="carrusel-container">
+            <button class="carrusel-prev" onclick="cambiarMascota(-1)">
+                <img src="../assets/previous.png" alt="Regreso">
+            </button>
+            <div class="carrusel">
+                <div class="mascota-item" th:each="animal : ${mascotas}">
+                    <div class="mascota-info">
+                        <img th:src="${animal.foto}" alt="Foto de ${animal.nombre}" class="mascota-foto">
+                        <img class="estadoimg" id="estadoImg" th:if="${animal.estado == true}" th:src="@{/assets/check.png}" alt="Estado">
+                        <img class="estadoimg" id="estadoImg" th:if="${animal.estado == false}" th:src="@{/assets/wrong.png}" alt="Estado">
+                        <div class="info-itemNombre">
+                            <small class="info-title">Nombre:</small>
+                            <label class="info-label" th:text="${animal.nombre}"></label>
+                        </div>
+                        <div class="info-itemRaza">
+                            <small class="info-title">Raza:</small>
+                            <label class="info-label" th:text="${animal.raza}"></label>
+                        </div>
+                        <div class="info-itemEdad">
+                            <small class="info-title">Edad:</small>
+                            <label class="info-label" th:text="${animal.edad}"></label>
+                        </div>
+                        <div class="info-itemPeso">
+                            <small class="info-title">Peso:</small>
+                            <label class="info-label" th:text="${animal.peso}"></label>
+                        </div>
+                        <div class="info-itemEnfermedad">
+                            <small class="info-title">Enfermedad:</small>
+                            <label class="info-label" th:text="${animal.enfermedad}"></label>
+                        </div>
+                        <button class="info-button" > + Info </button>
+                    </div>
+                </div>
+            </div>
+            <button class="carrusel-next" onclick="cambiarMascota(1)">
+                <img src="../assets/next.png" alt="Siguiente">
+            </button>
         </div>
+        <div class="agregar-container">
+            <div class="infoadd-itemNombre">
+                <small class="info-title">Nombre:</small>
+                <input type="text" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre">
+            </div>
+            <div class="infoadd-itemRaza">
+                <small class="info-title">Raza:</small>
+                <input type="text" class="inputadd-text" id="raza" placeholder="Ingresa la raza">
+            </div>
+            <div class="infoadd-itemEdad">
+                <small class="info-title">Edad:</small>
+                <input type="text" class="inputadd-text" id="edad" placeholder="Ingresa la edad">
+            </div>
+            <div class="infoadd-itemPeso">
+                <small class="info-title">Peso:</small>
+                <input type="text" class="inputadd-text" id="peso" placeholder="Ingresa el peso">
+            </div>
+            <div class="infoadd-itemEnfermedad">
+                <small class="info-title">Enfermedad:</small>
+                <input type="text" class="inputadd-text" id="enfermedad" placeholder="Ingresa la enfermedad">
+            </div>
+            <div class="infoadd-itemDueño">
+                <small class="info-title">Dueño C.C.:</small>
+                <input type="text" class="inputadd-text" id="dueno" placeholder="Ingresa la cédula">
+            </div>
+            <div class="infoadd-itemEstado">
+                <small class="info-title">Estado:</small>
+                <select id="estado" class="inputadd-text">
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+            </div>
+            <div class="infoadd-itemURL">
+                <small class="info-title">URL:</small>
+                <input type="text" class="inputadd-text" id="url" placeholder="Ingresa la URL de la foto">
+            </div>
+            <button type="button" class="agregar-button" onclick="enviarDatos()">Agregar Mascota</button>
+        </div>            
     </section>
     <!-- Pie de página -->
     <footer class="footer">
@@ -81,4 +122,5 @@
         </div>
     </footer>
 </body>
+<script src="../js/mascotasAdmin.js"></script>
 </html>
