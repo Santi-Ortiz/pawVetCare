@@ -171,7 +171,7 @@ body {
 }
 
 .container-informacion {
-    position: absolute; 
+    position: relative; 
     top: 120px; 
     left: 0px; 
     height: 600px; 
@@ -239,6 +239,12 @@ section{
 }
 
 .eliminar-btn {
+    position: absolute; 
+    top: 160px;
+    left: 1180px;
+    bottom: 150px;
+    right: 10px; 
+    z-index: 10000;
     background: #DE3B40FF;
 }
 
@@ -455,6 +461,9 @@ img.mascotaimg {
     font-weight: bold;
     color: #555;
     margin-bottom: 5px;
+    border: none;               
+    background: transparent;                                                                    
+    position: absolute;         
 }
 
 .mascotaimg {

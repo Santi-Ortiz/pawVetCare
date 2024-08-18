@@ -1,6 +1,12 @@
 function toggleEliminar() {
     const botonEliminar = document.getElementById("eliminarBtn");
     botonEliminar.classList.toggle("expanded");
+
+    if (botonEliminar.classList.contains("expanded")) {
+        mascota_delete.submit();
+    } else {
+        botonEliminar.classList.add("expanded");
+    }
 }
 
 function ajustarAnchoInput(input) {
@@ -26,31 +32,25 @@ function ajustarAnchoInput(input) {
 }
 
 function toggleEditar() {
-const botonEditar = document.getElementById("editarBtn");
-const labels = document.querySelectorAll(".info-label");
+    const botonEditar = document.getElementById("editarBtn");
+    const inputs = document.querySelectorAll(".info-label");
 
-if (!botonEditar.classList.contains("expanded")) {
-// Expandir el botón y cambiar a campos de entrada
-labels.forEach(label => {
-    const input = document.createElement("input");
-    input.type = "text";
-    input.value = label.innerText;
-    input.className = "input-text";
-    ajustarAnchoInput(input);
-    label.replaceWith(input);
-});
-botonEditar.classList.add("expanded");
-botonEditar.innerHTML = "<span class='text'>Editar Todo</span>";
-} else {
-    // Colapsar el botón y volver a etiquetas de texto
-    const inputs = document.querySelectorAll(".input-text");
-    inputs.forEach(input => {
-        const label = document.createElement("label");
-        label.className = "info-label";
-        label.innerText = input.value;
-        input.replaceWith(label);
-    });
-    botonEditar.classList.remove("expanded");
-    botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
+    if (botonEditar.classList.contains("expanded")) {
+        
+        inputs.forEach(input => {
+            input.setAttribute("readonly", true);
+        });
+        botonEditar.classList.remove("expanded");
+        botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
+        
+        
+        document.getElementById("mascotaForm").submit();
+    } else {
+        
+        inputs.forEach(input => {
+            input.removeAttribute("readonly");
+        });
+        botonEditar.classList.add("expanded");
+        botonEditar.innerHTML = "<span class='text'>Guardar</span>";
     }
 }

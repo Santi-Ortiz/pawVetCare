@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.example.demo.entity.Mascota;
 import com.example.demo.service.MascotaService;
@@ -42,22 +44,24 @@ public class MascotaController {
      
     // http://localhost:8090/mascota/delete/1
      @GetMapping("/delete/{id}")
-     public String borrarEstudiante(@PathVariable("id") Long identificacion){
+     public String borrarMascota(@PathVariable("id") Long identificacion){
         mascotaService.deleteById(identificacion);
         return "redirect:/mascota/todas";
      }
 
     // http://localhost:8090/mascota/update/1
      @GetMapping("/update/{id}")
-     public void actualizarInfoMascota(@PathVariable("id") Long identificacion, Model model) {
-        model.addAttribute("mascota", mascotaService.SearchById(identificacion));
-     }
+     public String actualizarInfoMascota(@PathVariable("id") Long identificacion, Model model) {
+      Mascota mascota = mascotaService.SearchById(identificacion);
+      model.addAttribute("mascota", mascota);
+      return "mostrarMascotaAdmin"; // Asegúrate de que esta vista tenga el formulario
+   }
 
      // http://localhost:8090/mascota/update/1
      @PostMapping("/update/{id}")
      public String actualizarMascota(@PathVariable("id") int  identificacion, @ModelAttribute("mascota") Mascota mascota) {
-        mascotaService.updateMascota(mascota);
-        return "redirect:/mascota/todas";
+         mascotaService.updateMascota(mascota);
+         return "redirect:/mascota/todas";
      }
 
 }
