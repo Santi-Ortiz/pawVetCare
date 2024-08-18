@@ -35,11 +35,19 @@ public class MascotaController {
         return "mostrarMascotaAdmin";
      }
 
+     // http://localhost:8090/mascota/add
+     @GetMapping("/add")
+     public String agregarMascota(Model model) {
+         Mascota mascota = new Mascota(0L, "", "", 0, 0F, "", "", false, 0L);
+         model.addAttribute("mascota", mascota);
+         return "mascotasAdmin";
+     }
+
      // http://localhost:8090/mascota/agregar
-     @PostMapping("/agregar")
-     public String agregarMascota(@ModelAttribute("mascota") Mascota mascota) {
-        mascotaService.add(mascota);
-        return "redirect:/mascota/todas";
+      @PostMapping("/agregar")
+      public String mostrar_agregar_mascota(@ModelAttribute("mascota") Mascota mascota) {
+         mascotaService.add(mascota);
+         return "redirect:/mascota/todas";
      }
      
     // http://localhost:8090/mascota/delete/1

@@ -75,41 +75,41 @@
                 <img src="../assets/next.png" alt="Siguiente">
             </button>
         </div>
-        <form th:object="${mascota}" th:action="@{/mascota/agregar}" method="post" class="agregar-container">
+        <form id="mascota_agregar" th:object="${mascota}" th:action="@{/mascota/agregar}" method="post" class="agregar-container">
             <div class="infoadd-itemNombre">
                 <small class="info-title">Nombre:</small>
-                <input type="text" class="inputadd-text" id="nombre" th:field="*{nombre}" placeholder="Ingresa el nombre" required>
+                <input th:type="text" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required>
             </div>
             <div class="infoadd-itemRaza">
                 <small class="info-title">Raza:</small>
-                <input type="text" class="inputadd-text" id="raza" th:field="*{raza}" placeholder="Ingresa la raza" required>
+                <input th:type="text" class="inputadd-text" id="raza"  placeholder="Ingresa la raza" required>
             </div>
             <div class="infoadd-itemEdad">
                 <small class="info-title">Edad:</small>
-                <input type="text" class="inputadd-text" id="edad" th:field="*{edad}" placeholder="Ingresa la edad" required>
+                <input th:type="number" class="inputadd-text" id="edad" placeholder="Ingresa la edad" required>
             </div>
             <div class="infoadd-itemPeso">
                 <small class="info-title">Peso:</small>
-                <input type="text" class="inputadd-text" id="peso" th:field="*{peso}" placeholder="Ingresa el peso" required>
+                <input th:type="number" class="inputadd-text" id="peso" placeholder="Ingresa el peso" required>
             </div>
             <div class="infoadd-itemEnfermedad">
                 <small class="info-title">Enfermedad:</small>
-                <input type="text" class="inputadd-text" id="enfermedad" th:field="*{enfermedad}" placeholder="Ingresa la enfermedad" required>
+                <input th:type="text" class="inputadd-text" id="enfermedad" placeholder="Ingresa la enfermedad" required>
             </div>
-            <!--<div class="infoadd-itemDueño">
+            <div class="infoadd-itemDueño">
                 <small class="info-title">Dueño C.C.:</small>
-                <input type="text" class="inputadd-text" id="dueno" th:field="*{id}"placeholder="Ingresa la cédula" required>
-            </div> -->
+                <input th:type="text" class="inputadd-text" id="dueno" placeholder="Ingresa la cédula" required>
+            </div> 
             <div class="infoadd-itemEstado">
                 <small class="info-title">Estado:</small>
-                <select id="estado" class="inputadd-text" th:field="*{estado}" required>
+                <select id="estado" class="inputadd-text" required>
                     <option th:value="true">Activo</option>
                     <option th:value="false">Inactivo</option>
                 </select>
             </div>
             <div class="infoadd-itemURL">
                 <small class="info-title">URL:</small>
-                <input type="text" class="inputadd-text" id="url" th:field="*{foto}"placeholder="Ingresa la URL de la foto" required>
+                <input th:type="text" class="inputadd-text" id="url" placeholder="Ingresa la URL de la foto" required>
             </div>
             <button type="submit" class="agregar-button">Agregar Mascota</button> 
         </form>           
