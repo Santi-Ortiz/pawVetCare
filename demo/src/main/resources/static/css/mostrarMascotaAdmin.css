@@ -260,6 +260,7 @@ section{
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     font-family: Poppins;
     font-size: 18px;
     font-weight: 700;
@@ -278,6 +279,11 @@ section{
     color: #0A4D20FF;
 }
 
+.editar-btn:hover {
+    background: #9ED6B1FF;
+    color: #0A4D20FF;
+}
+
 .editar-btn.expanded + .eliminar-btn {
     margin-left: 100px;
 }
@@ -290,6 +296,11 @@ section{
     right: 10px; 
     z-index: 10000;
     background: #DE3B40FF;
+}
+
+.eliminar-btn:hover {
+    background: #CC0000;
+    color: #000000;
 }
 
 .eliminar-btn.expanded {

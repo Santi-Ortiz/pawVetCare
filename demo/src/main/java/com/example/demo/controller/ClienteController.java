@@ -27,13 +27,13 @@ public class ClienteController {
     @GetMapping("/mascotas")
     public String mostrarMascotas(Model model){
         model.addAttribute("mascotas", clienteService.buscarMascotas());
-        return "mostrarMascotasCliente";
+        return "mascotasCliente";
     }
 
     @GetMapping("/mascota/{id}")
     public String mostrarMascota(Model model, @PathVariable("id") Long identificacion){
         model.addAttribute("mascota", clienteService.buscarMascotaPorID(identificacion));
-        return "mostrarMascotaClienteId";
+        return "mostrarMascotaCliente";
     }
     
     
