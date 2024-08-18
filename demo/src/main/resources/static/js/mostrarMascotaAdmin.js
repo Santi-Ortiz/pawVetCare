@@ -1,10 +1,11 @@
 function toggleEliminar() {
     const botonEliminar = document.getElementById("eliminarBtn");
-    botonEliminar.classList.toggle("expanded");
 
+    // Si el botón ya está expandido, ejecuta la acción de eliminar
     if (botonEliminar.classList.contains("expanded")) {
-        mascota_delete.submit();
+        document.getElementById("mascota_delete").submit();
     } else {
+        // Si no está expandido, lo expande y espera a la próxima interacción
         botonEliminar.classList.add("expanded");
     }
 }
@@ -17,8 +18,8 @@ function ajustarAnchoInput(input) {
     tempSpan.textContent = input.value || input.placeholder;
 
     let anchoCalculado = tempSpan.offsetWidth;
-    const anchoMinimo = 100; // Ancho mínimo en píxeles
-    const anchoMaximo = 700; // Ancho máximo en píxeles
+    const anchoMinimo = 20; // Ancho mínimo en píxeles
+    const anchoMaximo = 100; // Ancho máximo en píxeles
 
     // Ajustar el ancho del input dentro de los límites
     if (anchoCalculado < anchoMinimo) {

@@ -157,27 +157,56 @@ body {
 
 .primerTitulo {
     position: absolute; 
-    top: -40px; 
-    left: 15%;
+    top: 80px; 
+    left: 85px;
     width: 1190px; 
     height: 252px; 
     font-family: Poppins;
-    text-align: center;
+    text-align: left;
     justify-content: center;
     font-size: 55px; 
     line-height: 84px; 
     font-weight: 500; 
-    color: #323842FF;
+    color: #9095A0;
+}
+
+.segundoTitulo {
+    position: absolute; 
+    top: 160px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842;
+}
+
+.tercerTitulo {
+    position: absolute; 
+    top: 640px; 
+    left: 85px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: left;
+    justify-content: center;
+    font-size: 55px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #323842;
 }
 
 .container-informacion {
-    position: relative; 
-    top: 120px; 
+    position: absolute; 
+    top: 220px; 
+    width: 1540px; 
     left: 0px; 
-    height: 600px; 
-    background: #FFFFFF;
+    height: 350px; 
     border-radius: 0px; 
-    width: 100%;
     display: flex;
     z-index: 9997;
 }
@@ -190,15 +219,30 @@ section{
 .container-botones {
     position: absolute;
     top: 60px;
-    left: 1020px;
+    left: 940px;
     display: flex;
     gap: 10px;
 }
 
-.tituloAcciones {
+.tituloEditar {
     position: absolute; 
     top: 10px; 
-    left: 310px;
+    left: 280px;
+    width: 1190px; 
+    height: 252px; 
+    font-family: Poppins;
+    text-align: center;
+    justify-content: center;
+    font-size: 35px; 
+    line-height: 84px; 
+    font-weight: 500; 
+    color: #FFFFFF;
+}
+
+.tituloEliminar {
+    position: absolute; 
+    top: 10px; 
+    left: 630px;
     width: 1190px; 
     height: 252px; 
     font-family: Poppins;
@@ -235,13 +279,13 @@ section{
 }
 
 .editar-btn.expanded + .eliminar-btn {
-    margin-left: 10px;
+    margin-left: 100px;
 }
 
 .eliminar-btn {
     position: absolute; 
     top: 160px;
-    left: 1180px;
+    left: 1400px;
     bottom: 150px;
     right: 10px; 
     z-index: 10000;
@@ -350,7 +394,7 @@ img.mascotaimg {
 }
 
 .input-text {
-    width: 150%;
+    width: 50px;
     height: 0;
     padding: 10px;
     font-family: Poppins;
@@ -458,6 +502,7 @@ img.mascotaimg {
 .info-label {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
+    width: 55%;
     font-weight: bold;
     color: #555;
     margin-bottom: 5px;
@@ -465,6 +510,7 @@ img.mascotaimg {
     background: transparent;                                                                    
     position: absolute;         
 }
+
 
 .mascotaimg {
     position: absolute; 
