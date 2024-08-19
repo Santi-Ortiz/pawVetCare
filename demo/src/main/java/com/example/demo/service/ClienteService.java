@@ -22,4 +22,6 @@ public interface ClienteService {
     public void agregarMascota(Long cliente_id, Mascota mascota);
 
     public void eliminarMascota(Long cliente_id, Mascota mascota);
+
+    public void add(Mascota cliente);
 }
