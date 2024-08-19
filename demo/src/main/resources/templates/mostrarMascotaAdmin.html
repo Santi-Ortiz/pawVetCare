@@ -82,7 +82,7 @@
                     </div>
                 </form>
                 <form id="mascota_delete" th:action="@{/mascota/delete/{id}(id=${mascota.id})}">
-                    <button class="eliminar-btn" id="eliminarBtn" onclick="toggleEliminar()">
+                    <button class="eliminar-btn" id="eliminarBtn" type="button" onclick="toggleEliminar()">
                         <span class="icon">x</span>
                         <span class="text">Eliminar</span>
                     </button>
