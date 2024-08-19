@@ -10,10 +10,13 @@ import java.util.*;
 public class ClienteRepository {
 
     private Map<Long, Cliente> data = new HashMap<>();
+    private Map<Integer, Cliente> dataByCedula = new HashMap<>();
 
     public ClienteRepository() {
         Mascota mascota1 = new Mascota(1L, "Firulais", "Labrador", 5, 20F, "Viruela", "",true, 1L);
-        data.put(1L, new Cliente(1L,123456, "Juan Pérez", "juan.perez@example.com", 3001234567L, Map.of(1L, mascota1)));
+        Cliente cliente1 = new Cliente(1L, 123456, "Juan Pérez", "juan.perez@example.com", 3001234567L, Map.of(1L, mascota1));
+        data.put(cliente1.getId(), cliente1);
+        dataByCedula.put(cliente1.getCedula(), cliente1); // Añadir al mapa por cédula
     }
 
     public Collection<Cliente> findAll() {
@@ -23,6 +26,10 @@ public class ClienteRepository {
 	public Cliente findById(Long id) {
 		return data.get(id);
 	}
+
+    public Cliente findByCedula(Integer cedula) {
+        return dataByCedula.get(cedula);
+    }
 
     public Cliente add (Cliente cliente) {
         return data.put(cliente.getId(), cliente);
@@ -40,4 +47,5 @@ public class ClienteRepository {
         Mascota mascota = new Mascota(id, null, null, null, null, null, null, null, id);
         return mascota;
     }
+    
 }

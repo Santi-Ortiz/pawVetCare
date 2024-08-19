@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
+import com.example.demo.repository.MascotaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import java.util.Collection;
 public class ClienteServiceImpl implements ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
+    @Autowired
+    MascotaRepository repoMascota;
 
     @Override
     public Collection<Cliente> SearchAll(){
@@ -22,6 +25,11 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Cliente SearchById(Long id) {
         return clienteRepository.findById(id);
+    } 
+
+    @Override
+    public Cliente SearchByCedula(Integer cedula) {
+        return clienteRepository.findByCedula(cedula);
     } 
 
     @Override
@@ -41,7 +49,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Mascota buscarMascotaPorID(Long id){
-        return clienteRepository.findPetById(id);
+        return repoMascota.findById(id);
     }
     
     @Override
@@ -60,5 +68,11 @@ public class ClienteServiceImpl implements ClienteService {
             auxCliente.getMascotas().put(mascota.getId(), mascota);
             clienteRepository.add(auxCliente);
         }
+    }
+
+    @Override
+    public void add(Mascota cliente) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'add'");
     }
 }

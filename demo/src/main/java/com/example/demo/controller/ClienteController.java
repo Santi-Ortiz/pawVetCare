@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.service.ClienteService;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,18 +26,29 @@ public class ClienteController {
     public String loginCliente(){
         return "loginCliente";
     }
+    
+    // http://localhost:8090/admin/mascotas/{id}
+    @GetMapping("/mascota/{id}")
+    public String mostrarInfoMascotaAdmin(Model model, @PathVariable("id") Long identificacion){
 
-    // http://localhost:8090/cliente/mascotas
-    @GetMapping("/mascotas")
-    public String mostrarMascotas(Model model){
-        model.addAttribute("mascotas", clienteService.buscarMascotas());
-        return "mascotasCliente";
+        Mascota mascota = clienteService.buscarMascotaPorID(identificacion);
+        Cliente cliente = clienteService.SearchByCedula(mascota.getIdCliente().intValue());
+
+        if(mascota != null){
+            model.addAttribute("mascota", mascota); 
+            model.addAttribute("cliente", cliente); 
+        } else {
+            throw new NotPetFoundException(identificacion);
+        } 
+
+        model.addAttribute("mascota", clienteService.buscarMascotaPorID(identificacion)); 
+        return "mostrarMascotaCliente";
     }
 
-    @GetMapping("/mascota/{id}")
+    @GetMapping("/mascotas/{id}")
     public String mostrarMascota(Model model, @PathVariable("id") Long identificacion){
-        model.addAttribute("mascota", clienteService.buscarMascotaPorID(identificacion));
-        return "mostrarMascotaCliente";
+        model.addAttribute("cliente", clienteService.SearchById(identificacion));
+        return "mascotasCliente";
     }
 
     // http://localhost:8090/mascota/todas
