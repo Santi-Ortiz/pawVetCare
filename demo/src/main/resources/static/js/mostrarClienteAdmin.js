@@ -55,3 +55,21 @@ function toggleEditar() {
         botonEditar.innerHTML = "<span class='text'>Guardar</span>";
     }
 }
+
+let index = 0;
+
+function cambiarMascota(direccion) {
+    const items = document.querySelectorAll('.mascota-item');
+    if (items.length === 0) return;
+
+    index = (index + direccion + items.length) % items.length;
+    document.querySelector('.carrusel').style.transform = `translateX(-${index * 106.5}%)`;
+}
+
+// Función para moverse automáticamente cada 6 segundos
+function autoMoverCarrusel() {
+    cambiarMascota(1);
+}
+
+// Iniciar el movimiento automático del carrusel
+setInterval(autoMoverCarrusel, 6000);

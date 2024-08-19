@@ -5,7 +5,7 @@ html {
 }
 
 html, body {
-    height: 100%;
+    height: 50%;
     margin: 0;
 }
 
@@ -16,6 +16,7 @@ body {
 .content {
     flex: 1;
 }
+
 .top-bar {
     background-color: #FFFFFFFF;
     text-align: left;
@@ -187,7 +188,7 @@ body {
 
 .tercerTitulo {
     position: absolute; 
-    top: 640px; 
+    top: 520px; 
     left: 85px;
     width: 1190px; 
     height: 252px; 
@@ -205,7 +206,7 @@ body {
     top: 220px; 
     width: 1540px; 
     left: 0px; 
-    height: 350px; 
+    height: 250px; 
     border-radius: 0px; 
     display: flex;
     z-index: 9997;
@@ -219,7 +220,7 @@ section{
 .container-botones {
     position: absolute;
     top: 60px;
-    left: 940px;
+    left: 590px;
     display: flex;
     gap: 10px;
 }
@@ -227,7 +228,7 @@ section{
 .tituloEditar {
     position: absolute; 
     top: 10px; 
-    left: 280px;
+    left: -80px;
     width: 1190px; 
     height: 252px; 
     font-family: Poppins;
@@ -242,7 +243,7 @@ section{
 .tituloEliminar {
     position: absolute; 
     top: 10px; 
-    left: 630px;
+    left: 230px;
     width: 1190px; 
     height: 252px; 
     font-family: Poppins;
@@ -291,7 +292,7 @@ section{
 .eliminar-btn {
     position: absolute; 
     top: 160px;
-    left: 1400px;
+    left: 1000px;
     bottom: 150px;
     right: 10px; 
     z-index: 10000;
@@ -325,12 +326,12 @@ section{
     display: inline;
 }
 
-.containerMascota {
+.containerCliente {
     position: relative;
     top: 100px;
     left: 88px; 
     width: 1540px; 
-    background: #BFD5D8FF;
+    background: #C09181;
     border-radius: 12px;
     box-shadow: 0px 0px 1px #89989b, 0px 0px 2px #89989b;
     padding: 20px 0;
@@ -415,9 +416,9 @@ img.mascotaimg {
 
 .info-item {
     position: absolute;
-    width: 370px;
-    top: 55px;
-    left: 215px;
+    width: 300px;
+    top: 155px; 
+    left: 50px;
     flex-direction: column;
     background-color: #fff;
     padding: 18px;
@@ -426,36 +427,36 @@ img.mascotaimg {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-.info-itemRaza{
+.info-itemCedula{
     position: absolute;
     flex-direction: column;
     top: 155px; 
-    left: 90px;
-    width: 439px; 
+    left: 400px;
+    width: 200px; 
     background-color: #fff;
     padding: 18px;
     border-radius: 15px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-.info-itemEdad{
+.info-itemCorreo{
     position: absolute;
     flex-direction: column;
     top: 155px; 
-    left: 585px;
-    width: 183px;
+    left: 650px;
+    width: 500px;
     background-color: #fff;
     padding: 18px;
     border-radius: 15px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-.info-itemPeso{
+.info-itemCelular {
     position: absolute;
     flex-direction: column;
     top: 155px; 
-    width: 183px;
-    left: 822px;
+    width: 255px;
+    left: 1200px;
     background-color: #fff;
     padding: 18px;
     border-radius: 15px;
@@ -522,22 +523,218 @@ img.mascotaimg {
     position: absolute;         
 }
 
+.carrusel-container {
+    position: relative;
+    margin-top: 670px;
+    left: 40px; 
+    width: 1540px; 
+    height: 200px;
+    background: #BFD5D8FF;
+    border-radius: 12px;
+    box-shadow: 0px 0px 1px #89989b, 0px 0px 2px #89989b;
+    padding: 20px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: left;
+}
 
-.mascotaimg {
-    position: absolute; 
-    top: 35px; 
-    left: 90px; 
-    width: 100px; 
-    height:100px; 
+.carrusel {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+.mascota-item {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-left:100px;
+    text-align: left;
+}
+
+.mascota-foto {
+    width: 150px;
+    height: 150px;
     border-radius: 200px;
 }
 
+.carrusel-prev, .carrusel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.carrusel-prev img, .carrusel-next img {
+    width: 40px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.carrusel-prev {
+    left: 40px;
+}
+
+.carrusel-next {
+    right: 80px;
+}
+
+.estado-icon {
+    font-size: 1.5em;
+}
+
+.info-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-text {
+    width: 150%;
+    height: 0;
+    padding: 10px;
+    font-family: Poppins;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
 .estadoimg {
-    position: absolute; 
-    top: 60px; 
-    left: 650px; 
+    position: absolute;
     width: 50px; 
     height: 50px; 
+    top: 60px;
+    margin-left: 20px;
+}
+
+.info-itemNombre {
+    position: absolute;
+    width: 200px;
+    top: 55px;
+    margin-left: 240px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemRaza {
+    position: absolute;
+    width: 200px;
+    top: 55px;
+    margin-left: 480px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemEdad {
+    position: absolute;
+    width: 80px;
+    top: 55px;
+    margin-left: 720px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemPeso {
+    position: absolute;
+    width: 100px;
+    top: 55px;
+    margin-left: 840px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-itemEnfermedad {
+    position: absolute;
+    width: 230px;
+    top: 55px;
+    margin-left: 30px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    top: 30%;
+    color: #555;
+    margin-bottom: px;
+}
+
+.info-button {
+    position: absolute;
+    display: inline-flex;
+    top: 60px;
+    width: 80px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 700;
+    color: #BED6D8;
+    background: #1A292B;
+    border: none;
+    border-radius: 22px;
+    text-decoration: none;
+    margin-left: 1100px;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.info-button:hover {
+    color: #FFFFFFFF;
+    background: #89989b;
+}
+
+.estado img {
+    width: 40px; 
+    height: 40px;
+    border-radius: 0px;
+    margin: 0;
+}
+
+.mascota-foto {
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
 }
 
 .footer {

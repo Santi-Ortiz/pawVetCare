@@ -23,7 +23,7 @@
                     <a th:href="@{/home}" class="header-menu-item">DASHBOARD<div class="indicator"></div></a>
                     <a th:href="@{/admin/mascotas}" class="header-menu-item">MASCOTAS<div class="indicator"></div></a>
                     <a th:href="@{/contacto}" class="header-menu-item">VETERINARIOS</a>
-                    <a th:href="@{/admin/clientes}" class="header-menu-item" selected>CLIENTES<div class="indicator"></div></a>
+                    <a th:href="@{/admin/clientes}" class="header-menu-item selected"> CLIENTES<div class="indicator"></div></a>
                     <a th:href="@{/contacto}" class="header-menu-item">INICIALIZACIÓN</a>
                 </div>
             </nav>
@@ -33,26 +33,26 @@
         </header>
         <section class = "content">
             <p class="primerTitulo">Hola, admin</p>
-            <p class="segundoTitulo">Aquí está la información de la mascota:</p>
-            <p class="tercerTitulo">Dar el medicamento:</p>
+            <p class="segundoTitulo">Aquí está la información del cliente:</p>
+            <p class="tercerTitulo">Sus mascotas:</p>
             <div class="container-informacion">
-                <form id="mascotaForm" th:object="${cliente}" th:action="@{/cliente/update/{id}(id=${cliente.id})}" method="post" class="containerMascota">    
+                <form id="clienteForm" th:object="${cliente}" th:action="@{/cliente/update/{id}(id=${cliente.id})}" method="post" class="containerCliente">    
                     <p class="tituloEditar">Edita:</p>
                     <p class="tituloEliminar">Elimina:</p>
                     <div class="info-item">
                         <small class="info-title">Nombre:</small>
                         <input class="info-label" id="nombreLabel" th:field="*{nombre}" readonly></input>
                     </div>
-                    <div class="info-itemRaza">
-                        <small class="info-title">Raza:</small>
-                        <input class="info-label" th:field="*{cedular}" readonly></input>
+                    <div class="info-itemCedula">
+                        <small class="info-title">Cédula:</small>
+                        <input class="info-label" th:field="*{cedula}" readonly></input>
                     </div>
-                    <div class="info-itemEdad">
-                        <small class="info-title">Edad:</small>
+                    <div class="info-itemCorreo">
+                        <small class="info-title">Correo:</small>
                         <input class="info-label" th:field="*{correo}" readonly></input>
                     </div>
-                    <div class="info-itemPeso">
-                        <small class="info-title">Peso:</small>
+                    <div class="info-itemCelular">
+                        <small class="info-title">Celular:</small>
                         <input class="info-label" th:field="*{celular}" readonly></input>
                     </div>
                     <div class="container-botones">
@@ -62,15 +62,52 @@
                         </button>
                     </div>
                 </form>
-                <form id="mascota_delete" th:action="@{/mascota/delete/{id}(id=${mascota.id})}">
-                    <button class="eliminar-btn" id="eliminarBtn" onclick="toggleEliminar()">
+                <form id="cliente_delete" th:action="@{/cliente/delete/{id}(id=${cliente.id})}">
+                    <button class="eliminar-btn" id="eliminarBtn" type="button" onclick="toggleEliminar()">
                         <span class="icon">x</span>
                         <span class="text">Eliminar</span>
                     </button>
                 </form>
-            </div>  
+            </div> 
+            <div class="carrusel-container">
+                <button class="carrusel-prev" onclick="cambiarMascota(-1)">
+                    <img th:src="@{/assets/previous.png}" alt="Regreso">
+                </button>
+                <div class="carrusel">
+                    <div class="mascota-item" th:each="entry : ${cliente.mascotas.entrySet()}">
+                        <div class="mascota-info">
+                            <img th:src="${entry.value.foto}" class="mascota-foto">
+                            <img class="estadoimg" id="estadoImg" th:if="${entry.value.estado == true}" th:src="@{/assets/check.png}" alt="Estado">
+                            <img class="estadoimg" id="estadoImg" th:if="${entry.value.estado == false}" th:src="@{/assets/wrong.png}" alt="Estado">
+                            <div class="info-itemNombre">
+                                <small class="info-title">Nombre:</small>
+                                <label class="info-label" th:text="${entry.value.nombre}"></label>
+                            </div>
+                            <div class="info-itemRaza">
+                                <small class="info-title">Raza:</small>
+                                <label class="info-label" th:text="${entry.value.raza}"></label>
+                            </div>
+                            <div class="info-itemEdad">
+                                <small class="info-title">Edad:</small>
+                                <label class="info-label" th:text="${entry.value.edad}"></label>
+                            </div>
+                            <div class="info-itemPeso">
+                                <small class="info-title">Peso:</small>
+                                <label class="info-label" th:text="${entry.value.peso}"></label>
+                            </div>
+                            <div class="info-itemEnfermedad">
+                                <small class="info-title">Enfermedad:</small>
+                                <label class="info-label" th:text="${entry.value.enfermedad}"></label>
+                            </div>
+                            <a class="info-button" th:href="@{/admin/mascotas/{id}(id=${entry.value.id})}">+ Info</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="carrusel-next" onclick="cambiarMascota(1)">
+                    <img th:src="@{/assets/next.png}" alt="Siguiente">
+                </button>
+            </div>
         </section>
-        
         <!-- Pie de página -->
         <footer class="footer">
             <img th:src="@{/assets/logotipoRosado.png}" alt="Logo Footer">
