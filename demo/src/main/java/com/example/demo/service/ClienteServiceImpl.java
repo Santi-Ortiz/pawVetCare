@@ -1,4 +1,4 @@
-package com.example.demo.service;
+/*package com.example.demo.service;
 
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.entity.Cliente;
@@ -57,22 +57,24 @@ public class ClienteServiceImpl implements ClienteService {
         Cliente auxCliente = clienteRepository.findById(cliente_id);
         if(auxCliente != null){
             auxCliente.getMascotas().put(mascota.getId(), mascota);
-            clienteRepository.add(auxCliente);               
+            clienteRepository.add(auxCliente);         
         }
+        clienteRepository.findById(cliente_id).getMascotas().put(mascota.getId(), mascota);
     }
 
     @Override
     public void eliminarMascota(Long cliente_id, Mascota mascota){
         Cliente auxCliente = clienteRepository.findById(cliente_id);
         if(auxCliente != null){
-            auxCliente.getMascotas().put(mascota.getId(), mascota);
+            auxCliente.getMascotas().remove(mascota.getId());
             clienteRepository.add(auxCliente);
         }
     }
 
     @Override
-    public void add(Mascota cliente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+    public void add(Cliente cliente) {
+        clienteRepository.add(cliente);
     }
 }
+
+*/

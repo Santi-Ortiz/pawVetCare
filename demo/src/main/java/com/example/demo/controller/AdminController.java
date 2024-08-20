@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.Mascota;
 import com.example.demo.service.AdminService;
-import org.springframework.web.bind.annotation.RequestParam;
-
+//import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin")

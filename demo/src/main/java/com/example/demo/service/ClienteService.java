@@ -1,30 +1,57 @@
 package com.example.demo.service;
 
-import java.util.Collection;
+import java.util.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
+import com.example.demo.repository.ClienteRepository;
+//import com.example.demo.repository.MascotaRepository;
 
-public interface ClienteService {
+@Service
+public class ClienteService {
+    @Autowired
+    private ClienteRepository clienteRepository;
+    //private MascotaRepository mascotaRepository;
 
-    public Cliente SearchById(Long id);
- 
-    public Collection<Cliente> SearchAll();
+    public void agregarMascota(Long cliente_id, Mascota mascota){
+        Cliente cliente = clienteRepository.findById(cliente_id).get();
+        for(Mascota m : cliente.getMascotas()){
+            if(m.getId() == mascota.getId()){
+                cliente.getMascotas().add(mascota);
+                break;
+            }
+        }
+        clienteRepository.save(cliente);               
+    }
+
+    public void eliminarMascota(Long cliente_id, Mascota mascota){
+        Cliente cliente = clienteRepository.findById(cliente_id).get();
+        for(Mascota m : cliente.getMascotas()){
+            if(m.getId() == mascota.getId()){
+                cliente.getMascotas().remove(mascota);
+                break;
+            }
+        }
+        clienteRepository.save(cliente);   
+    }
     
-    public Cliente crearCliente(Cliente cliente);
-    
-    public Cliente eliminarCliente(Cliente cliente);
+    public Cliente obtenerCliente(Long id){
+        Optional<Cliente> auxCliente = clienteRepository.findById(id);
+        Cliente cliente = auxCliente.get(); 
+        return cliente;
+    }
 
-    public Collection<Mascota> buscarMascotas();
+    public void eliminarCliente(Long id){
+        clienteRepository.deleteById(id);
+    }
 
-    public Mascota buscarMascotaPorID(Long id);
+    public void agregarCliente(Cliente cliente){
+        clienteRepository.save(cliente);
+    }
 
-    public void agregarMascota(Long cliente_id, Mascota mascota);
-
-    public void eliminarMascota(Long cliente_id, Mascota mascota);
-
-    public void add(Mascota cliente);
-
-    public Cliente SearchByCedula(Integer cedula);
-    
+    public Collection<Cliente> mostrarTodos(){
+        return clienteRepository.findAll();
+    }
 }

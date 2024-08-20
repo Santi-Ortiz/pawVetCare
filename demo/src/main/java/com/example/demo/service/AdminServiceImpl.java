@@ -1,4 +1,4 @@
-package com.example.demo.service;
+/*package com.example.demo.service;
 
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
@@ -39,6 +39,8 @@ public class AdminServiceImpl implements AdminService {
     
     @Override
     public Cliente SearchClientById(Long id){
-        return repoCliente.findById(id);
+        Cliente cliente = repoCliente.findById(id).get();
+        return cliente;
     }
 }
+*/

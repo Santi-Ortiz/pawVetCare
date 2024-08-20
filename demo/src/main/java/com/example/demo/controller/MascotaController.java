@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import com.example.demo.entity.Mascota;
@@ -25,6 +24,7 @@ public class MascotaController {
      @GetMapping("/todas")
      public String mostrarMascotas(Model model){
         model.addAttribute("mascotas", mascotaService.SearchAll());
+        System.out.println("Mascotas: " + mascotaService.SearchAll());
         return "mascotasAdmin";
      }
 
@@ -46,8 +46,8 @@ public class MascotaController {
 
      // http://localhost:8090/mascota/add
      @GetMapping("/add")
-     public String agregarMascota(Model model) {
-         Mascota mascota = new Mascota(0L, "", "", 0, 0F, "", "", false, 0L);
+     public String agregarMascota(Model model, Mascota mascota) {
+         /*Mascota mascota = new Mascota(0L, "", "", 0, 0F, "", "", false, 0L);*/
          model.addAttribute("mascota", mascota);
          return "mascotasAdmin";
      }
