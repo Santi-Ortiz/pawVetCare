@@ -10,4 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * ClienteRepository
  */
-public interface ClienteRepository extends JpaRepository<Cliente, Long>{}
+public interface ClienteRepository extends JpaRepository<Cliente, Long>{
+
+    public Cliente findByCedula(Integer cedula);
+}

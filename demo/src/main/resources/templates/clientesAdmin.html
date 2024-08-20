@@ -72,7 +72,7 @@
                 <img src="../assets/next.png" alt="Siguiente">
             </button>
         </div>
-        <form id="mascota_agregar" th:object="${cliente}" th:action="@{/cliente/agregar}" method="post" class="agregar-container">
+        <form id="cliente_agregar" th:object="${cliente}" th:action="@{/cliente/agregar}" method="post" class="agregar-container">
             <div class="infoadd-itemNombre">
                 <small class="info-title">Nombre:</small>
                 <input th:type="text" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required>

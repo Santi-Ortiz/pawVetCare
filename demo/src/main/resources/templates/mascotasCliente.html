@@ -12,7 +12,7 @@
     <link rel="shortcut icon" th:href="@{/assets/imagotipoAzul.png}" type="image/x-icon">
 </head>
 <body>
-    <!-- Barra superior con navegación -->
+    <!-- Barra superior con navegación -->  
     <header class="top-bar">
         <a th:href="@{/home}">
             <img th:src="@{/assets/isologoAzul.png}" alt="Logo Azul">
@@ -24,13 +24,13 @@
                     <a th:href="@{/cliente/mascotas/{id}(id=${cliente.id})}" class="header-menu-item selected">MASCOTAS<div class="indicator"></div></a>
                 </div>
             </nav>
-        </nav>
+        </nav> 
         <div class="button-container">
             <a th:href="@{/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
         </div>
-    </header>
+    </header> 
     <section class = "content">
-        <p class="primerTitulo">Hola, <span th:text="${cliente.nombre}"></span></p>
+        <!--<p class="primerTitulo">Hola, <span th:text="${cliente.nombre}"></span></p> -->
         <p class="segundoTitulo">Aquí están todas tus mascotas:</p>
         <p class="tercerTitulo">Próximamente más funciones...</p>
         <div class="carrusel-container">
@@ -38,32 +38,32 @@
                 <img th:src="@{/assets/previous.png}" alt="Regreso">
             </button>
             <div class="carrusel">
-                <div class="mascota-item" th:each="entry : ${cliente.mascotas.entrySet()}">
+                <div class="mascota-item" th:each="mascota : ${cliente.mascotas}"> 
                     <div class="mascota-info">
-                        <img th:src="${entry.value.foto}" class="mascota-foto">
-                        <img class="estadoimg" id="estadoImg" th:if="${entry.value.estado == true}" th:src="@{/assets/check.png}" alt="Estado">
-                        <img class="estadoimg" id="estadoImg" th:if="${entry.value.estado == false}" th:src="@{/assets/wrong.png}" alt="Estado">
+                        <img th:src="${mascota.foto}" class="mascota-foto">
+                        <img class="estadoimg" id="estadoImg" th:if="${mascota.estado == true}" th:src="@{/assets/check.png}" alt="Estado">
+                        <img class="estadoimg" id="estadoImg" th:if="${mascota.estado == false}" th:src="@{/assets/wrong.png}" alt="Estado">
                         <div class="info-itemNombre">
                             <small class="info-title">Nombre:</small>
-                            <label class="info-label" th:text="${entry.value.nombre}"></label>
+                            <label class="info-label" th:text="${mascota.nombre}"></label>
                         </div>
                         <div class="info-itemRaza">
                             <small class="info-title">Raza:</small>
-                            <label class="info-label" th:text="${entry.value.raza}"></label>
+                            <label class="info-label" th:text="${mascota.raza}"></label>
                         </div>
                         <div class="info-itemEdad">
                             <small class="info-title">Edad:</small>
-                            <label class="info-label" th:text="${entry.value.edad}"></label>
+                            <label class="info-label" th:text="${mascota.edad}"></label>
                         </div>
                         <div class="info-itemPeso">
                             <small class="info-title">Peso:</small>
-                            <label class="info-label" th:text="${entry.value.peso}"></label>
+                            <label class="info-label" th:text="${mascota.peso}"></label>
                         </div>
                         <div class="info-itemEnfermedad">
                             <small class="info-title">Enfermedad:</small>
-                            <label class="info-label" th:text="${entry.value.enfermedad}"></label>
+                            <label class="info-label" th:text="${mascota.enfermedad}"></label>
                         </div>
-                        <a class="info-button" th:href="@{/cliente/mascota/{id}(id=${entry.value.id})}">+ Info</a>
+                        <a class="info-button" th:href="@{/cliente/mascota/{id}(id=${mascota.id})}">+ Info</a>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                 <img th:src="@{/assets/next.png}" alt="Siguiente">
             </button>
         </div>        
-    </section>
+    </section> 
     <!-- Pie de página -->
     <footer class="footer">
         <img th:src="@{/assets/logotipoRosado.png}" alt="Logo Footer">

@@ -43,6 +43,10 @@ public class ClienteService {
         return cliente;
     }
 
+    public Cliente obtenerClientePorCedula(Integer cedula){
+        return clienteRepository.findByCedula(cedula);
+    }
+
     public void eliminarCliente(Long id){
         clienteRepository.deleteById(id);
     }
@@ -53,5 +57,8 @@ public class ClienteService {
 
     public Collection<Cliente> mostrarTodos(){
         return clienteRepository.findAll();
+    }
+    public void update(Cliente cliente){
+        clienteRepository.save(cliente);
     }
 }

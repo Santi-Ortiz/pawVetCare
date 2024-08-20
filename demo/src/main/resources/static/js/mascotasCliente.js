@@ -43,7 +43,7 @@ document.getElementById('mascota_agregar').addEventListener('submit', function(e
         return input;
     };
 
-    form.appendChild(createHiddenField('id', 10))
+    //form.appendChild(createHiddenField('id', 10))
     form.appendChild(createHiddenField('nombre', nombre));
     form.appendChild(createHiddenField('raza', raza));
     form.appendChild(createHiddenField('edad', edad));

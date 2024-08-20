@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import java.util.*;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 
 
 @Entity
@@ -23,7 +24,7 @@ public class Cliente{
     private String correo;
     private Long celular;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente")
     private List<Mascota> mascotas;
 
     public Cliente(){}

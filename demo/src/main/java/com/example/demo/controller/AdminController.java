@@ -6,9 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.demo.entity.Mascota;
+import com.example.demo.entity.Cliente;
 import com.example.demo.service.AdminService;
+import com.example.demo.service.ClienteService;
 //import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -17,6 +21,9 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private ClienteService clienteService;
 
     // http://localhost:8090/admin/mascotas
     @GetMapping("/mascotas")
@@ -52,8 +59,17 @@ public class AdminController {
     // http://localhost:8090/admin/cliente/{id}
     @GetMapping("/cliente/{id}")
     public String mostrarCliente(Model model, @PathVariable("id") Long identificacion) {
-        model.addAttribute("cliente", adminService.SearchClientById(identificacion));
+        Cliente cliente = clienteService.obtenerCliente(identificacion);
+
+        if(cliente != null){
+           model.addAttribute("cliente", cliente); 
+        } else {
+           throw new NotPetFoundException(identificacion);
+        }
+
+        model.addAttribute("cliente", clienteService.obtenerCliente(identificacion));
         return "mostrarClienteAdmin";
+
     }
-    
+ 
 }
