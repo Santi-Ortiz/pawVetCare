@@ -67,7 +67,10 @@
                     </div>
                     <div class="info-itemEstado">
                         <small class="info-title">Estado:</small>
-                        <label class="info-label" th:text="${mascota.estado}"></label>
+                        <select class="info-select" name="estado">
+                            <option value="TRUE" th:selected="${mascota.estado == 'TRUE'}">Activo</option>
+                            <option value="FALSE" th:selected="${mascota.estado == 'FALSE'}">Inactivo</option>
+                        </select>
                     </div>
                     <div class="info-itemFoto">
                         <small class="info-title">URL Foto:</small>

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.Mascota;
 import com.example.demo.service.MascotaService;
+import com.example.demo.service.ClienteService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -19,7 +21,9 @@ public class MascotaController {
 
     @Autowired
     MascotaService mascotaService;
-          
+   
+    @Autowired
+    ClienteService clienteService;
     // http://localhost:8090/mascota/todas
      @GetMapping("/todas")
      public String mostrarMascotas(Model model){
@@ -46,9 +50,11 @@ public class MascotaController {
 
      // http://localhost:8090/mascota/add
      @GetMapping("/add")
-     public String agregarMascota(Model model, Mascota mascota) {
-         /*Mascota mascota = new Mascota(0L, "", "", 0, 0F, "", "", false, 0L);*/
+     public String agregarMascota(Model model) {
+         Mascota mascota = new Mascota ();
          model.addAttribute("mascota", mascota);
+         Integer cedula = 0;
+         model.addAttribute("cedula", cedula);
          return "mascotasAdmin";
      }
 
@@ -56,6 +62,8 @@ public class MascotaController {
       @PostMapping("/agregar")
       public String mostrar_agregar_mascota(@ModelAttribute("mascota") Mascota mascota) {
          mascotaService.add(mascota);
+         //sSystem.out.println(mascota.getIdCliente().getId());
+         clienteService.agregarMascota(mascota.getIdCliente().getId(), mascota);
          return "redirect:/mascota/todas";
      }
      
