@@ -17,8 +17,8 @@ import jakarta.persistence.FetchType;
 
 public class Cliente{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //private Long id;
     private Integer cedula;
     private String nombre;
     private String correo;
@@ -28,8 +28,8 @@ public class Cliente{
     private List<Mascota> mascotas;
 
     public Cliente(){}
-    public Cliente(Long id,Integer cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
-        this.id = id;
+    public Cliente(/*Long id,*/Integer cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
+        //this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
@@ -37,13 +37,13 @@ public class Cliente{
         this.mascotas = mascotas;
     }
 
-    public Long getId() {
+    /*public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
+    }*/
 
     public Integer getCedula() {
         return cedula;

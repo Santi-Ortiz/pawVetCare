@@ -1,7 +1,6 @@
 -- TABLA CLIENTE
 CREATE TABLE IF NOT EXISTS cliente (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    cedula INT NOT NULL,
+    cedula INT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     correo VARCHAR(255) NOT NULL,
     celular BIGINT NOT NULL
@@ -17,7 +16,7 @@ CREATE TABLE IF NOT EXISTS mascota (
     foto VARCHAR(255),
     estado BOOLEAN,
     cliente_id BIGINT,
-    FOREIGN KEY (cliente_id) REFERENCES cliente(id)
+    FOREIGN KEY (cliente_id) REFERENCES cliente(cedula)
 );
 --TABLA ADMIN
 CREATE TABLE IF NOT EXISTS adm (

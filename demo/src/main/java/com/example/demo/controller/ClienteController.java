@@ -48,7 +48,7 @@ public class ClienteController {
     @GetMapping("/inicio")
     public String inicioCliente(HttpSession session, Model model) { 
         Cliente cliente = (Cliente) session.getAttribute("cliente");
-        System.out.println("ID recibido: " + cliente.getId());
+        System.out.println("ID recibido: " + cliente.getCedula());
         if (cliente != null) {
             model.addAttribute("cliente", cliente);
             return "mascotasCliente";
@@ -60,25 +60,20 @@ public class ClienteController {
     @GetMapping("/mascota/{id}")
     public String mostrarInfoMascotaAdmin(@PathVariable("id") Long idMascota, HttpSession session, Model model) {
     Cliente cliente = (Cliente) session.getAttribute("cliente");
-    if (cliente != null) {
+        //if(cliente != null){
         List<Mascota> mascotasLista = cliente.getMascotas();
-        Mascota mascotaSeleccionada = mascotasLista.stream()
-                                                    .filter(m -> m.getId().equals(idMascota))
-                                                    .findFirst()
-                                                    .orElse(null);
-
-        if (mascotaSeleccionada != null) {
-            model.addAttribute("mascota", mascotaSeleccionada);
-            model.addAttribute("cliente", cliente);
-            return "mostrarMascotaCliente";
-        } else {
-            // Manejo de mascota no encontrada
-            throw new NotPetFoundException(idMascota);
+        for(Mascota mascota : mascotasLista){
+            if(mascota.getId().equals(idMascota)){
+                model.addAttribute("mascota", mascota);
+                model.addAttribute("cliente", cliente);
+                return "mostrarMascotaCliente";
+            }else{
+                continue;
+            }
+        /*     }*/
         }
-    } else {
-        // Manejo de cliente no encontrado en la sesión
-        return "redirect:/cliente/login";
-    }
+        //Hacer lo del errorController
+        return "errorClienteNoEncontrado";
     }
 
     // http://localhost:8090/cliente/mascotas/{id}

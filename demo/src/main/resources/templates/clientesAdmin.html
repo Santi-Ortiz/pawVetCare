@@ -44,10 +44,10 @@
             <div class="carrusel">
                 <div class="mascota-item" th:each="cliente : ${clientes}">
                     <div class="mascota-info">
-                        <div class="info-itemId">
+                        <!--<div class="info-itemId">
                             <small class="info-title">ID:</small>
                             <label class="info-label" th:text="${cliente.id}"></label>
-                        </div>
+                        </div>-->
                         <div class="info-itemNombre">
                             <small class="info-title">Nombre:</small>
                             <label class="info-label" th:text="${cliente.nombre}"></label>
@@ -64,7 +64,7 @@
                             <small class="info-title">Celular:</small>
                             <label class="info-label" th:text="${cliente.celular}"></label>
                         </div>
-                        <a class="info-button" th:href="@{/admin/cliente/{id}(id=${cliente.id})}">+ Info</a>
+                        <a class="info-button" th:href="@{/admin/cliente/{id}(id=${cliente.cedula})}">+ Info</a>
                     </div>
                 </div>
             </div>
