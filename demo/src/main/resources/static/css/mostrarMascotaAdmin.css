@@ -498,6 +498,48 @@ img.mascotaimg {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
+.info-select {
+    width: 30%;
+    padding: 3px;
+    font-family: Poppins;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.info-select::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+.info-select:hover {
+    border-color: #aaa;
+}
+
+.info-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.info-select option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
 .info-itemFoto{
     position: absolute;
     flex-direction: column;

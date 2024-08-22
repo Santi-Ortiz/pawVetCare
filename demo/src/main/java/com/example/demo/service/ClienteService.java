@@ -8,33 +8,55 @@ import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.repository.ClienteRepository;
 //import com.example.demo.repository.MascotaRepository;
+import com.example.demo.repository.MascotaRepository;
+
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
-    //private MascotaRepository mascotaRepository;
+    
+    @Autowired
+    private MascotaRepository mascotaRepository;
 
-    public void agregarMascota(Long cliente_id, Mascota mascota){
-        Cliente cliente = clienteRepository.findById(cliente_id).get();
-        for(Mascota m : cliente.getMascotas()){
-            if(m.getId() == mascota.getId()){
-                cliente.getMascotas().add(mascota);
-                break;
-            }
+    @Transactional
+    public void agregarMascota(Long clienteId, Mascota mascota) {
+        Cliente cliente = clienteRepository.findByCedula(clienteId);
+
+        // Si la mascota ya existe en la base de datos, solo actualiza el vínculo
+        if (mascota.getId() != null) {
+            Mascota existingMascota = mascotaRepository.findById(mascota.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Mascota no encontrada con ID: "));
+            existingMascota.setNombre(mascota.getNombre());
+            existingMascota.setRaza(mascota.getRaza());
+            existingMascota.setEdad(mascota.getEdad());
+            existingMascota.setPeso(mascota.getPeso());
+            existingMascota.setEnfermedad(mascota.getEnfermedad());
+            existingMascota.setFoto(mascota.getFoto());
+            existingMascota.setEstado(mascota.getEstado());
+            mascota = existingMascota; // Usar la instancia existente
+        } else {
+            mascota.setIdCliente(cliente);
         }
-        clienteRepository.save(cliente);               
+        mascota.setIdCliente(cliente);
+        mascotaRepository.save(mascota);
+        //cliente.getMascotas().add(mascota);
+        //clienteRepository.save(cliente);
     }
 
-    public void eliminarMascota(Long cliente_id, Mascota mascota){
-        Cliente cliente = clienteRepository.findById(cliente_id).get();
-        for(Mascota m : cliente.getMascotas()){
-            if(m.getId() == mascota.getId()){
-                cliente.getMascotas().remove(mascota);
-                break;
-            }
-        }
-        clienteRepository.save(cliente);   
+    @Transactional
+    public void eliminarMascota(Long clienteId, Long mascotaId) {
+        Cliente cliente = clienteRepository.findById(clienteId)
+            .orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado con ID: " + clienteId));
+
+        Mascota mascota = mascotaRepository.findById(mascotaId)
+            .orElseThrow(() -> new EntityNotFoundException("Mascota no encontrada con ID: " + mascotaId));
+
+        cliente.getMascotas().remove(mascota);
+        clienteRepository.save(cliente);
+        mascotaRepository.delete(mascota);
     }
     
     public Cliente obtenerCliente(Long id){
@@ -43,7 +65,7 @@ public class ClienteService {
         return cliente;
     }
 
-    public Cliente obtenerClientePorCedula(Integer cedula){
+    public Cliente obtenerClientePorCedula(Long cedula){
         return clienteRepository.findByCedula(cedula);
     }
 
