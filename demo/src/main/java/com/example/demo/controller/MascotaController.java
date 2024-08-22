@@ -63,7 +63,7 @@ public class MascotaController {
       public String mostrar_agregar_mascota(@ModelAttribute("mascota") Mascota mascota) {
          mascotaService.add(mascota);
          //sSystem.out.println(mascota.getIdCliente().getId());
-         clienteService.agregarMascota(mascota.getIdCliente().getId(), mascota);
+         clienteService.agregarMascota(mascota.getIdCliente().getCedula(), mascota);
          return "redirect:/mascota/todas";
      }
      

@@ -36,7 +36,7 @@
             <p class="segundoTitulo">Aquí está la información del cliente:</p>
             <p class="tercerTitulo">Sus mascotas:</p>
             <div class="container-informacion">
-                <form id="clienteForm" th:object="${cliente}" th:action="@{/cliente/update/{id}(id=${cliente.id})}" method="post" class="containerCliente">    
+                <form id="clienteForm" th:object="${cliente}" th:action="@{/cliente/update/{cedula}(cedula=${cliente.cedula})}" method="post" class="containerCliente">    
                     <p class="tituloEditar">Edita:</p>
                     <p class="tituloEliminar">Elimina:</p>
                     <div class="info-item">
@@ -62,7 +62,7 @@
                         </button>
                     </div>
                 </form>
-                <form id="cliente_delete" th:action="@{/cliente/delete/{id}(id=${cliente.id})}">
+                <form id="cliente_delete" th:action="@{/cliente/delete/{cedula}(cedula=${cliente.cedula})}">
                     <button class="eliminar-btn" id="eliminarBtn" type="button" onclick="toggleEliminar()">
                         <span class="icon">x</span>
                         <span class="text">Eliminar</span>

@@ -57,17 +57,17 @@ public class AdminController {
     }
 
     // http://localhost:8090/admin/cliente/{id}
-    @GetMapping("/cliente/{id}")
-    public String mostrarCliente(Model model, @PathVariable("id") Long identificacion) {
-        Cliente cliente = clienteService.obtenerCliente(identificacion);
+    @GetMapping("/cliente/{cedula}")
+    public String mostrarCliente(Model model, @PathVariable("cedula") Integer cedula) {
+        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
 
         if(cliente != null){
            model.addAttribute("cliente", cliente); 
         } else {
-           throw new NotPetFoundException(identificacion);
+           //throw new NotPetFoundException(identificacion);
         }
 
-        model.addAttribute("cliente", clienteService.obtenerCliente(identificacion));
+        model.addAttribute("cliente", clienteService.obtenerClientePorCedula(cedula));
         return "mostrarClienteAdmin";
 
     }

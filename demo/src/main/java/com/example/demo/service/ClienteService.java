@@ -22,7 +22,7 @@ public class ClienteService {
     private MascotaRepository mascotaRepository;
 
     @Transactional
-    public void agregarMascota(Long clienteId, Mascota mascota) {
+    public void agregarMascota(int clienteId, Mascota mascota) {
         Cliente cliente = clienteRepository.findByCedula(clienteId);
 
         // Si la mascota ya existe en la base de datos, solo actualiza el vínculo
@@ -65,7 +65,7 @@ public class ClienteService {
         return cliente;
     }
 
-    public Cliente obtenerClientePorCedula(Long cedula){
+    public Cliente obtenerClientePorCedula(Integer cedula){
         return clienteRepository.findByCedula(cedula);
     }
 
