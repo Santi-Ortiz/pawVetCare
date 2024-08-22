@@ -1,17 +1,34 @@
 package com.example.demo.service;
 
-import java.util.Collection;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.example.demo.entity.Mascota;
-public interface MascotaService {
+import com.example.demo.repository.MascotaRepository;
+import java.util.*;
 
-    public Mascota SearchById(Long id);
+@Service
+public class MascotaService {
+    @Autowired
+    private MascotaRepository repo;
+
+    public Mascota SearchById(Long id){
+        Optional<Mascota> auxMascota = repo.findById(id);
+        return auxMascota.get();
+    }
  
-    public Collection<Mascota> SearchAll();
+    public List<Mascota> SearchAll(){
+        return repo.findAll();
+    }
 
-    public void deleteById(Long id);
+    public void deleteById(Long id){
+        repo.deleteById(id);
+    }
 
-    public void updateMascota(Mascota mascota);
+    public void updateMascota(Mascota mascota){
+        repo.save(mascota);
+    }
 
-    public void add(Mascota mascota);
+    public void add(Mascota mascota){
+        repo.save(mascota);
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.demo.service;
+/*package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,8 @@ public class MascotaServiceImpl implements MascotaService{
 
     @Override
     public Mascota SearchById(Long id){
-        return repo.findById(id);
+        Optional<Mascota> auxMascota = repo.findById(id);
+        return auxMascota.get();
     }
 
     @Override
@@ -30,11 +31,12 @@ public class MascotaServiceImpl implements MascotaService{
     
     @Override
     public void updateMascota(Mascota mascota){
-        repo.update(mascota);
+        repo.save(mascota);
     }
 
     @Override
     public void add(Mascota mascota){
-        repo.add(mascota);
+        repo.save(mascota);
     }
 }
+*/

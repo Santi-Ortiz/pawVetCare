@@ -3,7 +3,7 @@ function toggleEliminar() {
 
     // Si el botón ya está expandido, ejecuta la acción de eliminar
     if (botonEliminar.classList.contains("expanded")) {
-        document.getElementById("mascota_delete").submit();
+        document.getElementById("cliente_delete").submit();
     } else {
         // Si no está expandido, lo expande y espera a la próxima interacción
         botonEliminar.classList.add("expanded");
@@ -44,8 +44,7 @@ function toggleEditar() {
         botonEditar.classList.remove("expanded");
         botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
         
-        
-        document.getElementById("mascotaForm").submit();
+        document.getElementById("clienteForm").submit();
     } else {
         
         inputs.forEach(input => {
@@ -55,3 +54,21 @@ function toggleEditar() {
         botonEditar.innerHTML = "<span class='text'>Guardar</span>";
     }
 }
+
+let index = 0;
+
+function cambiarMascota(direccion) {
+    const items = document.querySelectorAll('.mascota-item');
+    if (items.length === 0) return;
+
+    index = (index + direccion + items.length) % items.length;
+    document.querySelector('.carrusel').style.transform = `translateX(-${index * 106.5}%)`;
+}
+
+// Función para moverse automáticamente cada 6 segundos
+function autoMoverCarrusel() {
+    cambiarMascota(1);
+}
+
+// Iniciar el movimiento automático del carrusel
+setInterval(autoMoverCarrusel, 6000);

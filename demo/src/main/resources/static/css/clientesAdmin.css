@@ -420,7 +420,7 @@ body {
     left: 88px; 
     width: 1540px; 
     height: 200px;
-    background: #BFD5D8FF;
+    background: #C09181;
     border-radius: 12px;
     padding: 20px 0;
     box-sizing: border-box;
@@ -505,11 +505,24 @@ body {
     margin-left: 20px;
 }
 
+.info-itemId {
+    position: absolute;
+    width: 80px;
+    top: 55px;
+    margin-left: 0px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
 .info-itemNombre {
     position: absolute;
     width: 200px;
     top: 55px;
-    margin-left: 240px;
+    margin-left: 120px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -518,11 +531,11 @@ body {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-.info-itemRaza {
+.info-itemCedula {
     position: absolute;
     width: 200px;
     top: 55px;
-    margin-left: 480px;
+    margin-left: 360px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -531,11 +544,11 @@ body {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-.info-itemEdad {
+.info-itemCorreo {
     position: absolute;
-    width: 80px;
+    width: 350px;
     top: 55px;
-    margin-left: 720px;
+    margin-left: 600px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -544,24 +557,11 @@ body {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-.info-itemPeso {
+.info-itemCelular {
     position: absolute;
-    width: 100px;
+    width: 210px;
     top: 55px;
-    margin-left: 840px;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
-
-.info-itemEnfermedad {
-    position: absolute;
-    width: 230px;
-    top: 55px;
-    margin-left: 980px;
+    margin-left: 990px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -590,18 +590,18 @@ body {
     font-family: Poppins;
     font-size: 16px;
     font-weight: 700;
-    color: #BED6D8;
-    background: #1A292B;
+    color: #FFFFFF;
+    background: #FF3B00;
     border: none;
     border-radius: 22px;
     text-decoration: none;
-    margin-left: 1100px;
+    margin-left: 1240px;
     transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
 }
 
 .info-button:hover {
     color: #FFFFFFFF;
-    background: #89989b;
+    background: #000000;
 }
 
 .estado img {
@@ -619,7 +619,7 @@ body {
     height: 330px;
     background: #FFFFFF;
     border-radius: 12px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+    box-shadow: 0px 2px 4px #E6CECE, 0px 0px 1px #E6CECE;
     padding: 20px 0;
     box-sizing: border-box;
     overflow: hidden;
@@ -629,99 +629,52 @@ body {
 .infoadd-itemNombre {
     position: absolute;
     left: 20px;
-    width: 550px;
+    width: 690px;
     flex-direction: column;
     background-color: #F3F4F6;
     padding: 14px;
     font-size: 14px;
     border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+    box-shadow: 0px 2px 4px #E6CECE, 0px 0px 1px #E6CECE;
 }
 
-.infoadd-itemRaza {
+.infoadd-itemCedula {
     position: absolute;
-    left: 620px;
-    width: 325px;
+    left: 760px;
+    width: 725px;
     flex-direction: column;
     background-color: #F3F4F6;
     padding: 14px;
     font-size: 14px;
     border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+    box-shadow: 0px 2px 4px #E6CECE, 0px 0px 1px #E6CECE;
+
 }
 
-.infoadd-itemPeso {
-    position: absolute;
-    left: 995px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-.infoadd-itemEdad {
-    position: absolute;
-    left: 1265px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-.infoadd-itemEnfermedad {
+.infoadd-itemCorreo {
     position: absolute;
     left: 20px;
     top:140px;
+    width: 690px;
     flex-direction: column;
     background-color: #F3F4F6;
     padding: 14px;
     font-size: 14px;
     border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+    box-shadow: 0px 2px 4px #E6CECE, 0px 0px 1px #E6CECE;
 }
 
-.infoadd-itemDueño {
+.infoadd-itemCelular {
     position: absolute;
-    left: 375px;
-    width: 300px;
+    left: 760px;
+    width: 725px;
     top:140px;
     flex-direction: column;
     background-color: #F3F4F6;
     padding: 14px;
     font-size: 14px;
     border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-.infoadd-itemEstado {
-    position: absolute;
-    left: 725px;
-    width: 220px;
-    top:140px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-
-.infoadd-itemURL {
-    position: absolute;
-    left: 994px;
-    width: 500px;
-    top:140px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
+    box-shadow: 0px 2px 4px #E6CECE, 0px 0px 1px #E6CECE;
 }
 
 .infoadd-title {
@@ -749,7 +702,7 @@ body {
     margin-top: 240px;
     margin-left: 600px;
     padding: 12px;
-    background-color: #BFD5D8FF;
+    background-color: #C09181;
     color: #fff;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
@@ -761,7 +714,7 @@ body {
 }
 
 .agregar-button:hover {
-    background-color: #97b3b5;
+    background-color: #E6CECE;
 }
 
 .footer {

@@ -4,38 +4,46 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 import java.util.*;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 
+
+@Entity
+@Table(name="cliente")
 
 public class Cliente{
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)*/
-    private Long id;
+    @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //private Long id;
     private Integer cedula;
     private String nombre;
     private String correo;
     private Long celular;
 
-    //@OneToMany(mappedBy = "cliente")
-    private Map<Long, Mascota> mascotas = new HashMap<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente")
+    private List<Mascota> mascotas;
 
-    public Cliente(Integer cedula, String nombre, String correo, Long celular) {
+    public Cliente(){}
+    public Cliente(/*Long id,*/Integer cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
+        //this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
+        this.mascotas = mascotas;
     }
 
-    
-
-    public Long getId() {
+    /*public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
+    }*/
 
     public Integer getCedula() {
         return cedula;
@@ -69,11 +77,11 @@ public class Cliente{
         this.celular = celular;
     }
     
-    public Map<Long, Mascota> getMascotas() {
+    public List<Mascota> getMascotas() {
         return mascotas;
     }
 
-    public void setMascotas(Map<Long, Mascota> mascotas) {
+    public void setMascotas(List<Mascota> mascotas) {
         this.mascotas = mascotas;
     }
 }

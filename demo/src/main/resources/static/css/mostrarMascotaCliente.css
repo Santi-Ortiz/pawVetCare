@@ -415,9 +415,9 @@ img.mascotaimg {
 
 .info-item {
     position: absolute;
-    width: 370px;
+    width: 315px;
     top: 55px;
-    left: 215px;
+    left: 615px;
     flex-direction: column;
     background-color: #fff;
     padding: 18px;
@@ -479,7 +479,7 @@ img.mascotaimg {
     flex-direction: column;
     top: 240px; 
     left: 90px;
-    width: 340px;
+    width: 675px;
     background-color: #fff;
     padding: 18px;
     border-radius: 15px;
@@ -496,48 +496,6 @@ img.mascotaimg {
     padding: 18px;
     border-radius: 15px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
-
-.info-select {
-    width: 30%;
-    padding: 3px;
-    font-family: Poppins;
-    font-size: 16px;
-    color: #333;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-.info-select::after {
-    content: '';
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px;
-    height: 10px;
-    background-color: #333;
-    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-}
-
-.info-select:hover {
-    border-color: #aaa;
-}
-
-.info-select:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.info-select option {
-    padding: 10px;
-    background-color: #fff;
-    color: #333;
 }
 
 .info-itemFoto{
@@ -568,7 +526,7 @@ img.mascotaimg {
 .mascotaimg {
     position: absolute; 
     top: 35px; 
-    left: 90px; 
+    left: 490px; 
     width: 100px; 
     height:100px; 
     border-radius: 200px;
@@ -577,7 +535,7 @@ img.mascotaimg {
 .estadoimg {
     position: absolute; 
     top: 60px; 
-    left: 650px; 
+    left: 995px; 
     width: 50px; 
     height: 50px; 
 }
