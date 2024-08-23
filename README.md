@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="assets\isologoRosado.png" alt="Logo" width="200" height="200">
+    <img src="demo/src/main/resources/static/assets/isologoRosado.png" alt="Logo" width="200" height="200">
   </a>
 
 <h1 align="center">PAW VET CARE</h1>
@@ -44,21 +44,21 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Project Objectives
+### Project Objectives
 
-	- Business Digitalization: Create a professional online presence for the veterinary clinic, allowing users to access information about the clinic's services, equipment and blog.
-	- Medical Care Registration: Implement a system to register and manage pet medical care.
-	- Administration Portal: Develop an administration portal for clinic staff to analyze business data and manage staff efficiently.
-	- Interactivity and Usability: Provide an attractive and easy to use user experience, with intuitive navigation and responsive design.
+- <strong>Business Digitalization</strong>: Create a professional online presence for the veterinary clinic, allowing users to access information about the clinic's services, equipment and blog.
+- <strong>Medical Care Registration</strong>: Implement a system to register and manage pet medical care.
+- <strong>Administration Portal</strong>: Develop an administration portal for clinic staff to analyze business data and manage staff efficiently.
+- <strong>Interactivity and Usability</strong>: Provide an attractive and easy to use user experience, with intuitive navigation and responsive design.
 
-Features
+### Features
 
-	- Home Page: Introduces the clinic, services offered and testimonials from satisfied clients.
-	- Services Section: Detailed information about hospitalization services, treatments, daycare, SPA and transportation.
-	- Medical Team: Presentation of the veterinary team and their credentials.
-	- Blog: Pet care related content, practical tips and informative videos.
-	- Registration and Login System: Functionality for users to register and access their account.
-	- Administration Portal: Tools for the internal management of the clinic.
+- <strong> Home Page </strong>: Introduces the clinic, services offered and testimonials from satisfied clients.
+- <strong>Services Section</strong>: Detailed information about hospitalization services, treatments, daycare, SPA and transportation.
+- <strong>Medical Team</strong>: Presentation of the veterinary team and their credentials.
+- <strong>Blog</strong>: Pet care related content, practical tips and informative videos.
+- <strong>Registration and Login System</strong>: Functionality for users to register and access their account.
+- <strong>Administration Portal</strong>: Tools for the internal management of the clinic.
 
 
 ## Built With
@@ -68,11 +68,11 @@ Features
 <!-- CONTACT -->
 ## Contact
 
-María Alejandra Casas López - [https://github.com/al-calo] <br>
-Nicolás Montaño Arias - [https://github.com/Monts04] <br>
-Santiago Ortiz Alarcón - [https://github.com/Santi-Ortiz]
+[María Alejandra Casas López](https://github.com/al-calo) <br>
+[Nicolás Montaño Arias](https://github.com/Monts04) <br>
+[Santiago Ortiz Alarcón](https://github.com/Santi-Ortiz)
 
-Project Link: [https://github.com/Santi-Ortiz/pawVetCare.git)
+[Project Link](https://github.com/Santi-Ortiz/pawVetCare.git)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Spring]: https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=Spring&logoColor=white
