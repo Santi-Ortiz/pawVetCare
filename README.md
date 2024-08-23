@@ -68,9 +68,9 @@
 <!-- CONTACT -->
 ## Contact
 
-[María Alejandra Casas López](https://github.com/al-calo) <br>
-[Nicolás Montaño Arias](https://github.com/Monts04) <br>
-[Santiago Ortiz Alarcón](https://github.com/Santi-Ortiz)
+- [María Alejandra Casas López](https://github.com/al-calo) <br>
+- [Nicolás Montaño Arias](https://github.com/Monts04) <br>
+- [Santiago Ortiz Alarcón](https://github.com/Santi-Ortiz)
 
 [Project Link](https://github.com/Santi-Ortiz/pawVetCare.git)
 
