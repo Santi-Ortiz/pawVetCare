@@ -40,7 +40,7 @@ public class ClienteController {
             if(mascota.getId().equals(idMascota)){
                 model.addAttribute("mascota", mascota);
                 model.addAttribute("cliente", cliente);
-                return "mostrarMascotaCliente";
+                return "cliente_MostrarMascotas";
             }else{
                 continue;
             }
@@ -54,21 +54,21 @@ public class ClienteController {
     @GetMapping("/mascotas/{id}")
     public String mostrarCliente(Model model, @PathVariable("id") Long identificacion){
         model.addAttribute("cliente", clienteService.obtenerCliente(identificacion));
-        return "mascotasCliente";
+        return "cliente_mostrarTodasMascotas";
     }
 
     // http://localhost:8090/cliente/todos
     @GetMapping("/todos")
     public String mostrarClientes(Model model){
        model.addAttribute("clientes", clienteService.mostrarTodos());
-       return "clientesAdmin";
+       return "admin_mostrarTodosClientes";
     }
 
     // http://localhost:8090/cliente/add
     @GetMapping("/add")
     public String agregarCliente(Model model, Cliente cliente){
         model.addAttribute("cliente", cliente);
-        return "clientesAdmin";
+        return "admin_mostrarTodosClientes";
     }
 
     // http://localhost:8090/cliente/agregar
@@ -83,7 +83,7 @@ public class ClienteController {
     public String actualizarInfoCliente(@PathVariable("id") Long identificacion, Model model) {
      Cliente cliente = clienteService.obtenerCliente(identificacion);
      model.addAttribute("cliente", cliente);
-     return "mostrarClienteAdmin"; // Asegúrate de que esta vista tenga el formulario
+     return "admin_MostrarInfoCliente"; // Asegúrate de que esta vista tenga el formulario
   }
 
     // http://localhost:8090/mascota/update/{id}

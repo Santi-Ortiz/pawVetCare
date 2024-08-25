@@ -27,9 +27,9 @@ public class AdminController {
 
     // http://localhost:8090/admin/mascotas
     @GetMapping("/mascotas")
-    public String mostrarMascotasAdmin(Model model){
+    public String mostraradmin_mostrarTodasMascotas(Model model){
         model.addAttribute("mascotas", adminService.SearchAllPets());
-        return "mascotasAdmin";
+        return "admin_mostrarTodasMascotas";
         //mascotaController.mostrarMascotas(model);
     }
 
@@ -46,14 +46,14 @@ public class AdminController {
         } 
 
         model.addAttribute("mascota", adminService.SearchPetById(identificacion)); 
-        return "mostrarMascotaAdmin";
+        return "admin_mostrarInfo1Mascota";
     }
 
     // http://localhost:8090/admin/clientes
     @GetMapping("/clientes")
-    public String mostrarClientesAdmin(Model model){
+    public String mostraradmin_mostrarTodosClientes(Model model){
         model.addAttribute("clientes", adminService.SearchAllClients());
-        return "clientesAdmin";
+        return "admin_mostrarTodosClientes";
     }
 
     // http://localhost:8090/admin/cliente/{id}
@@ -68,7 +68,7 @@ public class AdminController {
         }
 
         model.addAttribute("cliente", clienteService.obtenerClientePorCedula(cedula));
-        return "mostrarClienteAdmin";
+        return "admin_MostrarInfoCliente";
 
     }
  
