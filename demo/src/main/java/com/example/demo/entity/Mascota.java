@@ -11,7 +11,6 @@ import jakarta.persistence.Entity;
 @Entity
 @Table(name="mascota")
 public class Mascota{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,6 +25,7 @@ public class Mascota{
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
     public Mascota(){
     }
     public Mascota(Long id, String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto, Boolean estado, Cliente cliente) {
@@ -39,7 +39,16 @@ public class Mascota{
         this.estado = estado;
         this.cliente = cliente;
     }
-
+    public Mascota(String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto, Boolean estado, Cliente cliente) {
+        this.nombre = nombre;
+        this.raza = raza;
+        this.edad = edad;
+        this.peso = peso;
+        this.enfermedad = enfermedad;
+        this.foto = foto;
+        this.estado = estado;
+        this.cliente = cliente;
+    }
     
     public Long getId() {
         return id;

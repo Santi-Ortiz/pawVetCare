@@ -25,7 +25,7 @@
             </div>
         </nav>
         <div class="button-container">
-            <a th:href="@{/iniciarSesion}" class="buttonSoyPVC">Soy PVC</a>
+            <a th:href="@{/iniciarSesion/form}" class="buttonSoyPVC">Soy PVC</a>
             <a th:href="@{/registro}" class="buttonSinCuenta">NO TENGO CUENTA</a>
         </div>
     </header>
@@ -36,7 +36,7 @@
             <div class="container-login">
                 <p class="subTitulo">¡Ya cuido a mi mascota!</p>
                 <p class="subTitulo2">Ingresa tu cédula</p>
-                <form th:action="@{/cliente/login}" method="post">
+                <form th:action="@{/iniciarSesion/form}" method="post">
                     <div class="form-group">
                         <label for="id">Cédula</label>
                         <input type="text" id="id" name="id" placeholder="Ej. 101234567" required>
