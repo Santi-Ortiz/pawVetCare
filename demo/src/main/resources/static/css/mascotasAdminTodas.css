@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 html {
-    height: 100%;
+    height: 105%;
     width: 100%;
 }
 
@@ -16,7 +16,9 @@ body {
 
 .content {
     flex: 1;
+    padding-bottom: 120px;
 }
+
 .top-bar {
     background-color: #FFFFFFFF;
     text-align: left;
@@ -229,7 +231,6 @@ body {
 
 .buscador-input {
     padding: 10px;
-    width: 150px;
     font-family: Poppins;
     border: 1px solid #ccc;
     border-radius: 20px;
@@ -253,26 +254,6 @@ body {
     color: black;
 }
 
-.todas-button {
-    position:absolute;
-    margin-top: 120px;
-    margin-left: 1390px;
-    padding: 8px 16px;
-    background-color: #9095A0;
-    font-family: Poppins;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-weight: 500; 
-    cursor: pointer;
-    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
-}
-
-.todas-button:hover {
-    background-color: #F3F4F6;
-    color: black;
-}
-
 
 .tercerTitulo {
     position: absolute; 
@@ -289,68 +270,11 @@ body {
     color: #323842FF;
 }
 
-.carrusel-container {
-    position: relative;
-    margin-top: 120px;
-    left: 88px; 
-    width: 1540px; 
-    height: 200px;
-    background: #BFD5D8FF;
-    border-radius: 12px;
-    box-shadow: 0px 0px 1px #89989b, 0px 0px 2px #89989b;
-    padding: 20px 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    text-align: left;
-}
-
-.carrusel {
-    display: flex;
-    transition: transform 0.5s ease;
-    will-change: transform;
-}
-
-.mascota-item {
-    min-width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    margin-left:100px;
-    text-align: left;
-}
-
 .mascota-foto {
     width: 150px;
     height: 150px;
+    margin-left: 30px;
     border-radius: 200px;
-}
-
-.carrusel-prev, .carrusel-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 1;
-}
-
-.carrusel-prev img, .carrusel-next img {
-    width: 40px;
-    height: auto;
-}
-
-.carrusel-prev {
-    left: 10px;
-}
-
-.carrusel-next {
-    right: 10px;
-}
-
-.estado-icon {
-    font-size: 1.5em;
 }
 
 .info-title {
@@ -376,201 +300,15 @@ body {
     position: absolute;
     width: 50px; 
     height: 50px; 
-    top: 60px;
+    margin-top: 50px;
     margin-left: 20px;
 }
 
 .info-itemNombre {
-    position: absolute;
     width: 200px;
-    top: 55px;
-    margin-left: 240px;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
-
-.info-itemRaza {
-    position: absolute;
-    width: 200px;
-    top: 55px;
-    margin-left: 480px;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
-
-.info-itemEdad {
-    position: absolute;
-    width: 80px;
-    top: 55px;
-    margin-left: 720px;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
-
-.info-itemPeso {
-    position: absolute;
-    width: 100px;
-    top: 55px;
-    margin-left: 840px;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
-
-.info-itemEnfermedad {
-    position: absolute;
-    width: 230px;
-    top: 55px;
-    margin-left: 980px;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
-
-.info-label {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 5px;
-}
-
-.info-button {
-    position: absolute;
-    top: 60px;
-    width: 80px;
-    height: 44px;
-    justify-content: center;
-    font-family: Poppins;
-    font-size: 16px;
-    font-weight: 700;
-    color: #BED6D8;
-    background: #1A292B;
-    border: none;
-    border-radius: 22px;
-    text-decoration: none;
-    margin-left: 1100px;
-}
-
-.info-button:hover {
-    color: #FFFFFFFF;
-    background: #89989b;
-}
-
-.carrusel-container {
     position: relative;
-    top: 200px;
-    left: 88px; 
-    width: 1540px; 
-    height: 200px;
-    background: #BFD5D8FF;
-    border-radius: 12px;
-    padding: 20px 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    text-align: left;
-}
-
-.carrusel {
-    display: flex;
-    transition: transform 0.5s ease;
-    will-change: transform;
-}
-
-.mascota-item {
-    min-width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    margin-left:100px;
-    text-align: left;
-}
-
-.mascota-foto {
-    width: 150px;
-    height: 150px;
-    border-radius: 200px;
-}
-
-.carrusel-prev, .carrusel-next {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    outline: none;
-}
-
-.carrusel-prev img, .carrusel-next img {
-    width: 40px;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index: 1;
-}
-
-.carrusel-prev {
-    left: 40px;
-}
-
-.carrusel-next {
-    right: 80px;
-}
-
-.estado-icon {
-    font-size: 1.5em;
-}
-
-.info-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: #888;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.input-text {
-    width: 150%;
-    height: 0;
-    padding: 10px;
-    font-family: Poppins;
-    box-sizing: border-box;
-    font-size: 12px;
-}
-
-.estadoimg {
-    position: absolute;
-    width: 50px; 
-    height: 50px; 
-    top: 60px;
-    margin-left: 20px;
-}
-
-.info-itemNombre {
-    position: absolute;
-    width: 200px;
-    top: 55px;
-    margin-left: 240px;
+    margin-top: -105px;
+    margin-left: 270px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -580,10 +318,11 @@ body {
 }
 
 .info-itemRaza {
-    position: absolute;
     width: 200px;
+    position: relative;
+    margin-top: -110px;
     top: 55px;
-    margin-left: 480px;
+    margin-left: 510px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -593,10 +332,9 @@ body {
 }
 
 .info-itemEdad {
-    position: absolute;
     width: 80px;
     top: 55px;
-    margin-left: 720px;
+    margin-left: 750px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -606,10 +344,10 @@ body {
 }
 
 .info-itemPeso {
-    position: absolute;
     width: 100px;
-    top: 55px;
-    margin-left: 840px;
+    position: relative;
+    margin-top: -55px;
+    margin-left: 870px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -619,10 +357,10 @@ body {
 }
 
 .info-itemEnfermedad {
-    position: absolute;
     width: 230px;
-    top: 55px;
-    margin-left: 980px;
+    position: relative;
+    margin-top: -55px;
+    margin-left: 1010px;
     flex-direction: column;
     background-color: #fff;
     padding: 14px;
@@ -640,10 +378,10 @@ body {
 }
 
 .info-button {
-    position: absolute;
     display: inline-flex;
-    top: 60px;
-    width: 80px;
+    position: absolute;
+    margin-top: -50px;
+    width: 160px;
     height: 44px;
     align-items: center;
     justify-content: center;
@@ -656,7 +394,7 @@ body {
     border: none;
     border-radius: 22px;
     text-decoration: none;
-    margin-left: 1100px;
+    margin-left: 1300px;
     transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
 }
 
@@ -672,158 +410,46 @@ body {
     margin: 0;
 }
 
-.agregar-container {
-    position: relative;
+.mascotas-container {
     margin-top: 320px;
-    left: 88px; 
-    width: 1540px; 
-    height: 330px;
-    background: #FFFFFF;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+}
+
+.mascota-item {
+    margin-left: 88px; 
+    width: 1500px; 
+    height: 150px;
+    padding: 20px;
+    background: #BFD5D8FF;
     border-radius: 12px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-    padding: 20px 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    text-align: left;
+    box-shadow: 0px 0px 1px #89989b, 0px 0px 2px #89989b;
 }
 
-.infoadd-itemNombre {
-    position: absolute;
-    left: 20px;
-    width: 550px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-.infoadd-itemRaza {
-    position: absolute;
-    left: 620px;
-    width: 325px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-.infoadd-itemPeso {
-    position: absolute;
-    left: 995px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-.infoadd-itemEdad {
-    position: absolute;
-    left: 1265px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-.infoadd-itemEnfermedad {
-    position: absolute;
-    left: 20px;
-    top:140px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-.infoadd-itemDueño {
-    position: absolute;
-    left: 375px;
-    width: 300px;
-    top:140px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-.infoadd-itemEstado {
-    position: absolute;
-    left: 725px;
-    width: 220px;
-    top:140px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-
-.infoadd-itemURL {
-    position: absolute;
-    left: 994px;
-    width: 500px;
-    top:140px;
-    flex-direction: column;
-    background-color: #F3F4F6;
-    padding: 14px;
-    font-size: 14px;
-    border-radius: 15px;
-    box-shadow: 0px 2px 4px #BFD5D8FF, 0px 0px 1px #BFD5D8FF;
-}
-
-.infoadd-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: #888;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.inputadd-text {
-    width: 100%;
-    padding: 10px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    box-sizing: border-box;
-    border-radius: 20px;
-    border: 1px solid #ddd;
-}
-
-.agregar-button {
-    width: 300px;
-    margin-top: 240px;
-    margin-left: 600px;
-    padding: 12px;
-    background-color: #BFD5D8FF;
-    color: #fff;
+.pagination {
+    text-align: center;
+    font-family: Poppins;
+    margin-top: 20px;
     font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
 }
 
-.agregar-button:hover {
-    background-color: #97b3b5;
+.pagination button {
+    background-color: #BFD4D7;
+    font-family: Poppins;
+    border-radius: 20px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
 }
+
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
 
 .footer {
     position: fixed;

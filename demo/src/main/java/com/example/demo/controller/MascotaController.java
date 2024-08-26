@@ -64,14 +64,14 @@ public class MascotaController {
          mascotaService.add(mascota);
          //sSystem.out.println(mascota.getIdCliente().getId());
          clienteService.agregarMascota(mascota.getIdCliente().getId(), mascota);
-         return "redirect:/mascota/todas";
+         return "redirect:/admin/mascotas";
      }
      
     // http://localhost:8090/mascota/delete/1
      @GetMapping("/delete/{id}")
      public String borrarMascota(@PathVariable("id") Long identificacion){
         mascotaService.deleteById(identificacion);
-        return "redirect:/mascota/todas";
+        return "redirect:/admin/mascotas";
      }
 
     // http://localhost:8090/mascota/update/{id}
@@ -86,7 +86,7 @@ public class MascotaController {
      @PostMapping("/update/{id}")
      public String actualizarMascota(@PathVariable("id") int  identificacion, @ModelAttribute("mascota") Mascota mascota) {
          mascotaService.updateMascota(mascota);
-         return "redirect:/mascota/todas";
+         return "redirect:/admin/mascotas";
      }
 
 }

@@ -33,6 +33,14 @@ public class AdminController {
         //mascotaController.mostrarMascotas(model);
     }
 
+    // http://localhost:8090/admin/mascotas/todas
+    @GetMapping("/mascotas/todas")
+    public String mostrarTodasLasMascotasAdmin(Model model){
+        model.addAttribute("mascotas", adminService.SearchAllPets());
+        return "mascotasAdminTodas";
+        //mascotaController.mostrarMascotas(model);
+    }
+
     // http://localhost:8090/admin/mascotas/{id}
     @GetMapping("/mascotas/{id}")
     public String mostrarInfoMascotaAdmin(Model model, @PathVariable("id") Long identificacion){
