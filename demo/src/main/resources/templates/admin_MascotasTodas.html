@@ -35,7 +35,13 @@
     </header>
     <section class="content">
         <p class="primerTitulo">Hola, admin</p>
-        <p class="segundoTitulo">Navega por las mascotas:</p>  
+        <p class="segundoTitulo">Aquí están todas las mascotas:</p>
+        <form class="buscador-form" onsubmit="return false;">
+            <input type="text" class="buscador-input" placeholder="Buscar por ID">
+            <button type="button" class="buscador-button">Buscar</button>
+        </form>
+        <a th:href="@{/admin/mascotas/todas}" class="todas-button">+ Ver todas las mascotas</a> 
+        <p class="tercerTitulo">Agrega mascotas:</p>  
         <div class="mascotas-container" id="mascotasContainer">
             <div class="mascota-item" th:each="animal : ${mascotas}">
                 <div class="mascota-info">
