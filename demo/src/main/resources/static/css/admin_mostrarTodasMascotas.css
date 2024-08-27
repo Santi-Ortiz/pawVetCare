@@ -559,7 +559,7 @@ body {
 
 .info-itemEnfermedad {
     position: absolute;
-    width: 230px;
+    width: 250px;
     top: 55px;
     margin-left: 980px;
     flex-direction: column;
@@ -595,7 +595,7 @@ body {
     border: none;
     border-radius: 22px;
     text-decoration: none;
-    margin-left: 1100px;
+    margin-left: 1115px;
     transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
 }
 
