@@ -35,6 +35,7 @@ function ajustarAnchoInput(input) {
 function toggleEditar() {
     const botonEditar = document.getElementById("editarBtn");
     const inputs = document.querySelectorAll(".info-label");
+    
 
     if (botonEditar.classList.contains("expanded")) {
         

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 // import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Mascota;
 import com.example.demo.entity.Cliente;
@@ -40,6 +41,13 @@ public class AdminController {
           return "admin_MascotasTodas";
           //mascotaController.mostrarMascotas(model);
       }
+
+    // Método para redirigir al ID específico
+    @GetMapping("/busqueda")
+    public String redirectToMascota(@RequestParam("id") Long id) {
+        return "redirect:/admin/mascotas/" + id;
+ 
+    }
 
     // http://localhost:8090/admin/mascotas/{id}
     @GetMapping("/mascotas/{id}")
