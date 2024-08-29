@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 // import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+import java.util.*;
 
 import com.example.demo.entity.Mascota;
 import com.example.demo.entity.Cliente;
@@ -27,57 +29,49 @@ public class AdminController {
 
     // http://localhost:8090/admin/mascotas
     @GetMapping("/mascotas")
-    public String mostrarMascotasAdmin(Model model){
+    public String mostraradmin_mostrarTodasMascotas(Model model){
         model.addAttribute("mascotas", adminService.SearchAllPets());
-        return "mascotasAdmin";
+        return "admin_mostrarTodasMascotas";
         //mascotaController.mostrarMascotas(model);
     }
 
-    // http://localhost:8090/admin/mascotas/todas
-    @GetMapping("/mascotas/todas")
-    public String mostrarTodasLasMascotasAdmin(Model model){
-        model.addAttribute("mascotas", adminService.SearchAllPets());
-        return "mascotasAdminTodas";
-        //mascotaController.mostrarMascotas(model);
+      // http://localhost:8090/admin/mascotas/todas
+      @GetMapping("/mascotas/todas")
+      public String mostraradmin_mostrarTodasLasMascotas(Model model){
+          model.addAttribute("mascotas", adminService.SearchAllPets());
+          return "admin_MascotasTodas";
+          //mascotaController.mostrarMascotas(model);
+      }
+
+    // Método para redirigir al ID específico
+    @GetMapping("/busqueda")
+    public String redirectToMascota(@RequestParam("id") Long id) {
+        return "redirect:/admin/mascotas/" + id;
+ 
     }
 
     // http://localhost:8090/admin/mascotas/{id}
     @GetMapping("/mascotas/{id}")
-    public String mostrarInfoMascotaAdmin(Model model, @PathVariable("id") Long identificacion){
+    public String mostrarInfoMascotaAdmin(Model model, @PathVariable("id") Long idMascota){
 
-        Mascota mascota = adminService.SearchPetById(identificacion);
-
-        if(mascota != null){
-            model.addAttribute("mascota", mascota); 
-        } else {
-            throw new NotPetFoundException(identificacion);
-        } 
-
-        model.addAttribute("mascota", adminService.SearchPetById(identificacion)); 
-        return "mostrarMascotaAdmin";
+        Mascota mascota = adminService.SearchPetById(idMascota);
+        model.addAttribute("mascota", mascota); 
+        return "admin_mostrarInfo1Mascota"; 
     }
 
     // http://localhost:8090/admin/clientes
     @GetMapping("/clientes")
-    public String mostrarClientesAdmin(Model model){
+    public String mostraradmin_mostrarTodosClientes(Model model){
         model.addAttribute("clientes", adminService.SearchAllClients());
-        return "clientesAdmin";
+        return "admin_mostrarTodosClientes";
     }
 
     // http://localhost:8090/admin/cliente/{id}
-    @GetMapping("/cliente/{id}")
-    public String mostrarCliente(Model model, @PathVariable("id") Long identificacion) {
-        Cliente cliente = clienteService.obtenerCliente(identificacion);
-
-        if(cliente != null){
-           model.addAttribute("cliente", cliente); 
-        } else {
-           throw new NotPetFoundException(identificacion);
-        }
-
-        model.addAttribute("cliente", clienteService.obtenerCliente(identificacion));
-        return "mostrarClienteAdmin";
-
+    @GetMapping("/cliente/{cedula}")
+    public String mostrarCliente(Model model, @PathVariable("cedula") Long cedula) {
+        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
+        model.addAttribute("cliente", cliente); 
+        return "admin_MostrarInfoCliente";
     }
  
 }

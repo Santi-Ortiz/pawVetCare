@@ -7,26 +7,26 @@
     <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
     <title>PawVetCare | Mascotas Cliente</title>
     <!-- Enlace al archivo CSS específico para la página -->
-    <link rel="stylesheet" th:href="@{/css/mascotasCliente.css}">
+    <link rel="stylesheet" th:href="@{/css/cliente_mostrarTodasMascotas.css}">
     <!-- Favicon -->
     <link rel="shortcut icon" th:href="@{/assets/imagotipoAzul.png}" type="image/x-icon">
 </head>
 <body>
     <!-- Barra superior con navegación -->  
     <header class="top-bar">
-        <a th:href="@{/home}">
+        <a th:href="@{/landing/home}">
             <img th:src="@{/assets/isologoAzul.png}" alt="Logo Azul">
         </a>
         <!-- Botones de navegación -->
         <nav>
             <nav>
                 <div class="header-menu">
-                    <a th:href="@{/cliente/mascotas/{id}(id=${cliente.id})}" class="header-menu-item selected">MASCOTAS<div class="indicator"></div></a>
+                    <a th:href="@{/cliente/mascotas/{id}(id=${cliente.cedula})}" class="header-menu-item selected">MASCOTAS<div class="indicator"></div></a>
                 </div>
             </nav>
         </nav> 
         <div class="button-container">
-            <a th:href="@{/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
+            <a th:href="@{/landing/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
         </div>
     </header> 
     <section class = "content">
@@ -83,5 +83,5 @@
         </div>
     </footer>
 </body>
-<script th:src="@{/js/mascotasCliente.js}"></script>
+<script th:src="@{/js/cliente_mostrarTodasMascotas.js}"></script>
 </html>

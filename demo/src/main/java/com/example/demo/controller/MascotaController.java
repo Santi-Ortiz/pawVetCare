@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+   package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class MascotaController {
      public String mostrarMascotas(Model model){
         model.addAttribute("mascotas", mascotaService.SearchAll());
         System.out.println("Mascotas: " + mascotaService.SearchAll());
-        return "mascotasAdmin";
+        return "admin_mostrarTodasMascotas";
      }
 
      // http://localhost:8090/mascota/find/
@@ -45,7 +45,7 @@ public class MascotaController {
          }
 
          model.addAttribute("mascota", mascotaService.SearchById(identificacion));
-         return "mostrarMascotaAdmin";
+         return "admin_mostrarInfo1Mascota";
      }
 
      // http://localhost:8090/mascota/add
@@ -55,7 +55,7 @@ public class MascotaController {
          model.addAttribute("mascota", mascota);
          Integer cedula = 0;
          model.addAttribute("cedula", cedula);
-         return "mascotasAdmin";
+         return "admin_mostrarTodasMascotas";
      }
 
      // http://localhost:8090/mascota/agregar
@@ -63,8 +63,8 @@ public class MascotaController {
       public String mostrar_agregar_mascota(@ModelAttribute("mascota") Mascota mascota) {
          mascotaService.add(mascota);
          //sSystem.out.println(mascota.getIdCliente().getId());
-         clienteService.agregarMascota(mascota.getIdCliente().getId(), mascota);
-         return "redirect:/admin/mascotas";
+         clienteService.agregarMascota(mascota.getIdCliente().getCedula(), mascota);
+         return "redirect:/mascota/todas";
      }
      
     // http://localhost:8090/mascota/delete/1
@@ -79,7 +79,7 @@ public class MascotaController {
      public String actualizarInfoMascota(@PathVariable("id") Long identificacion, Model model) {
       Mascota mascota = mascotaService.SearchById(identificacion);
       model.addAttribute("mascota", mascota);
-      return "mostrarMascotaAdmin"; // Asegúrate de que esta vista tenga el formulario
+      return "admin_mostrarInfo1Mascota"; // Asegúrate de que esta vista tenga el formulario
    }
 
      // http://localhost:8090/mascota/update/{id}

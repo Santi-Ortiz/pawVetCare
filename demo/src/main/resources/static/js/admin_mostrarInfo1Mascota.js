@@ -35,12 +35,15 @@ function ajustarAnchoInput(input) {
 function toggleEditar() {
     const botonEditar = document.getElementById("editarBtn");
     const inputs = document.querySelectorAll(".info-label");
+    const estado = document.getElementById("state");
+    
 
     if (botonEditar.classList.contains("expanded")) {
         
         inputs.forEach(input => {
             input.setAttribute("readonly", true);
         });
+        estado.disabled = true;
         botonEditar.classList.remove("expanded");
         botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
         
@@ -51,6 +54,7 @@ function toggleEditar() {
         inputs.forEach(input => {
             input.removeAttribute("readonly");
         });
+        estado.disabled = false;
         botonEditar.classList.add("expanded");
         botonEditar.innerHTML = "<span class='text'>Guardar</span>";
     }

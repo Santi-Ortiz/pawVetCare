@@ -17,6 +17,6 @@ public class VeterinarioController {
     @GetMapping("/mascotas")
      public String mostrarMascotas(Model model){
         model.addAttribute("mascotas", MascotaService.SearchAll());
-        return "mascotasAdmin";
+        return "admin_mostrarTodasMascotas";
      }
 }

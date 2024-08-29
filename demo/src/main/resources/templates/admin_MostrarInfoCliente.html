@@ -6,7 +6,7 @@
         <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
         <title>PawVetCare | Mostrar Cliente</title>
         <!-- Enlace al archivo CSS específico para la página -->
-        <link rel="stylesheet" th:href="@{/css/mostrarClienteAdmin.css}">
+        <link rel="stylesheet" th:href="@{/css/admin_MostrarInfoCliente.css}">
         <!-- Favicon -->
         <link rel="shortcut icon" th:href="@{/assets/imagotipoAzul.png}" type="image/x-icon">
     
@@ -14,21 +14,21 @@
     <body>
         <!-- Barra superior con navegación -->
         <header class="top-bar">
-            <a th:href="@{/home}">
+            <a th:href="@{/landing/home}">
                 <img th:src="@{/assets/isologoAzul.png}" alt="Logo Azul">
             </a>
             <!-- Botones de navegación -->
             <nav>
                 <div class="header-menu">
-                    <a th:href="@{/home}" class="header-menu-item">DASHBOARD<div class="indicator"></div></a>
+                    <a th:href="@{/landing/home}" class="header-menu-item">DASHBOARD<div class="indicator"></div></a>
                     <a th:href="@{/admin/mascotas}" class="header-menu-item">MASCOTAS<div class="indicator"></div></a>
-                    <a th:href="@{/contacto}" class="header-menu-item">VETERINARIOS</a>
+                    <a th:href="@{/landing/contacto}" class="header-menu-item">VETERINARIOS</a>
                     <a th:href="@{/admin/clientes}" class="header-menu-item selected"> CLIENTES<div class="indicator"></div></a>
-                    <a th:href="@{/contacto}" class="header-menu-item">INICIALIZACIÓN</a>
+                    <a th:href="@{/landing/contacto}" class="header-menu-item">INICIALIZACIÓN</a>
                 </div>
             </nav>
             <div class="button-container">
-                <a th:href="@{/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
+                <a th:href="@{/landing/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
             </div>
         </header>
         <section class = "content">
@@ -36,7 +36,7 @@
             <p class="segundoTitulo">Aquí está la información del cliente:</p>
             <p class="tercerTitulo">Sus mascotas:</p>
             <div class="container-informacion">
-                <form id="clienteForm" th:object="${cliente}" th:action="@{/cliente/update/{id}(id=${cliente.id})}" method="post" class="containerCliente">    
+                <form id="clienteForm" th:object="${cliente}" th:action="@{/cliente/update/{cedula}(cedula=${cliente.cedula})}" method="post" class="containerCliente">    
                     <p class="tituloEditar">Edita:</p>
                     <p class="tituloEliminar">Elimina:</p>
                     <div class="info-item">
@@ -62,7 +62,7 @@
                         </button>
                     </div>
                 </form>
-                <form id="cliente_delete" th:action="@{/cliente/delete/{id}(id=${cliente.id})}">
+                <form id="cliente_delete" th:action="@{/cliente/delete/{cedula}(cedula=${cliente.cedula})}">
                     <button class="eliminar-btn" id="eliminarBtn" type="button" onclick="toggleEliminar()">
                         <span class="icon">x</span>
                         <span class="text">Eliminar</span>
@@ -119,5 +119,5 @@
             </div>
         </footer>
     </body>
-    <script th:src="@{/js/mostrarClienteAdmin.js}"></script>
+    <script th:src="@{/js/admin_MostrarInfoCliente.js}"></script>
 </html>

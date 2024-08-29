@@ -1,7 +1,5 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -10,16 +8,19 @@ import java.util.*;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 
 @Entity
 @Table(name="cliente")
 
 public class Cliente{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Integer cedula;
+    private Integer id;
+    private Long cedula;
     private String nombre;
     private String correo;
     private Long celular;
@@ -28,28 +29,34 @@ public class Cliente{
     private List<Mascota> mascotas;
 
     public Cliente(){}
-    public Cliente(Long id,Integer cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
-        this.id = id;
+
+    public Cliente(Long cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
         this.mascotas = mascotas;
     }
+    public Cliente(Long cedula, String nombre, String correo, Long celular) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.celular = celular;
+    }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Integer getCedula() {
+    public Long getCedula() {
         return cedula;
     }
 
-    public void setCedula(Integer cedula) {
+    public void setCedula(Long cedula) {
         this.cedula = cedula;
     }
 

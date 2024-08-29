@@ -7,38 +7,38 @@
     <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
     <title>PawVetCare | Mostrar Todas Las Mascotas</title>
     <!-- Enlace al archivo CSS específico para la página -->
-    <link rel="stylesheet" th:href="@{/css/mascotasAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin_mostrarTodasMascotas.css}">
     <!-- Favicon -->
     <link rel="shortcut icon" href="../assets/imagotipoAzul.png" type="image/x-icon">
 </head>
 <body>
     <!-- Barra superior con navegación -->
     <header class="top-bar">
-        <a th:href="@{/home}">
+        <a th:href="@{/landing/home}">
             <img src="../assets/isologoAzul.png" alt="Logo Azul">
         </a>
         <!-- Botones de navegación -->
         <nav>
             <nav>
                 <div class="header-menu">
-                    <a th:href="@{/home}" class="header-menu-item">DASHBOARD<div class="indicator"></div></a>
+                    <a th:href="@{/landing/home}" class="header-menu-item">DASHBOARD<div class="indicator"></div></a>
                     <a th:href="@{/admin/mascotas}" class="header-menu-item selected">MASCOTAS<div class="indicator"></div></a>
-                    <a th:href="@{/contacto}" class="header-menu-item">VETERINARIOS</a>
+                    <a th:href="@{/landing/contacto}" class="header-menu-item">VETERINARIOS</a>
                     <a th:href="@{/admin/clientes}" class="header-menu-item">CLIENTES</a>
-                    <a th:href="@{/contacto}" class="header-menu-item">INICIALIZACIÓN</a>
+                    <a th:href="@{/landing/contacto}" class="header-menu-item">INICIALIZACIÓN</a>
                 </div>
             </nav>
         </nav>
         <div class="button-container">
-            <a th:href="@{/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
+            <a th:href="@{/landing/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
         </div>
     </header>
     <section class = "content">
         <p class="primerTitulo">Hola, admin</p>
         <p class="segundoTitulo">Aquí están todas las mascotas:</p>
-        <form class="buscador-form" onsubmit="return false;">
-            <input type="text" class="buscador-input" placeholder="Buscar por ID">
-            <button type="button" class="buscador-button">Buscar</button>
+        <form th:action="@{/admin/busqueda}" class="buscador-form" >
+            <input type="text" name="id" class="buscador-input" placeholder="Buscar por ID">
+            <button type="submit" class="buscador-button">Buscar</button>
         </form>
         <a th:href="@{/admin/mascotas/todas}" class="todas-button">+ Ver todas las mascotas</a> 
         <p class="tercerTitulo">Agrega mascotas:</p>    
@@ -130,5 +130,5 @@
         </div>
     </footer>
 </body>
-<script src="../js/mascotasAdmin.js"></script>
+<script src="../js/admin_mostrarTodasMascotas.js"></script>
 </html>

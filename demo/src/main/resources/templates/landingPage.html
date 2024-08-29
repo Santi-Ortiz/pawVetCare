@@ -13,19 +13,19 @@
 <body>
     <!-- Barra superior con navegación -->
     <header class="top-bar">
-        <a th:href="@{/home}">
+        <a th:href="@{/landing/home}">
             <img src="../assets/isologoAzul.png" alt="Logo Azul">
         </a>
         <!-- Botones de navegación -->
         <nav>
             <div class="header-menu">
-                <a th:href="@{/home}" class="header-menu-item selected">HOME<div class="indicator"></div></a>
-                <a th:href="@{/equipo}" class="header-menu-item">EQUIPO</a>
-                <a th:href="@{/contacto}" class="header-menu-item">CONTACTO</a>
+                <a th:href="@{/landing/home}" class="header-menu-item selected">HOME<div class="indicator"></div></a>
+                <a th:href="@{/landing/equipo}" class="header-menu-item">EQUIPO</a>
+                <a th:href="@{/landing/contacto}" class="header-menu-item">CONTACTO</a>
             </div>
         </nav>
         <div class="button-container">
-            <a th:href="@{/iniciarSesion}" class="buttonSoyPVC">Soy PVC</a>
+            <a th:href="@{/iniciarSesion/form}" class="buttonSoyPVC">Soy PVC</a>
             <a th:href="@{/registro}" class="buttonSinCuenta">NO TENGO CUENTA</a>
         </div>
     </header>
@@ -35,7 +35,7 @@
             <p class="primerTitulo">¡El amor tiene cuatro patas!</p>
             <p class="primerSubtitulo">Sabemos lo importante que es para ti tener un segundo hogar donde tu mascota sea el centro de todo</p>
             <a class="cuidarButton" th:href="@{/registro}" type="button">Quiero cuidar a mi mascota</a>
-            <a class="yaSoyButton" th:href="@{/iniciarSesion}">YA SOY PetVetCitizen</a>
+            <a class="yaSoyButton" th:href="@{/iniciarSesion/form}">YA SOY PetVetCitizen</a>
             <img class="perroPortadaRosa" src="../assets/goldenPortadaRosa.png" alt="Perro Principal Rosa">
             <img class="perroPortada" src="../assets/goldenPortada.png" alt="Perro Principal">
             <img class="gatoPortadaAzul" src="../assets/gatoPortadaAzul.png" alt="Gato Principal Azul">

@@ -21,6 +21,10 @@ public class Admin {
         this.usuario = usuario;
         this.contrasena = contrasena;
     }
+    public Admin(String usuario, String contrasena) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+    }
 
     public Long getId() {
         return id;
