@@ -8,6 +8,8 @@ import java.util.*;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 
 @Entity
@@ -16,7 +18,9 @@ import jakarta.persistence.FetchType;
 public class Cliente{
 
     @Id
-    private Integer cedula;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private Long cedula;
     private String nombre;
     private String correo;
     private Long celular;
@@ -26,25 +30,33 @@ public class Cliente{
 
     public Cliente(){}
 
-    public Cliente(Integer cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
+    public Cliente(Long cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
         this.mascotas = mascotas;
     }
-    public Cliente(Integer cedula, String nombre, String correo, Long celular) {
+    public Cliente(Long cedula, String nombre, String correo, Long celular) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
     }
 
-    public Integer getCedula() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Long getCedula() {
         return cedula;
     }
 
-    public void setCedula(Integer cedula) {
+    public void setCedula(Long cedula) {
         this.cedula = cedula;
     }
 
