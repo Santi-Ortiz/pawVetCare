@@ -1,10 +1,10 @@
 package com.example.demo.controller;
 
-public class NotPetFoundException extends RuntimeException {
+public class NotClientFoundException extends RuntimeException{
 
     private Long id;
 
-    public NotPetFoundException(Long id) {
+    public NotClientFoundException(Long id) {
         this.id = id;
     }
 

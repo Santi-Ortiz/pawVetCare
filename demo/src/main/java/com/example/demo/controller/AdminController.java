@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 // import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.util.*;
 
 import com.example.demo.entity.Mascota;
 import com.example.demo.entity.Cliente;
@@ -51,18 +52,11 @@ public class AdminController {
 
     // http://localhost:8090/admin/mascotas/{id}
     @GetMapping("/mascotas/{id}")
-    public String mostrarInfoMascotaAdmin(Model model, @PathVariable("id") Long identificacion){
+    public String mostrarInfoMascotaAdmin(Model model, @PathVariable("id") Long idMascota){
 
-        Mascota mascota = adminService.SearchPetById(identificacion);
-
-        if(mascota != null){
-            model.addAttribute("mascota", mascota); 
-        } else {
-            throw new NotPetFoundException(identificacion);
-        } 
-
-        model.addAttribute("mascota", adminService.SearchPetById(identificacion)); 
-        return "admin_mostrarInfo1Mascota";
+        Mascota mascota = adminService.SearchPetById(idMascota);
+        model.addAttribute("mascota", mascota); 
+        return "admin_mostrarInfo1Mascota"; 
     }
 
     // http://localhost:8090/admin/clientes
@@ -76,16 +70,8 @@ public class AdminController {
     @GetMapping("/cliente/{cedula}")
     public String mostrarCliente(Model model, @PathVariable("cedula") Long cedula) {
         Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
-
-        if(cliente != null){
-           model.addAttribute("cliente", cliente); 
-        } else {
-           //throw new NotPetFoundException(identificacion);
-        }
-
-        model.addAttribute("cliente", clienteService.obtenerClientePorCedula(cedula));
+        model.addAttribute("cliente", cliente); 
         return "admin_MostrarInfoCliente";
-
     }
  
 }
