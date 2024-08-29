@@ -66,7 +66,7 @@ public class AdminController {
 
     // http://localhost:8090/admin/cliente/{id}
     @GetMapping("/cliente/{cedula}")
-    public String mostrarCliente(Model model, @PathVariable("cedula") Integer cedula) {
+    public String mostrarCliente(Model model, @PathVariable("cedula") Long cedula) {
         Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
 
         if(cliente != null){
