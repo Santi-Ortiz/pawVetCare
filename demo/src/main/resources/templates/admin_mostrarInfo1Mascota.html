@@ -67,7 +67,7 @@
                     </div>
                     <div class="info-itemEstado">
                         <small class="info-title">Estado:</small>
-                        <select class="info-select" name="estado">
+                        <select id="state"class="info-select" name="estado" disabled>
                             <option value="TRUE" th:selected="${mascota.estado == 'TRUE'}">Activo</option>
                             <option value="FALSE" th:selected="${mascota.estado == 'FALSE'}">Inactivo</option>
                         </select>
