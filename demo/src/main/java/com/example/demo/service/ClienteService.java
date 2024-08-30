@@ -84,6 +84,10 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+    public void add(Cliente cliente){
+        clienteRepository.save(cliente);
+    }
+
     // public void editarCliente(Cliente cliente){
     //     clienteRepository.deleteById(cliente.getCedula());
     // }
