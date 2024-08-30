@@ -5,7 +5,7 @@ public class NotPetFoundException extends RuntimeException {
     private Long id;
 
     public NotPetFoundException(Long id) {
-        this.id = id;
+       this.id = id;
     }
 
     public Long getId(){

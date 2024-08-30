@@ -4,8 +4,6 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.demo.controller.NotClientFoundException;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.repository.ClienteRepository;
@@ -38,7 +36,7 @@ public class ClienteService {
             existingMascota.setEnfermedad(mascota.getEnfermedad());
             existingMascota.setFoto(mascota.getFoto());
             existingMascota.setEstado(mascota.getEstado());
-            mascota = existingMascota;
+            mascota = existingMascota; // Usar la instancia existente
         } else {
             mascota.setIdCliente(cliente);
         }
@@ -51,10 +49,10 @@ public class ClienteService {
     @Transactional
     public void eliminarMascota(Long clienteId, Long mascotaId) {
         Cliente cliente = clienteRepository.findById(clienteId)
-            .orElseThrow(() -> new NotClientFoundException(clienteId));
+            .orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado con ID: " + clienteId));
 
         Mascota mascota = mascotaRepository.findById(mascotaId)
-            .orElseThrow(() -> new NotClientFoundException(mascotaId));
+            .orElseThrow(() -> new EntityNotFoundException("Mascota no encontrada con ID: " + mascotaId));
 
         cliente.getMascotas().remove(mascota);
         clienteRepository.save(cliente);
@@ -67,14 +65,7 @@ public class ClienteService {
     }
 
     public Cliente obtenerClientePorCedula(Long cedula){
-        Cliente cliente = clienteRepository.findByCedula(cedula);
-
-        if(cliente != null){
-            return clienteRepository.findByCedula(cedula);
-        } else {    
-            throw new NotClientFoundException(cedula);
-        }
-        
+        return clienteRepository.findByCedula(cedula);
     }
 
     public void eliminarCliente(Long id){
