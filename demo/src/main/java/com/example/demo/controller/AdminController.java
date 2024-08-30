@@ -51,28 +51,13 @@ public class AdminController {
         return "redirect:/admin/mascotas/" + id;
  
     }
-      }
-
-    // Método para redirigir al ID específico
-    @GetMapping("/busqueda")
-    public String redirectToMascota(@RequestParam("id") Long id) {
-        return "redirect:/admin/mascotas/" + id;
- 
-    }
 
     // http://localhost:8090/admin/mascotas/{id}
     @GetMapping("/mascotas/{id}")
     public String mostrarInfoMascotaAdmin(Model model, @PathVariable("id") Long idMascota){
-
-<<<<<<< HEAD
         Mascota mascota = adminService.SearchPetById(idMascota);
         model.addAttribute("mascota", mascota); 
         return "admin_mostrarInfo1Mascota"; 
-=======
-        Mascota mascota = adminService.SearchPetById(idMascota);
-        model.addAttribute("mascota", mascota); 
-        return "mostrarMascotaAdmin"; 
->>>>>>> parent of ca48998 (nombres refactorizados)
     }
 
     // http://localhost:8090/admin/clientes
