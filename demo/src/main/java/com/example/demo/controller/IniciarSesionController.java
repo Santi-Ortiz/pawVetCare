@@ -48,7 +48,7 @@ public class IniciarSesionController {
         System.out.println("ID recibido: " + cliente.getCedula());
         if (cliente != null) {
             model.addAttribute("cliente", cliente);
-            return "mascotasCliente";
+            return "cliente_mostrarTodasMascotas";
         }
         return "redirect:/iniciarSesion/form";
     }

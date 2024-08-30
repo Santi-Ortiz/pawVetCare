@@ -37,8 +37,8 @@
             <p class="tercerTitulo">Dar el medicamento:</p>
             <div class="container-informacion">
                 <form id="mascotaForm" th:object="${mascota}" th:action="@{/mascota/update/{id}(id=${mascota.id})}" method="post" class="containerMascota">    
-                    <p class="tituloEditar">Edita:</p>
-                    <p class="tituloEliminar">Elimina:</p>
+                    <p class="tituloEditar">Editar</p>
+                    <p class="tituloEliminar">Eliminar</p>
                     <div class="info-item">
                         <small class="info-title">Nombre:</small>
                         <input class="info-label" id="nombreLabel" th:field="*{nombre}" readonly></input>

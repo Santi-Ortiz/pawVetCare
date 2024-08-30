@@ -25,14 +25,14 @@
             </div>
         </nav>
         <div class="button-container">
-            <a th:href="@{/iniciarSesion}" class="buttonSoyPVC">Soy PVC</a>
+            <a th:href="@{/iniciarSesion/form}" class="buttonSoyPVC">Soy PVC</a>
             <a th:href="@{/registro}" class="buttonSinCuenta">NO TENGO CUENTA</a>
         </div>
     </header>
     <main>
         <!-- Contenido principal de la página -->
         <section class="content">
-            <p class="primerTitulo">¡Tú peludo está en buenas manos!</p>
+            <p class="primerTitulo">¡Tu peludo está en buenas manos!</p>
             <div class="container-login">
                 <p class="subTitulo">¡Quiero cuidar a mi mascota!</p>
                 <form th:action="@{/login}" method="post">
