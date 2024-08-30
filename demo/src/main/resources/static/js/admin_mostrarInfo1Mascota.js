@@ -43,7 +43,6 @@ function toggleEditar() {
         inputs.forEach(input => {
             input.setAttribute("readonly", true);
         });
-        estado.disabled = true;
         botonEditar.classList.remove("expanded");
         botonEditar.innerHTML = "<span class='icon'>✎</span><span class='text'>Editar todo</span>";
         
