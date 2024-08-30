@@ -23,7 +23,7 @@ public class Mascota{
     private Boolean estado;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "cliente_cedula", referencedColumnName = "cedula")
     private Cliente cliente;
 
     public Mascota(){

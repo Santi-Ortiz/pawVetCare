@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-
+import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.service.MascotaService;
 import com.example.demo.service.ClienteService;
@@ -60,9 +61,17 @@ public class MascotaController {
 
      // http://localhost:8090/mascota/agregar
       @PostMapping("/agregar")
-      public String mostrar_agregar_mascota(@ModelAttribute("mascota") Mascota mascota) {
-         mascotaService.add(mascota);
-         clienteService.agregarMascota(mascota.getIdCliente().getCedula(), mascota);
+      public String mostrar_agregar_mascota(@ModelAttribute("mascota") Mascota mascota, @RequestParam("idCliente") Long cedula) {
+         // //mascota.setIdCliente(clienteService.obtenerCliente(1036204790L));
+         // mascotaService.add(mascota);
+         // clienteService.agregarMascota(mascota.getIdCliente().getCedula(), mascota);
+           // Asignar el cliente a la mascota
+        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
+        mascota.setIdCliente(cliente);
+        mascotaService.add(mascota); // Guardar la mascota
+
+        // Asociar la mascota al cliente
+        clienteService.agregarMascota(cliente.getCedula(), mascota);
          return "redirect:/mascota/todas";
      }
      
