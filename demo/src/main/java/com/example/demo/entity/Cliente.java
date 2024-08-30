@@ -46,6 +46,15 @@ public class Cliente{
         this.celular = celular;
     }
 
+    public Cliente(Integer id, Long cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
+        this.id = id;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.celular = celular;
+        this.mascotas = mascotas;
+    }
+
     public Integer getId() {
         return id;
     }

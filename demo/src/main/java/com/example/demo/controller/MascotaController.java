@@ -62,16 +62,11 @@ public class MascotaController {
      // http://localhost:8090/mascota/agregar
       @PostMapping("/agregar")
       public String mostrar_agregar_mascota(@ModelAttribute("mascota") Mascota mascota, @RequestParam("idCliente") Long cedula) {
-         // //mascota.setIdCliente(clienteService.obtenerCliente(1036204790L));
-         // mascotaService.add(mascota);
-         // clienteService.agregarMascota(mascota.getIdCliente().getCedula(), mascota);
-           // Asignar el cliente a la mascota
-        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
-        mascota.setIdCliente(cliente);
-        mascotaService.add(mascota); // Guardar la mascota
+         Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
+         mascota.setIdCliente(cliente);
+         mascotaService.add(mascota); 
 
-        // Asociar la mascota al cliente
-        clienteService.agregarMascota(cliente.getCedula(), mascota);
+         clienteService.agregarMascota(cliente.getCedula(), mascota);
          return "redirect:/mascota/todas";
      }
      

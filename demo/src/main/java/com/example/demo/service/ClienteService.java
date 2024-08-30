@@ -80,14 +80,17 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
 
-    public void agregarCliente(Cliente cliente){
-        clienteRepository.save(cliente);
-    }
-
     public Collection<Cliente> mostrarTodos(){
         return clienteRepository.findAll();
     }
+
+    // public void editarCliente(Cliente cliente){
+    //     clienteRepository.deleteById(cliente.getCedula());
+    // }
+
     public void update(Cliente cliente){
+        cliente.setId(clienteRepository.findByCedula(cliente.getCedula()).getId());
+        clienteRepository.deleteById(cliente.getCedula());
         clienteRepository.save(cliente);
     }
 }

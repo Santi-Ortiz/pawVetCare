@@ -66,7 +66,7 @@ public class ClienteController {
     // http://localhost:8090/cliente/agregar
     @PostMapping("/agregar")
       public String mostrar_agregar_cliente(@ModelAttribute("cliente") Cliente cliente) {
-         clienteService.agregarCliente(cliente);
+         clienteService.update(cliente);
          return "redirect:/cliente/todos";
     }
 
