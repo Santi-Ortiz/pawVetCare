@@ -4,6 +4,9 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.controller.NotClientFoundException;
+import com.example.demo.controller.NotPetFoundException;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.repository.ClienteRepository;
@@ -16,16 +19,17 @@ public class AdminService {
     @Autowired
     private MascotaRepository repoMascota;
 
-    /*@Autowired
-    private AdminRepository repoAdmin;*/
-
     @Autowired
     private ClienteRepository repoCliente;
 
     
     public Mascota SearchPetById(Long id) {
-        Mascota mascota = repoMascota.findById(id).get();
-        return mascota;
+        Optional<Mascota> optionalMascota = repoMascota.findById(id);
+        if (optionalMascota.isPresent()) {
+            return optionalMascota.get();
+        } else {
+            throw new NotPetFoundException(id);
+        }
     }
 
     public List<Mascota> SearchAllPets() {
@@ -37,7 +41,10 @@ public class AdminService {
     }
     
     public Cliente SearchClientById(Long id){
-        Cliente cliente = repoCliente.findById(id).get();
-        return cliente;
+        Optional<Cliente> optionalCliente = repoCliente.findById(id);
+        if(optionalCliente.isPresent())
+            return optionalCliente.get();
+        else
+            throw new NotClientFoundException(id);
     }
 }

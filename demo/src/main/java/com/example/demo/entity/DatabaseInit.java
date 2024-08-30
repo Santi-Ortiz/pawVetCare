@@ -78,7 +78,6 @@ public class DatabaseInit implements ApplicationRunner{
         clienteRepository.save(new Cliente(1430947461L,"Rebecca Adkins","malesuada.augue@icloud.edu",357772405L));
         //Creación mascotas
         mascotaRepository.save(new Mascota("Toby","Husky",2,24.0F,"Insuficiencia","https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Siberian-husky.jpg/480px-Siberian-husky.jpg",true,clienteRepository.findByCedula(1235062800L)));
-        mascotaRepository.save(new Mascota("Toby","Husky",2,24.0F,"Insuficiencia","https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Siberian-husky.jpg/480px-Siberian-husky.jpg",true,clienteRepository.findByCedula(1235062800L)));
         mascotaRepository.save(new Mascota("Pepper","Husky",2,12.0F,"Parvovirus","https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Siberian-husky.jpg/480px-Siberian-husky.jpg",true,clienteRepository.findByCedula(1640900910L)));
         mascotaRepository.save(new Mascota("Luna","Poodle",5,26.0F,"Traqueobronquitis","https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Agility_Poodle.jpg/375px-Agility_Poodle.jpg",false,clienteRepository.findByCedula(1678516338L)));
         mascotaRepository.save(new Mascota("Lucky","Golden",5,27.0F,"Dermatitis","https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Golden_retriever%2C_Argentina.jpg/330px-Golden_retriever%2C_Argentina.jpg",false,clienteRepository.findByCedula(1036204790L)));

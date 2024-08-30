@@ -32,7 +32,7 @@ public class AdminController {
     @GetMapping("/mascotas")
     public String mostrarMascotasAdmin(Model model){
         model.addAttribute("mascotas", adminService.SearchAllPets());
-        return "mascotasAdmin";
+        return "admin_mostrarTodasMascotas";
         //mascotaController.mostrarMascotas(model);
     }
 
@@ -63,7 +63,6 @@ public class AdminController {
             throw new NotPetFoundException(identificacion);
         } 
 
-        model.addAttribute("mascota", adminService.SearchPetById(identificacion)); 
         return "admin_mostrarInfo1Mascota";
     }
 
@@ -71,7 +70,7 @@ public class AdminController {
     @GetMapping("/clientes")
     public String mostrarClientesAdmin(Model model){
         model.addAttribute("clientes", adminService.SearchAllClients());
-        return "clientesAdmin";
+        return "admin_mostrarTodosClientes";
     }
 
     // http://localhost:8090/admin/cliente/{id}
@@ -80,21 +79,12 @@ public class AdminController {
         Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
 
         if(cliente != null){
-   
-        if(cliente != null){
            model.addAttribute("cliente", cliente); 
         } else {
-           //throw new NotPetFoundException(identificacion);
+           throw new NotPetFoundException(cedula);
         }
 
-        model.addAttribute("cliente", clienteService.obtenerClientePorCedula(cedula));
-        } else {
-           //throw new NotPetFoundException(identificacion);
-        }
-
-        model.addAttribute("cliente", clienteService.obtenerClientePorCedula(cedula));
         return "admin_MostrarInfoCliente";
-
     }
  
 }

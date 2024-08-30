@@ -6,7 +6,7 @@
         <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
         <title>PawVetCare | Mostrar Mascota</title>
         <!-- Enlace al archivo CSS específico para la página -->
-        <link rel="stylesheet" th:href="@{/css/mostrarMascotaCliente.css}">
+        <link rel="stylesheet" th:href="@{/css/admin_mostrarInfo1Mascota.css}">
         <!-- Favicon -->
         <link rel="shortcut icon" th:href="@{/assets/imagotipoAzul.png}" type="image/x-icon">
     
@@ -20,7 +20,11 @@
             <!-- Botones de navegación -->
             <nav>
                 <div class="header-menu">
-                    <a th:href="@{/cliente/mascotas/1}" class="header-menu-item selected">MASCOTAS<div class="indicator"></div></a>
+                    <a th:href="@{/landing/home}" class="header-menu-item">DASHBOARD<div class="indicator"></div></a>
+                    <a th:href="@{/admin/mascotas}" class="header-menu-item selected">MASCOTAS<div class="indicator"></div></a>
+                    <a th:href="@{/landing/contacto}" class="header-menu-item">VETERINARIOS</a>
+                    <a th:href="@{/admin/clientes}" class="header-menu-item">CLIENTES</a>
+                    <a th:href="@{/landing/contacto}" class="header-menu-item">INICIALIZACIÓN</a>
                 </div>
             </nav>
             <div class="button-container">
@@ -28,11 +32,13 @@
             </div>
         </header>
         <section class = "content">
-            <p class="primerTitulo">Hola,</span></p>
-            <p class="segundoTitulo">Aquí está la información de tu mascota:</p>
-            <p class="tercerTitulo">Atenciones:</p>
+            <p class="primerTitulo">Hola, admin</p>
+            <p class="segundoTitulo">Aquí está la información de la mascota:</p>
+            <p class="tercerTitulo">Dar el medicamento:</p>
             <div class="container-informacion">
-                <form id="mascotaForm" th:object="${mascota}" th:action="@{/mascota/update/{id}(id=${mascota.id})}" method="post" class="containerMascota">
+                <form id="mascotaForm" th:object="${mascota}" th:action="@{/mascota/update/{id}(id=${mascota.id})}" method="post" class="containerMascota">    
+                    <p class="tituloEditar">Edita:</p>
+                    <p class="tituloEliminar">Elimina:</p>
                     <div class="info-item">
                         <small class="info-title">Nombre:</small>
                         <input class="info-label" id="nombreLabel" th:field="*{nombre}" readonly></input>
@@ -59,11 +65,30 @@
                         <small class="info-title">Dueño C.C.:</small>
                         <input class="info-label" th:field="*{idCliente}" readonly></input>
                     </div>
+                    <div class="info-itemEstado">
+                        <small class="info-title">Estado:</small>
+                        <select id="state"class="info-select" name="estado" disabled>
+                            <option value="TRUE" th:selected="${mascota.estado == 'TRUE'}">Activo</option>
+                            <option value="FALSE" th:selected="${mascota.estado == 'FALSE'}">Inactivo</option>
+                        </select>
+                    </div>
                     <div class="info-itemFoto">
                         <small class="info-title">URL Foto:</small>
                         <input class="info-label" th:field="*{foto}" readonly></input>
                     </div>
                     <img class="mascotaimg" th:src="${mascota.foto}" alt="cat">
+                    <div class="container-botones">
+                        <button class="editar-btn" id="editarBtn" type="button" onclick="toggleEditar()">
+                            <span class="icon">✎</span>
+                            <span class="text">Editar todo</span>
+                        </button>
+                    </div>
+                </form>
+                <form id="mascota_delete" th:action="@{/mascota/delete/{id}(id=${mascota.id})}">
+                    <button class="eliminar-btn" id="eliminarBtn" type="button" onclick="toggleEliminar()">
+                        <span class="icon">x</span>
+                        <span class="text">Eliminar</span>
+                    </button>
                 </form>
             </div>  
         </section>
@@ -79,4 +104,5 @@
             </div>
         </footer>
     </body>
+    <script th:src="@{/js/admin_mostrarInfo1Mascota.js}"></script>
 </html>
