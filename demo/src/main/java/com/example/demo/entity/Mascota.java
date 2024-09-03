@@ -1,12 +1,7 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name="mascota")
@@ -25,6 +20,9 @@ public class Mascota{
     @ManyToOne
     @JoinColumn(name = "cliente_cedula", referencedColumnName = "cedula")
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tratamiento> tratamientos;
 
     public Mascota(){
     }
@@ -124,5 +122,11 @@ public class Mascota{
         this.cliente = cliente;
     }
 
-    
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
+    }
 }
