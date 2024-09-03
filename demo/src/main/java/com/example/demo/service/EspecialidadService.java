@@ -21,6 +21,6 @@ public class EspecialidadService {
 
     @Transactional
     public void eliminarEspecialidad(String nombre_espe){
-      especialidadRepository.delete(especialidadRepository.findyByNombre_especialidad(nombre_espe));
+      especialidadRepository.delete(especialidadRepository.findByNombreEspecialidad(nombre_espe));
     }
 }

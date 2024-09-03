@@ -12,12 +12,12 @@ public class Usuario {
     private Integer id;
 
     @Column(nullable = false, unique = true)
-    private String tipo_usuario;
+    private String tipoUsuario;
 
     public Usuario() {}
 
-    public Usuario(String tipo_usuario) {
-        this.tipo_usuario = tipo_usuario;
+    public Usuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public Integer getId() {
@@ -29,11 +29,11 @@ public class Usuario {
     }
 
     public String getTipo_usuario() {
-        return tipo_usuario;
+        return tipoUsuario;
     }
 
-    public void setTipo_usuario(String tipo_usuario) {
-        this.tipo_usuario = tipo_usuario;
+    public void setTipo_usuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
      
 }

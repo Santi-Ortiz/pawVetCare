@@ -20,6 +20,6 @@ public class UsuarioService {
 
     @Transactional
     public void eliminarUsuario(String tipo_usuario){
-        usuarioRepository.delete(usuarioRepository.findyByTipo_usuario(tipo_usuario));
+        usuarioRepository.delete(usuarioRepository.findByTipoUsuario(tipo_usuario));
     }
 }

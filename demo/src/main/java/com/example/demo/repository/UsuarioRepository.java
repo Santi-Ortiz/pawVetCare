@@ -7,5 +7,5 @@ import com.example.demo.entity.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
-    public Usuario findyByTipo_usuario(String tipo_usuario);
+    public Usuario findByTipoUsuario(String tipoUsuario);
 }

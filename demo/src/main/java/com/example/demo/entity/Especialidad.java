@@ -14,13 +14,13 @@ public class Especialidad{
     private Integer id;
 
     @Column(nullable = false, unique = true)
-    private String nombre_especialidad;
+    private String nombreEspecialidad;
 
     @OneToMany(mappedBy = "especialidad", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Veterinario> veterinarios = new ArrayList<>();
 
-    public Especialidad(String nombre_especialidad) {
-        this.nombre_especialidad = nombre_especialidad;
+    public Especialidad(String nombreEspecialidad) {
+        this.nombreEspecialidad = nombreEspecialidad;
     }
 
     public Especialidad() {
@@ -36,11 +36,11 @@ public class Especialidad{
     }
 
     public String getNombre_especialidad() {
-        return nombre_especialidad;
+        return nombreEspecialidad;
     }
 
-    public void setNombre_especialidad(String nombre_especialidad) {
-        this.nombre_especialidad = nombre_especialidad;
+    public void setNombre_especialidad(String nombreEspecialidad) {
+        this.nombreEspecialidad = nombreEspecialidad;
     }
 
     public List<Veterinario> getVeterinarios() {

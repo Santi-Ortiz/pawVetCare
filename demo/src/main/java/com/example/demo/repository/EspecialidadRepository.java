@@ -7,6 +7,6 @@ import com.example.demo.entity.Especialidad;
 
 @Repository
 public interface EspecialidadRepository extends JpaRepository<Especialidad,Long>{
-    public Especialidad findyByNombre_especialidad(String nombre);
+    public Especialidad findByNombreEspecialidad(String nombreEspecialidad);
 } 
 
