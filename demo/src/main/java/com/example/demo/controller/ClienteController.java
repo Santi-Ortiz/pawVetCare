@@ -53,12 +53,14 @@ public class ClienteController {
     @GetMapping("/todos")
     public String mostrarClientes(Model model){
        model.addAttribute("clientes", clienteService.mostrarTodos());
+       model.addAttribute("cliente", new Cliente());
        return "admin_mostrarTodosClientes";
     }
 
     // http://localhost:8090/cliente/add
     @GetMapping("/add")
-    public String agregarCliente(Model model, Cliente cliente){
+    public String agregarCliente(Model model){
+        Cliente cliente = new Cliente();
         model.addAttribute("cliente", cliente);
         return "admin_mostrarTodosClientes";
     }
@@ -75,7 +77,7 @@ public class ClienteController {
     public String actualizarInfoCliente(@PathVariable("id") Long identificacion, Model model) {
      Cliente cliente = clienteService.obtenerCliente(identificacion);
      model.addAttribute("cliente", cliente);
-     return "admin_MostrarInfoCliente"; // Asegúrate de que esta vista tenga el formulario
+     return "admin_MostrarInfoCliente";
   }
 
     // http://localhost:8090/mascota/update/{id}

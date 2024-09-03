@@ -71,4 +71,4 @@ function autoMoverCarrusel() {
 }
 
 // Iniciar el movimiento automático del carrusel
-setInterval(autoMoverCarrusel, 6000);
+setInterval(autoMoverCarrusel, 6000); 

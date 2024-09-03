@@ -31,6 +31,7 @@ public class AdminController {
     // http://localhost:8090/admin/mascotas
     @GetMapping("/mascotas")
     public String mostrarMascotasAdmin(Model model){
+        model.addAttribute("mascota", new Mascota());
         model.addAttribute("mascotas", adminService.SearchAllPets());
         return "admin_mostrarTodasMascotas";
         //mascotaController.mostrarMascotas(model);
@@ -39,6 +40,7 @@ public class AdminController {
       // http://localhost:8090/admin/mascotas/todas
       @GetMapping("/mascotas/todas")
       public String mostraradmin_mostrarTodasLasMascotas(Model model){
+          model.addAttribute("mascota", new Mascota());
           model.addAttribute("mascotas", adminService.SearchAllPets());
           return "admin_MascotasTodas";
           //mascotaController.mostrarMascotas(model);
@@ -70,6 +72,7 @@ public class AdminController {
     @GetMapping("/clientes")
     public String mostrarClientesAdmin(Model model){
         model.addAttribute("clientes", adminService.SearchAllClients());
+        model.addAttribute("cliente", new Cliente());
         return "admin_mostrarTodosClientes";
     }
 

@@ -59,4 +59,3 @@ document.getElementById('mascota_agregar').addEventListener('submit', function(e
     // Envía el formulario
     form.submit();
 });
-

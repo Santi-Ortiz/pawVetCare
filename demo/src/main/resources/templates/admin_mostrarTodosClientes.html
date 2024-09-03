@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,12 +58,12 @@
                         </div>
                         <div class="info-itemCorreo">
                             <small class="info-title">Correo:</small>
-                            <label class="info-label" th:text="${cliente.correo}"></label>
+                            <label class="info-label" th:field="*{correo}"th:text="${cliente.correo}"></label>
                         </div>
                         <div class="info-itemCelular">
                             <small class="info-title">Celular:</small>
-                            <label class="info-label" th:text="${cliente.celular}"></label>
-                        </div>
+                            <label class="info-label" th:field="*{celular}" th:text="${cliente.celular}"></label>
+                            </div>
                         <a class="info-button" th:href="@{/admin/cliente/{id}(id=${cliente.cedula})}">+ Info</a>
                     </div>
                 </div>
@@ -75,19 +75,19 @@
         <form id="cliente_agregar" th:object="${cliente}" th:action="@{/cliente/agregar}" method="post" class="agregar-container">
             <div class="infoadd-itemNombre">
                 <small class="info-title">Nombre:</small>
-                <input th:type="text" class="inputadd-text" id="nombre" placeholder="Ingresa el nombre" required>
+                <input type="text" class="inputadd-text" th:field="*{nombre}" id="nombre" placeholder="Ingresa el nombre" required>
             </div>
             <div class="infoadd-itemCedula">
                 <small class="info-title">Cédula:</small>
-                <input th:type="number" class="inputadd-text" id="cedula" placeholder="Ingresa la cédula" required>
+                <input type="number" class="inputadd-text" th:field="*{cedula}" id="cedula" placeholder="Ingresa la cédula" required>
             </div>
             <div class="infoadd-itemCorreo">
                 <small class="info-title">Correo:</small>
-                <input th:type="correo" class="inputadd-text" id="correo" placeholder="Ingresa el correo" required>
+                <input type="correo" class="inputadd-text" th:field="*{correo}" id="correo" placeholder="Ingresa el correo" required>
             </div>
             <div class="infoadd-itemCelular">
                 <small class="info-title">Celular:</small>
-                <input th:type="number" class="inputadd-text" id="celular" placeholder="Ingresa el celular" required>
+                <input type="number" class="inputadd-text" th:field="*{celular}" id="celular" placeholder="Ingresa el celular" required>
             </div>
             <button type="submit" class="agregar-button">Agregar Cliente</button> 
         </form>           

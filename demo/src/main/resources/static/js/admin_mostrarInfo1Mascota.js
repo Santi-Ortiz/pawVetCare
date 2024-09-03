@@ -57,4 +57,4 @@ function toggleEditar() {
         botonEditar.classList.add("expanded");
         botonEditar.innerHTML = "<span class='text'>Guardar</span>";
     }
-}
+} 

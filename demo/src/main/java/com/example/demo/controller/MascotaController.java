@@ -28,6 +28,7 @@ public class MascotaController {
     // http://localhost:8090/mascota/todas
      @GetMapping("/todas")
      public String mostrarMascotas(Model model){
+        model.addAttribute("mascota", new Mascota());
         model.addAttribute("mascotas", mascotaService.SearchAll());
         System.out.println("Mascotas: " + mascotaService.SearchAll());
         return "admin_mostrarTodasMascotas";
@@ -54,8 +55,10 @@ public class MascotaController {
      public String agregarMascota(Model model) {
          Mascota mascota = new Mascota ();
          model.addAttribute("mascota", mascota);
-         Integer cedula = 0;
-         model.addAttribute("cedula", cedula);
+         // Cliente cliente = new Cliente();
+         // Integer cedula = 0;
+         // model.addAttribute("cedula", cedula);
+         // model.addAttribute("cliente", cliente);
          return "admin_mostrarTodasMascotas";
      }
 
