@@ -52,4 +52,18 @@ public class IniciarSesionController {
         }
         return "redirect:/iniciarSesion/form";
     }
+
+    // http://localhost:8090/veterinario
+    @GetMapping("/veterinario")
+    public String inicioVeterinario() { 
+        
+        return "loginVeterinario";
+    }
+
+    // http://localhost:8090/cliente/inicio
+    @GetMapping("/sesiones")
+    public String inicioSesion() { 
+        
+        return "iniciarSesion";
+    }
 }

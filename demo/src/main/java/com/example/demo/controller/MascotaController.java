@@ -39,14 +39,16 @@ public class MascotaController {
      public String mostrarInfoMascota(Model model, @PathVariable("id") Long identificacion ){
 
          Mascota mascota = mascotaService.SearchById(identificacion);
+         System.out.println("ID recibido: " + mascota.getIdCliente().getCedula());
 
          if(mascota != null){
             model.addAttribute("mascota", mascota); 
+            model.addAttribute("clienteCedula", mascota.getIdCliente().getCedula());
          } else {
             throw new NotPetFoundException(identificacion);
          }
 
-         model.addAttribute("mascota", mascotaService.SearchById(identificacion));
+         //model.addAttribute("mascota", mascotaService.SearchById(identificacion));
          return "admin_mostrarInfo1Mascota";
      }
 
