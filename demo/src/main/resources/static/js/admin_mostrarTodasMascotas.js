@@ -32,7 +32,7 @@ document.getElementById('mascota_agregar').addEventListener('submit', function(e
     // Crea un nuevo formulario
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = '/mascota/agregar'; // URL para enviar los datos al backend
+    form.action = '/mascota/admin/agregar'; // URL para enviar los datos al backend
 
     // Crea campos ocultos y añádelos al formulario
     const createHiddenField = (name, value) => {

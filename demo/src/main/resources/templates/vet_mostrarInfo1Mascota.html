@@ -29,11 +29,11 @@
             </div>
         </header>
         <section class = "content">
-            <p class="primerTitulo">Hola, admin</p>
+            <p class="primerTitulo">Hola, vet</p>
             <p class="segundoTitulo">Aquí está la información de la mascota:</p>
             <p class="tercerTitulo">Dar el medicamento:</p>
             <div class="container-informacion">
-                <form id="mascotaForm" th:object="${mascota}" th:action="@{/mascota/update/{id}(id=${mascota.id})}" method="post" class="containerMascota">    
+                <form id="mascotaForm" th:object="${mascota}" th:action="@{/mascota/update/vet/{id}(id=${mascota.id})}" method="post" class="containerMascota">    
                     <p class="tituloEditar">Editar</p>
                     <p class="tituloEliminar">Eliminar</p>
                     <div class="info-item">
@@ -81,7 +81,7 @@
                         </button>
                     </div>
                 </form>
-                <form id="mascota_delete" th:action="@{/mascota/delete/{id}(id=${mascota.id})}">
+                <form id="mascota_delete" th:action="@{/mascota/vet/delete/{id}(id=${mascota.id})}">
                     <button class="eliminar-btn" id="eliminarBtn" type="button" onclick="toggleEliminar()">
                         <span class="icon">x</span>
                         <span class="text">Eliminar</span>

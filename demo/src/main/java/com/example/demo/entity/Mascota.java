@@ -22,7 +22,7 @@ public class Mascota{
     private Cliente cliente;
 
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tratamiento> tratamientos;
+    private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Mascota(){
     }

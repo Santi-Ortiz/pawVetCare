@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,14 +27,23 @@ public class MascotaController {
    
     @Autowired
     ClienteService clienteService;
-    // http://localhost:8090/mascota/todas
-     @GetMapping("/todas")
+    // http://localhost:8090/mascota/ad/todas
+     @GetMapping("/ad/todas")
      public String mostrarMascotas(Model model){
         model.addAttribute("mascota", new Mascota());
         model.addAttribute("mascotas", mascotaService.SearchAll());
         System.out.println("Mascotas: " + mascotaService.SearchAll());
         return "admin_mostrarTodasMascotas";
      }
+
+     // http://localhost:8090/mascota/vet/todas
+     /*@GetMapping("/vet/todas")
+     public String mostrarMascotasVet(Model model){
+        model.addAttribute("mascota", new Mascota());
+        model.addAttribute("mascotas", mascotaService.SearchAll());
+        System.out.println("Mascotas: " + mascotaService.SearchAll());
+        return "vet_mostrarTodasMascotas";
+     }*/
 
      // http://localhost:8090/mascota/find/
      @GetMapping("/find/{id}")
@@ -61,25 +72,47 @@ public class MascotaController {
      }
 
      // http://localhost:8090/mascota/agregar
-      @PostMapping("/agregar")
+      @PostMapping("/admin/agregar")
       public String mostrar_agregar_mascota(@ModelAttribute("mascota") Mascota mascota, @RequestParam("idCliente") Long cedula) {
          Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
          if(cliente != null){
             mascota.setIdCliente(cliente);
             mascotaService.add(mascota); 
             clienteService.agregarMascota(cliente.getCedula(), mascota);
-            return "redirect:/mascota/todas";
+            return "redirect:/admin/mascotas";
          } else {
             return"";
             // throw new NotClientIdExistInPet(cedula);
          }
      }
+
+     // http://localhost:8090/mascota/agregar
+     @PostMapping("/vet/agregar")
+     public String mostrar_agregar_mascota_vet(@ModelAttribute("mascota") Mascota mascota, @RequestParam("idCliente") Long cedula) {
+        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
+        if(cliente != null){
+           mascota.setIdCliente(cliente);
+           mascotaService.add(mascota); 
+           clienteService.agregarMascota(cliente.getCedula(), mascota);
+           return "redirect:/veterinario/mascotas";
+        } else {
+           return"";
+           // throw new NotClientIdExistInPet(cedula);
+        }
+    }
      
     // http://localhost:8090/mascota/delete/1
-     @GetMapping("/delete/{id}")
+     @GetMapping("/ad/delete/{id}")
      public String borrarMascota(@PathVariable("id") Long identificacion){
         mascotaService.deleteById(identificacion);
-        return "redirect:/mascota/todas";
+        return "redirect:/admin/mascotas";
+     }
+
+     // http://localhost:8090/mascota/delete/1
+     @GetMapping("/vet/delete/{id}")
+     public String borrarMascotaVet(@PathVariable("id") Long identificacion){
+        mascotaService.deleteById(identificacion);
+        return "redirect:/veterinario/mascotas";
      }
 
     // http://localhost:8090/mascota/update/{id}
@@ -89,12 +122,69 @@ public class MascotaController {
       model.addAttribute("mascota", mascota);
       return "admin_mostrarInfo1Mascota";
    }
+   
+     //http://localhost:8090/mascota/update/{id}
+   @PostMapping("/update/vet/{id}")
+   public String actualizarMascotaVet(@PathVariable("id") Long identificacion, @ModelAttribute("mascota") Mascota nuevaMascota) {
+      // Cargar la mascota original desde la base de datos
+      Mascota mascotaExistente = mascotaService.SearchById(identificacion);
+      
+      if (mascotaExistente != null) {
+         // Actualizar los campos de la mascota existente
+         mascotaExistente.setNombre(nuevaMascota.getNombre());
+         mascotaExistente.setRaza(nuevaMascota.getRaza());
+         mascotaExistente.setEdad(nuevaMascota.getEdad());
+         mascotaExistente.setPeso(nuevaMascota.getPeso());
+         mascotaExistente.setEnfermedad(nuevaMascota.getEnfermedad());
+         mascotaExistente.setEstado(nuevaMascota.getEstado());
+         mascotaExistente.setFoto(nuevaMascota.getFoto());
 
-     // http://localhost:8090/mascota/update/{id}
-     @PostMapping("/update/{id}")
-     public String actualizarMascota(@PathVariable("id") int  identificacion, @ModelAttribute("mascota") Mascota mascota) {
-         mascotaService.updateMascota(mascota);
-         return "redirect:/mascota/todas";
-     }
+         if (mascotaExistente.getTratamientos() == null) {
+            mascotaExistente.setTratamientos(new ArrayList<>());
+        }
+
+        mascotaExistente.getTratamientos().clear();
+        if (nuevaMascota.getTratamientos() != null) {
+            mascotaExistente.getTratamientos().addAll(nuevaMascota.getTratamientos());
+        }
+
+         // Guardar los cambios
+         mascotaService.updateMascota(mascotaExistente);
+      }
+
+      return "redirect:/veterinario/mascotas";
+   }
+
+   //http://localhost:8090/mascota/update/{id}
+   @PostMapping("/update/ad/{id}")
+   public String actualizarMascota(@PathVariable("id") Long identificacion, @ModelAttribute("mascota") Mascota nuevaMascota) {
+      // Cargar la mascota original desde la base de datos
+      Mascota mascotaExistente = mascotaService.SearchById(identificacion);
+      
+      if (mascotaExistente != null) {
+         // Actualizar los campos de la mascota existente
+         mascotaExistente.setNombre(nuevaMascota.getNombre());
+         mascotaExistente.setRaza(nuevaMascota.getRaza());
+         mascotaExistente.setEdad(nuevaMascota.getEdad());
+         mascotaExistente.setPeso(nuevaMascota.getPeso());
+         mascotaExistente.setEnfermedad(nuevaMascota.getEnfermedad());
+         mascotaExistente.setEstado(nuevaMascota.getEstado());
+         mascotaExistente.setFoto(nuevaMascota.getFoto());
+
+         if (mascotaExistente.getTratamientos() == null) {
+            mascotaExistente.setTratamientos(new ArrayList<>());
+        }
+
+        mascotaExistente.getTratamientos().clear();
+        if (nuevaMascota.getTratamientos() != null) {
+            mascotaExistente.getTratamientos().addAll(nuevaMascota.getTratamientos());
+        }
+
+         // Guardar los cambios
+         mascotaService.updateMascota(mascotaExistente);
+      }
+
+      return "redirect:/admin/mascotas";
+   }
 
 }
