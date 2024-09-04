@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Cliente;
+import com.example.demo.entity.Veterinario;
 import com.example.demo.entity.Admin;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.ClienteService;
+import com.example.demo.service.VeterinarioService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,6 +28,9 @@ public class IniciarSesionController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private VeterinarioService vetService;
     
     // localhost:8090/iniciarSesion/form
     @GetMapping("/form")
@@ -65,12 +70,31 @@ public class IniciarSesionController {
         return "loginVeterinario";
     }
 
+    // http://localhost:8090/iniciarSesion/adminform
+    @PostMapping("/veterinarioform")
+    public String sesionVet(@RequestParam("cedula") Long cedula, @RequestParam("password") String password, HttpSession session, Model model){
+        try {
+            Veterinario vet = vetService.buscarVet(cedula);
+            if(vet.getContrasena().equals(password)){
+                session.setAttribute("vet", vet);
+                return "redirect:/veterinario/mascotas";
+            }else{
+                model.addAttribute("errorMessage", "Contraseña incorrecta.");
+                return "redirect:/iniciarSesion/veterinario";
+            }
+        } catch (NoSuchElementException e) {
+            model.addAttribute("errorMessage", "Veterinario no encontrado.");
+            return "loginVeterinario";
+        }
+    }
+
     // http://localhost:8090/iniciarSesion/admin
     @GetMapping("/admin")
     public String loginAdmin() { 
         return "loginAdmin";
     }
 
+    // http://localhost:8090/iniciarSesion/adminform
     @PostMapping("/adminform")
     public String sesionAdmin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session, Model model){
         try {

@@ -16,6 +16,11 @@ public class VeterinarioService {
     private VeterinarioRepository veterinarioRepository;
 
     @Transactional
+    public Veterinario buscarVet(Long cedula){
+      return veterinarioRepository.findByCedula(cedula);
+    }
+
+    @Transactional
     public void agregarVet(Long cedula, String contrasena, String foto, Integer numAtenciones, String nombre, Especialidad especialidad){
       veterinarioRepository.save(new Veterinario(cedula, contrasena, foto, numAtenciones, nombre, especialidad));
     }

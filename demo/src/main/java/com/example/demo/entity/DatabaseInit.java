@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClienteRepository;
+import com.example.demo.repository.EspecialidadRepository;
 import com.example.demo.repository.MascotaRepository;
+import com.example.demo.repository.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -20,11 +22,19 @@ public class DatabaseInit implements ApplicationRunner{
     ClienteRepository clienteRepository;
     @Autowired
     MascotaRepository mascotaRepository;
+    @Autowired
+    VeterinarioRepository veterinarioRepository;
+    @Autowired
+    EspecialidadRepository especialidadRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception{
         //Creación administrador
         adminRepository.save(new Admin("admin","admin"));
+        //Creación especialidad 
+        especialidadRepository.save(new Especialidad("Cardiologo"));
+        //Creación veterinario
+        veterinarioRepository.save(new Veterinario(1234L,"vet", "https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg", 2, "Monica", especialidadRepository.findById(1L).get()));
         //Creación clientes
         clienteRepository.save(new Cliente(1235062800L,"Dylan Richardson","facilisis.vitae@aol.org",309878724L));
         clienteRepository.save(new Cliente(1640900910L,"Ignatius Compton","quis@yahoo.org",362491489L));
