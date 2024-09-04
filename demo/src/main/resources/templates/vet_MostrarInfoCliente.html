@@ -20,8 +20,8 @@
             <!-- Botones de navegación -->
             <nav>
                 <div class="header-menu">
-                    <a th:href="@{/admin/mascotas}" class="header-menu-item">MASCOTAS<div class="indicator"></div></a>
-                    <a th:href="@{/admin/clientes}" class="header-menu-item selected"> CLIENTES<div class="indicator"></div></a>
+                    <a th:href="@{/veterinario/mascotas}" class="header-menu-item">MASCOTAS<div class="indicator"></div></a>
+                    <a th:href="@{/veterinario/clientes}" class="header-menu-item selected"> CLIENTES<div class="indicator"></div></a>
                 </div>
             </nav>
             <div class="button-container">
@@ -96,7 +96,7 @@
                                 <small class="info-title">Enfermedad:</small>
                                 <label class="info-label" th:text="${mascota.enfermedad}"></label>
                             </div>
-                            <a class="info-button" th:href="@{/admin/mascotas/{id}(id=${mascota.id})}">+ Info</a>
+                            <a class="info-button" th:href="@{/veterinario/mascotas/{id}(id=${mascota.id})}">+ Info</a>
                         </div>
                     </div>
                 </div>
