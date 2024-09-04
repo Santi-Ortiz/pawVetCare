@@ -19,4 +19,21 @@ public class ErrorController {
         return "errorClienteNoEncontrado";
     }
 
+    @ExceptionHandler(ClientExistingException.class)
+    public String errorClienteExistente(Model model, ClientExistingException ex){
+        model.addAttribute("cedula", ex.getCedula());
+        return "errorClienteExistente";
+    }
+
+    @ExceptionHandler(ClientUpdatingException.class)
+    public String errorClienteActualizado(Model model, ClientUpdatingException ex){
+        model.addAttribute("cedula", ex.getCedula());
+        return "errorClienteActualizado";
+    }
+
+    @ExceptionHandler(NotClientIdExistInPet.class)
+    public String errorClienteIdEnMascota(Model model, NotClientIdExistInPet ex){
+        model.addAttribute("cedula", ex.getCedula());
+        return "errorClienteIdEnMascota";
+    }
 }

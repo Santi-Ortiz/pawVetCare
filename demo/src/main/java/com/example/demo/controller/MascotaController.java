@@ -57,10 +57,6 @@ public class MascotaController {
      public String agregarMascota(Model model) {
          Mascota mascota = new Mascota ();
          model.addAttribute("mascota", mascota);
-         // Cliente cliente = new Cliente();
-         // Integer cedula = 0;
-         // model.addAttribute("cedula", cedula);
-         // model.addAttribute("cliente", cliente);
          return "admin_mostrarTodasMascotas";
      }
 
@@ -68,11 +64,15 @@ public class MascotaController {
       @PostMapping("/agregar")
       public String mostrar_agregar_mascota(@ModelAttribute("mascota") Mascota mascota, @RequestParam("idCliente") Long cedula) {
          Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
-         mascota.setIdCliente(cliente);
-         mascotaService.add(mascota); 
-
-         clienteService.agregarMascota(cliente.getCedula(), mascota);
-         return "redirect:/mascota/todas";
+         if(cliente != null){
+            mascota.setIdCliente(cliente);
+            mascotaService.add(mascota); 
+            clienteService.agregarMascota(cliente.getCedula(), mascota);
+            return "redirect:/mascota/todas";
+         } else {
+            return"";
+            // throw new NotClientIdExistInPet(cedula);
+         }
      }
      
     // http://localhost:8090/mascota/delete/1

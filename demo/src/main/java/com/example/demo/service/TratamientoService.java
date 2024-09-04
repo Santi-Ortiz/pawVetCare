@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.controller.NotClientFoundException;
-import com.example.demo.controller.NotPetFoundException;
 import com.example.demo.entity.Tratamiento;
 import com.example.demo.entity.Veterinario;
 import com.example.demo.entity.Mascota;

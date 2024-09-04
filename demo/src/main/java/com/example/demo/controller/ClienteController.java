@@ -75,10 +75,11 @@ public class ClienteController {
     // http://localhost:8090/mascota/update/{id}
     @GetMapping("/update/{id}")
     public String actualizarInfoCliente(@PathVariable("id") Long identificacion, Model model) {
-     Cliente cliente = clienteService.obtenerCliente(identificacion);
-     model.addAttribute("cliente", cliente);
-     return "admin_MostrarInfoCliente";
-  }
+
+        Cliente cliente = clienteService.obtenerCliente(identificacion);
+        model.addAttribute("cliente", cliente);
+        return "admin_MostrarInfoCliente";
+    }
 
     // http://localhost:8090/mascota/update/{id}
     @PostMapping("/update/{id}")
