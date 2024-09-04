@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.controller.NotClientFoundException;
 import com.example.demo.controller.NotPetFoundException;
+import com.example.demo.entity.Admin;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.repository.ClienteRepository;
-//import com.example.demo.repository.AdminRepository;
+import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.MascotaRepository;
 
 @Service
@@ -21,6 +22,9 @@ public class AdminService {
 
     @Autowired
     private ClienteRepository repoCliente;
+
+    @Autowired
+    private AdminRepository repoAdmin;
 
     
     public Mascota SearchPetById(Long id) {
@@ -47,7 +51,9 @@ public class AdminService {
         else
             throw new NotClientFoundException(id);
     }
-
+    public Admin findByUsuario(String username){
+        return repoAdmin.findByUsuario(username);
+    }
     //TODO: CRUD de Admin
     //TODO: Login de Admin
 }

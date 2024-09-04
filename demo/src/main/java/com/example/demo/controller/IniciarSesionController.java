@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Cliente;
+import com.example.demo.entity.Admin;
+import com.example.demo.service.AdminService;
 import com.example.demo.service.ClienteService;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +23,9 @@ public class IniciarSesionController {
     
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private AdminService adminService;
     
     // localhost:8090/iniciarSesion/form
     @GetMapping("/form")
@@ -62,9 +67,25 @@ public class IniciarSesionController {
 
     // http://localhost:8090/iniciarSesion/admin
     @GetMapping("/admin")
-    public String inicioAdmin() { 
-        
+    public String loginAdmin() { 
         return "loginAdmin";
+    }
+
+    @PostMapping("/adminform")
+    public String sesionAdmin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session, Model model){
+        try {
+            Admin admin = adminService.findByUsuario(username);
+            if(admin.getContrasena().equals(password)){
+                session.setAttribute("admin", admin);
+                return "redirect:/admin/mascotas";
+            }else{
+                model.addAttribute("errorMessage", "Contraseña incorrecta.");
+                return "redirect:/iniciarSesion/admin";
+            }
+        } catch (NoSuchElementException e) {
+            model.addAttribute("errorMessage", "Admin no encontrado.");
+            return "loginAdmin";
+        }
     }
 
     // http://localhost:8090/cliente/inicio
