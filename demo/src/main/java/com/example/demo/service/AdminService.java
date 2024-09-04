@@ -47,4 +47,7 @@ public class AdminService {
         else
             throw new NotClientFoundException(id);
     }
+
+    //TODO: CRUD de Admin
+    //TODO: Login de Admin
 }

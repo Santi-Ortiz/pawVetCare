@@ -7,8 +7,8 @@
     <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
     <title>PawVetCare | Mostrar Todas Las Mascotas</title>
     <!-- Enlace al archivo CSS específico para la página -->
-    <link rel="stylesheet" th:href="@{/css/vet_mostrarTodasMascotas.css}">
-    <!-- Favicon -->
+    <link rel="stylesheet" th:href="@{/css/vet_MostrarTodasMascotas.css}">
+    <!-- Favicon -->    
     <link rel="shortcut icon" href="../assets/imagotipoAzul.png" type="image/x-icon">
 </head>
 <body>
@@ -31,7 +31,7 @@
         </div>
     </header>
     <section class = "content">
-        <p class="primerTitulo">Hola, admin</p>
+        <p class="primerTitulo">Hola vet,</p>
         <p class="segundoTitulo">Aquí están todas las mascotas:</p>
         <form th:action="@{/admin/busqueda}" class="buscador-form" >
             <input type="text" name="id" class="buscador-input" placeholder="Buscar por ID">
