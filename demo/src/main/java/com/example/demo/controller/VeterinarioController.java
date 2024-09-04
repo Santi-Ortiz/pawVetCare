@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.entity.Mascota;
 import com.example.demo.service.MascotaService;
 
 @Controller
@@ -16,7 +18,8 @@ public class VeterinarioController {
     
     @GetMapping("/mascotas")
      public String mostrarMascotas(Model model){
-        model.addAttribute("mascotas", MascotaService.SearchAll());
-        return "vet_MostrarTodasMascotas";
+         model.addAttribute("mascota", new Mascota());
+         model.addAttribute("mascotas", MascotaService.SearchAll());
+         return "vet_MostrarTodasMascotas";
      }
 }
