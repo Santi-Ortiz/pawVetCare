@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
+    <title>PawVetCare | Clientes</title>
+    <!-- Enlace al archivo CSS específico para la página -->
+    <link rel="stylesheet" th:href="@{/css/vet_mostrarTodosClientes.css}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/imagotipoAzul.png" type="image/x-icon">
+</head>
+<body>
+    <!-- Barra superior con navegación -->
+    <header class="top-bar">
+        <a th:href="@{/landing/home}">
+            <img src="../assets/isologoAzul.png" alt="Logo Azul">
+        </a>
+        <!-- Botones de navegación -->
+        <nav>
+            <nav>
+                <div class="header-menu">
+                    <a th:href="@{/admin/mascotas}" class="header-menu-item">MASCOTAS<div class="indicator"></div></a>
+                    <a th:href="@{/admin/clientes}" class="header-menu-item selected">CLIENTES<div class="indicator"></div></a>
+                </div>
+            </nav>
+        </nav>
+        <div class="button-container">
+            <a th:href="@{/landing/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
+        </div>
+    </header>
+    <section class = "content">
+        <p class="primerTitulo">Hola, admin</p>
+        <p class="segundoTitulo">Aquí están todos los clientes:</p>
+        <p class="tercerTitulo">Agrega clientes:</p>
+        <div class="carrusel-container">
+            <button class="carrusel-prev" onclick="cambiarMascota(-1)">
+                <img src="../assets/previous.png" alt="Regreso">
+            </button>
+            <div class="carrusel">
+                <div class="mascota-item" th:each="cliente : ${clientes}">
+                    <div class="mascota-info">
+                        <!--<div class="info-itemId">
+                            <small class="info-title">ID:</small>
+                            <label class="info-label" th:text="${cliente.id}"></label>
+                        </div>-->
+                        <div class="info-itemNombre">
+                            <small class="info-title">Nombre:</small>
+                            <label class="info-label" th:text="${cliente.nombre}"></label>
+                        </div>
+                        <div class="info-itemCedula">
+                            <small class="info-title">Cédula:</small>
+                            <label class="info-label" th:text="${cliente.cedula}"></label>
+                        </div>
+                        <div class="info-itemCorreo">
+                            <small class="info-title">Correo:</small>
+                            <label class="info-label" th:field="*{correo}"th:text="${cliente.correo}"></label>
+                        </div>
+                        <div class="info-itemCelular">
+                            <small class="info-title">Celular:</small>
+                            <label class="info-label" th:field="*{celular}" th:text="${cliente.celular}"></label>
+                            </div>
+                        <a class="info-button" th:href="@{/admin/cliente/{id}(id=${cliente.cedula})}">+ Info</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carrusel-next" onclick="cambiarMascota(1)">
+                <img src="../assets/next.png" alt="Siguiente">
+            </button>
+        </div>
+        <form id="cliente_agregar" th:object="${cliente}" th:action="@{/cliente/agregar}" method="post" class="agregar-container">
+            <div class="infoadd-itemNombre">
+                <small class="info-title">Nombre:</small>
+                <input type="text" class="inputadd-text" th:field="*{nombre}" id="nombre" placeholder="Ingresa el nombre" required>
+            </div>
+            <div class="infoadd-itemCedula">
+                <small class="info-title">Cédula:</small>
+                <input type="number" class="inputadd-text" th:field="*{cedula}" id="cedula" placeholder="Ingresa la cédula" required>
+            </div>
+            <div class="infoadd-itemCorreo">
+                <small class="info-title">Correo:</small>
+                <input type="correo" class="inputadd-text" th:field="*{correo}" id="correo" placeholder="Ingresa el correo" required>
+            </div>
+            <div class="infoadd-itemCelular">
+                <small class="info-title">Celular:</small>
+                <input type="number" class="inputadd-text" th:field="*{celular}" id="celular" placeholder="Ingresa el celular" required>
+            </div>
+            <button type="submit" class="agregar-button">Agregar Cliente</button> 
+        </form>           
+    </section>
+    <!-- Pie de página -->
+    <footer class="footer">
+        <img src="../assets/logotipoRosado.png" alt="Logo Footer">
+        <p class="direccion">Carrera 13 #140 - 52A, Bogotá, Colombia</p>
+        <p class="correo">info@petvetc.com</p>
+        <p class="derechos">© 2024 SLM, Inc.</p>
+        <div class="iconos">
+            <img src="../assets/iconos.png" alt="Iconos Footer">
+        </div>
+    </footer>
+</body>
+<script src="../js/vet_mostrarTodosClientes.js"></script>
+</html>

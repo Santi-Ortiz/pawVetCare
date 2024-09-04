@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
+    <title>PawVetCare | Mostrar Todas Las Mascotas</title>
+    <!-- Enlace al archivo CSS específico para la página -->
+    <link rel="stylesheet" th:href="@{/css/vet_mostrarTodasMascotas.css}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/imagotipoAzul.png" type="image/x-icon">
+</head>
+<body>
+    <!-- Barra superior con navegación -->
+    <header class="top-bar">
+        <a th:href="@{/landing/home}">
+            <img src="../assets/isologoAzul.png" alt="Logo Azul">
+        </a>
+        <!-- Botones de navegación -->
+        <nav>
+            <nav>
+                <div class="header-menu">
+                    <a th:href="@{/admin/mascotas}" class="header-menu-item selected">MASCOTAS<div class="indicator"></div></a>
+                    <a th:href="@{/admin/clientes}" class="header-menu-item">CLIENTES</a>
+                </div>
+            </nav>
+        </nav>
+        <div class="button-container">
+            <a th:href="@{/landing/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
+        </div>
+    </header>
+    <section class = "content">
+        <p class="primerTitulo">Hola, admin</p>
+        <p class="segundoTitulo">Aquí están todas las mascotas:</p>
+        <form th:action="@{/admin/busqueda}" class="buscador-form" >
+            <input type="text" name="id" class="buscador-input" placeholder="Buscar por ID">
+            <button type="submit" class="buscador-button">Buscar</button>
+        </form>
+        <a th:href="@{/admin/mascotas/todas}" class="todas-button">+ Ver todas las mascotas</a> 
+        <p class="tercerTitulo">Agrega mascotas:</p>    
+        <div class="carrusel-container">
+            <button class="carrusel-prev" onclick="cambiarMascota(-1)">
+                <img src="../assets/previous.png" alt="Regreso">
+            </button>
+            <div class="carrusel">
+                <div class="mascota-item" th:each="animal : ${mascotas}">
+                    <div class="mascota-info">
+                        <img th:src="${animal.foto}" alt="Foto de ${animal.nombre}" class="mascota-foto">
+                        <img class="estadoimg" id="estadoImg" th:if="${animal.estado == true}" th:src="@{/assets/check.png}" alt="Estado">
+                        <img class="estadoimg" id="estadoImg" th:if="${animal.estado == false}" th:src="@{/assets/wrong.png}" alt="Estado">
+                        <div class="info-itemNombre">
+                            <small class="info-title">Nombre:</small>
+                            <label class="info-label" th:text="${animal.nombre}"></label>
+                        </div>
+                        <div class="info-itemRaza">
+                            <small class="info-title">Raza:</small>
+                            <label class="info-label" th:text="${animal.raza}"></label>
+                        </div>
+                        <div class="info-itemEdad">
+                            <small class="info-title">Edad:</small>
+                            <label class="info-label" th:text="${animal.edad}"></label>
+                        </div>
+                        <div class="info-itemPeso">
+                            <small class="info-title">Peso:</small>
+                            <label class="info-label" th:text="${animal.peso}"></label>
+                        </div>
+                        <div class="info-itemEnfermedad">
+                            <small class="info-title">Enfermedad:</small>
+                            <label class="info-label" th:text="${animal.enfermedad}"></label>
+                        </div>
+                        <a class="info-button" th:href="@{/admin/mascotas/{id}(id=${animal.id})}">+ Info</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carrusel-next" onclick="cambiarMascota(1)">
+                <img src="../assets/next.png" alt="Siguiente">
+            </button>
+        </div>
+        <form id="mascota_agregar" th:object="${mascota}" th:action="@{/mascota/agregar}" method="post" class="agregar-container">
+            <div class="infoadd-itemNombre">
+                <small class="info-title">Nombre:</small>
+                <input th:type="text" class="inputadd-text" th:field="*{nombre}" id="nombre" placeholder="Ingresa el nombre" required>
+            </div>
+            <div class="infoadd-itemRaza">
+                <small class="info-title">Raza:</small>
+                <input th:type="text" class="inputadd-text" th:field="*{raza}" id="raza"  placeholder="Ingresa la raza" required>
+            </div>
+            <div class="infoadd-itemEdad">
+                <small class="info-title">Edad:</small>
+                <input th:type="number" class="inputadd-text" th:field="*{edad}" id="edad" placeholder="Ingresa la edad" required>
+            </div>
+            <div class="infoadd-itemPeso">
+                <small class="info-title">Peso:</small>
+                <input th:type="number" class="inputadd-text" th:field="*{peso}" id="peso" placeholder="Ingresa el peso" required>
+            </div>
+            <div class="infoadd-itemEnfermedad">
+                <small class="info-title">Enfermedad:</small>
+                <input th:type="text" class="inputadd-text" th:field="*{enfermedad}" id="enfermedad" placeholder="Ingresa la enfermedad" required>
+            </div>
+            <div class="infoadd-itemDueño">
+                <small class="info-title">Dueño C.C.:</small>
+                <input th:type="text" class="inputadd-text" name="idCliente" id="dueno" placeholder="Ingresa la cédula" required>
+            </div> 
+            <div class="infoadd-itemEstado">
+                <small class="info-title">Estado:</small>
+                <select th:field="*{estado}" id="estado" class="inputadd-text" required>
+                    <option th:value="true">Activo</option>
+                    <option th:value="false">Inactivo</option>
+                </select>
+            </div>
+            <div class="infoadd-itemURL">
+                <small class="info-title">URL:</small>
+                <input th:type="text" class="inputadd-text" th:field="*{foto}" id="url" placeholder="Ingresa la URL de la foto" required>
+            </div>
+            <button type="submit" class="agregar-button">Agregar Mascota</button> 
+        </form>           
+    </section>
+    <!-- Pie de página -->
+    <footer class="footer">
+        <img src="../assets/logotipoRosado.png" alt="Logo Footer">
+        <p class="direccion">Carrera 13 #140 - 52A, Bogotá, Colombia</p>
+        <p class="correo">info@petvetc.com</p>
+        <p class="derechos">© 2024 SLM, Inc.</p>
+        <div class="iconos">
+            <img src="../assets/iconos.png" alt="Iconos Footer">
+        </div>
+    </footer>
+</body>
+<script src="../js/vet_mostrarTodasMascotas.js"></script>
+</html>

@@ -195,7 +195,7 @@ body {
 .content .primerTitulo {
     position: absolute; 
     top: 120px; 
-    left: 370px; 
+    left: 380px; 
     width: 1000px; 
     height: 47px; 
     font-family: Poppins;
@@ -240,7 +240,7 @@ body {
     left: 530px; 
     width: 700px; 
     height: 500px; 
-    background: #BFD5D8FF; 
+    background: #E6CECE; 
     border-radius: 12px;
 }
 
@@ -276,6 +276,16 @@ body {
     box-sizing: border-box;
 }
 
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
 .form-group input[type="submit"] {
     width: 100%;
     margin-top: 20px;
@@ -299,7 +309,7 @@ body {
 .content .noButton {
     position: absolute; 
     top: 650px; 
-    left: 795px; 
+    left: 820px; 
     height: 44px; 
     padding: 0 16px; 
     display: flex; 

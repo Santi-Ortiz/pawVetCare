@@ -6,7 +6,7 @@
     <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
     <title>PawVetCare | Login Cliente</title>
     <!-- Enlace al archivo CSS específico para la página -->
-    <link rel="stylesheet" th:href="@{/css/iniciarSesion.css}">
+    <link rel="stylesheet" th:href="@{/css/loginVeterinario.css}">
     <!-- Favicon -->
     <link rel="shortcut icon" href="../assets/imagotipoAzul.png" type="image/x-icon">
 </head>
@@ -25,37 +25,35 @@
             </div>
         </nav>
         <div class="button-container">
-            <a th:href="@{/iniciarSesion/form}" class="buttonSoyPVC">Soy PVC</a>
+            <a th:href="@{/iniciarSesion/sesiones}" class="buttonSoyPVC">Soy PVC</a>
             <a th:href="@{/registro}" class="buttonSinCuenta">NO TENGO CUENTA</a>
         </div>
     </header>
     <main>
+        <!-- Contenido principal de la página -->
         <section class="content">
-            <p class="primerTitulo">Escoge tu cuenta</p>
-        
-            <!-- Cliente -->
-            <a href="/iniciarSesion/form">
-                <div class="container-cliente">
-                    <p class="text-cliente">¡Ya cuido a mi mascota!</p>
-                    <img class="img-cliente" src="../assets/clienteInicio.png" alt="">
-                </div>
-            </a>
-        
-            <!-- Veterinario -->
-            <a href="/iniciarSesion/veterinario">
-                <div class="container-veterinario">
-                    <p class="text-cliente">¡Soy Vet!</p>
-                    <img class="img-cliente" src="../assets/veterinarioInicio.png" alt="">
-                </div>
-            </a>
-        
-            <!-- Administrador -->
-            <a href="/iniciarSesion/admin">
-                <div class="container-admin">
-                    <p class="text-cliente">¡Soy Admin!</p>
-                    <img class="img-cliente" src="../assets/administradora.png" alt="">
-                </div>
-            </a>
+            <p class="primerTitulo">¡Gracias por ser Vet!</p>
+            <div class="container-login">
+                <p class="subTitulo">¡Soy Vet!</p>
+                <p class="subTitulo2">Ingresa tus datos</p>
+                <form th:action="@{/iniciarSesion/form}" method="post">
+                    <div class="form-group">
+                        <label for="id">Cédula</label>
+                        <input type="text" id="id" name="id" placeholder="Ej. 123456" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Ver mis mascotas">
+                    </div>
+                </form>
+            </div>
+            <img class="perroPortadaRosa" src="../assets/goldenPortadaRosa.png" alt="Perro Principal Rosa">
+            <img class="perroPortada" src="../assets/goldenPortada.png" alt="Perro Principal">
+            <img class="gatoPortadaAzul" src="../assets/gatoPortadaAzul.png" alt="Gato Principal Azul">
+            <img class="gatoPortada" src="../assets/gatoPortada.png" alt="Gato Principal">
         </section>
         <!-- Pie de página -->
         <footer class="footer">
