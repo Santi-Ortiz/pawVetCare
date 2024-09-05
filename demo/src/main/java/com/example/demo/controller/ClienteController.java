@@ -88,26 +88,30 @@ public class ClienteController {
     // http://localhost:8090/mascota/update/{id}
     @PostMapping("/update/ad/{id}")
     public String actualizarCliente(@PathVariable("id") Long  identificacion, @ModelAttribute("cliente") Cliente cliente) {
+        try {
             Cliente existingCliente = clienteService.obtenerCliente(identificacion);
             if (existingCliente != null) {
-
+                // Verificar si la cédula ya pertenece a otro cliente
                 Cliente clienteConMismaCedula = clienteService.obtenerClientePorCedula(cliente.getCedula());
                 if (clienteConMismaCedula != null && !clienteConMismaCedula.getId().equals(existingCliente.getId())) {
                     throw new ClientUpdatingException(cliente.getCedula());
                 }
-        
+    
                 existingCliente.setCelular(cliente.getCelular());
                 existingCliente.setCorreo(cliente.getCorreo());
                 existingCliente.setNombre(cliente.getNombre());
-        
+    
                 clienteService.update(existingCliente);
-        
+    
                 List<Mascota> mascotas = existingCliente.getMascotas();
                 for (Mascota mascota : mascotas) {
                     mascota.setCliente(existingCliente);
                     mascotaService.updateMascota(mascota);
                 }
             }
+        } catch (ClientUpdatingException e) {
+            return "errorClienteActualizado"; 
+        }
     
         return "redirect:/admin/clientes";
         
