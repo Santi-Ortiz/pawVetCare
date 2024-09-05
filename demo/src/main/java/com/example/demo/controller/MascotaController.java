@@ -101,17 +101,17 @@ public class MascotaController {
         }
     }
      
-    // http://localhost:8090/mascota/delete/1
+    // http://localhost:8090/mascota/ad/delete/1
      @GetMapping("/ad/delete/{id}")
      public String borrarMascota(@PathVariable("id") Long identificacion){
-        mascotaService.deleteById(identificacion);
+        mascotaService.borrarMascota(identificacion);
         return "redirect:/admin/mascotas";
-     }
+     }   
 
      // http://localhost:8090/mascota/delete/1
      @GetMapping("/vet/delete/{id}")
      public String borrarMascotaVet(@PathVariable("id") Long identificacion){
-        mascotaService.deleteById(identificacion);
+        mascotaService.borrarMascota(identificacion);
         return "redirect:/veterinario/mascotas";
      }
 

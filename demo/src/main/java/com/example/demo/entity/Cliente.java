@@ -23,7 +23,7 @@ public class Cliente{
     private String correo;
     private Long celular;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas;
 
     public Cliente(){}

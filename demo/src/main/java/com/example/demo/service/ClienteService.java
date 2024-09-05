@@ -78,9 +78,6 @@ public class ClienteService {
     }
 
     public void eliminarCliente(Long id){
-        Cliente auxcliente = clienteRepository.findByCedula(id);
-        auxcliente.getMascotas().clear();
-        clienteRepository.save(auxcliente);
         clienteRepository.deleteById(id);
     }
 

@@ -56,6 +56,15 @@ public class VeterinarioController {
  
     }
 
+    // http://localhost:8090/admin/mascotas/todas
+    @GetMapping("/mascotas/todas")
+    public String mostraradmin_mostrarTodasLasMascotas(Model model){
+        model.addAttribute("mascota", new Mascota());
+        model.addAttribute("mascotas", adminService.SearchAllPets());
+        return "vet_MascotasTodas";
+        //mascotaController.mostrarMascotas(model);
+    }
+
     // http://localhost:8090/veterinario/clientes
     @GetMapping("/clientes")
     public String mostrarClientesAdmin(Model model){

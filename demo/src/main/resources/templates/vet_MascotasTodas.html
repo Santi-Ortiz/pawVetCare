@@ -31,7 +31,7 @@
         </div>
     </header>
     <section class="content">
-        <p class="primerTitulo">Hola, admin</p>
+        <p class="primerTitulo">Hola, vet</p>
         <p class="segundoTitulo">Navega por las mascotas:</p>  
         <div class="mascotas-container" id="mascotasContainer">
             <div class="mascota-item" th:each="animal : ${mascotas}">
@@ -59,7 +59,7 @@
                         <small class="info-title">Enfermedad:</small>
                         <label class="info-label" th:text="${animal.enfermedad}"></label>
                     </div>
-                    <a class="info-button" th:href="@{/admin/mascotas/{id}(id=${animal.id})}">+ Información</a>
+                    <a class="info-button" th:href="@{/veterinario/mascotas/{id}(id=${animal.id})}">+ Información</a>
                 </div>
             </div>
         </div>

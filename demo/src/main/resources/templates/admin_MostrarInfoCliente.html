@@ -62,7 +62,7 @@
                         </button>
                     </div>
                 </form>
-                <form id="cliente_delete" th:action="@{/cliente/delete/{cedula}(cedula=${cliente.cedula})}">
+                <form id="cliente_delete" th:action="@{/cliente/delete/{id}(id=${cliente.id})}">
                     <button class="eliminar-btn" id="eliminarBtn" type="button" onclick="toggleEliminar()">
                         <span class="icon">x</span>
                         <span class="text">Eliminar</span>

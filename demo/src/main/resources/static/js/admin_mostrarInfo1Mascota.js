@@ -3,7 +3,7 @@ function toggleEliminar() {
 
     // Si el botón ya está expandido, ejecuta la acción de eliminar
     if (botonEliminar.classList.contains("expanded")) {
-        document.getElementById("mascota_delete").submit();
+        document.getElementById('mascota_delete').submit();
     } else {
         // Si no está expandido, lo expande y espera a la próxima interacción
         botonEliminar.classList.add("expanded");
