@@ -3,9 +3,12 @@ package com.example.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.controller.ClientUpdatingException;
+import com.example.demo.controller.NotPetFoundException;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.entity.Tratamiento;
+import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.TratamientoRepository;
 
@@ -17,58 +20,52 @@ import java.util.*;
 @Service
 public class MascotaService {
     @Autowired
-    private MascotaRepository repo;
+    private MascotaRepository mascotaRepository;
 
     @Autowired
     private TratamientoRepository repoTratamiento;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
     @Transactional
     public Mascota SearchById(Long id){
-        Optional<Mascota> auxMascota = repo.findById(id);
+        Optional<Mascota> auxMascota = mascotaRepository.findById(id);
         return auxMascota.get();
     }
     
     @Transactional
     public List<Mascota> SearchAll(){
-        return repo.findAll();
+        return mascotaRepository.findAll();
     }
 
 
     @Transactional
     public void borrarMascota(Long id){
-       /*try {
-            Optional<Mascota> mascota = repo.findById(id);
-            if (mascota.isPresent()) {
-                Mascota m = mascota.get();
-                System.out.println("Mascota encontrada: " + m);
-                repo.delete(m);
-                repo.flush();
-                System.out.println("Mascota con ID " + id + " eliminada.");
-            } else {
-                System.out.println("Mascota con ID " + id + " no encontrada.");
-            }
-        } catch (Exception e) {
-            System.out.println("Error al eliminar la mascota: " + e.getMessage());
-        }*/
-        Mascota mascota = repo.findById(id).orElseThrow(() -> new EntityNotFoundException("Mascota no encontrada"));
+       
+        Mascota mascota = mascotaRepository.findById(id).orElseThrow(() -> new NotPetFoundException(id));
 
-        // Elimina la mascota de la lista de mascotas del cliente
         Cliente cliente = mascota.getIdCliente();
         if (cliente != null) {
-            cliente.getMascotas().remove(mascota);  // Eliminar de la lista del cliente
+            cliente.getMascotas().remove(mascota);
         }
 
-        // Elimina la mascota
-        repo.delete(mascota);
+        mascotaRepository.delete(mascota);
     }
 
     @Transactional
     public void updateMascota(Mascota mascota){
-        repo.save(mascota);
+        //mascotaRepository.save(mascota);
+        Cliente clienteExistente = clienteRepository.findByCedula(mascota.getIdCliente().getCedula());
+        if (clienteExistente != null && !clienteExistente.getId().equals(mascota.getIdCliente().getId())) {
+            throw new ClientUpdatingException(mascota.getIdCliente().getCedula());
+        } else {
+            mascotaRepository.save(mascota);
+        }
     }
 
     @Transactional
     public void add(Mascota mascota){
-        repo.save(mascota);
+        mascotaRepository.save(mascota);
     }
 }

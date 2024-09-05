@@ -98,6 +98,12 @@ public class ClienteService {
     // }
 
     public void update(Cliente cliente){
-        clienteRepository.save(cliente);
+        //clienteRepository.save(cliente);
+        Cliente clienteExistente = clienteRepository.findByCedula(cliente.getCedula());
+        if (clienteExistente != null && !clienteExistente.getId().equals(cliente.getId())) {
+            throw new ClientUpdatingException(cliente.getCedula());
+        } else {
+            clienteRepository.save(cliente);
+        }
     }
 }
