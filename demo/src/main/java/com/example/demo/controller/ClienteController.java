@@ -88,6 +88,7 @@ public class ClienteController {
     // http://localhost:8090/mascota/update/{id}
     @PostMapping("/update/ad/{id}")
     public String actualizarCliente(@PathVariable("id") Long  identificacion, @ModelAttribute("cliente") Cliente cliente) {
+        
             Cliente existingCliente = clienteService.obtenerCliente(identificacion);
             if (existingCliente != null) {
 
