@@ -88,7 +88,7 @@ public class ClienteController {
     // http://localhost:8090/mascota/update/{id}
     @PostMapping("/update/ad/{id}")
     public String actualizarCliente(@PathVariable("id") Long  identificacion, @ModelAttribute("cliente") Cliente cliente) {
-        try {
+        
             Cliente existingCliente = clienteService.obtenerCliente(identificacion);
             if (existingCliente != null) {
                 // Verificar si la cédula ya pertenece a otro cliente
@@ -109,9 +109,6 @@ public class ClienteController {
                     mascotaService.updateMascota(mascota);
                 }
             }
-        } catch (ClientUpdatingException e) {
-            return "errorClienteActualizado"; 
-        }
     
         return "redirect:/admin/clientes";
         
