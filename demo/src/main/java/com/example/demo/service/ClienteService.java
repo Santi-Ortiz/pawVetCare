@@ -68,13 +68,8 @@ public class ClienteService {
     }
 
     public Cliente obtenerClientePorCedula(Long cedula){
-        Cliente cliente = clienteRepository.findByCedula(cedula);
-
-        if(cliente != null){
-            return clienteRepository.findByCedula(cedula);
-        } else {    
-            throw new NotClientFoundException(cedula);
-        }
+        // Cliente cliente = clienteRepository.findByCedula(cedula);
+        return clienteRepository.findByCedula(cedula);
     }
 
     public void eliminarCliente(Long id){
@@ -98,12 +93,12 @@ public class ClienteService {
     // }
 
     public void update(Cliente cliente){
-        //clienteRepository.save(cliente);
-        Cliente clienteExistente = clienteRepository.findByCedula(cliente.getCedula());
-        if (clienteExistente != null && !clienteExistente.getId().equals(cliente.getId())) {
-            throw new ClientUpdatingException(cliente.getCedula());
-        } else {
-            clienteRepository.save(cliente);
-        }
+        clienteRepository.save(cliente);
+        // Cliente clienteExistente = clienteRepository.findByCedula(cliente.getCedula());
+        // if (clienteExistente != null && !clienteExistente.getId().equals(cliente.getId())) {
+        //     throw new ClientUpdatingException(cliente.getCedula());
+        // } else {
+        //     clienteRepository.save(cliente);
+        // }
     }
 }
