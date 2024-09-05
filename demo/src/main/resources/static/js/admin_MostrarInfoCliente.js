@@ -55,7 +55,7 @@ function toggleEditar() {
     }
 }
 
-let index = 0;
+/*let index = 0;
 
 function cambiarMascota(direccion) {
     const items = document.querySelectorAll('.mascota-item');
@@ -63,7 +63,39 @@ function cambiarMascota(direccion) {
 
     index = (index + direccion + items.length) % items.length;
     document.querySelector('.carrusel').style.transform = `translateX(-${index * 106.5}%)`;
+}*/
+
+let index = 0;
+
+function cambiarMascota(direccion) {
+    const items = document.querySelectorAll('.mascota-item');
+    if (items.length === 0) return;
+
+    // Cambiar el índice de la mascota actual
+    index = (index + direccion + items.length) % items.length;
+
+    // Actualizar el contenido dinámico de la mascota seleccionada
+    const mascotaActual = items[index];
+
+    const nombre = mascotaActual.querySelector('.info-itemNombre .info-label').textContent;
+    const raza = mascotaActual.querySelector('.info-itemRaza .info-label').textContent;
+    const edad = mascotaActual.querySelector('.info-itemEdad .info-label').textContent;
+    const peso = mascotaActual.querySelector('.info-itemPeso .info-label').textContent;
+    const enfermedad = mascotaActual.querySelector('.info-itemEnfermedad .info-label').textContent;
+    const foto = mascotaActual.querySelector('.mascota-foto').src;
+
+    // Actualizar los campos de la interfaz para reflejar los valores de la mascota actual
+    document.querySelector('.info-itemNombre .info-label').textContent = nombre;
+    document.querySelector('.info-itemRaza .info-label').textContent = raza;
+    document.querySelector('.info-itemEdad .info-label').textContent = edad;
+    document.querySelector('.info-itemPeso .info-label').textContent = peso;
+    document.querySelector('.info-itemEnfermedad .info-label').textContent = enfermedad;
+    document.querySelector('.mascotaimg').src = foto;
+
+    // Ajustar la transformación de desplazamiento visual en el carrusel
+    document.querySelector('.carrusel').style.transform = `translateX(-${index * 106.5}%)`;
 }
+
 
 // Función para moverse automáticamente cada 6 segundos
 function autoMoverCarrusel() {
