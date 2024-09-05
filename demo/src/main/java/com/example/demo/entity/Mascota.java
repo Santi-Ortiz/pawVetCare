@@ -18,7 +18,7 @@ public class Mascota{
     private Boolean estado;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_cedula", referencedColumnName = "cedula")
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
 
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)

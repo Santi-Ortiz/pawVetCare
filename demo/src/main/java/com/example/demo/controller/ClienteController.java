@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.service.ClienteService;
+import com.example.demo.service.MascotaService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -23,6 +24,9 @@ public class ClienteController {
 
     @Autowired 
     private ClienteService clienteService;
+
+    @Autowired 
+    private MascotaService mascotaService;
 
     // http://localhost:8090/cliente/mascota/{id}
     @GetMapping("/mascota/{id}")
@@ -82,10 +86,52 @@ public class ClienteController {
     }
 
     // http://localhost:8090/mascota/update/{id}
-    @PostMapping("/update/{id}")
-    public String actualizarCliente(@PathVariable("id") Long  identificacion, @ModelAttribute("mascota") Cliente cliente) {
-        clienteService.update(cliente);
-        return "redirect:/cliente/todos";
+    @PostMapping("/update/ad/{id}")
+    public String actualizarCliente(@PathVariable("id") Long  identificacion, @ModelAttribute("cliente") Cliente cliente) {
+        Cliente existingCliente = clienteService.obtenerClientePorCedula(identificacion);
+        if(existingCliente != null){
+
+            existingCliente.setCedula(cliente.getCedula());
+            existingCliente.setCelular(cliente.getCelular());
+            existingCliente.setCorreo(cliente.getCorreo());
+            existingCliente.setNombre(cliente.getNombre()); 
+
+            clienteService.update(existingCliente);
+
+            List<Mascota> mascotas = existingCliente.getMascotas();
+
+            for (Mascota mascota : mascotas) {
+                mascota.setIdCliente(existingCliente); 
+                mascotaService.updateMascota(mascota);
+            }
+
+        }
+        
+        return "redirect:/admin/clientes";
+    }
+
+    // http://localhost:8090/mascota/update/{id}
+    @PostMapping("/update/vet/{id}")
+    public String actualizarClienteVet(@PathVariable("id") Long  identificacion, @ModelAttribute("mascota") Cliente cliente) {
+        Cliente existingCliente = clienteService.obtenerClientePorCedula(identificacion);
+        if(existingCliente != null){
+
+            existingCliente.setCedula(cliente.getCedula());
+            existingCliente.setCelular(cliente.getCelular());
+            existingCliente.setCorreo(cliente.getCorreo());
+            existingCliente.setNombre(cliente.getNombre()); 
+
+            clienteService.update(existingCliente);
+
+            List<Mascota> mascotas = existingCliente.getMascotas();
+
+            for (Mascota mascota : mascotas) {
+                mascota.setIdCliente(existingCliente); 
+                mascotaService.updateMascota(mascota);
+            }
+
+        }
+        return "redirect:/veterinario/clientes";
     }
 
     // http://localhost:8090/cliente/delete/{id}

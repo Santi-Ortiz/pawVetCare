@@ -101,12 +101,6 @@ public class ClienteService {
     // }
 
     public void update(Cliente cliente){
-        if(clienteRepository.existsByCedula(cliente.getCedula())){
-            throw new ClientUpdatingException(cliente.getCedula());
-        } else{ 
-            cliente.setId(clienteRepository.findByCedula(cliente.getCedula()).getId());
-            clienteRepository.deleteById(cliente.getCedula());
-            clienteRepository.save(cliente);
-        }
+        clienteRepository.save(cliente);
     }
 }
