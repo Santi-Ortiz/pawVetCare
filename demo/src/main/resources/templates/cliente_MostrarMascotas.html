@@ -57,7 +57,7 @@
                     </div>
                     <div class="info-itemDueño">
                         <small class="info-title">Dueño C.C.:</small>
-                        <input class="info-label" th:field="*{idCliente}" readonly></input>
+                        <input class="info-label" th:value="${mascota.cliente.cedula}" readonly></input>
                     </div>
                     <div class="info-itemFoto">
                         <small class="info-title">URL Foto:</small>

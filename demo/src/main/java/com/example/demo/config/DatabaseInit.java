@@ -1,10 +1,15 @@
-package com.example.demo.entity;
+package com.example.demo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
+import com.example.demo.entity.Admin;
+import com.example.demo.entity.Cliente;
+import com.example.demo.entity.Especialidad;
+import com.example.demo.entity.Mascota;
+import com.example.demo.entity.Veterinario;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.EspecialidadRepository;

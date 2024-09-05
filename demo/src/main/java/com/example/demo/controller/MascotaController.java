@@ -50,11 +50,11 @@ public class MascotaController {
      public String mostrarInfoMascota(Model model, @PathVariable("id") Long identificacion ){
 
          Mascota mascota = mascotaService.SearchById(identificacion);
-         System.out.println("ID recibido: " + mascota.getIdCliente().getCedula());
+         System.out.println("ID recibido: " + mascota.getCliente().getCedula());
 
          if(mascota != null){
             model.addAttribute("mascota", mascota); 
-            model.addAttribute("clienteCedula", mascota.getIdCliente().getCedula());
+            model.addAttribute("clienteCedula", mascota.getCliente().getCedula());
          } else {
             throw new NotPetFoundException(identificacion);
          }
@@ -76,7 +76,7 @@ public class MascotaController {
       public String mostrar_agregar_mascota(@ModelAttribute("mascota") Mascota mascota, @RequestParam("idCliente") Long cedula) {
          Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
          if(cliente != null){
-            mascota.setIdCliente(cliente);
+            mascota.setCliente(cliente);
             mascotaService.add(mascota); 
             clienteService.agregarMascota(cliente.getCedula(), mascota);
             return "redirect:/admin/mascotas";
@@ -91,7 +91,7 @@ public class MascotaController {
      public String mostrar_agregar_mascota_vet(@ModelAttribute("mascota") Mascota mascota, @RequestParam("idCliente") Long cedula) {
         Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
         if(cliente != null){
-           mascota.setIdCliente(cliente);
+           mascota.setCliente(cliente);
            mascotaService.add(mascota); 
            clienteService.agregarMascota(cliente.getCedula(), mascota);
            return "redirect:/veterinario/mascotas";
@@ -116,12 +116,28 @@ public class MascotaController {
      }
 
     // http://localhost:8090/mascota/update/{id}
-     @GetMapping("/update/{id}")
-     public String actualizarInfoMascota(@PathVariable("id") Long identificacion, Model model) {
+   @GetMapping("/update/{id}")
+   public String actualizarInfoMascota(@PathVariable("id") Long identificacion, Model model) {
       Mascota mascota = mascotaService.SearchById(identificacion);
-      model.addAttribute("mascota", mascota);
+
+      // Verificación para asegurar que mascota no es null
+      if (mascota != null) {
+         model.addAttribute("mascota", mascota);
+         
+         // Verificación para evitar NullPointerException si cliente es null
+         if (mascota.getCliente() != null) {
+               model.addAttribute("clienteCedula", mascota.getCliente().getCedula());
+         } else {
+               model.addAttribute("clienteCedula", "No disponible");
+         }
+      } else {
+         // Mascota no encontrada, redirige a una página de error o realiza alguna acción
+         return "error_page"; // Cambia por tu página de error
+      }
+
       return "admin_mostrarInfo1Mascota";
    }
+
    
      //http://localhost:8090/mascota/update/{id}
    @PostMapping("/update/vet/{id}")

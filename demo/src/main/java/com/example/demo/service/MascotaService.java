@@ -45,7 +45,7 @@ public class MascotaService {
        
         Mascota mascota = mascotaRepository.findById(id).orElseThrow(() -> new NotPetFoundException(id));
 
-        Cliente cliente = mascota.getIdCliente();
+        Cliente cliente = mascota.getCliente();
         if (cliente != null) {
             cliente.getMascotas().remove(mascota);
         }
@@ -56,9 +56,9 @@ public class MascotaService {
     @Transactional
     public void updateMascota(Mascota mascota){
         //mascotaRepository.save(mascota);
-        Cliente clienteExistente = clienteRepository.findByCedula(mascota.getIdCliente().getCedula());
-        if (clienteExistente != null && !clienteExistente.getId().equals(mascota.getIdCliente().getId())) {
-            throw new ClientUpdatingException(mascota.getIdCliente().getCedula());
+        Cliente clienteExistente = clienteRepository.findByCedula(mascota.getCliente().getCedula());
+        if (clienteExistente != null && !clienteExistente.getId().equals(mascota.getCliente().getId())) {
+            throw new ClientUpdatingException(mascota.getCliente().getCedula());
         } else {
             mascotaRepository.save(mascota);
         }

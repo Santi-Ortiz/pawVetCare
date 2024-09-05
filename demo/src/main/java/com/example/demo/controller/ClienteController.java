@@ -105,7 +105,7 @@ public class ClienteController {
     
                 List<Mascota> mascotas = existingCliente.getMascotas();
                 for (Mascota mascota : mascotas) {
-                    mascota.setIdCliente(existingCliente);
+                    mascota.setCliente(existingCliente);
                     mascotaService.updateMascota(mascota);
                 }
             }
@@ -133,7 +133,7 @@ public class ClienteController {
             List<Mascota> mascotas = existingCliente.getMascotas();
 
             for (Mascota mascota : mascotas) {
-                mascota.setIdCliente(existingCliente); 
+                mascota.setCliente(existingCliente); 
                 mascotaService.updateMascota(mascota);
             }
 

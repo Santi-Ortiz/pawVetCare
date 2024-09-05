@@ -58,11 +58,11 @@ public class AdminController {
     public String mostrarInfoMascotaAdmin(Model model, @PathVariable("id") Long identificacion){
 
         Mascota mascota = adminService.SearchPetById(identificacion);
-        System.out.println("ID recibido: " + mascota.getIdCliente().getCedula());
+        System.out.println("ID recibido: " + mascota.getCliente().getCedula());
 
         if(mascota != null){
             model.addAttribute("mascota", mascota); 
-            model.addAttribute("clienteCedula", mascota.getIdCliente().getCedula());
+            model.addAttribute("clienteCedula", mascota.getCliente().getCedula());
         } else {
             throw new NotPetFoundException(identificacion);
         } 

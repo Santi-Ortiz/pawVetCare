@@ -43,9 +43,9 @@ public class ClienteService {
             existingMascota.setEstado(mascota.getEstado());
             mascota = existingMascota; 
         } else {
-            mascota.setIdCliente(cliente);
+            mascota.setCliente(cliente);
         }
-        mascota.setIdCliente(cliente);
+        mascota.setCliente(cliente);
         mascotaRepository.save(mascota);
     }
 

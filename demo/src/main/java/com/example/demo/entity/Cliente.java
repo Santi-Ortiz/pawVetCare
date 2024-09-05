@@ -1,9 +1,5 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
 import java.util.*;
 
 import jakarta.persistence.*;
@@ -23,7 +19,7 @@ public class Cliente{
     private String correo;
     private Long celular;
 
-    @OneToMany(mappedBy = "cliente" , cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas;
 
     public Cliente(){}
