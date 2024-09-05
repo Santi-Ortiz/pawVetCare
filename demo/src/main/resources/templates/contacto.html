@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,27 +13,27 @@
 <body>
     <!-- Barra superior con navegación -->
     <header class="top-bar">
-        <a th:href="@{/home}">
+        <a th:href="@{/landing/home}">
             <img src="../assets/isologoAzul.png" alt="Logo Azul">
         </a>
         <!-- Botones de navegación -->
         <nav>
             <div class="header-menu">
-                <a th:href="@{/home}" class="header-menu-item">
+                <a th:href="@{/landing/home}" class="header-menu-item">
                     HOME
                 </a>
                 </a>
-                <a th:href="@{/equipo}" class="header-menu-item">
+                <a th:href="@{/landing/equipo}" class="header-menu-item">
                     EQUIPO
                 </a>
-                <a th:href="@{/contacto}" class="header-menu-item selected">
+                <a th:href="@{/landing/contacto}" class="header-menu-item selected">
                     CONTACTO
                     <div class="indicator"></div>
                 </a>
             </div>
         </nav>
         <div class="button-container">
-            <a th:href="@{/iniciarSesion}" class="buttonSoyPVC">Soy PVC</a>
+            <a th:href="@{/iniciarSesion/sesiones}" class="buttonSoyPVC">Soy PVC</a>
             <a th:href="@{/registro}" class="buttonSinCuenta">NO TENGO CUENTA</a>
         </div>
     </header>

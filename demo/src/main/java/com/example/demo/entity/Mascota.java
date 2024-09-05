@@ -1,17 +1,11 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name="mascota")
 public class Mascota{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,8 +18,12 @@ public class Mascota{
     private Boolean estado;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tratamiento> tratamientos = new ArrayList<>();
+
     public Mascota(){
     }
     public Mascota(Long id, String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto, Boolean estado, Cliente cliente) {
@@ -39,7 +37,16 @@ public class Mascota{
         this.estado = estado;
         this.cliente = cliente;
     }
-
+    public Mascota(String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto, Boolean estado, Cliente cliente) {
+        this.nombre = nombre;
+        this.raza = raza;
+        this.edad = edad;
+        this.peso = peso;
+        this.enfermedad = enfermedad;
+        this.foto = foto;
+        this.estado = estado;
+        this.cliente = cliente;
+    }
     
     public Long getId() {
         return id;
@@ -106,14 +113,20 @@ public class Mascota{
     }
 
 
-    public Cliente getIdCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
 
-    public void setIdCliente(Cliente cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
+    }
 }

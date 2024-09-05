@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
+    <title>PawVetCare | Mascotas Cliente</title>
+    <!-- Enlace al archivo CSS específico para la página -->
+    <link rel="stylesheet" th:href="@{/css/cliente_mostrarTodasMascotas.css}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/imagotipoAzul.png}" type="image/x-icon">
+</head>
+<body>
+    <!-- Barra superior con navegación -->  
+    <header class="top-bar">
+        <a th:href="@{/landing/home}">
+            <img th:src="@{/assets/isologoAzul.png}" alt="Logo Azul">
+        </a>
+        <!-- Botones de navegación -->
+        <nav>
+            <nav>
+                <div class="header-menu">
+                    <a th:href="@{/cliente/mascotas/{id}(id=${cliente.cedula})}" class="header-menu-item selected">MASCOTAS<div class="indicator"></div></a>
+                </div>
+            </nav>
+        </nav> 
+        <div class="button-container">
+            <a th:href="@{/landing/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
+        </div>
+    </header> 
+    <section class = "content">
+        <!--<p class="primerTitulo">Hola, <span th:text="${cliente.nombre}"></span></p> -->
+        <p class="segundoTitulo">Aquí están todas tus mascotas:</p>
+        <p class="tercerTitulo">Próximamente más funciones...</p>
+        <div class="carrusel-container">
+            <button class="carrusel-prev" onclick="cambiarMascota(-1)">
+                <img th:src="@{/assets/previous.png}" alt="Regreso">
+            </button>
+            <div class="carrusel">
+                <div class="mascota-item" th:each="mascota : ${cliente.mascotas}"> 
+                    <div class="mascota-info">
+                        <img th:src="${mascota.foto}" class="mascota-foto">
+                        <img class="estadoimg" id="estadoImg" th:if="${mascota.estado == true}" th:src="@{/assets/check.png}" alt="Estado">
+                        <img class="estadoimg" id="estadoImg" th:if="${mascota.estado == false}" th:src="@{/assets/wrong.png}" alt="Estado">
+                        <div class="info-itemNombre">
+                            <small class="info-title">Nombre:</small>
+                            <label class="info-label" th:text="${mascota.nombre}"></label>
+                        </div>
+                        <div class="info-itemRaza">
+                            <small class="info-title">Raza:</small>
+                            <label class="info-label" th:text="${mascota.raza}"></label>
+                        </div>
+                        <div class="info-itemEdad">
+                            <small class="info-title">Edad:</small>
+                            <label class="info-label" th:text="${mascota.edad}"></label>
+                        </div>
+                        <div class="info-itemPeso">
+                            <small class="info-title">Peso:</small>
+                            <label class="info-label" th:text="${mascota.peso}"></label>
+                        </div>
+                        <div class="info-itemEnfermedad">
+                            <small class="info-title">Enfermedad:</small>
+                            <label class="info-label" th:text="${mascota.enfermedad}"></label>
+                        </div>
+                        <a class="info-button" th:href="@{/cliente/mascota/{id}(id=${mascota.id})}">+ Info</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carrusel-next" onclick="cambiarMascota(1)">
+                <img th:src="@{/assets/next.png}" alt="Siguiente">
+            </button>
+        </div>        
+    </section> 
+    <!-- Pie de página -->
+    <footer class="footer">
+        <img th:src="@{/assets/logotipoRosado.png}" alt="Logo Footer">
+        <p class="direccion">Carrera 13 #140 - 52A, Bogotá, Colombia</p>
+        <p class="correo">info@petvetc.com</p>
+        <p class="derechos">© 2024 SLM, Inc.</p>
+        <div class="iconos">
+            <img th:src="@{/assets/iconos.png}" alt="Iconos Footer">
+        </div>
+    </footer>
+</body>
+<script th:src="@{/js/cliente_mostrarTodasMascotas.js}"></script>
+</html>

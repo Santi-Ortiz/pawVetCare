@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
+        <title>PawVetCare | Error Cliente</title>
+        <!-- Enlace al archivo CSS específico para la página -->
+        <link rel="stylesheet" th:href="@{/css/errorClienteIdNoExistenteMascota.css}">
+        <!-- Favicon -->
+        <link rel="shortcut icon" th:href="@{/assets/imagotipoAzul.png}" type="image/x-icon">
+    
+    </head>
+    <body>
+        <!-- Barra superior con navegación -->
+        <header class="top-bar">
+            <a th:href="@{/landing/home}">
+                <img th:src="@{/assets/isologoAzul.png}" alt="Logo Azul">
+            </a>
+        </header>
+        <section class = "content">
+            <img class="perritoError" th:src="@{/assets/errorMascota.png}" alt="Perrito">
+            <p class="primerTitulo">¡Ooops! Parece ser que la cédula que deseas actualizar ya le pertenece a otro cliente.</p>
+            <button class="btn-regresar" onclick="goBack()">Regresar</button>
+        </section>
+        <!-- Pie de página -->
+        <footer class="footer">
+            <img th:src="@{/assets/logotipoRosado.png}" alt="Logo Footer">
+            <p class="direccion">Carrera 13 #140 - 52A, Bogotá, Colombia</p>
+            <p class="correo">info@petvetc.com</p>
+            <p class="derechos">© 2024 SLM, Inc.</p>
+            <div class="iconos">
+                <img th:src="@{/assets/iconos.png}" alt="Iconos Footer">
+            </div>
+        </footer>
+    </body>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</html>

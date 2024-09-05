@@ -1,35 +1,45 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
 import java.util.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.*;
 
 
 @Entity
 @Table(name="cliente")
 
 public class Cliente{
+
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private Long id;
-    private Integer cedula;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false, unique = true)
+    private Long cedula;
     private String nombre;
     private String correo;
     private Long celular;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas;
 
     public Cliente(){}
-    public Cliente(/*Long id,*/Integer cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
-        //this.id = id;
+
+    public Cliente(Long cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.celular = celular;
+        this.mascotas = mascotas;
+    }
+    public Cliente(Long cedula, String nombre, String correo, Long celular) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.celular = celular;
+    }
+
+    public Cliente(Long id, Long cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
+        this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
@@ -37,19 +47,19 @@ public class Cliente{
         this.mascotas = mascotas;
     }
 
-    /*public Long getId() {
+    public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }*/
+    }
 
-    public Integer getCedula() {
+    public Long getCedula() {
         return cedula;
     }
 
-    public void setCedula(Integer cedula) {
+    public void setCedula(Long cedula) {
         this.cedula = cedula;
     }
 

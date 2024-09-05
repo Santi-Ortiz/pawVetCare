@@ -160,7 +160,7 @@ body {
 
 .content .perroPortada {
     position: absolute; 
-    top: 95px; 
+    top: 155px; 
     left: 0px; 
     height: 754px; 
     border-radius: 0px;
@@ -168,7 +168,7 @@ body {
 
 .content .perroPortadaRosa {
     position: absolute; 
-    top: 164px; 
+    top: 236px; 
     left: 10px; 
     width: 524px; 
     height: 700px; 
@@ -195,7 +195,7 @@ body {
 .content .primerTitulo {
     position: absolute; 
     top: 120px; 
-    left: 420px; 
+    left: 370px; 
     width: 1000px; 
     height: 47px; 
     font-family: Poppins;
@@ -237,7 +237,7 @@ body {
 .container-login{
     position: absolute; 
     top: 283px; 
-    left: 550px; 
+    left: 530px; 
     width: 700px; 
     height: 500px; 
     background: #BFD5D8FF; 
@@ -299,7 +299,7 @@ body {
 .content .noButton {
     position: absolute; 
     top: 650px; 
-    left: 820px; 
+    left: 795px; 
     height: 44px; 
     padding: 0 16px; 
     display: flex; 

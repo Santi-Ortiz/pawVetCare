@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
+    <title>PawVetCare | Login Cliente</title>
+    <!-- Enlace al archivo CSS específico para la página -->
+    <link rel="stylesheet" th:href="@{/css/loginAdmin.css}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/imagotipoAzul.png" type="image/x-icon">
+</head>
+<body>
+    <!-- Barra superior con navegación -->
+    <header class="top-bar">
+        <a th:href="@{/landing/home}">
+            <img src="../assets/isologoAzul.png" alt="Logo Azul">
+        </a>
+        <!-- Botones de navegación -->
+        <nav>
+            <div class="header-menu">
+                <a th:href="@{/landing/home}" class="header-menu-item">HOME</a>
+                <a th:href="@{/landing/equipo}" class="header-menu-item">EQUIPO</a>
+                <a th:href="@{/landing/contacto}" class="header-menu-item">CONTACTO</a>
+            </div>
+        </nav>
+        <div class="button-container">
+            <a th:href="@{/iniciarSesion/sesiones}" class="buttonSoyPVC">Soy PVC</a>
+            <a th:href="@{/registro}" class="buttonSinCuenta">NO TENGO CUENTA</a>
+        </div>
+    </header>
+    <main>
+        <!-- Contenido principal de la página -->
+        <section class="content">
+            <p class="primerTitulo">¡Recuerda, tus credenciales son únicas!</p>
+            <div class="container-login">
+                <p class="subTitulo">¡Soy Admin!</p>
+                <p class="subTitulo2">Ingresa tus datos</p>
+                <form th:action="@{/iniciarSesion/adminform}" method="post">
+                    <div class="form-group">
+                        <label for="id">Usuario</label>
+                        <input type="text" id="username" name="username" placeholder="Ej. admin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Ver mis mascotas">
+                    </div>
+                </form>
+            </div>
+            <img class="perroPortadaRosa" src="../assets/goldenPortadaRosa.png" alt="Perro Principal Rosa">
+            <img class="perroPortada" src="../assets/goldenPortada.png" alt="Perro Principal">
+            <img class="gatoPortadaAzul" src="../assets/gatoPortadaAzul.png" alt="Gato Principal Azul">
+            <img class="gatoPortada" src="../assets/gatoPortada.png" alt="Gato Principal">
+        </section>
+        <!-- Pie de página -->
+        <footer class="footer">
+            <img src="../assets/logotipoRosado.png" alt="Logo Footer">
+            <p class="direccion">Carrera 13 #140 - 52A, Bogotá, Colombia</p>
+            <p class="correo">info@petvetc.com</p>
+            <p class="derechos">© 2024 SLM, Inc.</p>
+            <div class="iconos">
+                <img src="../assets/iconos.png" alt="Iconos Footer">
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

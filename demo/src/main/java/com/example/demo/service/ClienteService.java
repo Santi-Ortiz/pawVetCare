@@ -4,13 +4,18 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.controller.ClientExistingException;
+import com.example.demo.controller.ClientUpdatingException;
+import com.example.demo.controller.NotClientFoundException;
+import com.example.demo.controller.NotPetFoundException;
+
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
+
 import com.example.demo.repository.ClienteRepository;
-//import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.MascotaRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -22,13 +27,13 @@ public class ClienteService {
     private MascotaRepository mascotaRepository;
 
     @Transactional
-    public void agregarMascota(int clienteId, Mascota mascota) {
+    public void agregarMascota(Long clienteId, Mascota mascota) {
         Cliente cliente = clienteRepository.findByCedula(clienteId);
 
         // Si la mascota ya existe en la base de datos, solo actualiza el vínculo
         if (mascota.getId() != null) {
             Mascota existingMascota = mascotaRepository.findById(mascota.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Mascota no encontrada con ID: "));
+                .orElseThrow(() -> new NotPetFoundException(0L));
             existingMascota.setNombre(mascota.getNombre());
             existingMascota.setRaza(mascota.getRaza());
             existingMascota.setEdad(mascota.getEdad());
@@ -36,23 +41,21 @@ public class ClienteService {
             existingMascota.setEnfermedad(mascota.getEnfermedad());
             existingMascota.setFoto(mascota.getFoto());
             existingMascota.setEstado(mascota.getEstado());
-            mascota = existingMascota; // Usar la instancia existente
+            mascota = existingMascota; 
         } else {
-            mascota.setIdCliente(cliente);
+            mascota.setCliente(cliente);
         }
-        mascota.setIdCliente(cliente);
+        mascota.setCliente(cliente);
         mascotaRepository.save(mascota);
-        //cliente.getMascotas().add(mascota);
-        //clienteRepository.save(cliente);
     }
 
     @Transactional
     public void eliminarMascota(Long clienteId, Long mascotaId) {
         Cliente cliente = clienteRepository.findById(clienteId)
-            .orElseThrow(() -> new EntityNotFoundException("Cliente no encontrado con ID: " + clienteId));
+            .orElseThrow(() -> new NotClientFoundException(clienteId));
 
         Mascota mascota = mascotaRepository.findById(mascotaId)
-            .orElseThrow(() -> new EntityNotFoundException("Mascota no encontrada con ID: " + mascotaId));
+            .orElseThrow(() -> new NotClientFoundException(clienteId));
 
         cliente.getMascotas().remove(mascota);
         clienteRepository.save(cliente);
@@ -60,12 +63,12 @@ public class ClienteService {
     }
     
     public Cliente obtenerCliente(Long id){
-        Optional<Cliente> auxCliente = clienteRepository.findById(id);
-        Cliente cliente = auxCliente.get(); 
+        Cliente cliente = clienteRepository.findByCedula(id); 
         return cliente;
     }
 
-    public Cliente obtenerClientePorCedula(Integer cedula){
+    public Cliente obtenerClientePorCedula(Long cedula){
+        // Cliente cliente = clienteRepository.findByCedula(cedula);
         return clienteRepository.findByCedula(cedula);
     }
 
@@ -73,14 +76,29 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
 
-    public void agregarCliente(Cliente cliente){
-        clienteRepository.save(cliente);
-    }
-
     public Collection<Cliente> mostrarTodos(){
         return clienteRepository.findAll();
     }
+
+    public void add(Cliente cliente){
+        if(clienteRepository.findByCedula(cliente.getCedula()) != null){
+            throw new ClientExistingException(cliente.getCedula());
+        } else{
+            clienteRepository.save(cliente);
+        }
+    }
+
+    // public void editarCliente(Cliente cliente){
+    //     clienteRepository.deleteById(cliente.getCedula());
+    // }
+
     public void update(Cliente cliente){
         clienteRepository.save(cliente);
+        // Cliente clienteExistente = clienteRepository.findByCedula(cliente.getCedula());
+        // if (clienteExistente != null && !clienteExistente.getId().equals(cliente.getId())) {
+        //     throw new ClientUpdatingException(cliente.getCedula());
+        // } else {
+        //     clienteRepository.save(cliente);
+        // }
     }
 }

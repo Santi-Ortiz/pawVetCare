@@ -5,20 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Admin;
 
-//import java.util.*;
-
 @Repository
-public interface AdminRepository extends JpaRepository<Admin,Long>{} 
-/*public class AdminRepository{
+public interface AdminRepository extends JpaRepository<Admin,Long>{
+    public Admin findByUsuario(String usuario);
+} 
 
-
-    private Map<String, String> data = new HashMap<>();
-
-    public AdminRepository() {
-        data.put("admin", "admin");
-    }
-
-
-
-
-}*/
