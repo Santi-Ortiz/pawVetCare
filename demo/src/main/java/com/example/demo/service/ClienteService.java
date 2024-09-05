@@ -68,13 +68,10 @@ public class ClienteService {
     }
 
     public Cliente obtenerClientePorCedula(Long cedula){
-        Cliente cliente = clienteRepository.findByCedula(cedula);
+        // Cliente cliente = clienteRepository.findByCedula(cedula);
 
-        if(cliente != null){
-            return clienteRepository.findByCedula(cedula);
-        } else {    
-            throw new NotClientFoundException(cedula);
-        }
+        return clienteRepository.findByCedula(cedula);
+        
     }
 
     public void eliminarCliente(Long id){
