@@ -47,7 +47,7 @@ public class AdminController {
       }
 
     // Método para redirigir al ID específico
-    @GetMapping("/busqueda")
+    @GetMapping("/busqueda/mascota")
     public String redirectToMascota(@RequestParam("id") Long id) {
         return "redirect:/admin/mascotas/" + id;
  
@@ -76,6 +76,14 @@ public class AdminController {
         model.addAttribute("clientes", adminService.SearchAllClients());
         model.addAttribute("cliente", new Cliente());
         return "admin_mostrarTodosClientes";
+    }
+
+    // http://localhost:8090/admin/clientes/todos
+    @GetMapping("/clientes/todos")
+    public String mostrarClientesTodosAdmin(Model model){
+        model.addAttribute("clientes", adminService.SearchAllClients());
+        model.addAttribute("cliente", new Cliente());
+        return "admin_ClientesTodos";
     }
 
     // http://localhost:8090/admin/cliente/{id}

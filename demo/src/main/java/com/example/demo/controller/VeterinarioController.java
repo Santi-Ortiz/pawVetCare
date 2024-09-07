@@ -50,7 +50,7 @@ public class VeterinarioController {
     }
 
     // Método para redirigir al ID específico
-    @GetMapping("/busqueda")
+    @GetMapping("/busqueda/mascota")
     public String redirectToMascota(@RequestParam("id") Long id) {
         return "redirect:/veterinario/mascotas/" + id;
  
@@ -71,6 +71,14 @@ public class VeterinarioController {
         model.addAttribute("clientes", adminService.SearchAllClients());
         model.addAttribute("cliente", new Cliente());
         return "vet_mostrarTodosClientes";
+    }
+
+    // http://localhost:8090/veterinario/clientes/todos    
+    @GetMapping("/clientes/todos")
+    public String mostrarClientesTodosAdmin(Model model){
+        model.addAttribute("clientes", adminService.SearchAllClients());
+        model.addAttribute("cliente", new Cliente());
+        return "vet_ClientesTodos";
     }
 
     // http://localhost:8090/admin/cliente/{id}

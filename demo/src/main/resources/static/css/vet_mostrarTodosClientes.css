@@ -717,6 +717,66 @@ body {
     background-color: #E6CECE;
 }
 
+.buscador-input {
+    padding: 10px;
+    width: 150px;
+    font-family: Poppins;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 8px;
+}
+
+.buscador-button {
+    padding: 8px 16px;
+    background-color: #C09181;
+    font-family: Poppins;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500; 
+    cursor: pointer;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.buscador-button:hover {
+    background-color: #F3F4F6;
+    color: black;
+}
+
+.todas-button {
+    position:absolute;
+    margin-top: 120px;
+    margin-left: 1390px;
+    padding: 8px 16px;
+    background-color: #9095A0;
+    font-family: Poppins;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500; 
+    cursor: pointer;
+    transition: width 0.3s, background-color 0.3s, margin-left 0.3s;
+}
+
+.todas-button:hover {
+    background-color: #F3F4F6;
+    color: black;
+}
+
+.titulo-buscador {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buscador-form {
+    position: absolute; 
+    top: 240px; 
+    left: 930px;
+    display: flex;
+    align-items: center;
+}
+
 .footer {
     position: fixed;
     background: #171A1FFF;
