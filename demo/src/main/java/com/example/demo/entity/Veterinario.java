@@ -27,7 +27,6 @@ public class Veterinario{
 
     private String foto;
 
-    private Integer numAtenciones;
 
     private String nombre;
 
@@ -41,11 +40,10 @@ public class Veterinario{
     public Veterinario (){
     }
 
-    public Veterinario(Long cedula, String contrasena, String foto, Integer numAtenciones, String nombre, Especialidad especialidad) {
+    public Veterinario(Long cedula, String contrasena, String foto, String nombre, Especialidad especialidad) {
         this.cedula = cedula;
         this.contrasena = contrasena;
         this.foto = foto;
-        this.numAtenciones = numAtenciones;
         this.nombre = nombre;
         this.especialidad = especialidad;
     }
@@ -80,14 +78,6 @@ public class Veterinario{
 
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-
-    public Integer getNumAtenciones() {
-        return numAtenciones;
-    }
-
-    public void setNumAtenciones(Integer numAtenciones) {
-        this.numAtenciones = numAtenciones;
     }
 
     public String getNombre() {

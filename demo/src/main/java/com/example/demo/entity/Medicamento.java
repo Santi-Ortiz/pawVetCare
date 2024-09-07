@@ -16,13 +16,18 @@ public class Medicamento {
     private String descripcion;
     private Date fecha_vencimiento;
     
+    @ManyToOne
+    @JoinColumn(name = "tratamiento_id", referencedColumnName = "id")
+    private Tratamiento tratamiento;
+
     public Medicamento() {
     }
 
-    public Medicamento(String nombre, String descripcion, Date fecha_vencimiento) {
+    public Medicamento(String nombre, String descripcion, Date fecha_vencimiento, Tratamiento tratamiento) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha_vencimiento = fecha_vencimiento;
+        this.tratamiento = tratamiento;
     }
 
     public Integer getId() {
@@ -57,4 +62,12 @@ public class Medicamento {
         this.fecha_vencimiento = fecha_vencimiento;
     }
 
+    public Tratamiento getTratamiento() {
+        return tratamiento;
+    }
+
+    public void setTratamiento(Tratamiento tratamiento) {
+        this.tratamiento = tratamiento;
+    }
+    
 }

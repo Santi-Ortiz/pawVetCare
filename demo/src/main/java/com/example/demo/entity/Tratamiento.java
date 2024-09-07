@@ -22,10 +22,15 @@ public class Tratamiento{
     @JoinColumn(name = "mascota_id")  
     private Mascota mascota;
 
-    public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota) {
+    @OneToMany(mappedBy = "tratamiento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Medicamento> medicamentos;
+
+
+    public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota, List<Medicamento> medicamentos) {
     this.fecha = fecha;
     this.veterinario = veterinario;
     this.mascota = mascota;
+    this.medicamentos = medicamentos;
     }
 
     public Integer getId() {
@@ -59,4 +64,15 @@ public class Tratamiento{
     public void setMascota(Mascota mascota) {
         this.mascota = mascota;
     }
+
+    public List<Medicamento> getMedicamentos() {
+        return medicamentos;
+    }
+
+    public void setMedicamentos(List<Medicamento> medicamentos) {
+        this.medicamentos = medicamentos;
+    }
+    
+
+
 }

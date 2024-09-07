@@ -14,23 +14,23 @@
 <body>
     <!-- Barra superior con navegación -->
     <header class="top-bar">
-        <a th:href="@{/landing/home}">
+        <a th:href="@{/}">
             <img src="../assets/isologoAzul.png" alt="Logo Azul">
         </a>
         <!-- Botones de navegación -->
         <nav>
             <nav>
                 <div class="header-menu">
-                    <a th:href="@{/landing/home}" class="header-menu-item">DASHBOARD<div class="indicator"></div></a>
+                    <a th:href="@{/}" class="header-menu-item">DASHBOARD<div class="indicator"></div></a>
                     <a th:href="@{/admin/mascotas}" class="header-menu-item">MASCOTAS<div class="indicator"></div></a>
-                    <a th:href="@{/landing/contacto}" class="header-menu-item">VETERINARIOS</a>
+                    <a th:href="@{/contacto}" class="header-menu-item">VETERINARIOS</a>
                     <a th:href="@{/admin/clientes}" class="header-menu-item selected">CLIENTES<div class="indicator"></div></a>
-                    <a th:href="@{/landing/contacto}" class="header-menu-item">INICIALIZACIÓN</a>
+                    <a th:href="@{/contacto}" class="header-menu-item">INICIALIZACIÓN</a>
                 </div>
             </nav>
         </nav>
         <div class="button-container">
-            <a th:href="@{/landing/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
+            <a th:href="@{/}" class="buttonSinCuenta">CERRAR SESIÓN</a>
         </div>
     </header>
     <section class = "content">

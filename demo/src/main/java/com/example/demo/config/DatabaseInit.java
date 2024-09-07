@@ -39,7 +39,7 @@ public class DatabaseInit implements ApplicationRunner{
         //Creación especialidad 
         especialidadRepository.save(new Especialidad("Cardiologo"));
         //Creación veterinario
-        veterinarioRepository.save(new Veterinario(1234L,"vet", "https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg", 2, "Monica", especialidadRepository.findById(1L).get()));
+        veterinarioRepository.save(new Veterinario(1234L,"vet", "https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg", "Monica", especialidadRepository.findById(1L).get()));
         //Creación clientes
         clienteRepository.save(new Cliente(1235062800L,"Dylan Richardson","facilisis.vitae@aol.org",309878724L));
         clienteRepository.save(new Cliente(1640900910L,"Ignatius Compton","quis@yahoo.org",362491489L));

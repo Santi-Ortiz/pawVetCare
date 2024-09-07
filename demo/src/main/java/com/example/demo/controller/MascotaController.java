@@ -81,8 +81,8 @@ public class MascotaController {
             clienteService.agregarMascota(cliente.getCedula(), mascota);
             return "redirect:/admin/mascotas";
          } else {
-            return"";
-            // throw new NotClientIdExistInPet(cedula);
+            //return"";
+            throw new NotClientIdExistInPet(cedula);
          }
      }
 
