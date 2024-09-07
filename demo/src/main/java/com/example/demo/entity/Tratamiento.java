@@ -25,7 +25,8 @@ public class Tratamiento{
     @OneToMany(mappedBy = "tratamiento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Medicamento> medicamentos;
 
-
+    public Tratamiento(){}
+    
     public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota, List<Medicamento> medicamentos) {
     this.fecha = fecha;
     this.veterinario = veterinario;

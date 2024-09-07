@@ -3,6 +3,9 @@ package com.example.demo.controller;
 public class NotClientIdExistInPet extends RuntimeException{
     private Long cedula;
 
+    public NotClientIdExistInPet() {
+    }
+
     public NotClientIdExistInPet(Long cedula) {
        this.cedula = cedula;
     }

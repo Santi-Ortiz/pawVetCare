@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import com.example.demo.entity.Medicamento;
+import com.example.demo.entity.Tratamiento;
 import com.example.demo.repository.MedicamentoRepository;
 
 @Service
@@ -14,8 +15,8 @@ public class MedicamentoService {
     private MedicamentoRepository medicamentoRepository;
 
     @Transactional
-    public void agregarMedicamento(String nombre, String descripcion, Date fecha_vencimiento){
-        medicamentoRepository.save(new Medicamento(nombre, descripcion, fecha_vencimiento));
+    public void agregarMedicamento(String nombre, String descripcion, Date fecha_vencimiento, Tratamiento tratamiento){
+        medicamentoRepository.save(new Medicamento(nombre, descripcion, fecha_vencimiento, tratamiento));
     }
 
     @Transactional

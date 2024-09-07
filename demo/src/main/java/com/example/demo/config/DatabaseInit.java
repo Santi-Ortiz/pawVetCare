@@ -1,5 +1,8 @@
 package com.example.demo.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -9,6 +12,7 @@ import com.example.demo.entity.Admin;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Mascota;
+import com.example.demo.entity.Tratamiento;
 import com.example.demo.entity.Veterinario;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClienteRepository;
@@ -34,12 +38,13 @@ public class DatabaseInit implements ApplicationRunner{
 
     @Override
     public void run(ApplicationArguments args) throws Exception{
+        List<Tratamiento> tratamientos = new ArrayList<>();
         //Creación administrador
         adminRepository.save(new Admin("admin","admin"));
         //Creación especialidad 
         especialidadRepository.save(new Especialidad("Cardiologo"));
         //Creación veterinario
-        veterinarioRepository.save(new Veterinario(1234L,"vet", "https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg", "Monica", especialidadRepository.findById(1L).get()));
+        veterinarioRepository.save(new Veterinario(1234L,"vet", "https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg", "Monica", especialidadRepository.findById(1L).get(), tratamientos));
         //Creación clientes
         clienteRepository.save(new Cliente(1235062800L,"Dylan Richardson","facilisis.vitae@aol.org",309878724L));
         clienteRepository.save(new Cliente(1640900910L,"Ignatius Compton","quis@yahoo.org",362491489L));

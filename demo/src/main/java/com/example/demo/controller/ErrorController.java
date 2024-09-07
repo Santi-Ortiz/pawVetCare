@@ -34,6 +34,6 @@ public class ErrorController {
     @ExceptionHandler(NotClientIdExistInPet.class)
     public String errorClienteIdEnMascota(Model model, NotClientIdExistInPet ex){
         model.addAttribute("cedula", ex.getCedula());
-        return "errorClienteIdEnMascota";
+        return "errorClienteIdNoExistenteMascota";  
     }
 }

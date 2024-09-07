@@ -40,12 +40,13 @@ public class Veterinario{
     public Veterinario (){
     }
 
-    public Veterinario(Long cedula, String contrasena, String foto, String nombre, Especialidad especialidad) {
+    public Veterinario(Long cedula, String contrasena, String foto, String nombre, Especialidad especialidad, List<Tratamiento> tratamientos) {
         this.cedula = cedula;
         this.contrasena = contrasena;
         this.foto = foto;
         this.nombre = nombre;
         this.especialidad = especialidad;
+        this.tratamientos = tratamientos;
     }
 
     public Integer getId() {
