@@ -99,5 +99,26 @@ public class AdminController {
 
         return "admin_MostrarInfoCliente";
     }
+
+    // http://localhost:8090/admin/veterinarios
+    @GetMapping("/veterinarios")
+    public String mostrarVeterinariosAdmin(Model model){
+        
+        return "admin_mostrarTodosVeterinarios";
+    }
+
+    // http://localhost:8090/admin/dashboard
+    @GetMapping("/dashboard")
+    public String mostrarDasboardAdmin(Model model){
+        
+        return "admin_Dashboard";
+    }
+
+    // http://localhost:8090/admin/inicizalizacion
+    @GetMapping("/inicializacion")
+    public String mostrarInicializacionAdmin(Model model){
+        
+        return "admin_Inicizalizacion";
+    }
  
 }
