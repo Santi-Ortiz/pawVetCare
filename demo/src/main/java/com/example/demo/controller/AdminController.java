@@ -103,8 +103,34 @@ public class AdminController {
     // http://localhost:8090/admin/veterinarios
     @GetMapping("/veterinarios")
     public String mostrarVeterinariosAdmin(Model model){
-        
+        model.addAttribute("mascota", new Mascota());
+        model.addAttribute("mascotas", adminService.SearchAllPets());
         return "admin_mostrarTodosVeterinarios";
+    }
+
+    // http://localhost:8090/admin/veterinarios
+    @GetMapping("/veterinarios/todos")
+    public String mostrarVeterinariosTodosAdmin(Model model){
+        model.addAttribute("mascota", new Mascota());
+        model.addAttribute("mascotas", adminService.SearchAllPets());
+        return "admin_VeterinariosTodos";
+    }
+
+    // http://localhost:8090/admin/veterinarios/{id}
+    @GetMapping("/veterinarios/{id}")
+    public String mostrarInfoVeterinarioAdmin(Model model, @PathVariable("id") Long identificacion){
+
+        Mascota mascota = adminService.SearchPetById(identificacion);
+        System.out.println("ID recibido: " + mascota.getCliente().getCedula());
+
+        if(mascota != null){
+            model.addAttribute("mascota", mascota); 
+            model.addAttribute("clienteCedula", mascota.getCliente().getCedula());
+        } else {
+            throw new NotPetFoundException(identificacion);
+        } 
+
+        return "admin_mostrarInfoVeterinario";
     }
 
     // http://localhost:8090/admin/dashboard
@@ -118,7 +144,7 @@ public class AdminController {
     @GetMapping("/inicializacion")
     public String mostrarInicializacionAdmin(Model model){
         
-        return "admin_Inicizalizacion";
+        return "admin_Inicializacion";
     }
  
 }
