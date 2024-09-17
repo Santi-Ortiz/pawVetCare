@@ -43,8 +43,37 @@ public class DatabaseInit implements ApplicationRunner{
         adminRepository.save(new Admin("admin","admin"));
         //Creación especialidad 
         especialidadRepository.save(new Especialidad("Cardiologo"));
+        especialidadRepository.save(new Especialidad("Nutrición"));
+        especialidadRepository.save(new Especialidad("Dermatología"));
+        especialidadRepository.save(new Especialidad("Oncología"));
+        especialidadRepository.save(new Especialidad("Toxicología"));
+        especialidadRepository.save(new Especialidad("Parasitología"));
+        especialidadRepository.save(new Especialidad("Neurología"));
+        especialidadRepository.save(new Especialidad("cirugía"));
+        
         //Creación veterinario
         veterinarioRepository.save(new Veterinario(1234L,"vet", "https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg", "Monica", especialidadRepository.findById(1L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(43254180L,"starwars12","https://thispersondoesnotexist.com/","Jemima Gray",especialidadRepository.findById(7L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(96163795L,"starfish09","https://thispersondoesnotexist.com/","Thor Frederick",especialidadRepository.findById(2L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(32642703L,"treehouse22","https://thispersondoesnotexist.com/","Keefe Riley",especialidadRepository.findById(5L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(90165479L,"pizza987","https://thispersondoesnotexist.com/","Ingrid Mcleod",especialidadRepository.findById(8L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(74300275L,"fastcar11","https://thispersondoesnotexist.com/","Leah Wise",especialidadRepository.findById(3L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(87970491L,"pizza987","https://thispersondoesnotexist.com/","Chaney Henderson",especialidadRepository.findById(6L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(64065468L,"blackcat1","https://thispersondoesnotexist.com/","Lisandra Colon",especialidadRepository.findById(3L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(11561735L,"chocolate1","https://thispersondoesnotexist.com/","Kelly Turner",especialidadRepository.findById(1L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(42862669L,"hello12345","https://thispersondoesnotexist.com/","Ahmed Chambers",especialidadRepository.findById(5L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(27244108L,"riverflow8","https://thispersondoesnotexist.com/","Quon Barr",especialidadRepository.findById(8L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(90483162L,"secretpass1","https://thispersondoesnotexist.com/","Alexis Pearson",especialidadRepository.findById(2L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(27200200L,"starfish09","https://thispersondoesnotexist.com/","Sierra Holder",especialidadRepository.findById(3L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(94915788L,"summer2020","https://thispersondoesnotexist.com/","Kiara Aguilar",especialidadRepository.findById(7L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(29085408L,"flower1234","https://thispersondoesnotexist.com/","Martena Sims",especialidadRepository.findById(6L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(86992950L,"blackcat1","https://thispersondoesnotexist.com/","Brennan Middleton",especialidadRepository.findById(1L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(38792985L,"computer98","https://thispersondoesnotexist.com/","Karleigh Hubbard",especialidadRepository.findById(4L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(85472043L,"rainbow22","https://thispersondoesnotexist.com/","Nehru Dunn",especialidadRepository.findById(8L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(81045486L,"magicstar1","https://thispersondoesnotexist.com/","Austin Porter",especialidadRepository.findById(1L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(46069761L,"1q2w3e4r","https://thispersondoesnotexist.com/","Michael Tyson",especialidadRepository.findById(1L).get(), tratamientos));
+        veterinarioRepository.save(new Veterinario(56409545L,"fireball2021","https://thispersondoesnotexist.com/","Nasim Orr",especialidadRepository.findById(4L).get(), tratamientos));
+
         //Creación clientes
         clienteRepository.save(new Cliente(1235062800L,"Dylan Richardson","facilisis.vitae@aol.org",309878724L));
         clienteRepository.save(new Cliente(1640900910L,"Ignatius Compton","quis@yahoo.org",362491489L));
