@@ -26,7 +26,7 @@ public class VeterinarioService {
 
     @Transactional
     public void agregarVet(Long cedula, String contrasena, String foto, String nombre, Especialidad especialidad, List<Tratamiento> tratamientos){
-      veterinarioRepository.save(new Veterinario(cedula, contrasena, foto, nombre, especialidad, tratamientos));
+      veterinarioRepository.save(new Veterinario(cedula, contrasena, foto, nombre, especialidad));
     }
 
     @Transactional

@@ -23,15 +23,14 @@ public class Tratamiento{
     private Mascota mascota;
 
     @OneToMany(mappedBy = "tratamiento", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Medicamento> medicamentos;
+    private List<Medicamento> medicamentos = new ArrayList<>();
 
     public Tratamiento(){}
     
-    public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota, List<Medicamento> medicamentos) {
-    this.fecha = fecha;
-    this.veterinario = veterinario;
-    this.mascota = mascota;
-    this.medicamentos = medicamentos;
+    public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota) {
+        this.fecha = fecha;
+        this.veterinario = veterinario;
+        this.mascota = mascota;
     }
 
     public Integer getId() {

@@ -20,7 +20,7 @@ public class TratamientoService {
 
     @Transactional
     public void agregarTratamiento (Date fecha, Veterinario veterinario, Mascota mascota, List<Medicamento> medicamentos){
-        repoTratamientoRepository.save(new Tratamiento(fecha, veterinario, mascota, medicamentos));
+        repoTratamientoRepository.save(new Tratamiento(fecha, veterinario, mascota));
     }
 
     @Transactional

@@ -1,11 +1,5 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
 import java.util.*;
 
 import jakarta.persistence.*;
@@ -35,18 +29,17 @@ public class Veterinario{
     private Especialidad especialidad;
 
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tratamiento> tratamientos;
+    private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Veterinario (){
     }
 
-    public Veterinario(Long cedula, String contrasena, String foto, String nombre, Especialidad especialidad, List<Tratamiento> tratamientos) {
+    public Veterinario(Long cedula, String contrasena, String foto, String nombre, Especialidad especialidad) {
         this.cedula = cedula;
         this.contrasena = contrasena;
         this.foto = foto;
         this.nombre = nombre;
         this.especialidad = especialidad;
-        this.tratamientos = tratamientos;
     }
 
     public Integer getId() {

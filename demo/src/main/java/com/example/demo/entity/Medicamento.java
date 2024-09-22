@@ -30,6 +30,12 @@ public class Medicamento {
         this.tratamiento = tratamiento;
     }
 
+    public Medicamento(String nombre, String descripcion, Date fecha_vencimiento) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fecha_vencimiento = fecha_vencimiento;
+    }
+
     public Integer getId() {
         return id;
     }
