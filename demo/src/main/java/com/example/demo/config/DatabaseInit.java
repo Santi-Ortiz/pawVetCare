@@ -235,16 +235,16 @@ public class DatabaseInit implements ApplicationRunner{
         mascotaRepository.save(new Mascota("Honey","BordeCollie",8,4.0F,"Pancreatitis","https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Border_collie_canon.jpg/480px-Border_collie_canon.jpg",true,clienteRepository.findByCedula(1430947461L)));
         
         //Creación Medicamentos
-        medicamentoRepository.save(new Medicamento("Antibiótico A", "Medicamento para infecciones bacterianas", java.sql.Date.valueOf("2025-03-15")));
-        medicamentoRepository.save(new Medicamento("Desparasitante B", "Desparasitante interno para perros y gatos", java.sql.Date.valueOf("2024-09-30")));
-        medicamentoRepository.save(new Medicamento("Vacuna Rabia", "Vacuna contra la rabia, una dosis anual", java.sql.Date.valueOf("2026-01-10")));
-        medicamentoRepository.save(new Medicamento("Analgésico C", "Analgésico de uso veterinario para el dolor agudo", java.sql.Date.valueOf("2023-12-01")));
-        medicamentoRepository.save(new Medicamento("Antipulgas D", "Solución tópica para control de pulgas", java.sql.Date.valueOf("2025-05-20")));
-        medicamentoRepository.save(new Medicamento("Antiinflamatorio E", "Medicamento antiinflamatorio no esteroide", java.sql.Date.valueOf("2024-07-15")));
-        medicamentoRepository.save(new Medicamento("Vacuna Moquillo", "Vacuna para prevenir el moquillo canino", java.sql.Date.valueOf("2026-02-25")));
-        medicamentoRepository.save(new Medicamento("Suplemento Articular", "Suplemento para mejorar la salud de las articulaciones", java.sql.Date.valueOf("2025-09-11")));
-        medicamentoRepository.save(new Medicamento("Antibiótico F", "Antibiótico de amplio espectro", java.sql.Date.valueOf("2024-11-05")));
-        medicamentoRepository.save(new Medicamento("Colirio Ocular", "Colirio para tratamiento de infecciones oculares", java.sql.Date.valueOf("2023-10-22")));
+        medicamentoRepository.save(new Medicamento("Antibiótico A", 20.5D, 20.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Desparasitante B", 10.5D, 10.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Vacuna Rabia", 5.5D, 5.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Analgésico C", 4.5D, 4.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Antipulgas D", 6.5D, 6.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Antiinflamatorio E", 8.5D, 8.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Vacuna Moquillo", 9.5D, 9.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Suplemento Articular", 6.5D, 6.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Antibiótico F", 8.5D, 8.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Colirio Ocular", 6.5D, 6.5D, 10, 0));
         
         //Creación tratamiento
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-08-15"), veterinarioRepository.findById((long)1).get(), mascotaRepository.findById((long)1).get()));

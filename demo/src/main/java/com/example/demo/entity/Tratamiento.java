@@ -22,8 +22,9 @@ public class Tratamiento{
     @JoinColumn(name = "mascota_id")  
     private Mascota mascota;
 
-    @OneToMany(mappedBy = "tratamiento", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Medicamento> medicamentos = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "medicamento_id")
+    private Medicamento medicamento;
 
     public Tratamiento(){}
     
@@ -31,6 +32,13 @@ public class Tratamiento{
         this.fecha = fecha;
         this.veterinario = veterinario;
         this.mascota = mascota;
+    }
+
+    public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota, Medicamento medicamento) {
+        this.fecha = fecha;
+        this.veterinario = veterinario;
+        this.mascota = mascota;
+        this.medicamento = medicamento;
     }
 
     public Integer getId() {
@@ -65,14 +73,13 @@ public class Tratamiento{
         this.mascota = mascota;
     }
 
-    public List<Medicamento> getMedicamentos() {
-        return medicamentos;
+    public Medicamento getMedicamento() {
+        return medicamento;
     }
 
-    public void setMedicamentos(List<Medicamento> medicamentos) {
-        this.medicamentos = medicamentos;
+    public void setMedicamento(Medicamento medicamento) {
+        this.medicamento = medicamento;
     }
+
     
-
-
 }
