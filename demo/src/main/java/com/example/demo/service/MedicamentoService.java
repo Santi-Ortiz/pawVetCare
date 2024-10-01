@@ -15,8 +15,8 @@ public class MedicamentoService {
     private MedicamentoRepository medicamentoRepository;
 
     @Transactional
-    public void agregarMedicamento(String nombre, String descripcion, Date fecha_vencimiento, Tratamiento tratamiento){
-        medicamentoRepository.save(new Medicamento(nombre, descripcion, fecha_vencimiento, tratamiento));
+    public void agregarMedicamento(String nombre, Double precio_venta, Double precio_compra, Integer unidades_disponibles, Integer unidades_vendidas){
+        medicamentoRepository.save(new Medicamento(nombre, precio_venta, precio_compra, unidades_disponibles, unidades_vendidas));
     }
 
     @Transactional
