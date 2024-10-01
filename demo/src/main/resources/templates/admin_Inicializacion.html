@@ -17,7 +17,6 @@
         <a th:href="@{/}">
             <img th:src="@{/assets/isologoAzul.png}" alt="Logo Azul">
         </a>
-        <!-- Botones de navegación -->
         <nav>
             <div class="header-menu">
                 <a th:href="@{/admin/dashboard}" class="header-menu-item">DASHBOARD</a>
@@ -32,9 +31,16 @@
         </div>
     </header> 
     <section class = "content">
-        
-    </section> 
-    <!-- Pie de página -->
+        <p class="primerTitulo">Hola, admin</p>
+        <p class="segundoTitulo">Inicializa los datos de los medicamentos:</p> 
+        <div class="container-inicializar">
+            <p class="subTitulo">Sube el archivo excel</p>
+            <div class="container">
+                <input type="file" (change)="onFileSelected($event)" accept=".xlsx" class="file-input">
+            </div>
+            <button class="subir-btn" (click)="onUpload()">Subir</button>
+          </div>
+    </section>    
     <footer class="footer">
         <img th:src="@{/assets/logotipoRosado.png}" alt="Logo Footer">
         <p class="direccion">Carrera 13 #140 - 52A, Bogotá, Colombia</p>
