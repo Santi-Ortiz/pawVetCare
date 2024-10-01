@@ -22,6 +22,7 @@ import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.MedicamentoRepository;
 import com.example.demo.repository.TratamientoRepository;
 import com.example.demo.repository.VeterinarioRepository;
+import com.example.demo.service.ExcelReaderService;
 
 import jakarta.transaction.Transactional;
 
@@ -42,6 +43,9 @@ public class DatabaseInit implements ApplicationRunner{
     TratamientoRepository tratamientoRepository;
     @Autowired
     MedicamentoRepository medicamentoRepository;
+
+    @Autowired
+    ExcelReaderService excelService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception{
@@ -257,6 +261,12 @@ public class DatabaseInit implements ApplicationRunner{
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-03-12"), veterinarioRepository.findById((long)3).get(), mascotaRepository.findById((long)3).get()));
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-01-15"), veterinarioRepository.findById((long)4).get(), mascotaRepository.findById((long)4).get()));
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-11-22"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)5).get()));
+
+        /*List<Medicamento> medicamentosTemp = excelService.obtenerInfoMedicamento("demo/src/main/resources/files/MEDICAMENTOS_VETERINARIA.xlsx");
+
+        for(Medicamento medicamento: medicamentosTemp){
+            medicamentoRepository.save(medicamento);
+        } */
 
     }
 }
