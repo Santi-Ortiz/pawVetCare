@@ -78,10 +78,12 @@ public class ExcelReaderService {
                 }
                 medicamentos.add(medicamento);
 
-            } 
+            }
+            return medicamentos; 
         } catch (IOException e) {
             e.getStackTrace();
         }
+        return medicamentos;
     }
 
 }
