@@ -1,5 +1,8 @@
 package com.example.demo.config;
 
+import java.io.FileInputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -262,11 +265,19 @@ public class DatabaseInit implements ApplicationRunner{
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-01-15"), veterinarioRepository.findById((long)4).get(), mascotaRepository.findById((long)4).get()));
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-11-22"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)5).get()));
 
-        /*List<Medicamento> medicamentosTemp = excelService.obtenerInfoMedicamento("demo/src/main/resources/files/MEDICAMENTOS_VETERINARIA.xlsx");
+        String filePath = "demo/src/main/resources/files/MEDICAMENTOS_VETERINARIA.xlsx";
 
-        for(Medicamento medicamento: medicamentosTemp){
-            medicamentoRepository.save(medicamento);
-        } */
+        try (InputStream inputStream = new FileInputStream(new File(filePath))) {
+            
+            List<Medicamento> listaMedicamentos = excelService.obtenerInfoMedicamento(inputStream);
+
+            for (Medicamento medicamento : listaMedicamentos) {
+                medicamentoRepository.save(medicamento);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

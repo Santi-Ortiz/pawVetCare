@@ -48,82 +48,43 @@ public class ExcelReaderService {
         }
     }
 
-    /*public List<Medicamento> obtenerInfoMedicamento(InputStream InputStream) {
+    public List<Medicamento> obtenerInfoMedicamento(InputStream inputStream) {
         List<Medicamento> medicamentos = new ArrayList<>();
-
-        try{
-            XSSFWorkbook workbook = new XSSFWorkbook(InputStream);
+    
+        try {
+            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
             XSSFSheet sheet = workbook.getSheetAt(0);
-            
+    
             int rowIndex = 0;
-            for(Row row : sheet){
-                if(rowIndex != 0){
+            for (Row row : sheet) {
+                if (rowIndex == 0) { 
                     rowIndex++;
                     continue;
                 }
-                Iterator<Cell> cellIterator = row.cellIterator();
-                int cellIndex = 0;
+    
                 Medicamento medicamento = new Medicamento();
-                while(cellIterator.hasNext()){
-                    Cell cell = cellIterator.next();
+                int cellIndex = 0;
+    
+                for (Cell cell : row) {
                     switch (cellIndex) {
                         case 0 -> medicamento.setNombre(cell.getStringCellValue());
                         case 1 -> medicamento.setPrecio_venta(cell.getNumericCellValue());
                         case 2 -> medicamento.setPrecio_compra(cell.getNumericCellValue());
                         case 3 -> medicamento.setUnidades_disponibles((int) cell.getNumericCellValue());
                         case 4 -> medicamento.setUnidades_vendidas((int) cell.getNumericCellValue());
-                        default -> {}
                     }
                     cellIndex++;
                 }
                 medicamentos.add(medicamento);
-
             }
-            return medicamentos; 
+            workbook.close();
+            return medicamentos;
         } catch (IOException e) {
-            e.getStackTrace();
-        }
-        return medicamentos;
-    }*/
-
-    public List<Medicamento> obtenerInfoMedicamento(String filePath) {
-        List<Medicamento> medicamentos = new ArrayList<>();
-
-        try{
-            FileInputStream file = new FileInputStream(new File(filePath));
-            Workbook workbook = WorkbookFactory.create(file);
-            Sheet sheet = workbook.getSheetAt(0);
-
-            int rowIndex = 0;
-            for(Row row : sheet){
-                if(rowIndex != 0){
-                    rowIndex++;
-                    continue;
-                }
-                Iterator<Cell> cellIterator = row.cellIterator();
-                int cellIndex = 1;
-                Medicamento medicamento = new Medicamento();
-                while(cellIterator.hasNext()){
-                    Cell cell = cellIterator.next();
-                    switch (cellIndex) {
-                        case 1 -> medicamento.setNombre(cell.getStringCellValue());
-                        case 2 -> medicamento.setPrecio_venta(cell.getNumericCellValue());
-                        case 3 -> medicamento.setPrecio_compra(cell.getNumericCellValue());
-                        case 4 -> medicamento.setUnidades_disponibles((int) cell.getNumericCellValue());
-                        case 5 -> medicamento.setUnidades_vendidas((int) cell.getNumericCellValue());
-                        default -> {}
-                    }
-                    cellIndex++;
-                }
-                medicamentos.add(medicamento);
-
-            }
-            return medicamentos; 
-        } catch (IOException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
         return medicamentos;
     }
+    
 
 }
 
