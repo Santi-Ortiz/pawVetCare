@@ -3,6 +3,8 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="mascota")
 public class Mascota{
@@ -17,10 +19,12 @@ public class Mascota{
     private String foto;
     private Boolean estado;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 

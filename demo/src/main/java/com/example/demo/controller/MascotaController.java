@@ -1,15 +1,20 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
@@ -17,8 +22,10 @@ import com.example.demo.service.MascotaService;
 import com.example.demo.service.ClienteService;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@Controller
+/*@Controller
 @RequestMapping("/mascota")
 public class MascotaController {
 
@@ -46,7 +53,7 @@ public class MascotaController {
      }*/
 
      // http://localhost:8090/mascota/find/
-     @GetMapping("/find/{id}")
+     /*@GetMapping("/find/{id}")
      public String mostrarInfoMascota(Model model, @PathVariable("id") Long identificacion ){
 
          Mascota mascota = mascotaService.SearchById(identificacion);
@@ -202,4 +209,139 @@ public class MascotaController {
          return "redirect:/admin/mascotas"; 
    }
 
+}*/
+@RestController
+@RequestMapping("/api/mascota")
+public class MascotaController {
+
+    @Autowired
+    MascotaService mascotaService;
+   
+    @Autowired
+    ClienteService clienteService;
+
+    // Obtener todas las mascotas (Administradores)
+    @GetMapping("/admin/todas")
+    public ResponseEntity<List<Mascota>> mostrarMascotas() {
+        List<Mascota> mascotas = mascotaService.SearchAll();
+        return ResponseEntity.ok(mascotas);
+    }
+
+    // Obtener todas las mascotas (Veterinarios)
+    @GetMapping("/vet/todas")
+    public ResponseEntity<List<Mascota>> mostrarMascotasVet() {
+        List<Mascota> mascotas = mascotaService.SearchAll();
+        return ResponseEntity.ok(mascotas);
+    }
+
+    // Obtener una mascota por ID
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Mascota> mostrarInfoMascota(@PathVariable("id") Long identificacion) {
+        Mascota mascota = mascotaService.SearchById(identificacion);
+        if (mascota != null) {
+            return ResponseEntity.ok(mascota);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); 
+        }
+    }
+
+    // Agregar una nueva mascota (Administrador)
+    @PostMapping("/admin/agregar")
+    public ResponseEntity<String> agregarMascota(@RequestBody Mascota mascota, @RequestParam("idCliente") Long cedula) {
+        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
+        if (cliente != null) {
+            mascota.setCliente(cliente);
+            mascotaService.add(mascota);
+            clienteService.agregarMascota(cliente.getCedula(), mascota);
+            return ResponseEntity.ok("Mascota agregada exitosamente");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado");
+        }
+    }
+
+    // Agregar una nueva mascota (Veterinario)
+    @PostMapping("/vet/agregar")
+    public ResponseEntity<String> agregarMascotaVet(@RequestBody Mascota mascota, @RequestParam("idCliente") Long cedula) {
+        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
+        if (cliente != null) {
+            mascota.setCliente(cliente);
+            mascotaService.add(mascota);
+            clienteService.agregarMascota(cliente.getCedula(), mascota);
+            return ResponseEntity.ok("Mascota agregada exitosamente");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado");
+        }
+    }
+
+    // Eliminar una mascota (Administrador)
+    @DeleteMapping("/admin/delete/{id}")
+    public ResponseEntity<String> borrarMascota(@PathVariable("id") Long identificacion) {
+        mascotaService.borrarMascota(identificacion);
+        return ResponseEntity.ok("Mascota eliminada exitosamente");
+    }
+
+    // Eliminar una mascota (Veterinario)
+    @DeleteMapping("/vet/delete/{id}")
+    public ResponseEntity<String> borrarMascotaVet(@PathVariable("id") Long identificacion) {
+        mascotaService.borrarMascota(identificacion);
+        return ResponseEntity.ok("Mascota eliminada exitosamente");
+    }
+
+    // Actualizar una mascota (Veterinario)
+    @PutMapping("/update/vet/{id}")
+    public ResponseEntity<Void> actualizarMascotaVet(@PathVariable("id") Long identificacion, @RequestBody Mascota nuevaMascota) {
+        Mascota mascotaExistente = mascotaService.SearchById(identificacion);
+        if (mascotaExistente != null) {
+            mascotaExistente.setNombre(nuevaMascota.getNombre());
+            mascotaExistente.setRaza(nuevaMascota.getRaza());
+            mascotaExistente.setEdad(nuevaMascota.getEdad());
+            mascotaExistente.setPeso(nuevaMascota.getPeso());
+            mascotaExistente.setEnfermedad(nuevaMascota.getEnfermedad());
+            mascotaExistente.setEstado(nuevaMascota.getEstado());
+            mascotaExistente.setFoto(nuevaMascota.getFoto());
+
+            if (mascotaExistente.getTratamientos() == null) {
+                mascotaExistente.setTratamientos(new ArrayList<>());
+            }
+            mascotaExistente.getTratamientos().clear();
+            if (nuevaMascota.getTratamientos() != null) {
+                mascotaExistente.getTratamientos().addAll(nuevaMascota.getTratamientos());
+            }
+
+            mascotaService.updateMascota(mascotaExistente);
+            return ResponseEntity.ok().build();  // Devuelve solo el estado 200 OK
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Devuelve solo el estado 404 Not Found
+        }
+    }
+
+    // Actualizar una mascota (Administrador)
+    @PutMapping("/update/ad/{id}")
+    public ResponseEntity<Void> actualizarMascotaAdmin(@PathVariable("id") Long identificacion, @RequestBody Mascota nuevaMascota) {
+        Mascota mascotaExistente = mascotaService.SearchById(identificacion);
+        if (mascotaExistente != null) {
+            mascotaExistente.setNombre(nuevaMascota.getNombre());
+            mascotaExistente.setRaza(nuevaMascota.getRaza());
+            mascotaExistente.setEdad(nuevaMascota.getEdad());
+            mascotaExistente.setPeso(nuevaMascota.getPeso());
+            mascotaExistente.setEnfermedad(nuevaMascota.getEnfermedad());
+            mascotaExistente.setEstado(nuevaMascota.getEstado());
+            mascotaExistente.setFoto(nuevaMascota.getFoto());
+
+            if (mascotaExistente.getTratamientos() == null) {
+                mascotaExistente.setTratamientos(new ArrayList<>());
+            }
+            mascotaExistente.getTratamientos().clear();
+            if (nuevaMascota.getTratamientos() != null) {
+                mascotaExistente.getTratamientos().addAll(nuevaMascota.getTratamientos());
+            }
+
+            mascotaService.updateMascota(mascotaExistente);
+            return ResponseEntity.ok().build();  // Devuelve solo el estado 200 OK
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Devuelve solo el estado 404 Not Found
+        }
+    }
 }
+
+
