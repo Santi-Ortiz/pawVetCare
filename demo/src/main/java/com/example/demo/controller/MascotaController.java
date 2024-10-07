@@ -289,7 +289,7 @@ public class MascotaController {
 
     // Actualizar una mascota (Veterinario)
     @PutMapping("/update/vet/{id}")
-    public ResponseEntity<String> actualizarMascotaVet(@PathVariable("id") Long identificacion, @RequestBody Mascota nuevaMascota) {
+    public ResponseEntity<Void> actualizarMascotaVet(@PathVariable("id") Long identificacion, @RequestBody Mascota nuevaMascota) {
         Mascota mascotaExistente = mascotaService.SearchById(identificacion);
         if (mascotaExistente != null) {
             mascotaExistente.setNombre(nuevaMascota.getNombre());
@@ -309,15 +309,15 @@ public class MascotaController {
             }
 
             mascotaService.updateMascota(mascotaExistente);
-            return ResponseEntity.ok("Mascota actualizada exitosamente");
+            return ResponseEntity.ok().build();  // Devuelve solo el estado 200 OK
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mascota no encontrada");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Devuelve solo el estado 404 Not Found
         }
     }
 
     // Actualizar una mascota (Administrador)
     @PutMapping("/update/ad/{id}")
-    public ResponseEntity<String> actualizarMascota(@PathVariable("id") Long identificacion, @RequestBody Mascota nuevaMascota) {
+    public ResponseEntity<Void> actualizarMascotaAdmin(@PathVariable("id") Long identificacion, @RequestBody Mascota nuevaMascota) {
         Mascota mascotaExistente = mascotaService.SearchById(identificacion);
         if (mascotaExistente != null) {
             mascotaExistente.setNombre(nuevaMascota.getNombre());
@@ -337,9 +337,9 @@ public class MascotaController {
             }
 
             mascotaService.updateMascota(mascotaExistente);
-            return ResponseEntity.ok("Mascota actualizada exitosamente");
+            return ResponseEntity.ok().build();  // Devuelve solo el estado 200 OK
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mascota no encontrada");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Devuelve solo el estado 404 Not Found
         }
     }
 }
