@@ -3,7 +3,9 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="mascota")
@@ -19,9 +21,9 @@ public class Mascota{
     private String foto;
     private Boolean estado;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    @JsonIgnore
     private Cliente cliente;
 
     @JsonIgnore

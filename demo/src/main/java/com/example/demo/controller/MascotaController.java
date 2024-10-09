@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
+import com.example.demo.entity.MascotaDTO;
 import com.example.demo.service.MascotaService;
 import com.example.demo.service.ClienteService;
 
@@ -235,14 +236,28 @@ public class MascotaController {
 
     // Obtener una mascota por ID
     @GetMapping("/find/{id}")
-    public ResponseEntity<Mascota> mostrarInfoMascota(@PathVariable("id") Long identificacion) {
+    public ResponseEntity<MascotaDTO> mostrarInfoMascota(@PathVariable("id") Long identificacion) {
         Mascota mascota = mascotaService.SearchById(identificacion);
         if (mascota != null) {
-            return ResponseEntity.ok(mascota);
+            // Mapear la entidad Mascota a MascotaDTO
+            MascotaDTO mascotaDTO = new MascotaDTO();
+            mascotaDTO.setId(mascota.getId());
+            mascotaDTO.setNombre(mascota.getNombre());
+            mascotaDTO.setRaza(mascota.getRaza());
+            mascotaDTO.setEdad(mascota.getEdad());
+            mascotaDTO.setPeso(mascota.getPeso());
+            mascotaDTO.setEnfermedad(mascota.getEnfermedad());
+            mascotaDTO.setFoto(mascota.getFoto());
+            mascotaDTO.setEstado(mascota.getEstado());
+            mascotaDTO.setCedulaCliente(mascota.getCliente() != null ? mascota.getCliente().getCedula() : null);
+            // Convertir los tratamientos si es necesario
+
+            return ResponseEntity.ok(mascotaDTO);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); 
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
 
     // Agregar una nueva mascota (Administrador)
     @PostMapping("/admin/agregar")
@@ -304,7 +319,7 @@ public class MascotaController {
 
     // Actualizar una mascota (Veterinario)
     @PutMapping("/update/vet/{id}")
-    public ResponseEntity<Void> actualizarMascotaVet(@PathVariable("id") Long identificacion, @RequestBody Mascota nuevaMascota) {
+    public ResponseEntity<MascotaDTO> actualizarMascotaVet(@PathVariable("id") Long identificacion, @RequestBody Mascota nuevaMascota) {
         Mascota mascotaExistente = mascotaService.SearchById(identificacion);
         if (mascotaExistente != null) {
             mascotaExistente.setNombre(nuevaMascota.getNombre());
@@ -315,24 +330,28 @@ public class MascotaController {
             mascotaExistente.setEstado(nuevaMascota.getEstado());
             mascotaExistente.setFoto(nuevaMascota.getFoto());
 
-            if (mascotaExistente.getTratamientos() == null) {
-                mascotaExistente.setTratamientos(new ArrayList<>());
-            }
-            mascotaExistente.getTratamientos().clear();
-            if (nuevaMascota.getTratamientos() != null) {
-                mascotaExistente.getTratamientos().addAll(nuevaMascota.getTratamientos());
-            }
-
             mascotaService.updateMascota(mascotaExistente);
-            return ResponseEntity.ok().build();  // Devuelve solo el estado 200 OK
+
+            MascotaDTO mascotaDTO = new MascotaDTO();
+            mascotaDTO.setId(mascotaExistente.getId());
+            mascotaDTO.setNombre(mascotaExistente.getNombre());
+            mascotaDTO.setRaza(mascotaExistente.getRaza());
+            mascotaDTO.setEdad(mascotaExistente.getEdad());
+            mascotaDTO.setPeso(mascotaExistente.getPeso());
+            mascotaDTO.setEnfermedad(mascotaExistente.getEnfermedad());
+            mascotaDTO.setFoto(mascotaExistente.getFoto());
+            mascotaDTO.setEstado(mascotaExistente.getEstado());
+            mascotaDTO.setCedulaCliente(mascotaExistente.getCliente().getCedula());
+
+            return ResponseEntity.ok(mascotaDTO);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Devuelve solo el estado 404 Not Found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
     // Actualizar una mascota (Administrador)
     @PutMapping("/update/ad/{id}")
-    public ResponseEntity<Void> actualizarMascotaAdmin(@PathVariable("id") Long identificacion, @RequestBody Mascota nuevaMascota) {
+    public ResponseEntity<MascotaDTO> actualizarMascotaAdmin(@PathVariable("id") Long identificacion, @RequestBody Mascota nuevaMascota) {
         Mascota mascotaExistente = mascotaService.SearchById(identificacion);
         if (mascotaExistente != null) {
             mascotaExistente.setNombre(nuevaMascota.getNombre());
@@ -343,20 +362,25 @@ public class MascotaController {
             mascotaExistente.setEstado(nuevaMascota.getEstado());
             mascotaExistente.setFoto(nuevaMascota.getFoto());
 
-            if (mascotaExistente.getTratamientos() == null) {
-                mascotaExistente.setTratamientos(new ArrayList<>());
-            }
-            mascotaExistente.getTratamientos().clear();
-            if (nuevaMascota.getTratamientos() != null) {
-                mascotaExistente.getTratamientos().addAll(nuevaMascota.getTratamientos());
-            }
-
             mascotaService.updateMascota(mascotaExistente);
-            return ResponseEntity.ok().build();  // Devuelve solo el estado 200 OK
+
+            MascotaDTO mascotaDTO = new MascotaDTO();
+            mascotaDTO.setId(mascotaExistente.getId());
+            mascotaDTO.setNombre(mascotaExistente.getNombre());
+            mascotaDTO.setRaza(mascotaExistente.getRaza());
+            mascotaDTO.setEdad(mascotaExistente.getEdad());
+            mascotaDTO.setPeso(mascotaExistente.getPeso());
+            mascotaDTO.setEnfermedad(mascotaExistente.getEnfermedad());
+            mascotaDTO.setFoto(mascotaExistente.getFoto());
+            mascotaDTO.setEstado(mascotaExistente.getEstado());
+            mascotaDTO.setCedulaCliente(mascotaExistente.getCliente().getCedula());
+
+            return ResponseEntity.ok(mascotaDTO);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Devuelve solo el estado 404 Not Found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
 }
 
 
