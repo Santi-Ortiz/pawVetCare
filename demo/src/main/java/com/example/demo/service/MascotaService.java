@@ -41,17 +41,30 @@ public class MascotaService {
 
 
     @Transactional
-    public void borrarMascota(Long id){
-       
-        Mascota mascota = mascotaRepository.findById(id).orElseThrow(() -> new NotPetFoundException(id));
+    public void borrarMascota(Long id) {
+        // Buscar la mascota por su ID
+        Mascota mascota = mascotaRepository.findById(id).orElseThrow();
 
+        // Obtener el cliente asociado a la mascota
         Cliente cliente = mascota.getCliente();
         if (cliente != null) {
+            // Eliminar la mascota de la lista del cliente
             cliente.getMascotas().remove(mascota);
         }
 
+        // Actualizar los tratamientos asociados
+        List<Tratamiento> tratamientos = mascota.getTratamientos();
+        for (Tratamiento tratamiento : tratamientos) {
+            tratamiento.setMascota(null); // Establecer la referencia a mascota en null
+        }
+        
+        // Guardar los tratamientos actualizados
+        repoTratamiento.saveAll(tratamientos);
+        
+        // Eliminar la mascota
         mascotaRepository.delete(mascota);
     }
+
 
     @Transactional
     public void updateMascota(Mascota mascota){

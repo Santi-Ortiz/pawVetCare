@@ -3,6 +3,10 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="mascota")
 public class Mascota{
@@ -19,9 +23,11 @@ public class Mascota{
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    @JsonIgnore
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "mascota")
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Mascota(){

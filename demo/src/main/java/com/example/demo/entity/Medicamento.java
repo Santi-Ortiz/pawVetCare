@@ -13,16 +13,20 @@ public class Medicamento {
     private Integer id;
 
     private String nombre;
-    private String descripcion;
-    private Date fecha_vencimiento;
-    
+    private Double precio_venta;
+    private Double precio_compra;
+    private Integer unidades_disponibles;
+    private Integer unidades_vendidas;
+
     public Medicamento() {
     }
 
-    public Medicamento(String nombre, String descripcion, Date fecha_vencimiento) {
+    public Medicamento(String nombre, Double precio_venta, Double precio_compra, Integer unidades_disponibles, Integer unidades_vendidas) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fecha_vencimiento = fecha_vencimiento;
+        this.precio_compra = precio_compra;
+        this.precio_venta = precio_venta;
+        this.unidades_disponibles = unidades_disponibles;
+        this.unidades_vendidas = unidades_vendidas;
     }
 
     public Integer getId() {
@@ -41,20 +45,35 @@ public class Medicamento {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Double getPrecio_venta() {
+        return precio_venta;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setPrecio_venta(Double precio_venta) {
+        this.precio_venta = precio_venta;
     }
 
-    public Date getFecha_vencimiento() {
-        return fecha_vencimiento;
+    public Double getPrecio_compra() {
+        return precio_compra;
     }
 
-    public void setFecha_vencimiento(Date fecha_vencimiento) {
-        this.fecha_vencimiento = fecha_vencimiento;
+    public void setPrecio_compra(Double precio_compra) {
+        this.precio_compra = precio_compra;
     }
 
+    public Integer getUnidades_disponibles() {
+        return unidades_disponibles;
+    }
+
+    public void setUnidades_disponibles(Integer unidades_disponibles) {
+        this.unidades_disponibles = unidades_disponibles;
+    }
+
+    public Integer getUnidades_vendidas() {
+        return unidades_vendidas;
+    }
+
+    public void setUnidades_vendidas(Integer unidades_vendidas) {
+        this.unidades_vendidas = unidades_vendidas;
+    } 
 }

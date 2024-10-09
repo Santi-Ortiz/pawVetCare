@@ -1,5 +1,11 @@
 package com.example.demo.config;
 
+import java.io.FileInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -9,12 +15,17 @@ import com.example.demo.entity.Admin;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Mascota;
+import com.example.demo.entity.Medicamento;
+import com.example.demo.entity.Tratamiento;
 import com.example.demo.entity.Veterinario;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.EspecialidadRepository;
 import com.example.demo.repository.MascotaRepository;
+import com.example.demo.repository.MedicamentoRepository;
+import com.example.demo.repository.TratamientoRepository;
 import com.example.demo.repository.VeterinarioRepository;
+import com.example.demo.service.ExcelReaderService;
 
 import jakarta.transaction.Transactional;
 
@@ -31,15 +42,52 @@ public class DatabaseInit implements ApplicationRunner{
     VeterinarioRepository veterinarioRepository;
     @Autowired
     EspecialidadRepository especialidadRepository;
+    @Autowired
+    TratamientoRepository tratamientoRepository;
+    @Autowired
+    MedicamentoRepository medicamentoRepository;
+
+    @Autowired
+    ExcelReaderService excelService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception{
+
         //Creación administrador
         adminRepository.save(new Admin("admin","admin"));
         //Creación especialidad 
         especialidadRepository.save(new Especialidad("Cardiologo"));
+        especialidadRepository.save(new Especialidad("Nutrición"));
+        especialidadRepository.save(new Especialidad("Dermatología"));
+        especialidadRepository.save(new Especialidad("Oncología"));
+        especialidadRepository.save(new Especialidad("Toxicología"));
+        especialidadRepository.save(new Especialidad("Parasitología"));
+        especialidadRepository.save(new Especialidad("Neurología"));
+        especialidadRepository.save(new Especialidad("cirugía"));
+        
         //Creación veterinario
-        veterinarioRepository.save(new Veterinario(1234L,"vet", "https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg", 2, "Monica", especialidadRepository.findById(1L).get()));
+        veterinarioRepository.save(new Veterinario(1234L,"vet", "https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg", "Monica", especialidadRepository.findById(1L).get()));
+        veterinarioRepository.save(new Veterinario(43254180L,"starwars12","https://thispersondoesnotexist.com/","Jemima Gray",especialidadRepository.findById(7L).get()));
+        veterinarioRepository.save(new Veterinario(96163795L,"starfish09","https://thispersondoesnotexist.com/","Thor Frederick",especialidadRepository.findById(2L).get()));
+        veterinarioRepository.save(new Veterinario(32642703L,"treehouse22","https://thispersondoesnotexist.com/","Keefe Riley",especialidadRepository.findById(5L).get()));
+        veterinarioRepository.save(new Veterinario(90165479L,"pizza987","https://thispersondoesnotexist.com/","Ingrid Mcleod",especialidadRepository.findById(8L).get()));
+        veterinarioRepository.save(new Veterinario(74300275L,"fastcar11","https://thispersondoesnotexist.com/","Leah Wise",especialidadRepository.findById(3L).get()));
+        veterinarioRepository.save(new Veterinario(87970491L,"pizza987","https://thispersondoesnotexist.com/","Chaney Henderson",especialidadRepository.findById(6L).get()));
+        veterinarioRepository.save(new Veterinario(64065468L,"blackcat1","https://thispersondoesnotexist.com/","Lisandra Colon",especialidadRepository.findById(3L).get()));
+        veterinarioRepository.save(new Veterinario(11561735L,"chocolate1","https://thispersondoesnotexist.com/","Kelly Turner",especialidadRepository.findById(1L).get()));
+        veterinarioRepository.save(new Veterinario(42862669L,"hello12345","https://thispersondoesnotexist.com/","Ahmed Chambers",especialidadRepository.findById(5L).get()));
+        veterinarioRepository.save(new Veterinario(27244108L,"riverflow8","https://thispersondoesnotexist.com/","Quon Barr",especialidadRepository.findById(8L).get()));
+        veterinarioRepository.save(new Veterinario(90483162L,"secretpass1","https://thispersondoesnotexist.com/","Alexis Pearson",especialidadRepository.findById(2L).get()));
+        veterinarioRepository.save(new Veterinario(27200200L,"starfish09","https://thispersondoesnotexist.com/","Sierra Holder",especialidadRepository.findById(3L).get()));
+        veterinarioRepository.save(new Veterinario(94915788L,"summer2020","https://thispersondoesnotexist.com/","Kiara Aguilar",especialidadRepository.findById(7L).get()));
+        veterinarioRepository.save(new Veterinario(29085408L,"flower1234","https://thispersondoesnotexist.com/","Martena Sims",especialidadRepository.findById(6L).get()));
+        veterinarioRepository.save(new Veterinario(86992950L,"blackcat1","https://thispersondoesnotexist.com/","Brennan Middleton",especialidadRepository.findById(1L).get()));
+        veterinarioRepository.save(new Veterinario(38792985L,"computer98","https://thispersondoesnotexist.com/","Karleigh Hubbard",especialidadRepository.findById(4L).get()));
+        veterinarioRepository.save(new Veterinario(85472043L,"rainbow22","https://thispersondoesnotexist.com/","Nehru Dunn",especialidadRepository.findById(8L).get()));
+        veterinarioRepository.save(new Veterinario(81045486L,"magicstar1","https://thispersondoesnotexist.com/","Austin Porter",especialidadRepository.findById(1L).get()));
+        veterinarioRepository.save(new Veterinario(46069761L,"1q2w3e4r","https://thispersondoesnotexist.com/","Michael Tyson",especialidadRepository.findById(1L).get()));
+        veterinarioRepository.save(new Veterinario(56409545L,"fireball2021","https://thispersondoesnotexist.com/","Nasim Orr",especialidadRepository.findById(4L).get()));
+
         //Creación clientes
         clienteRepository.save(new Cliente(1235062800L,"Dylan Richardson","facilisis.vitae@aol.org",309878724L));
         clienteRepository.save(new Cliente(1640900910L,"Ignatius Compton","quis@yahoo.org",362491489L));
@@ -192,6 +240,44 @@ public class DatabaseInit implements ApplicationRunner{
         mascotaRepository.save(new Mascota("Rex","Boxer",9,20.0F,"Insuficiencia","https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/HYPSO.JPG/169px-HYPSO.JPG",true,clienteRepository.findByCedula(1873486866L)));
         mascotaRepository.save(new Mascota("Daisy","Husky",6,30.0F,"Traqueobronquitis","https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Siberian-husky.jpg/480px-Siberian-husky.jpg",true,clienteRepository.findByCedula(1410113199L)));
         mascotaRepository.save(new Mascota("Honey","BordeCollie",8,4.0F,"Pancreatitis","https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Border_collie_canon.jpg/480px-Border_collie_canon.jpg",true,clienteRepository.findByCedula(1430947461L)));
+        
+        //Creación Medicamentos
+        medicamentoRepository.save(new Medicamento("Antibiótico A", 20.5D, 20.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Desparasitante B", 10.5D, 10.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Vacuna Rabia", 5.5D, 5.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Analgésico C", 4.5D, 4.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Antipulgas D", 6.5D, 6.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Antiinflamatorio E", 8.5D, 8.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Vacuna Moquillo", 9.5D, 9.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Suplemento Articular", 6.5D, 6.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Antibiótico F", 8.5D, 8.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Colirio Ocular", 6.5D, 6.5D, 10, 0));
+        
+        //Creación tratamiento
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-08-15"), veterinarioRepository.findById((long)1).get(), mascotaRepository.findById((long)1).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-09-10"), veterinarioRepository.findById((long)2).get(), mascotaRepository.findById((long)2).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-01-05"), veterinarioRepository.findById((long)3).get(), mascotaRepository.findById((long)3).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-02-20"), veterinarioRepository.findById((long)1).get(), mascotaRepository.findById((long)4).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2023-12-01"), veterinarioRepository.findById((long)4).get(), mascotaRepository.findById((long)1).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-07-07"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)2).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-10-11"), veterinarioRepository.findById((long)2).get(), mascotaRepository.findById((long)5).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-03-12"), veterinarioRepository.findById((long)3).get(), mascotaRepository.findById((long)3).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-01-15"), veterinarioRepository.findById((long)4).get(), mascotaRepository.findById((long)4).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-11-22"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)5).get()));
+
+        String filePath = "demo/src/main/resources/files/MEDICAMENTOS_VETERINARIA.xlsx";
+
+        try (InputStream inputStream = new FileInputStream(new File(filePath))) {
+            
+            List<Medicamento> listaMedicamentos = excelService.obtenerInfoMedicamento(inputStream);
+
+            for (Medicamento medicamento : listaMedicamentos) {
+                medicamentoRepository.save(medicamento);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

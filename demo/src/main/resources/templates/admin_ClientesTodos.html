@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
+    <title>PawVetCare | Ver todos los clientes</title>
+    <!-- Enlace al archivo CSS específico para la página -->
+    <link rel="stylesheet" th:href="@{/css/admin_ClientesTodos.css}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/imagotipoAzul.png}" type="image/x-icon">
+</head>
+<body>
+    <!-- Barra superior con navegación -->
+    <header class="top-bar">
+        <a th:href="@{/}">
+            <img th:src="@{/assets/isologoAzul.png}" alt="Logo Azul">
+        </a>
+        <!-- Botones de navegación -->
+        <nav>
+            <nav>
+                <div class="header-menu">
+                    <a th:href="@{/admin/dashboard}" class="header-menu-item">DASHBOARD<div class="indicator"></div></a>
+                    <a th:href="@{/admin/mascotas}" class="header-menu-item">MASCOTAS</a>
+                    <a th:href="@{/admin/veterinarios}" class="header-menu-item">VETERINARIOS</a>
+                    <a th:href="@{/admin/clientes}" class="header-menu-item selected">CLIENTES<div class="indicator"></div> </a>
+                    <a th:href="@{/admin/inicializacion}" class="header-menu-item">INICIALIZACIÓN</a>
+                </div>
+            </nav>
+        </nav>
+        <div class="button-container">
+            <a th:href="@{/}" class="buttonSinCuenta">CERRAR SESIÓN</a>
+        </div>
+    </header>
+    <section class="content">
+        <p class="primerTitulo">Hola, admin</p>
+        <p class="segundoTitulo">Navega por los clientes:</p>  
+        <div class="clientes-container" id="clientesContainer">
+            <div class="cliente-item" th:each="cliente : ${clientes}">
+                <div class="cliente-info">
+                    <div class="info-itemNombre">
+                        <small class="info-title">Nombre:</small>
+                        <label class="info-label" th:text="${cliente.nombre}"></label>
+                    </div>
+                    <div class="info-itemCedula">
+                        <small class="info-title">Cédula:</small>
+                        <label class="info-label" th:text="${cliente.cedula}"></label>
+                    </div>
+                    <div class="info-itemCorreo">
+                        <small class="info-title">Correo:</small>
+                        <label class="info-label" th:text="${cliente.correo}"></label>
+                    </div>
+                    <div class="info-itemCelular">
+                        <small class="info-title">Celular:</small>
+                        <label class="info-label" th:text="${cliente.celular}"></label>
+                    </div>
+                    <a class="info-button" th:href="@{/veterinario/cliente/{cedula}(cedula=${cliente.cedula})}">+ Info</a>
+                </div>
+            </div>
+        </div>
+        <!-- Controles de paginación -->
+        <div class="pagination">
+            <button id="prevPage" onclick="changePage(-1)">Anterior</button>
+            <span id="pageNumber">1</span>
+            <button id="nextPage" onclick="changePage(1)">Siguiente</button>
+        </div>         
+    </section>    
+    <!-- Pie de página -->
+    <footer class="footer">
+        <img th:src="@{/assets/logotipoRosado.png}" alt="Logo Footer">
+        <p class="direccion">Carrera 13 #140 - 52A, Bogotá, Colombia</p>
+        <p class="correo">info@petvetc.com</p>
+        <p class="derechos">© 2024 SLM, Inc.</p>
+        <div class="iconos">
+            <img th:src="@{/assets/iconos.png}" alt="Iconos Footer">
+        </div>
+    </footer>
+</body>
+<script th:src="@{/js/admin_ClientesTodos.js}"></script>
+</html>

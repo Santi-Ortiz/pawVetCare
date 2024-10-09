@@ -2,6 +2,10 @@ package com.example.demo.entity;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 
@@ -19,6 +23,8 @@ public class Cliente{
     private String correo;
     private Long celular;
 
+   
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas;
 

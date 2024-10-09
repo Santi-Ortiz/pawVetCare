@@ -2,6 +2,9 @@ package com.example.demo.entity;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,18 +17,34 @@ public class Tratamiento{
 
     private Date fecha;
     
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "veterinario_id") 
     private Veterinario veterinario;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mascota_id")  
     private Mascota mascota;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "medicamento_id")
+    private Medicamento medicamento;
+
+    public Tratamiento(){}
+    
     public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota) {
-    this.fecha = fecha;
-    this.veterinario = veterinario;
-    this.mascota = mascota;
+        this.fecha = fecha;
+        this.veterinario = veterinario;
+        this.mascota = mascota;
+    }
+
+    public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota, Medicamento medicamento) {
+        this.fecha = fecha;
+        this.veterinario = veterinario;
+        this.mascota = mascota;
+        this.medicamento = medicamento;
     }
 
     public Integer getId() {
@@ -59,4 +78,14 @@ public class Tratamiento{
     public void setMascota(Mascota mascota) {
         this.mascota = mascota;
     }
+
+    public Medicamento getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicamento(Medicamento medicamento) {
+        this.medicamento = medicamento;
+    }
+
+    
 }

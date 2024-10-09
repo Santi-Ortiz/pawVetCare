@@ -14,7 +14,7 @@
 <body>
     <!-- Barra superior con navegación -->
     <header class="top-bar">
-        <a th:href="@{/landing/home}">
+        <a th:href="@{/}">
             <img src="../assets/isologoAzul.png" alt="Logo Azul">
         </a>
         <!-- Botones de navegación -->
@@ -27,13 +27,13 @@
             </nav>
         </nav>
         <div class="button-container">
-            <a th:href="@{/landing/home}" class="buttonSinCuenta">CERRAR SESIÓN</a>
+            <a th:href="@{/}" class="buttonSinCuenta">CERRAR SESIÓN</a>
         </div>
     </header>
     <section class = "content">
-        <p class="primerTitulo">Hola vet,</p>
+        <p class="primerTitulo">Hola, vet</p>
         <p class="segundoTitulo">Aquí están todas las mascotas:</p>
-        <form th:action="@{/veterinario/busqueda}" class="buscador-form" >
+        <form th:action="@{/veterinario/busqueda/mascota}" class="buscador-form" >
             <input type="text" name="id" class="buscador-input" placeholder="Buscar por ID">
             <button type="submit" class="buscador-button">Buscar</button>
         </form>

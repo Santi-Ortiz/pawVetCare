@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PawVetCare: la mejor clínica veterinaria para el cuidado de tus mascotas en Bogotá.">
+    <title>PawVetCare | Inicialización</title>
+    <!-- Enlace al archivo CSS específico para la página -->
+    <link rel="stylesheet" th:href="@{/css/admin_Inicializacion.css}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/assets/imagotipoAzul.png}" type="image/x-icon">
+</head>
+<body>
+    <!-- Barra superior con navegación -->  
+    <header class="top-bar">
+        <a th:href="@{/}">
+            <img th:src="@{/assets/isologoAzul.png}" alt="Logo Azul">
+        </a>
+        <nav>
+            <div class="header-menu">
+                <a th:href="@{/admin/dashboard}" class="header-menu-item">DASHBOARD</a>
+                <a th:href="@{/admin/mascotas}" class="header-menu-item">MASCOTAS</a>
+                <a th:href="@{/admin/veterinarios}" class="header-menu-item">VETERINARIOS</a>
+                <a th:href="@{/admin/clientes}" class="header-menu-item">CLIENTES</a>
+                <a th:href="@{/admin/inicializacion}" class="header-menu-item  selected">INICIALIZACIÓN<div class="indicator"></div></a>
+            </div>
+        </nav>
+        <div class="button-container">
+            <a th:href="@{/}" class="buttonSinCuenta">CERRAR SESIÓN</a>
+        </div>
+    </header> 
+    <section class = "content">
+        <p class="primerTitulo">Hola, admin</p>
+        <p class="segundoTitulo">Inicializa los datos de los medicamentos:</p> 
+        <div class="container-inicializar">
+            <p class="subTitulo">Sube el archivo excel</p>
+            <div class="container">
+                <input type="file" (change)="onFileSelected($event)" accept=".xlsx" class="file-input">
+            </div>
+            <button class="subir-btn" (click)="onUpload()">Subir</button>
+          </div>
+    </section>    
+    <footer class="footer">
+        <img th:src="@{/assets/logotipoRosado.png}" alt="Logo Footer">
+        <p class="direccion">Carrera 13 #140 - 52A, Bogotá, Colombia</p>
+        <p class="correo">info@petvetc.com</p>
+        <p class="derechos">© 2024 SLM, Inc.</p>
+        <div class="iconos">
+            <img th:src="@{/assets/iconos.png}" alt="Iconos Footer">
+        </div>
+    </footer>
+</body>
+<script th:src="@{/js/admin_Inicializacion.js}"></script>
+</html>

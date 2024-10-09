@@ -27,26 +27,35 @@ public class ClienteService {
     private MascotaRepository mascotaRepository;
 
     @Transactional
-    public void agregarMascota(Long clienteId, Mascota mascota) {
+    public boolean agregarMascota(Long clienteId, Mascota mascota) {
         Cliente cliente = clienteRepository.findByCedula(clienteId);
+        
+        if (cliente == null) {
+            return false; 
+        }
 
-        // Si la mascota ya existe en la base de datos, solo actualiza el vínculo
         if (mascota.getId() != null) {
-            Mascota existingMascota = mascotaRepository.findById(mascota.getId())
-                .orElseThrow(() -> new NotPetFoundException(0L));
-            existingMascota.setNombre(mascota.getNombre());
-            existingMascota.setRaza(mascota.getRaza());
-            existingMascota.setEdad(mascota.getEdad());
-            existingMascota.setPeso(mascota.getPeso());
-            existingMascota.setEnfermedad(mascota.getEnfermedad());
-            existingMascota.setFoto(mascota.getFoto());
-            existingMascota.setEstado(mascota.getEstado());
-            mascota = existingMascota; 
+            Mascota existingMascota = mascotaRepository.findById(mascota.getId()).orElse(null);
+            
+            if (existingMascota != null) {
+                existingMascota.setNombre(mascota.getNombre());
+                existingMascota.setRaza(mascota.getRaza());
+                existingMascota.setEdad(mascota.getEdad());
+                existingMascota.setPeso(mascota.getPeso());
+                existingMascota.setEnfermedad(mascota.getEnfermedad());
+                existingMascota.setFoto(mascota.getFoto());
+                existingMascota.setEstado(mascota.getEstado());
+                mascota = existingMascota; 
+            } else {
+                return false;
+            }
         } else {
             mascota.setCliente(cliente);
         }
+
         mascota.setCliente(cliente);
         mascotaRepository.save(mascota);
+        return true;
     }
 
     @Transactional

@@ -1,12 +1,9 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
 import java.util.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
@@ -27,25 +24,25 @@ public class Veterinario{
 
     private String foto;
 
-    private Integer numAtenciones;
 
     private String nombre;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)  
     @JoinColumn(name = "especialidad_id")  
     private Especialidad especialidad;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tratamiento> tratamientos;
+    private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Veterinario (){
     }
 
-    public Veterinario(Long cedula, String contrasena, String foto, Integer numAtenciones, String nombre, Especialidad especialidad) {
+    public Veterinario(Long cedula, String contrasena, String foto, String nombre, Especialidad especialidad) {
         this.cedula = cedula;
         this.contrasena = contrasena;
         this.foto = foto;
-        this.numAtenciones = numAtenciones;
         this.nombre = nombre;
         this.especialidad = especialidad;
     }
@@ -80,14 +77,6 @@ public class Veterinario{
 
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-
-    public Integer getNumAtenciones() {
-        return numAtenciones;
-    }
-
-    public void setNumAtenciones(Integer numAtenciones) {
-        this.numAtenciones = numAtenciones;
     }
 
     public String getNombre() {
