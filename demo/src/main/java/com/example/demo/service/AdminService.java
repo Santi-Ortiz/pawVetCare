@@ -32,7 +32,7 @@ public class AdminService {
         if (optionalMascota.isPresent()) {
             return optionalMascota.get();
         } else {
-            throw new NotPetFoundException(id);
+            return new Mascota();
         }
     }
 

@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -247,17 +246,29 @@ public class MascotaController {
 
     // Agregar una nueva mascota (Administrador)
     @PostMapping("/admin/agregar")
-    public ResponseEntity<String> agregarMascota(@RequestBody Mascota mascota, @RequestParam("idCliente") Long cedula) {
-        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
-        if (cliente != null) {
-            mascota.setCliente(cliente);
-            mascotaService.add(mascota);
-            clienteService.agregarMascota(cliente.getCedula(), mascota);
-            return ResponseEntity.ok("Mascota agregada exitosamente");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado");
+    public ResponseEntity<Map<String, Object>> agregarMascota(@RequestBody Mascota mascota, @RequestParam("idCliente") Long cedula) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
+            if (cliente != null) {
+                mascota.setCliente(cliente);
+                mascotaService.add(mascota);
+                clienteService.agregarMascota(cliente.getCedula(), mascota);
+                
+                response.put("mensaje", "Mascota agregada exitosamente");
+                response.put("mascota", mascota);
+                return ResponseEntity.ok(response);
+            } else {
+                response.put("mensaje", "Cliente no encontrado");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            }
+        } catch (Exception e) {
+            response.put("mensaje", "Error al agregar la mascota");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
+
 
     // Agregar una nueva mascota (Veterinario)
     @PostMapping("/vet/agregar")
@@ -275,9 +286,13 @@ public class MascotaController {
 
     // Eliminar una mascota (Administrador)
     @DeleteMapping("/admin/delete/{id}")
-    public ResponseEntity<String> borrarMascota(@PathVariable("id") Long identificacion) {
+    public ResponseEntity<Map<String, String>> borrarMascota(@PathVariable("id") Long identificacion) {
         mascotaService.borrarMascota(identificacion);
-        return ResponseEntity.ok("Mascota eliminada exitosamente");
+    
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Mascota eliminada exitosamente");
+    
+        return ResponseEntity.ok(response);
     }
 
     // Eliminar una mascota (Veterinario)

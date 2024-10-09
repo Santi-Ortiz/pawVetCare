@@ -25,7 +25,7 @@ public class Mascota{
     private Cliente cliente;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "mascota")
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Mascota(){
