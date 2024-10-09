@@ -12,10 +12,12 @@ import com.example.demo.controller.NotPetFoundException;
 
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
-
+import com.example.demo.entity.Tratamiento;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.MascotaRepository;
+import com.example.demo.repository.TratamientoRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -25,6 +27,9 @@ public class ClienteService {
     
     @Autowired
     private MascotaRepository mascotaRepository;
+
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
 
     @Transactional
     public boolean agregarMascota(Long clienteId, Mascota mascota) {
@@ -83,26 +88,47 @@ public class ClienteService {
         
     }
 
+    @Transactional
     public void eliminarCliente(Long id){
-        clienteRepository.deleteById(id);
+    Cliente cliente = clienteRepository.findByCedula(id);
+
+    if (cliente != null) {
+       
+        for (Mascota mascota : cliente.getMascotas()) {
+            List<Tratamiento> tratamientos = mascota.getTratamientos();
+            for (Tratamiento tratamiento : tratamientos) {
+                tratamiento.setMascota(null); 
+                tratamientoRepository.save(tratamiento); 
+            }
+            
+            mascotaRepository.deleteById(mascota.getId());
+        }
+
+      
+        clienteRepository.deleteById(cliente.getId());
     }
+    }
+
 
     public Collection<Cliente> mostrarTodos(){
         return clienteRepository.findAll();
     }
 
-    public void add(Cliente cliente){
-        if(clienteRepository.findByCedula(cliente.getCedula()) != null){
+    @Transactional
+    public Cliente add(Cliente cliente) {
+        if (clienteRepository.findByCedula(cliente.getCedula()) != null) {
             throw new ClientExistingException(cliente.getCedula());
-        } else{
-            clienteRepository.save(cliente);
+        } else {
+            return clienteRepository.save(cliente);
         }
     }
+    
 
     // public void editarCliente(Cliente cliente){
     //     clienteRepository.deleteById(cliente.getCedula());
     // }
 
+    @Transactional
     public void update(Cliente cliente){
         //clienteRepository.save(cliente);
         Cliente clienteExistente = clienteRepository.findByCedula(cliente.getCedula());

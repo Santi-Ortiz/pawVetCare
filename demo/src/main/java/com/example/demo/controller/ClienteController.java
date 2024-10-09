@@ -194,12 +194,24 @@ public class ClienteController {
         return ResponseEntity.ok(clientes);
     }
 
+    // Obtener un cliente por su ID
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Cliente> obtenerClientePorId(@PathVariable("id") Long id) {
+        Cliente cliente = clienteService.obtenerCliente(id);
+        if (cliente != null) {
+            return ResponseEntity.ok(cliente); // Retorna el cliente encontrado
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Cliente no encontrado
+    }
+
+
     // Agregar un nuevo cliente
     @PostMapping("/agregar")
     public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
-        clienteService.add(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(cliente); // Cliente creado exitosamente
+        Cliente nuevoCliente = clienteService.add(cliente); // Guardar y obtener el cliente creado
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoCliente); // Devolver el cliente creado
     }
+
 
     // Actualizar información de un cliente (admin)
     @PutMapping("/update/admin/{id}")
@@ -255,7 +267,26 @@ public class ClienteController {
     // Eliminar un cliente
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> borrarCliente(@PathVariable("id") Long identificacion) {
-        clienteService.eliminarCliente(identificacion);
-        return ResponseEntity.noContent().build(); // Cliente eliminado exitosamente
+        // Buscar el cliente en la base de datos
+        Cliente cliente = clienteService.obtenerClientePorCedula(identificacion);
+
+        // Verificar si el cliente existe
+        if (cliente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Cliente no encontrado, devolver 404
+        }
+
+        try {
+            clienteService.eliminarCliente(identificacion);
+
+            if (clienteService.obtenerClientePorCedula(identificacion)==null) {
+                return ResponseEntity.noContent().build(); // Cliente eliminado exitosamente
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Falló la eliminación
+            }
+        } catch (Exception e) {
+            // Manejar cualquier excepción que ocurra durante la eliminación
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Error al eliminar
+        }
     }
+
 }
