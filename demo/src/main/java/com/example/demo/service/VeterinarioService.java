@@ -10,9 +10,6 @@ import com.example.demo.entity.Veterinario;
 import com.example.demo.repository.VeterinarioRepository;
 
 import java.util.*;
-;
-
-
 
 @Service
 public class VeterinarioService {
@@ -20,17 +17,40 @@ public class VeterinarioService {
     private VeterinarioRepository veterinarioRepository;
 
     @Transactional
-    public Veterinario buscarVet(Long cedula){
+    public Veterinario buscarVetPorCedula(Long cedula){
       return veterinarioRepository.findByCedula(cedula);
     }
 
     @Transactional
-    public void agregarVet(Long cedula, String contrasena, String foto, String nombre, Especialidad especialidad, List<Tratamiento> tratamientos){
-      veterinarioRepository.save(new Veterinario(cedula, contrasena, foto, nombre, especialidad));
+    public Veterinario buscarVet(Long id){
+      return veterinarioRepository.findById(id).orElse(null);
     }
 
     @Transactional
-    public void eliminarEspecialidad(Long cedula){
+    public Veterinario agregarVet(Veterinario veterinario){
+      if(veterinarioRepository.findByCedula(veterinario.getCedula()) == null){
+        return veterinarioRepository.save(veterinario);
+      } else{
+        return new Veterinario();
+      }
+    }
+
+    @Transactional
+    public void actualizarVet(Veterinario veterinario){
+      Veterinario vet = veterinarioRepository.findByCedula(veterinario.getCedula());
+      if(vet != null && !vet.getCedula().equals(veterinario.getCedula())){
+        System.out.println("No se puede actualizar el veterinario");
+      } else{
+        veterinarioRepository.save(veterinario);
+      }
+    }
+
+    public Collection<Veterinario> mostrarTodos(){
+      return veterinarioRepository.findAll();
+    }
+
+    @Transactional
+    public void eliminarVet(Long cedula){
       veterinarioRepository.delete(veterinarioRepository.findByCedula(cedula));
     }
 }
