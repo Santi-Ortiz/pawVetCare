@@ -33,7 +33,7 @@ public class Veterinario{
     private Especialidad especialidad;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "veterinario")
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Veterinario (){

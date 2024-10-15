@@ -179,13 +179,16 @@ public class ClienteController {
 
     // Obtener todas las mascotas de un cliente
     @GetMapping("/mascotas/{id}")
-    public ResponseEntity<Cliente> obtenerTodasMascotasCliente(@PathVariable("id") Long identificacion) {
+    public ResponseEntity<List<Mascota>> obtenerTodasMascotasCliente(@PathVariable("id") Long identificacion) {
         Cliente cliente = clienteService.obtenerCliente(identificacion);
         if (cliente != null) {
-            return ResponseEntity.ok(cliente);
+            // Devolvemos la lista de mascotas asociadas al cliente
+            List<Mascota> mascotas = cliente.getMascotas();
+            return ResponseEntity.ok(mascotas);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Cliente no encontrado
     }
+
 
     // Obtener todos los clientes
     @GetMapping("/todos")
