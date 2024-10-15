@@ -162,7 +162,7 @@ public class IniciarSesionController {
     public ResponseEntity<?> sesionVet(@RequestParam("cedula") Long cedula, @RequestParam("password") String password, HttpSession session){
         try {
 
-            Veterinario vet = vetService.buscarVetPorCedula(1234L);
+            Veterinario vet = vetService.buscarVetPorCedula(cedula);
             System.out.println(vet.getNombre());
             if (vet.getContrasena().equals(password)) {
                 session.setAttribute("vet", vet);
