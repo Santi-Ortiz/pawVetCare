@@ -36,14 +36,26 @@ public class VeterinarioService {
     }
 
     @Transactional
-    public void actualizarVet(Veterinario veterinario){
-      Veterinario vet = veterinarioRepository.findByCedula(veterinario.getCedula());
-      if(vet != null && !vet.getCedula().equals(veterinario.getCedula())){
-        System.out.println("No se puede actualizar el veterinario");
-      } else{
-        veterinarioRepository.save(veterinario);
-      }
+public void actualizarVet(Veterinario veterinario) {
+    // Busca el veterinario existente en la base de datos por cédula
+    Veterinario vetExistente = veterinarioRepository.findByCedula(veterinario.getCedula());
+    
+    // Verifica si el veterinario existe
+    if (vetExistente == null) {
+        throw new NoSuchElementException("El veterinario con la cédula " + veterinario.getCedula() + " no existe.");
     }
+
+    // Actualiza los campos del veterinario existente
+    vetExistente.setNombre(veterinario.getNombre());
+    vetExistente.setContrasena(veterinario.getContrasena());
+    vetExistente.setFoto(veterinario.getFoto());
+    vetExistente.setEspecialidad(veterinario.getEspecialidad());
+    vetExistente.setTratamientos(veterinario.getTratamientos());
+
+    // Guarda los cambios en la base de datos
+    veterinarioRepository.save(vetExistente);
+}
+
 
     public Collection<Veterinario> mostrarTodos(){
       return veterinarioRepository.findAll();

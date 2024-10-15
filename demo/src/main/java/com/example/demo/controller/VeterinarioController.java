@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -203,31 +204,34 @@ public class VeterinarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
-    @GetMapping("/update/{cedula}")
-    public ResponseEntity<Veterinario> actualizarInfoVet(@PathVariable("cedula") Long cedula) {
-        Veterinario existingVet = veterinarioService.buscarVet(cedula);
-        if(existingVet != null){
-            // Verificar si la cédula ya pertenece a otro veterinario
-            Veterinario vetConMismaCedula = veterinarioService.buscarVetPorCedula(existingVet.getCedula());
-            if (vetConMismaCedula != null && !vetConMismaCedula.getId().equals(existingVet.getId())) {
-                // throw new VetUpdatingException(existingVet.getCedula()); // TODO: Implementar esta excepción cuando se quiera modificar la cédula de un vet y ya exista
-                System.out.println("Ya existe un veterinario con la cédula ingresada");
-            }
-
-            existingVet.setCedula(existingVet.getCedula());
-            existingVet.setContrasena(existingVet.getContrasena());
-            existingVet.setFoto(existingVet.getFoto());
-            existingVet.setNombre(existingVet.getNombre());
-            existingVet.setEspecialidad(existingVet.getEspecialidad()); // TODO: Hacer validación de especialidad existente
-
-            // Se actualiza el veterinario
-            veterinarioService.actualizarVet(existingVet);
-
-            return ResponseEntity.ok(existingVet);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // El veterinario no existe
+    @PutMapping("/update/{cedula}")
+public ResponseEntity<Veterinario> actualizarInfoVet(@PathVariable("cedula") Long cedula, @RequestBody Veterinario veterinarioActualizado) {
+    Veterinario existingVet = veterinarioService.buscarVet(cedula);
+    if (existingVet != null) {
+        // Verificar si la cédula ya pertenece a otro veterinario
+        Veterinario vetConMismaCedula = veterinarioService.buscarVetPorCedula(veterinarioActualizado.getCedula());
+        if (vetConMismaCedula != null && !vetConMismaCedula.getId().equals(existingVet.getId())) {
+            // Si existe otro veterinario con la misma cédula, devolver un error
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null); 
         }
+
+        // Actualizar los datos del veterinario
+        existingVet.setCedula(veterinarioActualizado.getCedula());
+        existingVet.setContrasena(veterinarioActualizado.getContrasena());
+        existingVet.setFoto(veterinarioActualizado.getFoto());
+        existingVet.setNombre(veterinarioActualizado.getNombre());
+        existingVet.setEspecialidad(veterinarioActualizado.getEspecialidad());
+
+        // Guardar los cambios en el servicio
+        veterinarioService.actualizarVet(existingVet);
+
+        return ResponseEntity.ok(existingVet);
+    } else {
+        // Veterinario no encontrado
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
+}
+
 
     // Se elimina un veterinario por su cédula
     @DeleteMapping("/delete/{cedula}")
