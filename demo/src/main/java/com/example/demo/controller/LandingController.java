@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.entity.Cliente;
 
 @Controller
-//@RequestMapping("")
 public class LandingController {
     
     // localhost:8090/

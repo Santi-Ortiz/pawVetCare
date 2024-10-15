@@ -37,22 +37,22 @@ public class VeterinarioService {
 
     @Transactional
 public void actualizarVet(Veterinario veterinario) {
-    // Busca el veterinario existente en la base de datos por cédula
+    // Busca el veterinario existente por cédula
     Veterinario vetExistente = veterinarioRepository.findByCedula(veterinario.getCedula());
-    
+
     // Verifica si el veterinario existe
     if (vetExistente == null) {
         throw new NoSuchElementException("El veterinario con la cédula " + veterinario.getCedula() + " no existe.");
     }
 
-    // Actualiza los campos del veterinario existente
+    // Actualiza los campos
     vetExistente.setNombre(veterinario.getNombre());
     vetExistente.setContrasena(veterinario.getContrasena());
     vetExistente.setFoto(veterinario.getFoto());
     vetExistente.setEspecialidad(veterinario.getEspecialidad());
     vetExistente.setTratamientos(veterinario.getTratamientos());
 
-    // Guarda los cambios en la base de datos
+    // Guarda los cambios
     veterinarioRepository.save(vetExistente);
 }
 

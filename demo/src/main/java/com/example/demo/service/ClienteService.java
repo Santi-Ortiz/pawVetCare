@@ -123,11 +123,6 @@ public class ClienteService {
         }
     }
     
-
-    // public void editarCliente(Cliente cliente){
-    //     clienteRepository.deleteById(cliente.getCedula());
-    // }
-
     @Transactional
     public void update(Cliente cliente){
         //clienteRepository.save(cliente);

@@ -24,87 +24,6 @@ import com.example.demo.service.ClienteService;
 import com.example.demo.service.MascotaService;
 import com.example.demo.service.VeterinarioService;
 
-/*@Controller
-@RequestMapping("/veterinario")
-public class VeterinarioController {
-
-    @Autowired
-    private MascotaService MascotaService;
-    @Autowired
-    private AdminService adminService;
-    @Autowired
-    private ClienteService clientService;
-    
-    @GetMapping("/mascotas")
-     public String mostrarMascotas(Model model){
-         model.addAttribute("mascota", new Mascota());
-         model.addAttribute("mascotas", MascotaService.SearchAll());
-         return "vet_MostrarTodasMascotas";
-     }
-
-     // http://localhost:8090/admin/mascotas/{id}
-    @GetMapping("/mascotas/{id}")
-    public String mostrarInfoMascotaVet(Model model, @PathVariable("id") Long identificacion){
-
-        Mascota mascota = adminService.SearchPetById(identificacion);
-        System.out.println("ID recibido: " + mascota.getCliente().getCedula());
-
-        if(mascota != null){
-            model.addAttribute("mascota", mascota); 
-            model.addAttribute("clienteCedula", mascota.getCliente().getCedula());
-        } else {
-            throw new NotPetFoundException(identificacion);
-        } 
-
-        return "vet_mostrarInfo1Mascota";
-    }
-
-    // Método para redirigir al ID específico
-    @GetMapping("/busqueda/mascota")
-    public String redirectToMascota(@RequestParam("id") Long id) {
-        return "redirect:/veterinario/mascotas/" + id;
- 
-    }
-
-    // http://localhost:8090/admin/mascotas/todas
-    @GetMapping("/mascotas/todas")
-    public String mostraradmin_mostrarTodasLasMascotas(Model model){
-        model.addAttribute("mascota", new Mascota());
-        model.addAttribute("mascotas", adminService.SearchAllPets());
-        return "vet_MascotasTodas";
-        //mascotaController.mostrarMascotas(model);
-    }
-
-    // http://localhost:8090/veterinario/clientes
-    @GetMapping("/clientes")
-    public String mostrarClientesAdmin(Model model){
-        model.addAttribute("clientes", adminService.SearchAllClients());
-        model.addAttribute("cliente", new Cliente());
-        return "vet_mostrarTodosClientes";
-    }
-
-    // http://localhost:8090/veterinario/clientes/todos    
-    @GetMapping("/clientes/todos")
-    public String mostrarClientesTodosAdmin(Model model){
-        model.addAttribute("clientes", adminService.SearchAllClients());
-        model.addAttribute("cliente", new Cliente());
-        return "vet_ClientesTodos";
-    }
-
-    // http://localhost:8090/admin/cliente/{id}
-    @GetMapping("/cliente/{cedula}")
-    public String mostrarCliente(Model model, @PathVariable("cedula") Long cedula) {
-        Cliente cliente = clientService.obtenerClientePorCedula(cedula);
-
-        if(cliente != null){
-           model.addAttribute("cliente", cliente); 
-        } else {
-           throw new NotPetFoundException(cedula);
-        }
-
-        return "vet_MostrarInfoCliente";
-    }
-}*/
 
 @RestController
 @RequestMapping("/api/veterinario")
@@ -207,22 +126,23 @@ public class VeterinarioController {
     @PutMapping("/update/{cedula}")
 public ResponseEntity<Veterinario> actualizarInfoVet(@PathVariable("cedula") Long cedula, @RequestBody Veterinario veterinarioActualizado) {
     Veterinario existingVet = veterinarioService.buscarVet(cedula);
+    
     if (existingVet != null) {
         // Verificar si la cédula ya pertenece a otro veterinario
         Veterinario vetConMismaCedula = veterinarioService.buscarVetPorCedula(veterinarioActualizado.getCedula());
         if (vetConMismaCedula != null && !vetConMismaCedula.getId().equals(existingVet.getId())) {
-            // Si existe otro veterinario con la misma cédula, devolver un error
+            // Si la cédula ya está en uso por otro veterinario, retornar error
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null); 
         }
 
-        // Actualizar los datos del veterinario
+        // Actualizar datos del veterinario
         existingVet.setCedula(veterinarioActualizado.getCedula());
         existingVet.setContrasena(veterinarioActualizado.getContrasena());
         existingVet.setFoto(veterinarioActualizado.getFoto());
         existingVet.setNombre(veterinarioActualizado.getNombre());
         existingVet.setEspecialidad(veterinarioActualizado.getEspecialidad());
 
-        // Guardar los cambios en el servicio
+        // Guardar cambios
         veterinarioService.actualizarVet(existingVet);
 
         return ResponseEntity.ok(existingVet);
@@ -231,6 +151,7 @@ public ResponseEntity<Veterinario> actualizarInfoVet(@PathVariable("cedula") Lon
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 }
+
 
 
     // Se elimina un veterinario por su cédula

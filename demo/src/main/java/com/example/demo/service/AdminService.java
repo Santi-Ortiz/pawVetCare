@@ -54,6 +54,4 @@ public class AdminService {
     public Admin findByUsuario(String username){
         return repoAdmin.findByUsuario(username);
     }
-    //TODO: CRUD de Admin
-    //TODO: Login de Admin
 }
