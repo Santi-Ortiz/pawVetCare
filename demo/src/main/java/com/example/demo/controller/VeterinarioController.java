@@ -152,29 +152,16 @@ public ResponseEntity<Veterinario> actualizarInfoVet(@PathVariable("cedula") Lon
     }
 }
 
-
-
     // Se elimina un veterinario por su cédula
     @DeleteMapping("/delete/{cedula}")
-    public ResponseEntity<Void> borrarVet(@PathVariable Long cedula){
-
-        Veterinario vet = veterinarioService.buscarVetPorCedula(cedula);
-        if(vet == null){
-            // El veterinario no se encontró
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        try {
+    public ResponseEntity<Void> borrarVet(@PathVariable("cedula") Long cedula) {
+        Veterinario existingVet = veterinarioService.buscarVetPorCedula(cedula);
+        if (existingVet != null) {
             veterinarioService.eliminarVet(cedula);
-            if(veterinarioService.buscarVetPorCedula(cedula) == null){
-                // Validación que el veterinario fue eliminado
-                return ResponseEntity.noContent().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Error al eliminar
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); // Error al eliminar
-
     }
      
 }

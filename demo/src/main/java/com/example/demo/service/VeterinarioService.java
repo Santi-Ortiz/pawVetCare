@@ -62,7 +62,13 @@ public void actualizarVet(Veterinario veterinario) {
     }
 
     @Transactional
-    public void eliminarVet(Long cedula){
-      veterinarioRepository.delete(veterinarioRepository.findByCedula(cedula));
-    }
+public void eliminarVet(Long cedula) {
+    Veterinario vetExistente = veterinarioRepository.findByCedula(cedula);
+
+    List<Tratamiento> tratamientos = vetExistente.getTratamientos();
+        for (Tratamiento tratamiento : tratamientos) {
+            tratamiento.setVeterinario(null); // Establecer la referencia a  en null
+        }
+    veterinarioRepository.delete(vetExistente);  // Elimina el veterinario
+}
 }
