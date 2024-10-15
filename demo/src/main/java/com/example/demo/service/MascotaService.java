@@ -89,4 +89,8 @@ public class MascotaService {
     public long contarMascotasInactivas(){
         return mascotaRepository.countByEstadoFalse();
     }
+
+    public long contarMascotas(){
+        return mascotaRepository.count();
+    }
 }
