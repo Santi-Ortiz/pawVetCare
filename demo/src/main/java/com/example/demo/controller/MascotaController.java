@@ -381,6 +381,13 @@ public class MascotaController {
         }
     }
 
+    @GetMapping("/activas")
+    public ResponseEntity<Long> contarMascotasActivas() {
+        long count = mascotaService.contarMascotasActivas();
+        return ResponseEntity.ok(count);
+    }
+    
+
 }
 
 

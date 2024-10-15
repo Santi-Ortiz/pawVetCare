@@ -6,5 +6,6 @@ import com.example.demo.entity.Mascota;
 
 @Repository
 public interface MascotaRepository extends JpaRepository<Mascota,Long>{
-  
+    Long countByEstadoTrue();
+    Long countByEstadoFalse();
 }

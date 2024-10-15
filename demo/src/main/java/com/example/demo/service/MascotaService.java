@@ -81,4 +81,12 @@ public class MascotaService {
     public void add(Mascota mascota){
         mascotaRepository.save(mascota);
     }
+
+    public long contarMascotasActivas(){
+        return mascotaRepository.countByEstadoTrue();
+    }  
+
+    public long contarMascotasInactivas(){
+        return mascotaRepository.countByEstadoFalse();
+    }
 }
