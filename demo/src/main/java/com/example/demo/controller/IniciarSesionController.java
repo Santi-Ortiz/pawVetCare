@@ -162,7 +162,7 @@ public class IniciarSesionController {
     public ResponseEntity<?> sesionVet(@RequestParam("cedula") Long cedula, @RequestParam("password") String password, HttpSession session){
         try {
 
-            Veterinario vet = vetService.buscarVet(1234L);
+            Veterinario vet = vetService.buscarVetPorCedula(1234L);
             System.out.println(vet.getNombre());
             if (vet.getContrasena().equals(password)) {
                 session.setAttribute("vet", vet);
@@ -175,14 +175,13 @@ public class IniciarSesionController {
         }
     }
 
-    // http://localhost:8090/api/sesion/admin
     @PostMapping("/admin")
-    public ResponseEntity<?> sesionAdmin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session){
+    public ResponseEntity<?> sesionAdmin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) {
         try {
             Admin admin = adminService.findByUsuario(username);
             if (admin.getContrasena().equals(password)) {
                 session.setAttribute("admin", admin);
-                return ResponseEntity.ok(admin); 
+                return ResponseEntity.ok(admin);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta.");
             }
@@ -190,5 +189,6 @@ public class IniciarSesionController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Admin no encontrado.");
         }
     }
+
 }
 
