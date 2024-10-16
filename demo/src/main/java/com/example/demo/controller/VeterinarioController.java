@@ -140,6 +140,7 @@ public ResponseEntity<Veterinario> actualizarInfoVet(@PathVariable("cedula") Lon
         existingVet.setContrasena(veterinarioActualizado.getContrasena());
         existingVet.setFoto(veterinarioActualizado.getFoto());
         existingVet.setNombre(veterinarioActualizado.getNombre());
+        existingVet.setEstado(veterinarioActualizado.getEstado());
         existingVet.setEspecialidad(veterinarioActualizado.getEspecialidad());
 
         // Guardar cambios
