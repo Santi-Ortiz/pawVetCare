@@ -108,7 +108,7 @@ public class VeterinarioController {
 
     // Se obtiene un veterinario por su ID
     @GetMapping("/find/{cedula}")
-    public ResponseEntity<Veterinario> obtenerVetPorId(@PathVariable("cedula") Long cedula) {
+    public ResponseEntity<Veterinario> obtenerVetPorCedula(@PathVariable("cedula") Long cedula) {
         Veterinario veterinario = veterinarioService.buscarVetPorCedula(cedula);
         if (veterinario != null) {
             return ResponseEntity.ok(veterinario);
