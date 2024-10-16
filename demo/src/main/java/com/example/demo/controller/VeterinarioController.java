@@ -178,7 +178,7 @@ public ResponseEntity<Veterinario> actualizarInfoVet(@PathVariable("cedula") Lon
 
     @GetMapping("/total")
     public ResponseEntity<Long> contarVeterinarios() {
-        long count = veterinarioService.contarVeterinarios();
+        long count = veterinarioService.contarVeterinarios  ();
         return ResponseEntity.ok(count);
     }
     

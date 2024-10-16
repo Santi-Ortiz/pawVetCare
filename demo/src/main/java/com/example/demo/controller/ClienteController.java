@@ -23,6 +23,8 @@ import com.example.demo.service.ClienteService;
 import com.example.demo.service.MascotaService;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/cliente")
@@ -78,6 +80,16 @@ public class ClienteController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Cliente no encontrado
     }
+
+    @GetMapping("/find/cedula/{cedula}")
+    public ResponseEntity<Cliente> obtenerClientePOrCedula(@PathVariable("cedula") Long cedula) {
+        Cliente cliente = clienteService.obtenerClientePorCedula(cedula);
+        if (cliente != null) {
+            return ResponseEntity.ok(cliente); // Retorna el cliente encontrado
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Cliente no encontrado
+    }
+    
 
 
     // Agregar un nuevo cliente
