@@ -73,6 +73,11 @@ public class MascotaController {
         }
     }
 
+    // Obtener una mascota por ID
+    @GetMapping("/buscar/{nombre}")
+    public Mascota obtenerMascotaPorNombre(@PathVariable String nombre) {
+        return mascotaService.SearchByName(nombre);
+    }
 
     // Agregar una nueva mascota (Administrador)
     @PostMapping("/admin/agregar")

@@ -5,8 +5,12 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entity.Mascota;
 
 @Repository
-public interface MascotaRepository extends JpaRepository<Mascota,Long>{
+public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     long count();
+
     Long countByEstadoTrue();
+
     Long countByEstadoFalse();
+
+    public Mascota findByNombre(String nombre);
 }

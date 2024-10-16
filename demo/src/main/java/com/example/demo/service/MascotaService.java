@@ -29,16 +29,24 @@ public class MascotaService {
     private ClienteRepository clienteRepository;
 
     @Transactional
-    public Mascota SearchById(Long id){
+    public Mascota SearchById(Long id) {
         Optional<Mascota> auxMascota = mascotaRepository.findById(id);
         return auxMascota.get();
     }
-    
+
     @Transactional
-    public List<Mascota> SearchAll(){
-        return mascotaRepository.findAll();
+    public Mascota SearchByName(String nombre) {
+        Mascota auxMascota = mascotaRepository.findByNombre(nombre);
+        if (auxMascota == null) {
+            throw new NotPetFoundException(nombre);
+        }
+        return auxMascota;
     }
 
+    @Transactional
+    public List<Mascota> SearchAll() {
+        return mascotaRepository.findAll();
+    }
 
     @Transactional
     public void borrarMascota(Long id) {
@@ -57,18 +65,17 @@ public class MascotaService {
         for (Tratamiento tratamiento : tratamientos) {
             tratamiento.setMascota(null); // Establecer la referencia a mascota en null
         }
-        
+
         // Guardar los tratamientos actualizados
         repoTratamiento.saveAll(tratamientos);
-        
+
         // Eliminar la mascota
         mascotaRepository.delete(mascota);
     }
 
-
     @Transactional
-    public void updateMascota(Mascota mascota){
-        //mascotaRepository.save(mascota);
+    public void updateMascota(Mascota mascota) {
+        // mascotaRepository.save(mascota);
         Cliente clienteExistente = clienteRepository.findByCedula(mascota.getCliente().getCedula());
         if (clienteExistente != null && !clienteExistente.getId().equals(mascota.getCliente().getId())) {
             throw new ClientUpdatingException(mascota.getCliente().getCedula());
@@ -78,19 +85,19 @@ public class MascotaService {
     }
 
     @Transactional
-    public void add(Mascota mascota){
+    public void add(Mascota mascota) {
         mascotaRepository.save(mascota);
     }
 
-    public long contarMascotasActivas(){
+    public long contarMascotasActivas() {
         return mascotaRepository.countByEstadoTrue();
-    }  
+    }
 
-    public long contarMascotasInactivas(){
+    public long contarMascotasInactivas() {
         return mascotaRepository.countByEstadoFalse();
     }
 
-    public long contarMascotas(){
+    public long contarMascotas() {
         return mascotaRepository.count();
     }
 }

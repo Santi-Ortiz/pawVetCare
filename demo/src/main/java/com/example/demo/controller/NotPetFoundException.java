@@ -8,6 +8,10 @@ public class NotPetFoundException extends RuntimeException {
        this.id = id;
     }
 
+    public NotPetFoundException(String nombreMascota) {
+        //TODO Auto-generated constructor stub
+    }
+
     public Long getId(){
         return id;
     }
