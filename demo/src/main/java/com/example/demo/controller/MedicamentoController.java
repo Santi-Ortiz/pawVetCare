@@ -34,6 +34,27 @@ public class MedicamentoController {
         Medicamento medicamento = medicamentoService.SearchById(id);
         return ResponseEntity.ok(medicamento);
     }
+
+    // Se extraen las ventas totales de la veterinaria
+    @GetMapping("/ventas-totales")
+    public ResponseEntity<Double> obtenerVentasTotales(){
+        Double ventas = medicamentoService.calcularVentasTotales();
+        return ResponseEntity.ok(ventas);
+    }
+
+    // Se extraen las ganancias netas de la veterinaria
+    @GetMapping("/ganancias-totales")
+    public ResponseEntity<Double> obtenerGananciasTotales(){
+        Double gananciasTotales = medicamentoService.calcularGananciasTotales();
+        return ResponseEntity.ok(gananciasTotales); 
+    }
+
+    // Se extraen los costos totales de la veterinaria
+    @GetMapping("/costos-totales")
+    public ResponseEntity<Double> obtenerCostosTotales(){
+        Double costosTotales = medicamentoService.calcularCostosTotales();
+        return ResponseEntity.ok(costosTotales);
+    }
     
 
 }
