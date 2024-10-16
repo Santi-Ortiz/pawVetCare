@@ -71,4 +71,19 @@ public void eliminarVet(Long cedula) {
         }
     veterinarioRepository.delete(vetExistente);  // Elimina el veterinario
 }
+
+    @Transactional
+    public long contarVeterinariosActivos(){
+      return veterinarioRepository.countByEstadoTrue();
+    }
+
+    @Transactional
+    public long contarVeterinariosInactivos(){
+      return veterinarioRepository.countByEstadoFalse();
+    }
+
+    @Transactional
+    public long contarVeterinarios(){
+      return veterinarioRepository.count();
+    }
 }

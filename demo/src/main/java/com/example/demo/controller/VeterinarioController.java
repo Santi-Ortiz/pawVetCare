@@ -163,6 +163,25 @@ public ResponseEntity<Veterinario> actualizarInfoVet(@PathVariable("cedula") Lon
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @GetMapping("/activos")
+    public ResponseEntity<Long> contarVeterinariosActivos() {
+        long count = veterinarioService.contarVeterinariosActivos();
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/inactivos")
+    public ResponseEntity<Long> contarVeterinariosInactivos() {
+        long count = veterinarioService.contarVeterinariosInactivos();
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<Long> contarVeterinarios() {
+        long count = veterinarioService.contarVeterinarios();
+        return ResponseEntity.ok(count);
+    }
+    
      
 }
 

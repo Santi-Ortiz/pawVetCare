@@ -27,6 +27,8 @@ public class Veterinario{
 
     private String nombre;
 
+    private Boolean estado;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)  
     @JoinColumn(name = "especialidad_id")  
@@ -39,11 +41,12 @@ public class Veterinario{
     public Veterinario (){
     }
 
-    public Veterinario(Long cedula, String contrasena, String foto, String nombre, Especialidad especialidad) {
+    public Veterinario(Long cedula, String contrasena, String foto, String nombre, Boolean estado, Especialidad especialidad) {
         this.cedula = cedula;
         this.contrasena = contrasena;
         this.foto = foto;
         this.nombre = nombre;
+        this.estado = estado;
         this.especialidad = especialidad;
     }
 
@@ -100,5 +103,13 @@ public class Veterinario{
 
     public void setTratamientos(List<Tratamiento> tratamientos) {
         this.tratamientos = tratamientos;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 }
