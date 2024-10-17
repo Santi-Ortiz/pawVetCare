@@ -18,6 +18,10 @@ public class Medicamento {
     private Integer unidades_disponibles;
     private Integer unidades_vendidas;
 
+    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL)
+    private List<TratamientoMedicamento> tratamientoMedicamentos = new ArrayList<>();
+
+
     public Medicamento() {
     }
 
@@ -75,5 +79,14 @@ public class Medicamento {
 
     public void setUnidades_vendidas(Integer unidades_vendidas) {
         this.unidades_vendidas = unidades_vendidas;
+    }
+
+    public List<TratamientoMedicamento> getTratamientoMedicamentos() {
+        return tratamientoMedicamentos;
+    }
+
+    public void setTratamientoMedicamentos(List<TratamientoMedicamento> tratamientoMedicamentos) {
+        this.tratamientoMedicamentos = tratamientoMedicamentos;
     } 
+
 }
