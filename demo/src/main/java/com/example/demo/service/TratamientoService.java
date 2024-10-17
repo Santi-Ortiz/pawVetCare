@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +18,31 @@ import com.example.demo.repository.TratamientoRepository;
 public class TratamientoService {
 
     @Autowired
-    private TratamientoRepository repoTratamientoRepository;
+    private TratamientoRepository tratamientoRepository;
 
     @Transactional
     public void agregarTratamiento (Date fecha, Veterinario veterinario, Mascota mascota, List<Medicamento> medicamentos){
-        repoTratamientoRepository.save(new Tratamiento(fecha, veterinario, mascota));
+        tratamientoRepository.save(new Tratamiento(fecha, veterinario, mascota));
     }
 
     @Transactional
     public void eliminarTratamiento(Long id){
-      repoTratamientoRepository.delete(repoTratamientoRepository.findById(id).get());
+      tratamientoRepository.delete(tratamientoRepository.findById(id).get());
     }
+
+    public long obtenerTotalTratamientosMesActual() {
+      // Obtener el primer día del mes actual
+      LocalDate inicioMes = LocalDate.now().withDayOfMonth(1);
+
+      // Obtener el día actual
+      LocalDate diaActual = LocalDate.now();
+
+      // Convertir LocalDate a java.sql.Date
+      Date inicioMesSql = Date.valueOf(inicioMes);
+      Date diaActualSql = Date.valueOf(diaActual);
+
+      // Llamar al repositorio con las fechas convertidas
+      return tratamientoRepository.contarTratamientosMesActual(inicioMesSql, diaActualSql);
+  }
+
 }

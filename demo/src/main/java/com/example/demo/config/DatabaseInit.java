@@ -254,23 +254,24 @@ public class DatabaseInit implements ApplicationRunner{
         medicamentoRepository.save(new Medicamento("Colirio Ocular", 6.5D, 6.5D, 10, 0));
         
         //Creación tratamiento
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-08-15"), veterinarioRepository.findById((long)1).get(), mascotaRepository.findById((long)1).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-10-15"), veterinarioRepository.findById((long)1).get(), mascotaRepository.findById((long)1).get()));
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-09-10"), veterinarioRepository.findById((long)2).get(), mascotaRepository.findById((long)2).get()));
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-01-05"), veterinarioRepository.findById((long)3).get(), mascotaRepository.findById((long)3).get()));
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-02-20"), veterinarioRepository.findById((long)1).get(), mascotaRepository.findById((long)4).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-10-05"), veterinarioRepository.findById((long)3).get(), mascotaRepository.findById((long)3).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2023-02-20"), veterinarioRepository.findById((long)1).get(), mascotaRepository.findById((long)4).get()));
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2023-12-01"), veterinarioRepository.findById((long)4).get(), mascotaRepository.findById((long)1).get()));
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-07-07"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)2).get()));
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-10-11"), veterinarioRepository.findById((long)2).get(), mascotaRepository.findById((long)5).get()));
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-03-12"), veterinarioRepository.findById((long)3).get(), mascotaRepository.findById((long)3).get()));
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-01-15"), veterinarioRepository.findById((long)4).get(), mascotaRepository.findById((long)4).get()));
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-11-22"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)5).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2023-10-07"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)2).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2023-10-11"), veterinarioRepository.findById((long)2).get(), mascotaRepository.findById((long)5).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2021-03-12"), veterinarioRepository.findById((long)3).get(), mascotaRepository.findById((long)3).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2020-01-15"), veterinarioRepository.findById((long)4).get(), mascotaRepository.findById((long)4).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2022-11-22"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)5).get()));
 
         String filePath = "demo/src/main/resources/files/MEDICAMENTOS_VETERINARIA.xlsx";
 
+        // Lectura de medicamentos desde el archivo de excel
         try (InputStream inputStream = new FileInputStream(new File(filePath))) {
             
             List<Medicamento> listaMedicamentos = excelService.obtenerInfoMedicamento(inputStream);
-
+            // Guardar en la base de datos
             for (Medicamento medicamento : listaMedicamentos) {
                 medicamentoRepository.save(medicamento);
             }
