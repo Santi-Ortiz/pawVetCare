@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,6 +82,12 @@ public class TratamientoService {
 
       // Llamar al repositorio con las fechas convertidas
       return tratamientoRepository.contarTratamientosMesActual(inicioMesSql, diaActualSql);
-  }
+    }
+
+    public List<Tratamiento> obtenerTop3Tratamientos() {
+      return tratamientoRepository.encontrarTop3Tratamientos().stream()
+              .limit(3)
+              .collect(Collectors.toList());
+    }
 
 }

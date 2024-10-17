@@ -258,9 +258,9 @@ public class DatabaseInit implements ApplicationRunner{
         medicamentoRepository.save(new Medicamento("Colirio Ocular", 6.5D, 6.5D, 10, 0));
         
         //Creación tratamiento
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-10-15"), veterinarioRepository.findById((long)1).get(), mascotaRepository.findById((long)1).get()));
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-09-10"), veterinarioRepository.findById((long)2).get(), mascotaRepository.findById((long)2).get()));
-        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-10-05"), veterinarioRepository.findById((long)3).get(), mascotaRepository.findById((long)3).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2024-10-10"), veterinarioRepository.findById((long)1).get(), mascotaRepository.findById((long)1).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2025-11-11"), veterinarioRepository.findById((long)2).get(), mascotaRepository.findById((long)2).get()));
+        tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2026-12-12"), veterinarioRepository.findById((long)3).get(), mascotaRepository.findById((long)3).get()));
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2023-02-20"), veterinarioRepository.findById((long)1).get(), mascotaRepository.findById((long)4).get()));
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2023-12-01"), veterinarioRepository.findById((long)4).get(), mascotaRepository.findById((long)1).get()));
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2023-10-07"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)2).get()));
