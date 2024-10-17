@@ -61,6 +61,8 @@ public class TratamientoController {
             // Verificar que los objetos no sean nulos
             if (data.getMascota() == null || data.getVeterinario() == null || data.getMedicamento() == null) {
                 throw new RuntimeException("Datos incompletos: mascota, veterinario o medicamento es nulo.");
+            } else if(!data.getMascota().getEstado()){
+                throw new RuntimeException("La mascota no se encuentra activa.");
             }
 
             // Imprimir los datos recibidos (opcional)
