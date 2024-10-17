@@ -10,7 +10,7 @@ import java.util.*;
 public class Medicamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String nombre;
     private Double precio_venta;
@@ -33,11 +33,11 @@ public class Medicamento {
         this.unidades_vendidas = unidades_vendidas;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

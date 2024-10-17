@@ -17,6 +17,7 @@ import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Mascota;
 import com.example.demo.entity.Medicamento;
 import com.example.demo.entity.Tratamiento;
+import com.example.demo.entity.TratamientoMedicamento;
 import com.example.demo.entity.Veterinario;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClienteRepository;
@@ -25,6 +26,7 @@ import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.MedicamentoRepository;
 import com.example.demo.repository.TratamientoRepository;
 import com.example.demo.repository.VeterinarioRepository;
+import com.example.demo.repository.TratamientoMedicamentoRepository;
 import com.example.demo.service.ExcelReaderService;
 
 import jakarta.transaction.Transactional;
@@ -46,6 +48,8 @@ public class DatabaseInit implements ApplicationRunner{
     TratamientoRepository tratamientoRepository;
     @Autowired
     MedicamentoRepository medicamentoRepository;
+    @Autowired 
+    TratamientoMedicamentoRepository tratamientoMedicamentoRepository;
 
     @Autowired
     ExcelReaderService excelService;
@@ -265,6 +269,29 @@ public class DatabaseInit implements ApplicationRunner{
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2020-01-15"), veterinarioRepository.findById((long)4).get(), mascotaRepository.findById((long)4).get()));
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2022-11-22"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)5).get()));
 
+        //Creación TratamientoMedicamento
+
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 80L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 200L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 345L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(2L).get(), medicamentoRepository.findById( 35L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(2L).get(), medicamentoRepository.findById( 150L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(3L).get(), medicamentoRepository.findById( 98L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(4L).get(), medicamentoRepository.findById( 100L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(4L).get(), medicamentoRepository.findById( 350L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(4L).get(), medicamentoRepository.findById( 286L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(4L).get(), medicamentoRepository.findById( 270L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(5L).get(), medicamentoRepository.findById( 370L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(6L).get(), medicamentoRepository.findById( 258L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(7L).get(), medicamentoRepository.findById( 469L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(7L).get(), medicamentoRepository.findById( 449L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(8L).get(), medicamentoRepository.findById( 369L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(8L).get(), medicamentoRepository.findById( 269L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(8L).get(), medicamentoRepository.findById( 137L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(9L).get(), medicamentoRepository.findById( 18L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(10L).get(), medicamentoRepository.findById( 120L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(10L).get(), medicamentoRepository.findById( 223L).get()));
+        
         String filePath = "demo/src/main/resources/files/MEDICAMENTOS_VETERINARIA.xlsx";
 
         // Lectura de medicamentos desde el archivo de excel

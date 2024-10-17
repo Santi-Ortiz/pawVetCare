@@ -13,7 +13,7 @@ import jakarta.persistence.*;
 public class Tratamiento{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private Date fecha;
     
@@ -47,11 +47,11 @@ public class Tratamiento{
         this.tratamientoMedicamentos = tratamientoMedicamentos;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
