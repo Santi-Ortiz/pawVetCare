@@ -46,6 +46,7 @@ public class TratamientoService {
 
       // Actualizar las unidades disponibles del medicamento
       medicamento.setUnidades_disponibles(medicamento.getUnidades_disponibles() - cantidad);
+      medicamento.setUnidades_vendidas(cantidad);
       medicamentoRepository.save(medicamento);
 
       // Crear la instancia de la tabla intermedia TratamientoMedicamento
