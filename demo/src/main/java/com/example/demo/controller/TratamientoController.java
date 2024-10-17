@@ -45,48 +45,48 @@ public class TratamientoController {
     }
 
     @PostMapping("/dar")
-public ResponseEntity<Map<String, Object>> darTratamiento(@RequestBody TratamientoRequestDTO data) {
-    Map<String, Object> response = new HashMap<>();
-    try {
-        // Verificar que los objetos no sean nulos
-        if (data.getMascota() == null || data.getVeterinario() == null || data.getMedicamento() == null) {
-            throw new RuntimeException("Datos incompletos: mascota, veterinario o medicamento es nulo.");
+    public ResponseEntity<Map<String, Object>> darTratamiento(@RequestBody TratamientoRequestDTO data) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            // Verificar que los objetos no sean nulos
+            if (data.getMascota() == null || data.getVeterinario() == null || data.getMedicamento() == null) {
+                throw new RuntimeException("Datos incompletos: mascota, veterinario o medicamento es nulo.");
+            }
+
+            // Imprimir los datos recibidos (opcional)
+            System.out.println("Mascota: " + data.getMascota().getNombre());
+            System.out.println("Veterinario: " + data.getVeterinario().getNombre());
+            System.out.println("Medicamento: " + data.getMedicamento().getNombre());
+            System.out.println("Cantidad: " + data.getCantidad());
+
+            // Ejecutar la lógica del tratamiento
+            Medicamento medicamento = data.getMedicamento();
+            Tratamiento tratamiento = new Tratamiento(
+                Date.valueOf(LocalDate.now()), 
+                data.getVeterinario(), 
+                data.getMascota()
+            );
+
+            tratamientoService.agregarTratamiento(tratamiento, medicamento, data.getCantidad());
+
+            // Preparar la respuesta exitosa
+            response.put("message", "Tratamiento registrado exitosamente.");
+            response.put("status", HttpStatus.OK.value());
+            return ResponseEntity.ok(response);
+
+        } catch (RuntimeException e) {
+            // Preparar la respuesta de error específico
+            response.put("error", e.getMessage());
+            response.put("status", HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
+        } catch (Exception e) {
+            // Preparar la respuesta de error general
+            response.put("error", "Ocurrió un error al registrar el tratamiento.");
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
-
-        // Imprimir los datos recibidos (opcional)
-        System.out.println("Mascota: " + data.getMascota().getNombre());
-        System.out.println("Veterinario: " + data.getVeterinario().getNombre());
-        System.out.println("Medicamento: " + data.getMedicamento().getNombre());
-        System.out.println("Cantidad: " + data.getCantidad());
-
-        // Ejecutar la lógica del tratamiento
-        Medicamento medicamento = data.getMedicamento();
-        Tratamiento tratamiento = new Tratamiento(
-            Date.valueOf(LocalDate.now()), 
-            data.getVeterinario(), 
-            data.getMascota()
-        );
-
-        tratamientoService.agregarTratamiento(tratamiento, medicamento, data.getCantidad());
-
-        // Preparar la respuesta exitosa
-        response.put("message", "Tratamiento registrado exitosamente.");
-        response.put("status", HttpStatus.OK.value());
-        return ResponseEntity.ok(response);
-
-    } catch (RuntimeException e) {
-        // Preparar la respuesta de error específico
-        response.put("error", e.getMessage());
-        response.put("status", HttpStatus.BAD_REQUEST.value());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-
-    } catch (Exception e) {
-        // Preparar la respuesta de error general
-        response.put("error", "Ocurrió un error al registrar el tratamiento.");
-        response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
-}
 
 
 
