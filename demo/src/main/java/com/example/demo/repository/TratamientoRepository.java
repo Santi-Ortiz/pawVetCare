@@ -14,6 +14,7 @@ import com.example.demo.entity.Veterinario;
 @Repository
 public interface TratamientoRepository extends JpaRepository<Tratamiento,Long>{
     List<Tratamiento> findByVeterinario(Veterinario veterinario);
+    List<Tratamiento> findByMascotaId(Long mascotaId);
 
     @Query("SELECT COUNT(t) FROM Tratamiento t WHERE t.fecha BETWEEN :inicioMes AND :diaActual")
     long contarTratamientosMesActual(@Param("inicioMes") Date inicioMes, @Param("diaActual") Date diaActual);

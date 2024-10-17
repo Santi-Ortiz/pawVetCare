@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.entity.MascotaDTO;
+import com.example.demo.entity.Tratamiento;
+import com.example.demo.repository.TratamientoRepository;
 import com.example.demo.service.MascotaService;
 import com.example.demo.service.ClienteService;
 
@@ -34,6 +36,9 @@ public class MascotaController {
    
     @Autowired
     ClienteService clienteService;
+
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
 
     // Obtener todas las mascotas (Administradores)
     @GetMapping("/admin/todas")
@@ -241,6 +246,11 @@ public class MascotaController {
     public ResponseEntity<Long> contarMascotas(){
         long count = mascotaService.contarMascotas();
         return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/{id}/tratamientos")
+    public List<Tratamiento> obtenerTratamientosPorMascota(@PathVariable Long id) {
+        return tratamientoRepository.findByMascotaId(id);
     }
     
 
