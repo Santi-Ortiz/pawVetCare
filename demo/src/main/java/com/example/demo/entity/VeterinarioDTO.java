@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 public class VeterinarioDTO {
-    private Integer id;
+    private Long id;
     private Long cedula;
     private String nombre;
     private String contrasena;
@@ -24,11 +24,11 @@ public class VeterinarioDTO {
     public VeterinarioDTO() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

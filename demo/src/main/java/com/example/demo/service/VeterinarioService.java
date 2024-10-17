@@ -70,17 +70,36 @@ public class VeterinarioService {
 
     @Transactional
     public VeterinarioDTO obtenerVeterinarioPorCedula(Long cedula) {
-        Veterinario veterinario = veterinarioRepository.findByCedula(cedula);
-        return convertirAVeterinarioDTO(veterinario);
+        return convertirAVeterinarioDTO(veterinarioRepository.findByCedula(cedula));
+    }
+
+    @Transactional
+    public VeterinarioDTO obtenerPorID(Long id){
+        return convertirAVeterinarioDTO(veterinarioRepository.findById(id).get());
     }
 
     // Método para convertir de Veterinario a VeterinarioDTO
-    private VeterinarioDTO convertirAVeterinarioDTO(Veterinario veterinario) {
-        String nombreEspecialidad = veterinario.getEspecialidad() != null ? veterinario.getEspecialidad().getNombre_especialidad() : null;
-        return new VeterinarioDTO(
-            veterinario
-        );
+    public VeterinarioDTO convertirAVeterinarioDTO(Veterinario veterinario) {
+        if (veterinario == null) {
+            throw new RuntimeException("El veterinario es nulo.");
+        }
+    
+        VeterinarioDTO veterinarioDTO = new VeterinarioDTO();
+        veterinarioDTO.setId(veterinario.getId());
+        veterinarioDTO.setNombre(veterinario.getNombre());
+        veterinarioDTO.setCedula(veterinario.getCedula());
+        veterinarioDTO.setEstado(veterinario.getEstado());
+        veterinarioDTO.setFoto(veterinario.getFoto());
+    
+        if (veterinario.getEspecialidad() != null) {
+            veterinarioDTO.setNombreEspecialidad(veterinario.getEspecialidad().getNombre_especialidad());
+        } else {
+            veterinarioDTO.setNombreEspecialidad("Sin Especialidad");
+        }
+    
+        return veterinarioDTO;
     }
+    
 
     public Collection<Veterinario> mostrarTodos() {
         return veterinarioRepository.findAll();

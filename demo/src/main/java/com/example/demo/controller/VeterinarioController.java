@@ -118,6 +118,17 @@ public class VeterinarioController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); 
     }
 
+    // Se obtiene un veterinario por su cedula
+    @GetMapping("/findID/{id}")
+    public ResponseEntity<VeterinarioDTO> obtenerVetPorID(@PathVariable("id") Long id) {
+        VeterinarioDTO veterinario = veterinarioService.obtenerPorID(id);
+        if (veterinario != null) {
+            return ResponseEntity.ok(veterinario);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); 
+    }
+
+
     // Se agrega un veterinario nuevo
     @PostMapping("/agregar")
     public ResponseEntity<Veterinario> agregarVet(@RequestBody Veterinario veterinario) {

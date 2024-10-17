@@ -19,6 +19,7 @@ import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
 import com.example.demo.entity.MascotaDTO;
 import com.example.demo.entity.Tratamiento;
+import com.example.demo.entity.TratamientoDTO;
 import com.example.demo.repository.TratamientoRepository;
 import com.example.demo.service.MascotaService;
 import com.example.demo.service.ClienteService;
@@ -249,9 +250,13 @@ public class MascotaController {
     }
 
     @GetMapping("/{id}/tratamientos")
-    public List<Tratamiento> obtenerTratamientosPorMascota(@PathVariable Long id) {
-        return tratamientoRepository.findByMascotaId(id);
+    public List<TratamientoDTO> obtenerTratamientosPorMascota(@PathVariable Long id) {
+        List<Tratamiento> tratamientos = tratamientoRepository.findByMascotaId(id);
+        return tratamientos.stream()
+            .map(TratamientoDTO::new)
+            .toList();
     }
+
     
 
 }
