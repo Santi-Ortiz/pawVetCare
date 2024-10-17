@@ -100,4 +100,8 @@ public class MascotaService {
     public long contarMascotas() {
         return mascotaRepository.count();
     }
+
+    public List<Mascota> buscarNombrecontiene(String nombre) {
+        return mascotaRepository.findByNombreContainingIgnoreCase(nombre);
+    }    
 }

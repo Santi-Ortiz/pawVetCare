@@ -73,6 +73,36 @@ public class MascotaController {
         }
     }
 
+    // Obtener una mascota por nombre
+    @GetMapping("/find/nom/{nombre}")
+    public ResponseEntity<List<MascotaDTO>> mostrarInfoMascotaNom(@PathVariable("nombre") String nombre) {
+        List<Mascota> mascotas = mascotaService.buscarNombrecontiene(nombre);
+
+        if (!mascotas.isEmpty()) {
+            // Mapear cada entidad Mascota a un MascotaDTO
+            List<MascotaDTO> mascotaDTOs = mascotas.stream().map(mascota -> {
+                MascotaDTO mascotaDTO = new MascotaDTO();
+                mascotaDTO.setId(mascota.getId());
+                mascotaDTO.setNombre(mascota.getNombre());
+                mascotaDTO.setRaza(mascota.getRaza());
+                mascotaDTO.setEdad(mascota.getEdad());
+                mascotaDTO.setPeso(mascota.getPeso());
+                mascotaDTO.setEnfermedad(mascota.getEnfermedad());
+                mascotaDTO.setFoto(mascota.getFoto());
+                mascotaDTO.setEstado(mascota.getEstado());
+                mascotaDTO.setCedulaCliente(
+                    mascota.getCliente() != null ? mascota.getCliente().getCedula() : null
+                );
+                return mascotaDTO;
+            }).toList(); // Convertir el stream a lista
+
+            return ResponseEntity.ok(mascotaDTOs);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+
     // Obtener una mascota por ID
     @GetMapping("/buscar/{nombre}")
     public Mascota obtenerMascotaPorNombre(@PathVariable String nombre) {
