@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -22,6 +23,8 @@ import com.example.demo.entity.TratamientoMedicamento;
 import com.example.demo.entity.TratamientoRequestDTO;
 import com.example.demo.service.MedicamentoService;
 import com.example.demo.service.TratamientoService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/tratamiento")
@@ -43,6 +46,13 @@ public class TratamientoController {
         long totalTratamientos = tratamientoService.obtenerTotalTratamientosMesActual();
         return ResponseEntity.ok(totalTratamientos);
     }
+
+    @GetMapping("/top3")
+    public ResponseEntity<List<Tratamiento>> getTop3Tratamientos() {
+        List<Tratamiento> top3 = tratamientoService.obtenerTop3Tratamientos();
+        return ResponseEntity.ok(top3);
+    }
+    
 
     @PostMapping("/dar")
     public ResponseEntity<Map<String, Object>> darTratamiento(@RequestBody TratamientoRequestDTO data) {
@@ -66,10 +76,9 @@ public class TratamientoController {
                 data.getVeterinario(), 
                 data.getMascota()
             );
-
+            // Se agrega un tratamiento a la base de datos
             tratamientoService.agregarTratamiento(tratamiento, medicamento, data.getCantidad());
 
-            // Preparar la respuesta exitosa
             response.put("message", "Tratamiento registrado exitosamente.");
             response.put("status", HttpStatus.OK.value());
             return ResponseEntity.ok(response);
