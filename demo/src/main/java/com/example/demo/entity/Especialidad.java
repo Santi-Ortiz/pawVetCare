@@ -27,6 +27,11 @@ public class Especialidad{
         this.nombreEspecialidad = nombreEspecialidad;
     }
 
+    public Especialidad(Integer id, String nombreEspecialidad) {
+        this.id = id;
+        this.nombreEspecialidad = nombreEspecialidad;
+    }
+
     public Especialidad() {
 
     }
