@@ -17,10 +17,21 @@ public class TratamientoMedicamento {
     @ManyToOne
     @JoinColumn(name = "medicamento_id", nullable = false)
     private Medicamento medicamento;
+
+    private Integer cantidad;
+
+    public TratamientoMedicamento(){}
     
     public TratamientoMedicamento(Tratamiento tratamiento, Medicamento medicamento) {
         this.tratamiento = tratamiento;
         this.medicamento = medicamento;
+    }
+
+    
+    public TratamientoMedicamento(Tratamiento tratamiento, Medicamento medicamento, Integer cantidad) {
+        this.tratamiento = tratamiento;
+        this.medicamento = medicamento;
+        this.cantidad = cantidad;
     }
 
     // Getters y Setters
@@ -46,5 +57,13 @@ public class TratamientoMedicamento {
 
     public void setMedicamento(Medicamento medicamento) {
         this.medicamento = medicamento;
+    }
+    
+    public Integer getCantidad() {  // Asegúrate de tener este método
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 }

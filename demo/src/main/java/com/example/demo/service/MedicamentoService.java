@@ -27,10 +27,8 @@ public class MedicamentoService {
     }
 
     @Transactional
-    public void agregarMedicamento(String nombre, Double precio_venta, Double precio_compra,
-            Integer unidades_disponibles, Integer unidades_vendidas) {
-        medicamentoRepository
-                .save(new Medicamento(nombre, precio_venta, precio_compra, unidades_disponibles, unidades_vendidas));
+    public void agregarMedicamento(Medicamento medicamento) {
+        medicamentoRepository.save(medicamento);
     }
 
     @Transactional

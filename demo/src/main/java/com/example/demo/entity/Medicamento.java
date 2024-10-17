@@ -3,6 +3,8 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="medicamento")
@@ -18,6 +20,7 @@ public class Medicamento {
     private Integer unidades_disponibles;
     private Integer unidades_vendidas;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL)
     private List<TratamientoMedicamento> tratamientoMedicamentos = new ArrayList<>();
 

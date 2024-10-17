@@ -112,4 +112,9 @@ public class Veterinario{
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
+
+    public Veterinario orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
+    }
 }

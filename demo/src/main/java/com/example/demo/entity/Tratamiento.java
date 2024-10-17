@@ -18,12 +18,12 @@ public class Tratamiento{
     private Date fecha;
     
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "veterinario_id") 
     private Veterinario veterinario;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "mascota_id")  
     private Mascota mascota;
 
