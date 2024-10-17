@@ -269,7 +269,22 @@ public class DatabaseInit implements ApplicationRunner{
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2020-01-15"), veterinarioRepository.findById((long)4).get(), mascotaRepository.findById((long)4).get()));
         tratamientoRepository.save(new Tratamiento(java.sql.Date.valueOf("2022-11-22"), veterinarioRepository.findById((long)5).get(), mascotaRepository.findById((long)5).get()));
 
-        //Creación TratamientoMedicamento
+        String filePath = "demo/src/main/resources/files/MEDICAMENTOS_VETERINARIA.xlsx";
+
+        // Lectura de medicamentos desde el archivo de excel
+        try (InputStream inputStream = new FileInputStream(new File(filePath))) {
+            
+            List<Medicamento> listaMedicamentos = excelService.obtenerInfoMedicamento(inputStream);
+            // Guardar en la base de datos
+            for (Medicamento medicamento : listaMedicamentos) {
+                medicamentoRepository.save(medicamento);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+         //Creación TratamientoMedicamento
 
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 80L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 200L).get()));
@@ -291,21 +306,6 @@ public class DatabaseInit implements ApplicationRunner{
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(9L).get(), medicamentoRepository.findById( 18L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(10L).get(), medicamentoRepository.findById( 120L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(10L).get(), medicamentoRepository.findById( 223L).get()));
-        
-        String filePath = "demo/src/main/resources/files/MEDICAMENTOS_VETERINARIA.xlsx";
-
-        // Lectura de medicamentos desde el archivo de excel
-        try (InputStream inputStream = new FileInputStream(new File(filePath))) {
-            
-            List<Medicamento> listaMedicamentos = excelService.obtenerInfoMedicamento(inputStream);
-            // Guardar en la base de datos
-            for (Medicamento medicamento : listaMedicamentos) {
-                medicamentoRepository.save(medicamento);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 }
