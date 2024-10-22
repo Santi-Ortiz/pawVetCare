@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.Cliente;
-import com.example.demo.entity.Mascota;
 import com.example.demo.service.ClienteService;
 
 @Controller

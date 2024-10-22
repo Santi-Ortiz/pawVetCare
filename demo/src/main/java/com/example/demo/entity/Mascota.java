@@ -3,9 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="mascota")

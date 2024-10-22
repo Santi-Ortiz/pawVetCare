@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Cliente;
-import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Mascota;
-import com.example.demo.entity.Tratamiento;
 import com.example.demo.entity.Veterinario;
 import com.example.demo.entity.VeterinarioDTO;
 import com.example.demo.service.AdminService;

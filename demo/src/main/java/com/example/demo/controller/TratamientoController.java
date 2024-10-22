@@ -1,12 +1,10 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.sql.Date;
-import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Medicamento;
 import com.example.demo.entity.Tratamiento;
-import com.example.demo.entity.TratamientoMedicamento;
 import com.example.demo.entity.TratamientoRequestDTO;
 import com.example.demo.service.MedicamentoService;
 import com.example.demo.service.TratamientoService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController

@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import com.example.demo.entity.Medicamento;
-import com.example.demo.entity.Tratamiento;
 import com.example.demo.repository.MedicamentoRepository;
 
 @Service

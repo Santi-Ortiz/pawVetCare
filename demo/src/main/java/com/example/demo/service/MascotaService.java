@@ -12,7 +12,6 @@ import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.TratamientoRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 import java.util.*;

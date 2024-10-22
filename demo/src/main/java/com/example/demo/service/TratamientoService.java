@@ -29,11 +29,7 @@ public class TratamientoService {
     private TratamientoMedicamentoRepository  tratamientoMedicamentoRepository;
     @Autowired
     private MedicamentoRepository medicamentoRepository;
-    @Autowired
-    private VeterinarioRepository veterinarioRepository;
-    @Autowired
-    private MascotaRepository mascotaRepository;
-
+    
     @Transactional
   public Tratamiento agregarTratamiento(Tratamiento tratamiento, Medicamento medicamento, int cantidad) {
       // Guardar el tratamiento principal en la base de datos
