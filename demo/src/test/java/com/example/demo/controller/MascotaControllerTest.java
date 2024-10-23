@@ -1,15 +1,21 @@
 package com.example.demo.controller;
 
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.ModelResultMatchers.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
@@ -28,11 +34,14 @@ public class MascotaControllerTest {
     //Un Mock es un objeto falso que permite simular su comportamiento como si fuera real pero en ningún momento se crea en la DB
     
     // Todas las pruebas tienen 3 pasos: Arrange, Act, Assert
-     @Test
-    public void MascotaController_mostrarInfoMascota_Mascota() throws Exception {
-        // Arrange
-        when(mascotaService.SearchById(1L).thenReturn)
-        
+    //otra vez null arreglar import 
+    @Test
+     public void MascotaController_mostrarInfoMascota_Mascota() throws Exception {
+        when(mascotaService.SearchById(anyLong())).thenReturn(null);
+
+        ResultActions response = mockMvc.perform(
+           get("/api/mascota/find").param("id", "1") 
+        );
     }
 
     @Test
@@ -42,6 +51,10 @@ public class MascotaControllerTest {
 
     @Test
     public void MascotaController_agregarMascota_Mascota() {
+        Mascota mascota = new Mascota("Nala","Poodle",12,28.0F,"Moquillo","https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Agility_Poodle.jpg/375px-Agility_Poodle.jpg",false,new Cliente());
+    
+        //when(mascotaService.add(Mockito.any(Mascota.class))).thenReturn(mascota);
+
 
     }
 
