@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import static org.mockito.Mockito.when;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -9,6 +11,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.demo.entity.Cliente;
+import com.example.demo.entity.Mascota;
 import com.example.demo.service.MascotaService;
 
 @WebMvcTest(controllers = MascotaController.class)
@@ -24,11 +28,11 @@ public class MascotaControllerTest {
     //Un Mock es un objeto falso que permite simular su comportamiento como si fuera real pero en ningún momento se crea en la DB
     
     // Todas las pruebas tienen 3 pasos: Arrange, Act, Assert
-    @Test
-    public void MascotaController_mostrarInfoMascota_Mascota(){
-        // 1. Arrange -> Preparar lo necesario para la prueba
-        // 2. Act -> Ejecutar la prueba
-        // 3. Assert -> Verificar si el resultado es el esperado
+     @Test
+    public void MascotaController_mostrarInfoMascota_Mascota() throws Exception {
+        // Arrange
+        when(mascotaService.SearchById(1L).thenReturn)
+        
     }
 
     @Test

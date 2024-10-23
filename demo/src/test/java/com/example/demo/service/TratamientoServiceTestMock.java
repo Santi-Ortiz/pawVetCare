@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -50,7 +50,13 @@ public class TratamientoServiceTestMock {
     private TratamientoMedicamentoRepository tratamientoMedicamentoRepository;
 
     @BeforeEach
+    public void setUp() {
+        // No necesitas inicializar manualmente los mocks con MockitoExtension
+    }
+
+    @BeforeEach
     public void init() {}
+    
 
     // TODO: Hacer pruebas de integración
     // TODO: Hacer pruebas con mocks de los repositorios
@@ -80,19 +86,23 @@ public class TratamientoServiceTestMock {
 
     @Test
     public void agregarTratamiento_ErrorSinSuficientesUnidades() {
-        // Arrange
+        // Arrange: Medicamento con menos unidades de las necesarias
         Tratamiento tratamiento = new Tratamiento();
-        Medicamento medicamento = new Medicamento("Antibiótico A", 25.5D, 20.5D, 10, 50);
-        int cantidad = 10;
+        Medicamento medicamento = new Medicamento("Antibiótico A", 25.5D, 20.5D, 5, 50); // Solo 5 unidades disponibles
+        int cantidad = 10; // Se solicita más de lo disponible
 
         // Act & Assert
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             tratamientoService.agregarTratamiento(tratamiento, medicamento, cantidad);
         });
 
-        assertEquals("No hay suficientes unidades del medicamento Ibuprofeno", exception.getMessage());
+        // Verificamos que se lanza la excepción con el mensaje esperado
+        assertEquals("No hay suficientes unidades del medicamento Antibiótico A", exception.getMessage());
+
+        // Verificamos que NUNCA se llamó a tratamientoRepository.save()
         verify(tratamientoRepository, never()).save(any(Tratamiento.class));
     }
+
 
     @Test
     public void eliminarTratamiento_Exito() {
