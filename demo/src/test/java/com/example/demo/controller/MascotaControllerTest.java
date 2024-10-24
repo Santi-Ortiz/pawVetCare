@@ -47,10 +47,10 @@ public class MascotaControllerTest {
     //otra vez null arreglar import 
     @Test
         public void MascotaController_mostrarInfoMascota_Mascota() throws Exception {
-            // Arrange: Simulamos que no se encuentra la mascota
+            // Arrange
             when(mascotaService.SearchById(1L)).thenReturn(null);
 
-            // Act & Assert: Realizamos la solicitud y verificamos el estado 404
+            // Act & Assert
             mockMvc.perform(get("/api/mascota/find").param("id", "1"))
                     .andExpect(status().isNotFound());
         }
@@ -111,20 +111,18 @@ public class MascotaControllerTest {
 
     @Test
     public void MascotaController_actualizarMascota_Mascota() throws Exception {
-        // Arrange: Creamos las mascotas necesaria para la prueba
+        // Arrange
         Mascota mascotaActualizada = new Mascota("Nala", "Poodle", 13, 30.0F, "Parvovirus", 
             "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Agility_Poodle.jpg/375px-Agility_Poodle.jpg", 
             false, new Cliente());
         mascotaActualizada.setId(1L);
 
-        // Simulamos el comportamiento del servicio
         when(mascotaService.SearchById(1L)).thenReturn(mascotaActualizada);
         doNothing().when(mascotaService).updateMascota(any(Mascota.class));
 
-        // Convertimos la mascota a JSON
         String mascotaJson = new ObjectMapper().writeValueAsString(mascotaActualizada);
 
-        // Act & Assert: Realizamos la solicitud PUT y verificamos la respuesta
+        // Act & Assert
         mockMvc.perform(put("/api/mascota/update/ad/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mascotaJson))
@@ -139,21 +137,18 @@ public class MascotaControllerTest {
 
     @Test
     public void MascotaController_eliminarMascota() throws Exception {
-        // Arrange: Creamos una mascota con un ID para eliminar
         Mascota mascota = new Mascota("Nala", "Poodle", 12, 28.0F, "Moquillo", 
             "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Agility_Poodle.jpg/375px-Agility_Poodle.jpg", 
             false, new Cliente());
         mascota.setId(1L);
 
-        // Simulamos la respuesta del servicio
         when(mascotaService.SearchById(1L)).thenReturn(mascota);
-        doNothing().when(mascotaService).borrarMascota(1L); // Como es un método void, usamos doNothing()
+        doNothing().when(mascotaService).borrarMascota(1L); 
 
-        // Act & Assert: Realizamos la solicitud DELETE y verificamos la respuesta
+        // Act & Assert
         mockMvc.perform(delete("/api/mascota/admin/delete/1"))
-                .andExpect(status().isOk()); // Verificamos que la respuesta sea 200 OK
+                .andExpect(status().isOk()); 
 
-        // Verificamos que el servicio fue llamado correctamente
         verify(mascotaService, times(1)).borrarMascota(1L);
     }
 
