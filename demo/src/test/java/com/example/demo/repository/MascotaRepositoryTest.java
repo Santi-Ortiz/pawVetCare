@@ -103,4 +103,42 @@ public class MascotaRepositoryTest {
         Assertions.assertThat(mascotaEliminada).isNotPresent();
     }
 
+    // Consultas personalizadas
+
+    @Test
+    public void MascotaRepository_encontrarMascotasPorNombre_NotEmptyList(){
+        Mascota mascota = new Mascota("Luna", "Beagle", 4, 10.0F, "Saludable", "https://example.com/luna.jpg", true, null);
+        mascotaRepository.save(mascota);
+
+        List<Mascota> mascotas = mascotaRepository.findAllByNombre("Luna");
+
+        Assertions.assertThat(mascotas).isNotEmpty();
+        Assertions.assertThat(mascotas.size()).isEqualTo(1);
+        Assertions.assertThat(mascotas.get(0).getNombre()).isEqualTo("Luna");
+    }
+
+    @Test
+    public void MascotaRepository_encontrarMascotasPorEstado_NotEmptyList(){
+        Mascota mascota = new Mascota("Luna", "Beagle", 4, 10.0F, "Saludable", "https://example.com/luna.jpg", true, null);
+        mascotaRepository.save(mascota);
+
+        List<Mascota> mascotas = mascotaRepository.findAllByEstado(true);
+
+        Assertions.assertThat(mascotas).isNotEmpty();
+        Assertions.assertThat(mascotas.size()).isGreaterThan(0);
+        Assertions.assertThat(mascotas.get(0).getEstado()).isEqualTo(true);
+    }
+
+    @Test
+    public void MascotaRepository_encontrarMascotasPorEdadBetween_NotEmptyList(){
+        Mascota mascota = new Mascota("Luna", "Beagle", 4, 10.0F, "Saludable", "https://example.com/luna.jpg", true, null);
+        mascotaRepository.save(mascota);
+
+        List<Mascota> mascotas = mascotaRepository.findAllByEdadBetween(3, 5);
+
+        Assertions.assertThat(mascotas).isNotEmpty();
+        Assertions.assertThat(mascotas.size()).isGreaterThan(0);
+        Assertions.assertThat(mascotas.get(0).getEdad()).isBetween(3, 5);
+    }
+
 }

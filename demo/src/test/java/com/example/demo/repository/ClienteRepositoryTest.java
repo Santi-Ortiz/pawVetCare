@@ -25,23 +25,31 @@ public class ClienteRepositoryTest {
     private ClienteRepository clienteRepository;
 
     @BeforeEach
-    void init(){
+    void init() {
 
-        clienteRepository.save(new Cliente(1971408607L,"Harrison Moreno","in.lobortis@protonmail.couk",336215273L));
-        clienteRepository.save(new Cliente(1963427700L,"Dora Shields","id@protonmail.com",376298968L));
-        clienteRepository.save(new Cliente(1873486866L,"Lareina Roy","velit.dui.semper@outlook.org",341482251L));
-        clienteRepository.save(new Cliente(1410113199L,"Drake Glenn","in.at@icloud.ca",333104316L));
+        clienteRepository.save(new Cliente(1971408607L, "Harrison Moreno", "in.lobortis@protonmail.couk", 336215273L));
+        clienteRepository.save(new Cliente(1963427700L, "Dora Shields", "id@protonmail.com", 376298968L));
+        clienteRepository.save(new Cliente(1873486866L, "Lareina Roy", "velit.dui.semper@outlook.org", 341482251L));
+        clienteRepository.save(new Cliente(1410113199L, "Drake Glenn", "in.at@icloud.ca", 333104316L));
 
-        mascotaRepository.save(new Mascota("Alejandra","Chihuahua",9,5.0F,"Leptospirosis","https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Racib%C3%B3rz_2007_082.jpg/480px-Racib%C3%B3rz_2007_082.jpg",true,clienteRepository.findByCedula(336215273L)));
-        mascotaRepository.save(new Mascota("Santiago","Golden",9,20.0F,"Insuficiencia","https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/HYPSO.JPG/169px-HYPSO.JPG",true,clienteRepository.findByCedula(376298968L)));
-        mascotaRepository.save(new Mascota("Nicolas","Husky",6,30.0F,"Rabia","https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Siberian-husky.jpg/480px-Siberian-husky.jpg",true,clienteRepository.findByCedula(341482251L)));
-        mascotaRepository.save(new Mascota("Honey","BordeCollie",8,4.0F,"Pancreatitis","https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Border_collie_canon.jpg/480px-Border_collie_canon.jpg",true,clienteRepository.findByCedula(333104316L)));
-    } 
+        mascotaRepository.save(new Mascota("Alejandra", "Chihuahua", 9, 5.0F, "Leptospirosis",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Racib%C3%B3rz_2007_082.jpg/480px-Racib%C3%B3rz_2007_082.jpg",
+                true, clienteRepository.findByCedula(336215273L)));
+        mascotaRepository.save(new Mascota("Santiago", "Golden", 9, 20.0F, "Insuficiencia",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/HYPSO.JPG/169px-HYPSO.JPG", true,
+                clienteRepository.findByCedula(376298968L)));
+        mascotaRepository.save(new Mascota("Nicolas", "Husky", 6, 30.0F, "Rabia",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Siberian-husky.jpg/480px-Siberian-husky.jpg",
+                true, clienteRepository.findByCedula(341482251L)));
+        mascotaRepository.save(new Mascota("Honey", "BordeCollie", 8, 4.0F, "Pancreatitis",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Border_collie_canon.jpg/480px-Border_collie_canon.jpg",
+                true, clienteRepository.findByCedula(333104316L)));
+    }
 
     @Test
-    public void ClienteRepository_findById_Cliente(){
+    public void ClienteRepository_findById_Cliente() {
 
-        Cliente cliente = new Cliente(1032876577L,"Harrison Moreno", "hola@example.com", 123456789L);
+        Cliente cliente = new Cliente(1032876577L, "Harrison Moreno", "hola@example.com", 123456789L);
 
         clienteRepository.save(cliente);
         clienteRepository.findById(cliente.getId()).get();
@@ -52,7 +60,7 @@ public class ClienteRepositoryTest {
     }
 
     @Test
-    public void ClienteRepository_findAll_NoEmptyList(){
+    public void ClienteRepository_findAll_NoEmptyList() {
 
         Cliente cliente1 = new Cliente(1598765475L, "Martin Garrix", "pepepro@example.com", 455555546L);
         Cliente cliente2 = new Cliente(465789633L, "Juan Luis Guerra", "avispas@example.com", 123456789L);
@@ -67,8 +75,8 @@ public class ClienteRepositoryTest {
     }
 
     @Test
-    public void ClienteRepository_add_Cliente(){
-        
+    public void ClienteRepository_add_Cliente() {
+
         Cliente cliente = new Cliente(654320987L, "Carlos Vives", "carlitos@vives.com", 123456789L);
 
         clienteRepository.save(cliente);
@@ -77,9 +85,9 @@ public class ClienteRepositoryTest {
         Assertions.assertThat(cliente.getCedula()).isEqualTo(654320987L);
         Assertions.assertThat(cliente.getNombre()).isEqualTo("Carlos Vives");
     }
-    
+
     @Test
-    public void ClienteRepository_update_Cliente(){
+    public void ClienteRepository_update_Cliente() {
 
         Cliente cliente = new Cliente(658944567L, "Juanes", "camisa@negra.com", 123456789L);
         clienteRepository.save(cliente);
@@ -93,7 +101,7 @@ public class ClienteRepositoryTest {
     }
 
     @Test
-    public void ClienteRepository_delete(){
+    public void ClienteRepository_delete() {
 
         Cliente cliente = new Cliente(532587633L, "Oliver Heldens", "hello@example.com", 123456789L);
         clienteRepository.save(cliente);
@@ -107,11 +115,14 @@ public class ClienteRepositoryTest {
     }
 
     @Test
-    public void ClienteRepository_asignarMascotaCliente_Cliente(){
-        
+    public void ClienteRepository_asignarMascotaCliente_Cliente() {
+
         Cliente cliente = new Cliente(148963577L, "Pedro Capó", "calma@example.com", 123456789L);
-        Mascota mascota1 = new Mascota("Santiago","Golden",9,20.0F,"Insuficiencia","https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/HYPSO.JPG/169px-HYPSO.JPG",true, null);
-        Mascota mascota2 = new Mascota("Alejandra","Chihuahua",9,5.0F,"Leptospirosis","https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Racib%C3%B3rz_2007_082.jpg/480px-Racib%C3%B3rz_2007_082.jpg",true, null);
+        Mascota mascota1 = new Mascota("Santiago", "Golden", 9, 20.0F, "Insuficiencia",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/HYPSO.JPG/169px-HYPSO.JPG", true, null);
+        Mascota mascota2 = new Mascota("Alejandra", "Chihuahua", 9, 5.0F, "Leptospirosis",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Racib%C3%B3rz_2007_082.jpg/480px-Racib%C3%B3rz_2007_082.jpg",
+                true, null);
         List<Mascota> mascotas = List.of(mascota1, mascota2);
         clienteRepository.save(cliente);
 
@@ -120,6 +131,46 @@ public class ClienteRepositoryTest {
         Assertions.assertThat(cliente.getMascotas()).isNotEmpty();
         Assertions.assertThat(cliente.getMascotas().size()).isEqualTo(2);
         Assertions.assertThat(cliente.getMascotas().size()).isGreaterThan(0);
+    }
+
+    // Consultas personalizadas
+
+    @Test
+    public void ClienteRepository_contarMascotasPorCliente_NotEmptyList() {
+
+        Cliente cliente = new Cliente(1032876577L, "Pedro Capó", "calma@example.com", 123456789L);
+        clienteRepository.save(cliente);
+
+        long cantidadMascotas = clienteRepository.countMascotasByClienteId(1032876577L);
+
+        Assertions.assertThat(cantidadMascotas).isEqualTo(0);
+    }
+
+    @Test
+    public void ClienteRepository_findClientesConMasDeNMascotas_NotEmptyList() {
+
+        Cliente cliente = new Cliente(79810986L, "Pedro Capó", "calma@example.com", 123456789L, List.of(new Mascota(), new Mascota(), new Mascota(), new Mascota()));
+        clienteRepository.save(cliente);
+
+        List<Cliente> clientes = clienteRepository.findClientesWithMoreThanNMascotas(3);
+        clientes.add(cliente);
+
+        Assertions.assertThat(clientes).isNotEmpty();
+        Assertions.assertThat(clientes.size()).isGreaterThan(0);
+    }
+
+    @Test
+    public void ClienteRepository_findClientesPorRangoCedula_NotEmptyList() {
+
+        Cliente cliente1 = new Cliente(456789132L, "Pedro Capó", "ola@example.com", 789L);
+        Cliente cliente2 = new Cliente(123456789L, "Juanes", "chao@example.com", 987652L);
+        clienteRepository.save(cliente1);
+        clienteRepository.save(cliente2);
+
+        List<Cliente> clientes = clienteRepository.findClientesByCedulaRange(100000000L, 200000000L);
+
+        Assertions.assertThat(clientes).isNotEmpty();
+        Assertions.assertThat(clientes.size()).isGreaterThan(0);
     }
 
 }
