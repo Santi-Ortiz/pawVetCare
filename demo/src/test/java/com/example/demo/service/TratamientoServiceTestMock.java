@@ -50,17 +50,11 @@ public class TratamientoServiceTestMock {
     private TratamientoMedicamentoRepository tratamientoMedicamentoRepository;
 
     @BeforeEach
-    public void setUp() {
-        // No necesitas inicializar manualmente los mocks con MockitoExtension
-    }
+    public void setUp() {}
 
     @BeforeEach
     public void init() {}
     
-
-    // TODO: Hacer pruebas de integración
-    // TODO: Hacer pruebas con mocks de los repositorios
-
     @Test
     public void agregarTratamiento_Exito() {
         // Arrange

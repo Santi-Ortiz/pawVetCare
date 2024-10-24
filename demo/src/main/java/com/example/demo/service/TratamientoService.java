@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,9 +59,20 @@ public class TratamientoService {
         return savedTratamiento;
     }
 
+    @Transactional
+    public Tratamiento findById(Long id) {
+        Optional<Tratamiento> tratamiento = tratamientoRepository.findById(id);
+        if (tratamiento.isPresent()) {
+            return tratamiento.get();
+        } else {
+            throw new RuntimeException("Tratamiento no encontrado");
+        }
+    }
 
-
-
+    @Transactional
+    public List<Tratamiento> obtenerTratamientos() {
+        return tratamientoRepository.findAll();
+    }
 
     @Transactional
     public void eliminarTratamiento(Long id){
