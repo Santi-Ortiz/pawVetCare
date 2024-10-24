@@ -84,8 +84,8 @@ public class MascotaService {
     }
 
     @Transactional
-    public void add(Mascota mascota) {
-        mascotaRepository.save(mascota);
+    public Mascota add(Mascota mascota) {
+        return mascotaRepository.save(mascota);
     }
 
     public long contarMascotasActivas() {
