@@ -238,7 +238,7 @@ public class prueba2 {
 
         // Localiza y hace clic en el botón "Dar Medicamento"
         WebElement darMedicamentoButton = driver.findElement(By.cssSelector(".dar-button"));
-        //darMedicamentoButton.click();
+        darMedicamentoButton.click();
         
         // Espera a que la página cargue
         try {
@@ -248,8 +248,8 @@ public class prueba2 {
         }
 
         // Maneja la alerta de confirmación
-        // Alert alert = driver.switchTo().alert();
-        // alert.accept(); // Haz clic en "Aceptar" en la alerta
+        Alert alert = driver.switchTo().alert();
+        alert.accept(); // Haz clic en "Aceptar" en la alerta
         
         // Espera a que la página cargue
         try {
@@ -403,11 +403,11 @@ public class prueba2 {
         int gananciasTotalesIntFinal = Integer.parseInt(gananciasTotales2);
         
         // Aserción para comprobar que a es uno más que b
-        //Assertions.assertEquals(numeroTratamientos + 1, numeroTratamientosFinal, "Los tratamientos aumentaron 1 correctamente.");
+        Assertions.assertEquals(numeroTratamientos + 1, numeroTratamientosFinal, "Los tratamientos aumentaron 1 correctamente.");
         // Aserción para comprobar que a es mayor que b
-        //Assertions.assertTrue(gananciasTotalesIntFinal > gananciasTotalesInt, "Las ganancias aumentaron.");
+        Assertions.assertTrue(gananciasTotalesIntFinal > gananciasTotalesInt, "Las ganancias aumentaron.");
         // Aserción para comprobar que las ganancias aumentaron bien
-        //Assertions.assertEquals("5", gananciasTotalesIntFinal - gananciasTotalesInt, "Las ganancias fueron de 5 correctamente.");
+        Assertions.assertEquals("5", gananciasTotalesIntFinal - gananciasTotalesInt, "Las ganancias fueron de 5 correctamente.");
     }
 
     @AfterEach
