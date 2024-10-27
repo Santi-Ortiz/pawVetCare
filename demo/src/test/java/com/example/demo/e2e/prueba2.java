@@ -219,8 +219,8 @@ public class prueba2 {
         }
 
         // Maneja la alerta de confirmación
-        Alert alert = driver.switchTo().alert();
-        alert.accept(); // Haz clic en "Aceptar" en la alerta
+        // Alert alert = driver.switchTo().alert();
+        // alert.accept(); // Haz clic en "Aceptar" en la alerta
         
         // Espera a que la página cargue
         try {
