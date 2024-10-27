@@ -86,7 +86,7 @@ public class prueba1 {
 
         // Espera para que aparezca la alerta de "Credenciales incorrectas"
         try {
-            Thread.sleep(1000);  // Ajusta la espera según el tiempo de carga necesario
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -97,7 +97,7 @@ public class prueba1 {
 
         // Espera para reescribir
         try {
-            Thread.sleep(1000);  // Ajusta la espera según el tiempo de carga necesario
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -113,7 +113,7 @@ public class prueba1 {
 
         // Espera a la carga de la página
         try {
-            Thread.sleep(2000);  // Ajusta la espera según el tiempo de carga necesario
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -124,7 +124,7 @@ public class prueba1 {
 
         // Espera a la carga de la página
         try {
-            Thread.sleep(2000);  // Ajusta la espera según el tiempo de carga necesario
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

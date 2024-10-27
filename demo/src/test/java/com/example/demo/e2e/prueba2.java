@@ -19,9 +19,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class prueba2 {
     
     private WebDriver driver;
@@ -87,7 +91,7 @@ public class prueba2 {
 
         // Espera a la carga de la página
         try {
-            Thread.sleep(2000);  // Ajusta la espera según el tiempo de carga necesario
+            Thread.sleep(2000);  
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -98,7 +102,7 @@ public class prueba2 {
 
         // Espera a la carga de la página
         try {
-            Thread.sleep(2000);  // Ajusta la espera según el tiempo de carga necesario
+            Thread.sleep(2000); 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -162,7 +166,7 @@ public class prueba2 {
 
         // Espera a la carga de la página
         try {
-            Thread.sleep(2000);  // Ajusta la espera según el tiempo de carga necesario
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -328,7 +332,7 @@ public class prueba2 {
 
         // Espera a la carga de la página
         try {
-            Thread.sleep(2000);  // Ajusta la espera según el tiempo de carga necesario
+            Thread.sleep(2000); 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -339,7 +343,7 @@ public class prueba2 {
 
         // Espera a la carga de la página
         try {
-            Thread.sleep(2000);  // Ajusta la espera según el tiempo de carga necesario
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
