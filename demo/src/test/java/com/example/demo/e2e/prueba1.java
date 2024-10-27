@@ -36,7 +36,7 @@ public class prueba1 {
     }
 
     @Test
-    public void ingresarYClickSoyPVC() {
+    public void VeterinarioClienteMascota() {
         // Navega a la página principal
         driver.get("http://localhost:4200/home");
 
