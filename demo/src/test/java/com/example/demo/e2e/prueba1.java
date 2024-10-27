@@ -18,9 +18,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.test.annotation.DirtiesContext;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class prueba1 {
     
     private WebDriver driver;
@@ -37,7 +39,7 @@ public class prueba1 {
     }
 
     @Test
-    public void VeterinarioClienteMascota() {
+    public void IngresarComoVeterinario() {
         // Navega a la página principal
         driver.get("http://localhost:4200/home");
 
@@ -421,6 +423,12 @@ public class prueba1 {
         String fotoMascota2 = fotoLabel2.getAttribute("value");
         Assertions.assertEquals("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtJU_aRybhiJnVUitOFKoexK89bvCy4oyB5ACTXE8zUxF8xhVM", fotoMascota2);
 
+        // Espera a que la página cargue
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @AfterEach
