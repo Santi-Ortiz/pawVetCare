@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -39,6 +40,9 @@ public class prueba1 {
     public void VeterinarioClienteMascota() {
         // Navega a la página principal
         driver.get("http://localhost:4200/home");
+
+        // Empezar con un zoom diferente
+        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='70%'");
 
         // Espera para que cargue la página
         try {
@@ -124,7 +128,6 @@ public class prueba1 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
 
         // Completar formulario de cliente con campo de cédula incorrecto
         WebElement nombreInput = driver.findElement(By.id("nombre"));
@@ -274,7 +277,7 @@ public class prueba1 {
             e.printStackTrace();
         }
 
-         // Buscar la mascota por nombre
+        // Buscar la mascota por nombre
         WebElement buscarInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("nombreMascota")));
         buscarInput.clear();
         buscarInput.sendKeys("Pacco");
