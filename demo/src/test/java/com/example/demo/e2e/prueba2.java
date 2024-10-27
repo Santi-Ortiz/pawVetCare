@@ -8,6 +8,7 @@ import org.aspectj.lang.annotation.After;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -30,6 +31,8 @@ public class prueba2 {
     
     private WebDriver driver;
     private WebDriverWait wait;
+    private int numeroTratamientos;
+    private int gananciasTotalesInt;
 
     @BeforeEach
     public void init() {
@@ -42,7 +45,13 @@ public class prueba2 {
     }
 
     @Test
-    public void VeterinarioDarTratamiento() {
+    public void flujoCompleto() {
+        EntrarPrimeraInfoDashboard();
+        DarTratamiento();
+        ObservarCambiosDashboard();
+    }
+
+    public void EntrarPrimeraInfoDashboard() {
         // Navega a la página principal
         driver.get("http://localhost:4200/home");
 
@@ -110,7 +119,7 @@ public class prueba2 {
         // Almacena el número de tratamientos en una variable
         WebElement numeroTratamientosElement = driver.findElement(By.className("numero")); // Asegúrate de que solo haya un elemento con esta clase o usa un selector más específico si hay varios
         String numeroTratamientosText = numeroTratamientosElement.getText().trim();
-        int numeroTratamientos = Integer.parseInt(numeroTratamientosText);  // Convierte a int si es un número
+        this.numeroTratamientos = Integer.parseInt(numeroTratamientosText);  // Convierte a int si es un número
 
         // Almacena las ganancias totales en otra variable
         // Localiza el elemento de 'ganancias totales' y almacena el texto en la variable
@@ -118,11 +127,27 @@ public class prueba2 {
         String gananciasTotales = gananciasTotalesElement.getText();
         // Convertir el valor a número para usarlo en assert o cálculos
         gananciasTotales = gananciasTotales.replace("$", "").replace(",", "").trim();
-        int gananciasTotalesInt = Integer.parseInt(gananciasTotales);
+        this.gananciasTotalesInt = Integer.parseInt(gananciasTotales);
 
         // Hacer clic en el enlace "Cerrar Sesión"
         WebElement linkCerrar = wait.until(ExpectedConditions.elementToBeClickable(By.className("buttonSinCuenta")));
         linkCerrar.click();
+
+        // Espera para que cargue la página
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void DarTratamiento() {
+        // Navega a la página principal
+        driver.get("http://localhost:4200/home");
+
+        // Empezar con un zoom diferente
+        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='70%'");
 
         // Espera para que cargue la página
         try {
@@ -289,6 +314,22 @@ public class prueba2 {
         // Hacer clic en el enlace "Cerrar Sesión"
         WebElement linkCerrar2 = wait.until(ExpectedConditions.elementToBeClickable(By.className("buttonSinCuenta")));
         linkCerrar2.click();
+
+        // Espera para que cargue la página
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void ObservarCambiosDashboard() {
+        // Navega a la página principal
+        driver.get("http://localhost:4200/home");
+
+        // Empezar con un zoom diferente
+        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='70%'");
 
         // Espera para que cargue la página
         try {

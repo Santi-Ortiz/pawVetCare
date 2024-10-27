@@ -348,10 +348,26 @@ public class prueba1 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+    }
+
+        @Test
+    public void IngresarComoCliente() {
+        // Navega a la página principal
+        driver.get("http://localhost:4200/home");
+
+        // Empezar con un zoom diferente
+        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='70%'");
+
+        // Espera para que cargue la página
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // Localiza y hace clic en el botón "Soy PVC"
-        WebElement soyPVCButton2 = driver.findElement(By.className("buttonSoyPVC"));
-        soyPVCButton2.click();
+        WebElement soyPVCButton = driver.findElement(By.className("buttonSoyPVC"));
+        soyPVCButton.click();
 
         // Espera para que cargue la siguiente página
         try {
