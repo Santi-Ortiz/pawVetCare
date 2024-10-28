@@ -25,7 +25,7 @@ import org.springframework.test.context.ActiveProfiles;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class prueba1 {
+public class pruebas1 {
     
     private WebDriver driver;
     private WebDriverWait wait;
