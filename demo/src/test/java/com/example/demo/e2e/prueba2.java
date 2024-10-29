@@ -58,35 +58,14 @@ public class prueba2 {
         // Empezar con un zoom diferente
         ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='70%'");
 
-        // Espera para que cargue la página
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Localiza y hace clic en el botón "Soy PVC"
         WebElement soyPVCButton = driver.findElement(By.className("buttonSoyPVC"));
         soyPVCButton.click();
-
-        // Espera para que cargue la siguiente página
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Localiza y hace clic en el botón "¡Soy Admin!"
         WebElement soyAdminContainer = driver.findElement(By.className("container-admin"));
         WebElement soyAdminButton = soyAdminContainer.findElement(By.className("text-cliente"));
         wait.until(ExpectedConditions.elementToBeClickable(soyAdminButton)).click();
-
-        // Espera para que cargue la página de inicio de sesión
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Primer intento de ingreso con credenciales incorrectas
         WebElement cedulaInput = driver.findElement(By.id("username"));
@@ -98,23 +77,9 @@ public class prueba2 {
         WebElement verMisMascotasButton = driver.findElement(By.cssSelector("input[type='submit'][value='Ver mis mascotas']"));
         verMisMascotasButton.click();
 
-        // Espera a la carga de la página
-        try {
-            Thread.sleep(2000);  
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Navegar a la sección "CLIENTES"
-        WebElement dashboardLink = driver.findElement(By.cssSelector("a[routerlink='/dashboard']"));
+        WebElement dashboardLink = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[routerlink='/dashboard']")));
         dashboardLink.click();
-
-        // Espera a la carga de la página
-        try {
-            Thread.sleep(2000); 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Almacena el número de tratamientos en una variable
         WebElement numeroTratamientosElement = driver.findElement(By.className("numero")); // Asegúrate de que solo haya un elemento con esta clase o usa un selector más específico si hay varios
@@ -133,13 +98,6 @@ public class prueba2 {
         WebElement linkCerrar = wait.until(ExpectedConditions.elementToBeClickable(By.className("buttonSinCuenta")));
         linkCerrar.click();
 
-        // Espera para que cargue la página
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void DarTratamiento() {
@@ -148,13 +106,6 @@ public class prueba2 {
 
         // Empezar con un zoom diferente
         ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='70%'");
-
-        // Espera para que cargue la página
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Localiza y hace clic en el botón "Soy PVC"
         WebElement soyPVCButton2 = driver.findElement(By.className("buttonSoyPVC"));
@@ -172,13 +123,6 @@ public class prueba2 {
         WebElement soyVetButton = soyVetContainer.findElement(By.className("text-cliente"));
         soyVetButton.click();
 
-        // Espera para que cargue la página de inicio de sesión
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Primer intento de ingreso con credenciales incorrectas
         WebElement cedulaInput2 = driver.findElement(By.id("cedula"));
         cedulaInput2.sendKeys("1234");
@@ -189,13 +133,6 @@ public class prueba2 {
         WebElement verMisMascotasButton2 = driver.findElement(By.cssSelector("input[type='submit'][value='Ver mis mascotas']"));
         verMisMascotasButton2.click();
 
-        // Espera a la carga de la página
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Buscar la mascota por nombre
         WebElement buscarInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("nombreMascota")));
         buscarInput.clear();
@@ -204,23 +141,9 @@ public class prueba2 {
         WebElement buscarMasButton = driver.findElement(By.className("buscador-button"));
         buscarMasButton.click();
 
-        // Espera a que la página cargue
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Hacer clic en el enlace "+ Info" de la mascota encontrada
         WebElement infoButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("info-button")));
         infoButton.click();
-
-        // Espera a que la página cargue
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Localiza el elemento <select> por su nombre
         WebElement medicamentoSelect = driver.findElement(By.name("medicamento"));
@@ -239,35 +162,13 @@ public class prueba2 {
         // Localiza y hace clic en el botón "Dar Medicamento"
         WebElement darMedicamentoButton = driver.findElement(By.cssSelector(".dar-button"));
         darMedicamentoButton.click();
-        
-        // Espera a que la página cargue
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        // Maneja la alerta de confirmación
-        Alert alert = driver.switchTo().alert();
-        alert.accept(); // Haz clic en "Aceptar" en la alerta
-        
-        // Espera a que la página cargue
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        alert.accept();
 
         // Hacer clic en el enlace "MASCOTAS"
         WebElement linkMascotas2 = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("MASCOTAS")));
         linkMascotas2.click();
-
-        // Espera a que la página cargue
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Buscar la mascota por nombre
         WebElement buscarInput2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("nombreMascota")));
@@ -277,23 +178,9 @@ public class prueba2 {
         WebElement buscarMasButton2 = driver.findElement(By.className("buscador-button"));
         buscarMasButton2.click();
 
-        // Espera a que la página cargue
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Hacer clic en el enlace "+ Info" de la mascota encontrada
         WebElement infoButton2 = wait.until(ExpectedConditions.elementToBeClickable(By.className("info-button")));
         infoButton2.click();
-
-        // Espera a que la página cargue
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Verifica que el medicamento mostrado sea igual al seleccionado
         WebElement medicamentoLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemNombre .info-label"));
@@ -308,19 +195,12 @@ public class prueba2 {
         String  cantMostrado = cantLabel.getText();
 
         // Aserción para verificar que coincidan
-        // Assertions.assertEquals(medicamentoSeleccionado, medicamentoMostrado, "El medicamento mostrado no coincide con el seleccionado.");
-        // Assertions.assertEquals("1", cantMostrado, "La cédula no coincide con el del vet.");
+        Assertions.assertEquals(medicamentoSeleccionado, medicamentoMostrado, "El medicamento mostrado no coincide con el seleccionado.");
+        Assertions.assertEquals("1", cantMostrado, "La cédula no coincide con el del vet.");
 
         // Hacer clic en el enlace "Cerrar Sesión"
         WebElement linkCerrar2 = wait.until(ExpectedConditions.elementToBeClickable(By.className("buttonSinCuenta")));
         linkCerrar2.click();
-
-        // Espera para que cargue la página
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -331,35 +211,14 @@ public class prueba2 {
         // Empezar con un zoom diferente
         ((JavascriptExecutor) driver).executeScript("document.body.style.zoom='70%'");
 
-        // Espera para que cargue la página
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Localiza y hace clic en el botón "Soy PVC"
         WebElement soyPVCButton3 = driver.findElement(By.className("buttonSoyPVC"));
         soyPVCButton3.click();
-
-        // Espera para que cargue la siguiente página
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Localiza y hace clic en el botón "¡Soy Admin!"
         WebElement soyAdminContainer2 = driver.findElement(By.className("container-admin"));
         WebElement soyAdminButton2 = soyAdminContainer2.findElement(By.className("text-cliente"));
         wait.until(ExpectedConditions.elementToBeClickable(soyAdminButton2)).click();
-
-        // Espera para que cargue la página de inicio de sesión
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Primer intento de ingreso con credenciales incorrectas
         WebElement cedulaInput3 = driver.findElement(By.id("username"));
@@ -368,26 +227,13 @@ public class prueba2 {
         WebElement passwordInput3 = driver.findElement(By.id("password"));
         passwordInput3.sendKeys("admin");
 
-        WebElement verMisMascotasButton3 = driver.findElement(By.cssSelector("input[type='submit'][value='Ver mis mascotas']"));
+        WebElement verMisMascotasButton3 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[type='submit'][value='Ver mis mascotas']")));
         verMisMascotasButton3.click();
 
-        // Espera a la carga de la página
-        try {
-            Thread.sleep(2000); 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Navegar a la sección "CLIENTES"
-        WebElement dashboardLink3 = driver.findElement(By.cssSelector("a[routerlink='/dashboard']"));
+        WebElement dashboardLink3 =  wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[routerlink='/dashboard']")));
         dashboardLink3.click();
-
-        // Espera a la carga de la página
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        
 
         // Almacena el número de tratamientos en una variable
         WebElement numeroTratamientosElement2 = driver.findElement(By.className("numero")); // Asegúrate de que solo haya un elemento con esta clase o usa un selector más específico si hay varios
