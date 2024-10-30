@@ -246,13 +246,13 @@ public class DatabaseInit implements ApplicationRunner{
         mascotaRepository.save(new Mascota("Honey","BordeCollie",8,4.0F,"Pancreatitis","https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Border_collie_canon.jpg/480px-Border_collie_canon.jpg",true,clienteRepository.findByCedula(1430947461L)));
         
         //Creación Medicamentos
-        medicamentoRepository.save(new Medicamento("Antibiótico A", 25.5D, 20.5D, 10, 50));
+        medicamentoRepository.save(new Medicamento("Antibiótico A", 25.5D, 20.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Desparasitante B", 15.5D, 10.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Vacuna Rabia", 15.5D, 5.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Analgésico C", 44.5D, 4.5D, 10, 0));
-        medicamentoRepository.save(new Medicamento("Antipulgas D", 66.5D, 6.5D, 10, 6));
+        medicamentoRepository.save(new Medicamento("Antipulgas D", 66.5D, 6.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Antiinflamatorio E", 8.5D, 8.5D, 10, 0));
-        medicamentoRepository.save(new Medicamento("Vacuna Moquillo", 99.5D, 9.5D, 10, 7));
+        medicamentoRepository.save(new Medicamento("Vacuna Moquillo", 99.5D, 9.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Suplemento Articular", 6.5D, 6.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Antibiótico F", 8.5D, 8.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Colirio Ocular", 6.5D, 6.5D, 10, 0));
