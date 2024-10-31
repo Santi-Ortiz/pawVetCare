@@ -54,19 +54,23 @@ public class VeterinarioService {
 
         // Actualiza los campos
         vetExistente.setNombre(veterinarioDTO.getNombre());
-        vetExistente.setContrasena(veterinarioDTO.getContrasena());
+        vetExistente.setContrasena(vetExistente.getContrasena());
         vetExistente.setFoto(veterinarioDTO.getFoto());
         vetExistente.setEstado(veterinarioDTO.getEstado());
 
-        // Busca la especialidad existente en la base de datos
-        Especialidad especialidad = especialidadRepository.findById((long) veterinarioDTO.getEspecialidad_id())
-                .orElseThrow(() -> new NoSuchElementException("La especialidad con el ID " + veterinarioDTO.getEspecialidad_id() + " no existe."));
-        
-        vetExistente.setEspecialidad(especialidad);
+        // Verifica si especialidad_id no es null antes de intentar obtener la especialidad
+        if (veterinarioDTO.getEspecialidad_id() != null) {
+            Especialidad especialidad = especialidadRepository.findById((long) veterinarioDTO.getEspecialidad_id())
+                    .orElseThrow(() -> new NoSuchElementException("La especialidad con el ID " + veterinarioDTO.getEspecialidad_id() + " no existe."));
+            vetExistente.setEspecialidad(especialidad);
+        } else {
+            vetExistente.setEspecialidad(null); // Opcionalmente, establece la especialidad en null si no se proporciona un ID
+        }
 
         // Guarda los cambios
         veterinarioRepository.save(vetExistente);
     }
+
 
     @Transactional
     public VeterinarioDTO obtenerVeterinarioPorCedula(Long cedula) {

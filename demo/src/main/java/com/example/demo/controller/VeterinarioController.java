@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Cliente;
+import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Mascota;
 import com.example.demo.entity.Veterinario;
 import com.example.demo.entity.VeterinarioDTO;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.ClienteService;
+import com.example.demo.service.EspecialidadService;
 import com.example.demo.service.MascotaService;
 import com.example.demo.service.VeterinarioService;
 
@@ -40,6 +42,9 @@ public class VeterinarioController {
 
     @Autowired
     private VeterinarioService veterinarioService;
+
+    @Autowired
+    private EspecialidadService especialidadService;
 
     // Obtener todas las mascotas (Veterinario)
     @GetMapping("/mascotas")
@@ -136,33 +141,38 @@ public class VeterinarioController {
 
     @PutMapping("/update/{cedula}")
     public ResponseEntity<VeterinarioDTO> actualizarInfoVet(@PathVariable("cedula") Long cedula, @RequestBody VeterinarioDTO veterinarioActualizado) {
+        // Buscar el veterinario existente por cédula
         Veterinario existingVet = veterinarioService.buscarVetPorCedula(cedula);
-        
-        if (existingVet != null) {
-            // Verificar si la cédula ya pertenece a otro veterinario
-            Veterinario vetConMismaCedula = veterinarioService.buscarVetPorCedula(veterinarioActualizado.getCedula());
-            if (vetConMismaCedula != null && !vetConMismaCedula.getId().equals(existingVet.getId())) {
-                // Si la cédula ya está en uso por otro veterinario, retornar error
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(null); 
-            }
 
-            // Actualizar datos del veterinario
-            existingVet.setCedula(existingVet.getCedula());
-            existingVet.setContrasena(veterinarioActualizado.getContrasena());
-            existingVet.setFoto(veterinarioActualizado.getFoto());
-            existingVet.setNombre(veterinarioActualizado.getNombre());
-            existingVet.setEstado(veterinarioActualizado.getEstado());
-            existingVet.setEspecialidad(existingVet.getEspecialidad());
-
-            // Guardar cambios
-            veterinarioService.actualizarVet(veterinarioActualizado);
-
-            return ResponseEntity.ok(veterinarioActualizado);
-        } else {
-            // Veterinario no encontrado
+        if (existingVet == null) {
+            // Si el veterinario no existe, retornar 404
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } else {
+            // Actualizar el veterinario con los datos del DTO recibido
+            veterinarioService.actualizarVet(veterinarioActualizado);
+            
+            // Obtener el veterinario actualizado después de la modificación
+            Veterinario updatedVet = veterinarioService.buscarVetPorCedula(cedula);
+
+            // Convertir el veterinario actualizado a VeterinarioDTO para retornar
+            VeterinarioDTO veterinarioDTOActualizado = convertirVeterinarioA_DTO(updatedVet);
+
+            return ResponseEntity.ok(veterinarioDTOActualizado);
         }
     }
+
+    private VeterinarioDTO convertirVeterinarioA_DTO(Veterinario veterinario) {
+        VeterinarioDTO dto = new VeterinarioDTO();
+        dto.setCedula(veterinario.getCedula());
+        dto.setNombre(veterinario.getNombre());
+        dto.setContrasena(veterinario.getContrasena());
+        dto.setFoto(veterinario.getFoto());
+        dto.setEstado(veterinario.getEstado());
+        dto.setEspecialidad_id(veterinario.getEspecialidad() != null ? veterinario.getEspecialidad().getId() : null);
+        return dto;
+    }
+    
+
 
     // Se elimina un veterinario por su cédula
     @DeleteMapping("/delete/{cedula}")

@@ -23,4 +23,9 @@ public class EspecialidadService {
     public void eliminarEspecialidad(String nombre_espe){
       especialidadRepository.delete(especialidadRepository.findByNombreEspecialidad(nombre_espe));
     }
+
+    @Transactional
+    public Especialidad buscarEspecialidadPorId(Long id){
+      return especialidadRepository.findById(id).get();
+    }
 }

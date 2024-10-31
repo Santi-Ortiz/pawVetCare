@@ -7,7 +7,7 @@ public class VeterinarioDTO {
     private String contrasena;
     private String foto;
     private Boolean estado;
-    private Integer especialidad_id;
+    private Long especialidad_id;
     private String nombreEspecialidad;
 
     public VeterinarioDTO(Veterinario veterinario) {
@@ -80,11 +80,11 @@ public class VeterinarioDTO {
         this.estado = estado;
     }
 
-    public Integer getEspecialidad_id() {
+    public Long getEspecialidad_id() {
         return especialidad_id;
     }
 
-    public void setEspecialidad_id(Integer especialidad_id) {
+    public void setEspecialidad_id(Long especialidad_id) {
         this.especialidad_id = especialidad_id;
     }
 
