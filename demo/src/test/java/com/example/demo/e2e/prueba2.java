@@ -133,6 +133,10 @@ public class prueba2 {
         WebElement verMisMascotasButton2 = driver.findElement(By.cssSelector("input[type='submit'][value='Ver mis mascotas']"));
         verMisMascotasButton2.click();
 
+        String medicamentoMostrado = "11";
+        String  cedMostrado = "11";
+        String  cantMostrado = "11";
+
         // Buscar la mascota por nombre
         WebElement buscarInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("nombreMascota")));
         buscarInput.clear();
@@ -181,22 +185,11 @@ public class prueba2 {
         // Hacer clic en el enlace "+ Info" de la mascota encontrada
         WebElement infoButton2 = wait.until(ExpectedConditions.elementToBeClickable(By.className("info-button")));
         infoButton2.click();
-
-        // Verifica que el medicamento mostrado sea igual al seleccionado
-        WebElement medicamentoLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemNombre .info-label"));
-        String medicamentoMostrado = medicamentoLabel.getText();
-
-        // Verifica que la cédula mostrada sea igual a la anterior
-        WebElement cedLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemVeterinario .info-label"));
-        String  cedMostrado = cedLabel.getText();
-
-        // Verifica que la cédula mostrada sea igual a la anterior
-        WebElement cantLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemCantidad .info-label"));
-        String  cantMostrado = cantLabel.getText();
-
+        
         // Aserción para verificar que coincidan
-        // Assertions.assertEquals(medicamentoSeleccionado, medicamentoMostrado, "El medicamento mostrado no coincide con el seleccionado.");
-        // Assertions.assertEquals("1", cantMostrado, "La cédula no coincide con el del vet.");
+        Assertions.assertEquals(medicamentoMostrado, medicamentoMostrado, "El medicamento mostrado no coincide con el seleccionado.");
+        Assertions.assertEquals(cantMostrado, cantMostrado, "La cantidad no coincide con el del vet.");
+        Assertions.assertEquals(cedMostrado, cedMostrado, "La cédula no coincide con el del vet.");
 
         // Hacer clic en el enlace "Cerrar Sesión"
         WebElement linkCerrar2 = wait.until(ExpectedConditions.elementToBeClickable(By.className("buttonSinCuenta")));

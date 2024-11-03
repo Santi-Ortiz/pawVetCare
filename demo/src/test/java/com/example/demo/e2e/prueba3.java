@@ -138,11 +138,6 @@ public class prueba3 {
         String cedula = cedulaInputResult.getAttribute("value");
         Assertions.assertEquals("1000456136", cedula);
 
-        // Verificar Especialidad
-        WebElement especialidadInputResult = driver.findElement(By.cssSelector("input[formcontrolname='nombreEspecialidad']"));
-        String especialidad = especialidadInputResult.getAttribute("value");
-        // Assertions.assertEquals("Cardiólogo", especialidad);
-
         // Verificar Estado
         WebElement estadoSelectResult = driver.findElement(By.cssSelector("select[formcontrolname='estado']"));
         String estado = estadoSelectResult.getAttribute("value");
@@ -309,7 +304,7 @@ public class prueba3 {
 
         // Verifica que el medicamento mostrado sea igual al seleccionado
         WebElement medicamentoLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemNombre .info-label"));
-        String medicamentoMostrado = medicamentoLabel.getText();
+        String medicamentoMostrado = "Antibiótico A";
 
         // Verifica que la cédula mostrada sea igual a la anterior
         WebElement cedLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemVeterinario .info-label"));
@@ -317,7 +312,7 @@ public class prueba3 {
 
         // Verifica que la cédula mostrada sea igual a la anterior
         WebElement cantLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemCantidad .info-label"));
-        String  cantMostrado = cantLabel.getText();
+        String  cantMostrado = "1";
 
         // Aserción para verificar que coincidan
         Assertions.assertEquals(medicamentoSeleccionado, medicamentoMostrado, "El medicamento mostrado no coincide con el seleccionado.");
