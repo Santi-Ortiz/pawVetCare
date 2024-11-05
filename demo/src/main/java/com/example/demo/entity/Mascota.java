@@ -5,6 +5,11 @@ import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 @Entity
 @Table(name="mascota")
 public class Mascota{
@@ -30,6 +35,21 @@ public class Mascota{
 
     public Mascota(){
     }
+    
+    public Mascota(Long id, String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto,
+            Boolean estado, Cliente cliente, List<Tratamiento> tratamientos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.raza = raza;
+        this.edad = edad;
+        this.peso = peso;
+        this.enfermedad = enfermedad;
+        this.foto = foto;
+        this.estado = estado;
+        this.cliente = cliente;
+        this.tratamientos = tratamientos;
+    }
+
     public Mascota(Long id, String nombre, String raza, Integer edad, Float peso, String enfermedad, String foto, Boolean estado, Cliente cliente) {
         this.id = id;
         this.nombre = nombre;

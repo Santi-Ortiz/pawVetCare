@@ -7,6 +7,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
+import lombok.Builder;
+import lombok.Data;
+
+
+@Data
+@Builder
 @Entity
 @Table(name="tratamiento")
 
@@ -38,6 +44,15 @@ public class Tratamiento{
         this.fecha = fecha;
         this.veterinario = veterinario;
         this.mascota = mascota;
+    }
+
+    public Tratamiento(Long id, Date fecha, Veterinario veterinario, Mascota mascota,
+            List<TratamientoMedicamento> tratamientoMedicamentos) {
+        this.id = id;
+        this.fecha = fecha;
+        this.veterinario = veterinario;
+        this.mascota = mascota;
+        this.tratamientoMedicamentos = tratamientoMedicamentos;
     }
 
     public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota, List<TratamientoMedicamento> tratamientoMedicamentos) {

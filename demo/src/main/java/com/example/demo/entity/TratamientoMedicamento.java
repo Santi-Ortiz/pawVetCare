@@ -2,6 +2,11 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 @Entity
 @Table(name = "tratamiento_medicamento")
 public class TratamientoMedicamento {
@@ -29,6 +34,14 @@ public class TratamientoMedicamento {
 
     
     public TratamientoMedicamento(Tratamiento tratamiento, Medicamento medicamento, Integer cantidad) {
+        this.tratamiento = tratamiento;
+        this.medicamento = medicamento;
+        this.cantidad = cantidad;
+    }
+    
+
+    public TratamientoMedicamento(Integer id, Tratamiento tratamiento, Medicamento medicamento, Integer cantidad) {
+        this.id = id;
         this.tratamiento = tratamiento;
         this.medicamento = medicamento;
         this.cantidad = cantidad;

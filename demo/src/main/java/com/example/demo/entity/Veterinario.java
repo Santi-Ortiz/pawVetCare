@@ -6,7 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
+import lombok.Builder;
+import lombok.Data;
 
+
+@Data
+@Builder
 @Entity
 @Table(name="veterinario")
 
@@ -47,6 +52,18 @@ public class Veterinario{
         this.nombre = nombre;
         this.estado = estado;
         this.especialidad = especialidad;
+    }
+
+    public Veterinario(Long id, Long cedula, String contrasena, String foto, String nombre, Boolean estado,
+            Especialidad especialidad, List<Tratamiento> tratamientos) {
+        this.id = id;
+        this.cedula = cedula;
+        this.contrasena = contrasena;
+        this.foto = foto;
+        this.nombre = nombre;
+        this.estado = estado;
+        this.especialidad = especialidad;
+        this.tratamientos = tratamientos;
     }
 
     public Long getId() {

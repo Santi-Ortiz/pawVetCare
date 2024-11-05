@@ -5,7 +5,12 @@ import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Builder;
+import lombok.Data;
 
+
+@Data
+@Builder
 @Entity
 @Table(name="medicamento")
 
@@ -13,7 +18,6 @@ public class Medicamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nombre;
     private Double precio_venta;
     private Double precio_compra;
@@ -34,6 +38,18 @@ public class Medicamento {
         this.precio_venta = precio_venta;
         this.unidades_disponibles = unidades_disponibles;
         this.unidades_vendidas = unidades_vendidas;
+    }
+
+    
+    public Medicamento(Long id, String nombre, Double precio_venta, Double precio_compra, Integer unidades_disponibles,
+            Integer unidades_vendidas, List<TratamientoMedicamento> tratamientoMedicamentos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio_venta = precio_venta;
+        this.precio_compra = precio_compra;
+        this.unidades_disponibles = unidades_disponibles;
+        this.unidades_vendidas = unidades_vendidas;
+        this.tratamientoMedicamentos = tratamientoMedicamentos;
     }
 
     public Long getId() {

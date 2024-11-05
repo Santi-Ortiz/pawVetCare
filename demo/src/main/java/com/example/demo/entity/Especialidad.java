@@ -7,6 +7,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 @Entity
 @Table(name="especialidad")
 
@@ -29,6 +34,12 @@ public class Especialidad{
     public Especialidad(Integer id, String nombreEspecialidad) {
         this.id = id;
         this.nombreEspecialidad = nombreEspecialidad;
+    }
+
+    public Especialidad(Integer id, String nombreEspecialidad, List<Veterinario> veterinarios) {
+        this.id = id;
+        this.nombreEspecialidad = nombreEspecialidad;
+        this.veterinarios = veterinarios;
     }
 
     public Especialidad() {

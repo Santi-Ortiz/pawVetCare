@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+
+
 public class MascotaDTO {
     private Long id;
     private String nombre;

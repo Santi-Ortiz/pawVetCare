@@ -2,6 +2,11 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 @Entity
 @Table(name="usuario")
 
@@ -17,6 +22,11 @@ public class Usuario {
     public Usuario() {}
 
     public Usuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Usuario(Integer id, String tipoUsuario) {
+        this.id = id;
         this.tipoUsuario = tipoUsuario;
     }
 
