@@ -1,5 +1,15 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class VeterinarioDTO {
     private Long id;
     private Long cedula;
@@ -17,76 +27,8 @@ public class VeterinarioDTO {
         this.contrasena = veterinario.getContrasena();
         this.foto = veterinario.getFoto();
         this.estado = veterinario.getEstado();
-        this.nombreEspecialidad = veterinario.getEspecialidad().getNombre_especialidad();
+        this.nombreEspecialidad = veterinario.getEspecialidad().getNombreEspecialidad();
         this.especialidad_id = veterinario.getEspecialidad().getId();
     }
 
-    public VeterinarioDTO() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(Long cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getNombreEspecialidad() {
-        return nombreEspecialidad;
-    }
-
-    public void setNombreEspecialidad(String nombreEspecialidad) {
-        this.nombreEspecialidad = nombreEspecialidad;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
-    public Integer getEspecialidad_id() {
-        return especialidad_id;
-    }
-
-    public void setEspecialidad_id(Integer especialidad_id) {
-        this.especialidad_id = especialidad_id;
-    }
-
-    
 }

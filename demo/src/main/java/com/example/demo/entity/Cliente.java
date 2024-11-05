@@ -5,13 +5,16 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="cliente")
 
@@ -31,7 +34,6 @@ public class Cliente{
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas;
 
-    public Cliente(){}
 
     public Cliente(Long cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
         this.cedula = cedula;
@@ -40,6 +42,7 @@ public class Cliente{
         this.celular = celular;
         this.mascotas = mascotas;
     }
+    
     public Cliente(Long cedula, String nombre, String correo, Long celular) {
         this.cedula = cedula;
         this.nombre = nombre;
@@ -47,60 +50,4 @@ public class Cliente{
         this.celular = celular;
     }
 
-    public Cliente(Long id, Long cedula, String nombre, String correo, Long celular, List<Mascota> mascotas) {
-        this.id = id;
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.celular = celular;
-        this.mascotas = mascotas;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(Long cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public Long getCelular() {
-        return celular;
-    }
-
-    public void setCelular(Long celular) {
-        this.celular = celular;
-    }
-    
-    public List<Mascota> getMascotas() {
-        return mascotas;
-    }
-
-    public void setMascotas(List<Mascota> mascotas) {
-        this.mascotas = mascotas;
-    }
 }

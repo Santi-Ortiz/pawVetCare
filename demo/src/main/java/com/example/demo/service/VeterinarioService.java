@@ -92,7 +92,7 @@ public class VeterinarioService {
         veterinarioDTO.setFoto(veterinario.getFoto());
     
         if (veterinario.getEspecialidad() != null) {
-            veterinarioDTO.setNombreEspecialidad(veterinario.getEspecialidad().getNombre_especialidad());
+            veterinarioDTO.setNombreEspecialidad(veterinario.getEspecialidad().getNombreEspecialidad());
         } else {
             veterinarioDTO.setNombreEspecialidad("Sin Especialidad");
         }

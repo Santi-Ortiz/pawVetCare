@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Medicamento;
 import com.example.demo.entity.Tratamiento;
 import com.example.demo.entity.TratamientoRequestDTO;
-import com.example.demo.service.MedicamentoService;
 import com.example.demo.service.TratamientoService;
 
 
@@ -28,14 +27,6 @@ public class TratamientoController {
 
     @Autowired
     private TratamientoService tratamientoService;
-
-    @Autowired
-    private MedicamentoService medicamentoService;
-
-    public TratamientoController(TratamientoService tratamientoService, MedicamentoService medicamentoService) {
-        this.tratamientoService = tratamientoService;
-        this.medicamentoService = medicamentoService;
-    }
 
     @GetMapping("/tratamientos-ultimo-mes")
     public ResponseEntity<Long> getTratamientosUltimoMes() {

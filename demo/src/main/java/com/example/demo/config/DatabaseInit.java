@@ -3,7 +3,6 @@ package com.example.demo.config;
 import java.io.FileInputStream;
 import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Mascota;
 import com.example.demo.entity.Medicamento;
 import com.example.demo.entity.Tratamiento;
-import com.example.demo.entity.TratamientoMedicamento;
 import com.example.demo.entity.Veterinario;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClienteRepository;

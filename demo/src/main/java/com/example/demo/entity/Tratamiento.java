@@ -7,12 +7,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
-import lombok.Builder;
 import lombok.Data;
 
-
 @Data
-@Builder
 @Entity
 @Table(name="tratamiento")
 
@@ -59,46 +56,6 @@ public class Tratamiento{
         this.fecha = fecha;
         this.veterinario = veterinario;
         this.mascota = mascota;
-        this.tratamientoMedicamentos = tratamientoMedicamentos;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public Veterinario getVeterinario() {
-        return veterinario;
-    }
-
-    public void setVeterinario(Veterinario veterinario) {
-        this.veterinario = veterinario;
-    }
-
-    public Mascota getMascota() {
-        return mascota;
-    }
-
-    public void setMascota(Mascota mascota) {
-        this.mascota = mascota;
-    }
-
-    public List<TratamientoMedicamento> getTratamientoMedicamentos() {
-        return tratamientoMedicamentos;
-    }
-
-    public void setTratamientoMedicamentos(List<TratamientoMedicamento> tratamientoMedicamentos) {
         this.tratamientoMedicamentos = tratamientoMedicamentos;
     }
 }

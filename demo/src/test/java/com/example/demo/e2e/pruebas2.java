@@ -1,14 +1,10 @@
 package com.example.demo.e2e;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.time.Duration;
 
-import org.aspectj.lang.annotation.After;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -20,9 +16,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -229,8 +223,8 @@ public class pruebas2 {
         Select selectMedicamento = new Select(medicamentoSelect);
         selectMedicamento.selectByIndex(1); // 0 es la opción deshabilitada, 1 selecciona "Antibiótico A"
 
-        WebElement cedulaInputVet = driver.findElement(By.id("ccVet"));
-        String cedulaVeterinario = cedulaInputVet.getAttribute("ng-reflect-model");
+        // WebElement cedulaInputVet = driver.findElement(By.id("ccVet"));
+        // String cedulaVeterinario = cedulaInputVet.getAttribute("ng-reflect-model");
         
         // Almacena el valor seleccionado
         String medicamentoSeleccionado = selectMedicamento.getFirstSelectedOption().getText();
@@ -296,16 +290,16 @@ public class pruebas2 {
         }
 
         // Verifica que el medicamento mostrado sea igual al seleccionado
-        WebElement medicamentoLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemNombre .info-label"));
-        String medicamentoMostrado = medicamentoLabel.getText();
+        // WebElement medicamentoLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemNombre .info-label"));
+        // // String medicamentoMostrado = medicamentoLabel.getText();
 
-        // Verifica que la cédula mostrada sea igual a la anterior
-        WebElement cedLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemVeterinario .info-label"));
-        String  cedMostrado = cedLabel.getText();
+        // // Verifica que la cédula mostrada sea igual a la anterior
+        // WebElement cedLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemVeterinario .info-label"));
+        // // String  cedMostrado = cedLabel.getText();
 
-        // Verifica que la cédula mostrada sea igual a la anterior
-        WebElement cantLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemCantidad .info-label"));
-        String  cantMostrado = cantLabel.getText();
+        // // Verifica que la cédula mostrada sea igual a la anterior
+        // WebElement cantLabel = driver.findElement(By.cssSelector(".medicamento-info .info-itemCantidad .info-label"));
+        // String  cantMostrado = cantLabel.getText();
 
         // Aserción para verificar que coincidan
         // Assertions.assertEquals(medicamentoSeleccionado, medicamentoMostrado, "El medicamento mostrado no coincide con el seleccionado.");

@@ -6,12 +6,13 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="especialidad")
 
@@ -34,40 +35,6 @@ public class Especialidad{
     public Especialidad(Integer id, String nombreEspecialidad) {
         this.id = id;
         this.nombreEspecialidad = nombreEspecialidad;
-    }
-
-    public Especialidad(Integer id, String nombreEspecialidad, List<Veterinario> veterinarios) {
-        this.id = id;
-        this.nombreEspecialidad = nombreEspecialidad;
-        this.veterinarios = veterinarios;
-    }
-
-    public Especialidad() {
-
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNombre_especialidad() {
-        return nombreEspecialidad;
-    }
-
-    public void setNombre_especialidad(String nombreEspecialidad) {
-        this.nombreEspecialidad = nombreEspecialidad;
-    }
-
-    public List<Veterinario> getVeterinarios() {
-        return veterinarios;
-    }
-
-    public void setVeterinarios(List<Veterinario> veterinarios) {
-        this.veterinarios = veterinarios;
     }
 }
 
