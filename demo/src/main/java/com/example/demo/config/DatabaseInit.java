@@ -286,7 +286,7 @@ public class DatabaseInit implements ApplicationRunner{
 
          //Creación TratamientoMedicamento
 
-        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 80L).get()));
+        /*tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 80L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 200L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 345L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(2L).get(), medicamentoRepository.findById( 35L).get()));
@@ -305,7 +305,7 @@ public class DatabaseInit implements ApplicationRunner{
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(8L).get(), medicamentoRepository.findById( 137L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(9L).get(), medicamentoRepository.findById( 18L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(10L).get(), medicamentoRepository.findById( 120L).get()));
-        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(10L).get(), medicamentoRepository.findById( 223L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(10L).get(), medicamentoRepository.findById( 223L).get()));*/
 
     }
 }

@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,35 +32,47 @@ public class TratamientoService {
     private MedicamentoRepository medicamentoRepository;
     
     @Transactional
-  public Tratamiento agregarTratamiento(Tratamiento tratamiento, Medicamento medicamento, int cantidad) {
-      // Guardar el tratamiento principal en la base de datos
-      Tratamiento savedTratamiento = tratamientoRepository.save(tratamiento);
+    public Tratamiento agregarTratamiento(Tratamiento tratamiento, Medicamento medicamento, int cantidad) {
+        // Verificar si hay suficientes unidades del medicamento
+        if (medicamento.getUnidades_disponibles() < cantidad) {
+            throw new RuntimeException("No hay suficientes unidades del medicamento " + medicamento.getNombre());
+        }
 
-      // Verificar si hay suficientes unidades del medicamento
-      if (medicamento.getUnidades_disponibles() < cantidad) {
-          throw new RuntimeException("No hay suficientes unidades del medicamento " + medicamento.getNombre());
-      }
+        // Guardar el tratamiento principal en la base de datos
+        Tratamiento savedTratamiento = tratamientoRepository.save(tratamiento);
 
-      // Actualizar las unidades disponibles del medicamento
-      medicamento.setUnidades_disponibles(medicamento.getUnidades_disponibles() - cantidad);
-      medicamento.setUnidades_vendidas(cantidad);
-      medicamentoRepository.save(medicamento);
+        // Actualizar las unidades disponibles del medicamento
+        medicamento.setUnidades_disponibles(medicamento.getUnidades_disponibles() - cantidad);
+        medicamento.setUnidades_vendidas(cantidad);
+        medicamentoRepository.save(medicamento);
 
-      // Crear la instancia de la tabla intermedia TratamientoMedicamento
-      TratamientoMedicamento tratamientoMedicamento = new TratamientoMedicamento();
-      tratamientoMedicamento.setTratamiento(savedTratamiento);  // Asociar el tratamiento guardado
-      tratamientoMedicamento.setMedicamento(medicamento);        // Asociar el medicamento
-      tratamientoMedicamento.setCantidad(cantidad);              // Guardar la cantidad usada
+        // Crear la instancia de la tabla intermedia TratamientoMedicamento
+        TratamientoMedicamento tratamientoMedicamento = new TratamientoMedicamento();
+        tratamientoMedicamento.setTratamiento(savedTratamiento);
+        tratamientoMedicamento.setMedicamento(medicamento);
+        tratamientoMedicamento.setCantidad(cantidad);
 
-      // Guardar la relación en la tabla intermedia
-      tratamientoMedicamentoRepository.save(tratamientoMedicamento);
+        // Guardar la relación en la tabla intermedia
+        tratamientoMedicamentoRepository.save(tratamientoMedicamento);
 
-      // Devolver el tratamiento con sus relaciones actualizadas
-      return savedTratamiento;
-  }
+        // Devolver el tratamiento con sus relaciones actualizadas
+        return savedTratamiento;
+    }
 
+    @Transactional
+    public Tratamiento findById(Long id) {
+        Optional<Tratamiento> tratamiento = tratamientoRepository.findById(id);
+        if (tratamiento.isPresent()) {
+            return tratamiento.get();
+        } else {
+            throw new RuntimeException("Tratamiento no encontrado");
+        }
+    }
 
-
+    @Transactional
+    public List<Tratamiento> obtenerTratamientos() {
+        return tratamientoRepository.findAll();
+    }
 
     @Transactional
     public void eliminarTratamiento(Long id){
