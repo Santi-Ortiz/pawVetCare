@@ -2,7 +2,6 @@ package com.example.demo.entity;
 
 import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -14,7 +13,7 @@ import jakarta.persistence.*;
 public class Veterinario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private Long cedula;
@@ -26,6 +25,8 @@ public class Veterinario{
 
 
     private String nombre;
+
+    private Boolean estado;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)  
@@ -39,19 +40,20 @@ public class Veterinario{
     public Veterinario (){
     }
 
-    public Veterinario(Long cedula, String contrasena, String foto, String nombre, Especialidad especialidad) {
+    public Veterinario(Long cedula, String contrasena, String foto, String nombre, Boolean estado, Especialidad especialidad) {
         this.cedula = cedula;
         this.contrasena = contrasena;
         this.foto = foto;
         this.nombre = nombre;
+        this.estado = estado;
         this.especialidad = especialidad;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -100,5 +102,18 @@ public class Veterinario{
 
     public void setTratamientos(List<Tratamiento> tratamientos) {
         this.tratamientos = tratamientos;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public Veterinario orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
     }
 }

@@ -1,9 +1,9 @@
 package com.example.demo.entity;
 
 import java.util.*;
+import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 
@@ -13,24 +13,24 @@ import jakarta.persistence.*;
 public class Tratamiento{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private Date fecha;
     
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "veterinario_id") 
     private Veterinario veterinario;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "mascota_id")  
     private Mascota mascota;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medicamento_id")
-    private Medicamento medicamento;
+    @OneToMany(mappedBy = "tratamiento", cascade = CascadeType.ALL)
+    private List<TratamientoMedicamento> tratamientoMedicamentos = new ArrayList<>();
+
 
     public Tratamiento(){}
     
@@ -40,18 +40,18 @@ public class Tratamiento{
         this.mascota = mascota;
     }
 
-    public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota, Medicamento medicamento) {
+    public Tratamiento(Date fecha, Veterinario veterinario, Mascota mascota, List<TratamientoMedicamento> tratamientoMedicamentos) {
         this.fecha = fecha;
         this.veterinario = veterinario;
         this.mascota = mascota;
-        this.medicamento = medicamento;
+        this.tratamientoMedicamentos = tratamientoMedicamentos;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -79,13 +79,11 @@ public class Tratamiento{
         this.mascota = mascota;
     }
 
-    public Medicamento getMedicamento() {
-        return medicamento;
+    public List<TratamientoMedicamento> getTratamientoMedicamentos() {
+        return tratamientoMedicamentos;
     }
 
-    public void setMedicamento(Medicamento medicamento) {
-        this.medicamento = medicamento;
+    public void setTratamientoMedicamentos(List<TratamientoMedicamento> tratamientoMedicamentos) {
+        this.tratamientoMedicamentos = tratamientoMedicamentos;
     }
-
-    
 }

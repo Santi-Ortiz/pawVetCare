@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.entity.Admin;
@@ -33,7 +34,8 @@ import jakarta.transaction.Transactional;
 
 @Controller
 @Transactional
-public class DatabaseInit implements ApplicationRunner{
+@Profile("test")
+public class DatabaseInitTest implements ApplicationRunner{
     @Autowired 
     AdminRepository adminRepository;
     @Autowired
@@ -91,58 +93,7 @@ public class DatabaseInit implements ApplicationRunner{
         veterinarioRepository.save(new Veterinario(81045486L,"magicstar1","https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg","Austin Porter", false,especialidadRepository.findById(1L).get()));
         veterinarioRepository.save(new Veterinario(46069761L,"1q2w3e4r","https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg","Michael Tyson", false,especialidadRepository.findById(1L).get()));
         veterinarioRepository.save(new Veterinario(56409545L,"fireball2021","https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg","Nasim Orr", false,especialidadRepository.findById(4L).get()));
-
-        //Creación clientes
-        clienteRepository.save(new Cliente(1235062800L,"Dylan Richardson","facilisis.vitae@aol.org",309878724L));
-        clienteRepository.save(new Cliente(1640900910L,"Ignatius Compton","quis@yahoo.org",362491489L));
-        clienteRepository.save(new Cliente(1678516338L,"Ulric Wyatt","nam.nulla@icloud.ca",343261472L));
-        clienteRepository.save(new Cliente(1036204790L,"Fatima Duke","in.magna.phasellus@icloud.edu",352605555L));
-        clienteRepository.save(new Cliente(1189595192L,"Ramona Grant","vivamus.nibh.dolor@protonmail.ca",327982210L));
-        clienteRepository.save(new Cliente(1183244032L,"Kasper Riggs","sit.amet@outlook.edu",397804552L));
-        clienteRepository.save(new Cliente(1397485934L,"Maya Mckee","mi.pede@aol.couk",399530581L));
-        clienteRepository.save(new Cliente(1620457771L,"Walter O'brien","vel.est@icloud.ca",390253335L));
-        clienteRepository.save(new Cliente(1582417121L,"Kaseem Martinez","mattis.semper.dui@google.org",392755622L));
-        clienteRepository.save(new Cliente(1034035854L,"Uriah Summers","felis.ullamcorper@aol.ca",369992569L));
-        clienteRepository.save(new Cliente(1466299629L,"Murphy Shepard","maecenas.iaculis@aol.org",313644622L));
-        clienteRepository.save(new Cliente(1784649564L,"Nomlanga Montoya","lacus.nulla@hotmail.couk",370883016L));
-        clienteRepository.save(new Cliente(1463685994L,"Nyssa Stark","donec@protonmail.net",383581138L));
-        clienteRepository.save(new Cliente(1399417492L,"Cara Haynes","massa@yahoo.ca",320735830L));
-        clienteRepository.save(new Cliente(1508218624L,"Kenyon Atkins","cubilia.curae@google.net",305385837L));
-        clienteRepository.save(new Cliente(1261477208L,"Brianna Mercer","vulputate.lacus.cras@protonmail.com",336919594L));
-        clienteRepository.save(new Cliente(1798229791L,"Grace O'connor","et.nunc.quisque@protonmail.com",341209077L));
-        clienteRepository.save(new Cliente(1960954227L,"Jackson Burke","in@yahoo.ca",373618151L));
-        clienteRepository.save(new Cliente(1122533361L,"Lee Sherman","dictum.augue.malesuada@protonmail.net",353010632L));
-        clienteRepository.save(new Cliente(1823569570L,"Stone Head","semper@icloud.org",350562141L));
-        clienteRepository.save(new Cliente(1455442208L,"Lydia Garza","sit@outlook.net",311661409L));
-        clienteRepository.save(new Cliente(1572945473L,"Grady Kemp","nibh.dolor@yahoo.org",354768717L));
-        clienteRepository.save(new Cliente(1595362487L,"Hu Blevins","ultrices@outlook.org",320992125L));
-        clienteRepository.save(new Cliente(1331569072L,"Tiger Hardin","pellentesque.massa.lobortis@outlook.couk",341722894L));
-        clienteRepository.save(new Cliente(1708960240L,"Caryn Sampson","lorem.tristique@protonmail.edu",389899935L));
-        clienteRepository.save(new Cliente(1598085497L,"Zane Moreno","enim.sit.amet@google.couk",303549176L));
-        clienteRepository.save(new Cliente(1753745354L,"Abel Maldonado","eu.ultrices.sit@yahoo.edu",380912685L));
-        clienteRepository.save(new Cliente(1579299760L,"Cole Sanders","aliquam@icloud.edu",367149685L));
-        clienteRepository.save(new Cliente(1463387523L,"Philip Whitney","quisque@aol.ca",388499798L));
-        clienteRepository.save(new Cliente(1050178599L,"Hayden Park","neque@yahoo.edu",323061512L));
-        clienteRepository.save(new Cliente(1307382282L,"Gary Hines","tempus.scelerisque@google.net",385102160L));
-        clienteRepository.save(new Cliente(1741434712L,"Jarrod Evans","euismod@outlook.couk",344535101L));
-        clienteRepository.save(new Cliente(1524791740L,"Walter Kirby","erat.in@aol.net",354068407L));
-        clienteRepository.save(new Cliente(1880385151L,"Jillian Turner","cras.lorem.lorem@hotmail.edu",348773599L));
-        clienteRepository.save(new Cliente(1160176480L,"Duncan Mcconnell","eu@outlook.ca",325270189L));
-        clienteRepository.save(new Cliente(1072306213L,"Ann Head","blandit.nam@aol.couk",349087931L));
-        clienteRepository.save(new Cliente(1501134030L,"Victoria Reynolds","tempor.diam@google.ca",376534512L));
-        clienteRepository.save(new Cliente(1207377727L,"Bert West","erat@google.ca",372549668L));
-        clienteRepository.save(new Cliente(1460926052L,"Celeste Clark","lacus.cras@google.net",364496843L));
-        clienteRepository.save(new Cliente(1159817334L,"Abel Avila","egestas@protonmail.couk",324290880L));
-        clienteRepository.save(new Cliente(1807007174L,"Tarik Glenn","tempor.diam@icloud.couk",342726857L));
-        clienteRepository.save(new Cliente(1978101413L,"Jolie Curtis","ultricies.dignissim@google.ca",358103227L));
-        clienteRepository.save(new Cliente(1424794913L,"Mira Wyatt","urna.nullam@aol.ca",384779144L));
-        clienteRepository.save(new Cliente(1608244321L,"Alec Maldonado","ultrices@protonmail.net",304733602L));
-        clienteRepository.save(new Cliente(1010231564L,"Brett Kirby","elementum@aol.org",399341081L));
-        clienteRepository.save(new Cliente(1971408607L,"Harrison Moreno","in.lobortis@protonmail.couk",336215273L));
-        clienteRepository.save(new Cliente(1963427700L,"Dora Shields","id@protonmail.com",376298968L));
-        clienteRepository.save(new Cliente(1873486866L,"Lareina Roy","velit.dui.semper@outlook.org",341482251L));
-        clienteRepository.save(new Cliente(1410113199L,"Drake Glenn","in.at@icloud.ca",333104316L));
-        clienteRepository.save(new Cliente(1430947461L,"Rebecca Adkins","malesuada.augue@icloud.edu",357772405L));
+        
         //Creación mascotas
         mascotaRepository.save(new Mascota("Toby","Husky",2,24.0F,"Insuficiencia","https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Siberian-husky.jpg/480px-Siberian-husky.jpg",true,clienteRepository.findByCedula(1235062800L)));
         mascotaRepository.save(new Mascota("Pepper","Husky",2,12.0F,"Parvovirus","https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Siberian-husky.jpg/480px-Siberian-husky.jpg",true,clienteRepository.findByCedula(1640900910L)));
@@ -246,13 +197,13 @@ public class DatabaseInit implements ApplicationRunner{
         mascotaRepository.save(new Mascota("Honey","BordeCollie",8,4.0F,"Pancreatitis","https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Border_collie_canon.jpg/480px-Border_collie_canon.jpg",true,clienteRepository.findByCedula(1430947461L)));
         
         //Creación Medicamentos
-        medicamentoRepository.save(new Medicamento("Antibiótico A", 25.5D, 20.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Antibiótico A", 25.5D, 20.5D, 10, 50));
         medicamentoRepository.save(new Medicamento("Desparasitante B", 15.5D, 10.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Vacuna Rabia", 15.5D, 5.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Analgésico C", 44.5D, 4.5D, 10, 0));
-        medicamentoRepository.save(new Medicamento("Antipulgas D", 66.5D, 6.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Antipulgas D", 66.5D, 6.5D, 10, 6));
         medicamentoRepository.save(new Medicamento("Antiinflamatorio E", 8.5D, 8.5D, 10, 0));
-        medicamentoRepository.save(new Medicamento("Vacuna Moquillo", 99.5D, 9.5D, 10, 0));
+        medicamentoRepository.save(new Medicamento("Vacuna Moquillo", 99.5D, 9.5D, 10, 7));
         medicamentoRepository.save(new Medicamento("Suplemento Articular", 6.5D, 6.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Antibiótico F", 8.5D, 8.5D, 10, 0));
         medicamentoRepository.save(new Medicamento("Colirio Ocular", 6.5D, 6.5D, 10, 0));

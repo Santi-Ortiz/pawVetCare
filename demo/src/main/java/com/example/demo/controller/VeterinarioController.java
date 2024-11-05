@@ -9,101 +9,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Cliente;
+import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Mascota;
-import com.example.demo.entity.Tratamiento;
 import com.example.demo.entity.Veterinario;
+import com.example.demo.entity.VeterinarioDTO;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.ClienteService;
+import com.example.demo.service.EspecialidadService;
 import com.example.demo.service.MascotaService;
 import com.example.demo.service.VeterinarioService;
 
-/*@Controller
-@RequestMapping("/veterinario")
-public class VeterinarioController {
-
-    @Autowired
-    private MascotaService MascotaService;
-    @Autowired
-    private AdminService adminService;
-    @Autowired
-    private ClienteService clientService;
-    
-    @GetMapping("/mascotas")
-     public String mostrarMascotas(Model model){
-         model.addAttribute("mascota", new Mascota());
-         model.addAttribute("mascotas", MascotaService.SearchAll());
-         return "vet_MostrarTodasMascotas";
-     }
-
-     // http://localhost:8090/admin/mascotas/{id}
-    @GetMapping("/mascotas/{id}")
-    public String mostrarInfoMascotaVet(Model model, @PathVariable("id") Long identificacion){
-
-        Mascota mascota = adminService.SearchPetById(identificacion);
-        System.out.println("ID recibido: " + mascota.getCliente().getCedula());
-
-        if(mascota != null){
-            model.addAttribute("mascota", mascota); 
-            model.addAttribute("clienteCedula", mascota.getCliente().getCedula());
-        } else {
-            throw new NotPetFoundException(identificacion);
-        } 
-
-        return "vet_mostrarInfo1Mascota";
-    }
-
-    // Método para redirigir al ID específico
-    @GetMapping("/busqueda/mascota")
-    public String redirectToMascota(@RequestParam("id") Long id) {
-        return "redirect:/veterinario/mascotas/" + id;
- 
-    }
-
-    // http://localhost:8090/admin/mascotas/todas
-    @GetMapping("/mascotas/todas")
-    public String mostraradmin_mostrarTodasLasMascotas(Model model){
-        model.addAttribute("mascota", new Mascota());
-        model.addAttribute("mascotas", adminService.SearchAllPets());
-        return "vet_MascotasTodas";
-        //mascotaController.mostrarMascotas(model);
-    }
-
-    // http://localhost:8090/veterinario/clientes
-    @GetMapping("/clientes")
-    public String mostrarClientesAdmin(Model model){
-        model.addAttribute("clientes", adminService.SearchAllClients());
-        model.addAttribute("cliente", new Cliente());
-        return "vet_mostrarTodosClientes";
-    }
-
-    // http://localhost:8090/veterinario/clientes/todos    
-    @GetMapping("/clientes/todos")
-    public String mostrarClientesTodosAdmin(Model model){
-        model.addAttribute("clientes", adminService.SearchAllClients());
-        model.addAttribute("cliente", new Cliente());
-        return "vet_ClientesTodos";
-    }
-
-    // http://localhost:8090/admin/cliente/{id}
-    @GetMapping("/cliente/{cedula}")
-    public String mostrarCliente(Model model, @PathVariable("cedula") Long cedula) {
-        Cliente cliente = clientService.obtenerClientePorCedula(cedula);
-
-        if(cliente != null){
-           model.addAttribute("cliente", cliente); 
-        } else {
-           throw new NotPetFoundException(cedula);
-        }
-
-        return "vet_MostrarInfoCliente";
-    }
-}*/
 
 @RestController
 @RequestMapping("/api/veterinario")
@@ -120,6 +42,9 @@ public class VeterinarioController {
 
     @Autowired
     private VeterinarioService veterinarioService;
+
+    @Autowired
+    private EspecialidadService especialidadService;
 
     // Obtener todas las mascotas (Veterinario)
     @GetMapping("/mascotas")
@@ -181,20 +106,31 @@ public class VeterinarioController {
 
     // Se obtienen todos los veterinarios registrados
     @GetMapping("/todos")
-    public ResponseEntity<List<Veterinario>> obtenerTodosLosVets() {
-        List<Veterinario> veterinarios = (List<Veterinario>) veterinarioService.mostrarTodos();
-        return ResponseEntity.ok(veterinarios);
+    public ResponseEntity<List<VeterinarioDTO>> obtenerTodosLosVeterinarios() {
+        List<VeterinarioDTO> veterinariosDTO = veterinarioService.mostrarTodosConDTO();
+        return ResponseEntity.ok(veterinariosDTO);
     }
 
-    // Se obtiene un veterinario por su ID
+    // Se obtiene un veterinario por su cedula
     @GetMapping("/find/{cedula}")
-    public ResponseEntity<Veterinario> obtenerVetPorId(@PathVariable("cedula") Long cedula) {
-        Veterinario veterinario = veterinarioService.buscarVetPorCedula(cedula);
+    public ResponseEntity<VeterinarioDTO> obtenerVetPorCedula(@PathVariable("cedula") Long cedula) {
+        VeterinarioDTO veterinario = veterinarioService.obtenerVeterinarioPorCedula(cedula);
         if (veterinario != null) {
             return ResponseEntity.ok(veterinario);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); 
     }
+
+    // Se obtiene un veterinario por su cedula
+    @GetMapping("/findID/{id}")
+    public ResponseEntity<VeterinarioDTO> obtenerVetPorID(@PathVariable("id") Long id) {
+        VeterinarioDTO veterinario = veterinarioService.obtenerPorID(id);
+        if (veterinario != null) {
+            return ResponseEntity.ok(veterinario);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); 
+    }
+
 
     // Se agrega un veterinario nuevo
     @PostMapping("/agregar")
@@ -203,54 +139,71 @@ public class VeterinarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
-    @GetMapping("/update/{cedula}")
-    public ResponseEntity<Veterinario> actualizarInfoVet(@PathVariable("cedula") Long cedula) {
-        Veterinario existingVet = veterinarioService.buscarVet(cedula);
-        if(existingVet != null){
-            // Verificar si la cédula ya pertenece a otro veterinario
-            Veterinario vetConMismaCedula = veterinarioService.buscarVetPorCedula(existingVet.getCedula());
-            if (vetConMismaCedula != null && !vetConMismaCedula.getId().equals(existingVet.getId())) {
-                // throw new VetUpdatingException(existingVet.getCedula()); // TODO: Implementar esta excepción cuando se quiera modificar la cédula de un vet y ya exista
-                System.out.println("Ya existe un veterinario con la cédula ingresada");
-            }
+    @PutMapping("/update/{cedula}")
+    public ResponseEntity<VeterinarioDTO> actualizarInfoVet(@PathVariable("cedula") Long cedula, @RequestBody VeterinarioDTO veterinarioActualizado) {
+        // Buscar el veterinario existente por cédula
+        Veterinario existingVet = veterinarioService.buscarVetPorCedula(cedula);
 
-            existingVet.setCedula(existingVet.getCedula());
-            existingVet.setContrasena(existingVet.getContrasena());
-            existingVet.setFoto(existingVet.getFoto());
-            existingVet.setNombre(existingVet.getNombre());
-            existingVet.setEspecialidad(existingVet.getEspecialidad()); // TODO: Hacer validación de especialidad existente
-
-            // Se actualiza el veterinario
-            veterinarioService.actualizarVet(existingVet);
-
-            return ResponseEntity.ok(existingVet);
+        if (existingVet == null) {
+            // Si el veterinario no existe, retornar 404
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // El veterinario no existe
+            // Actualizar el veterinario con los datos del DTO recibido
+            veterinarioService.actualizarVet(veterinarioActualizado);
+            
+            // Obtener el veterinario actualizado después de la modificación
+            Veterinario updatedVet = veterinarioService.buscarVetPorCedula(cedula);
+
+            // Convertir el veterinario actualizado a VeterinarioDTO para retornar
+            VeterinarioDTO veterinarioDTOActualizado = convertirVeterinarioA_DTO(updatedVet);
+
+            return ResponseEntity.ok(veterinarioDTOActualizado);
         }
     }
+
+    private VeterinarioDTO convertirVeterinarioA_DTO(Veterinario veterinario) {
+        VeterinarioDTO dto = new VeterinarioDTO();
+        dto.setCedula(veterinario.getCedula());
+        dto.setNombre(veterinario.getNombre());
+        dto.setContrasena(veterinario.getContrasena());
+        dto.setFoto(veterinario.getFoto());
+        dto.setEstado(veterinario.getEstado());
+        dto.setEspecialidad_id(veterinario.getEspecialidad() != null ? veterinario.getEspecialidad().getId() : null);
+        return dto;
+    }
+    
+
 
     // Se elimina un veterinario por su cédula
     @DeleteMapping("/delete/{cedula}")
-    public ResponseEntity<Void> borrarVet(@PathVariable Long cedula){
-
-        Veterinario vet = veterinarioService.buscarVetPorCedula(cedula);
-        if(vet == null){
-            // El veterinario no se encontró
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        try {
+    public ResponseEntity<Void> borrarVet(@PathVariable("cedula") Long cedula) {
+        Veterinario existingVet = veterinarioService.buscarVetPorCedula(cedula);
+        if (existingVet != null) {
             veterinarioService.eliminarVet(cedula);
-            if(veterinarioService.buscarVetPorCedula(cedula) == null){
-                // Validación que el veterinario fue eliminado
-                return ResponseEntity.noContent().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Error al eliminar
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); // Error al eliminar
-
     }
+
+    @GetMapping("/activos")
+    public ResponseEntity<Long> contarVeterinariosActivos() {
+        long count = veterinarioService.contarVeterinariosActivos();
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/inactivos")
+    public ResponseEntity<Long> contarVeterinariosInactivos() {
+        long count = veterinarioService.contarVeterinariosInactivos();
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/total")
+    public ResponseEntity<Long> contarVeterinarios() {
+        long count = veterinarioService.contarVeterinarios  ();
+        return ResponseEntity.ok(count);
+    }
+    
      
 }
 

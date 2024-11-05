@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.controller.ClientExistingException;
 import com.example.demo.controller.ClientUpdatingException;
 import com.example.demo.controller.NotClientFoundException;
-import com.example.demo.controller.NotPetFoundException;
 
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
@@ -17,7 +16,6 @@ import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.TratamientoRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -121,11 +119,6 @@ public class ClienteService {
         }
     }
     
-
-    // public void editarCliente(Cliente cliente){
-    //     clienteRepository.deleteById(cliente.getCedula());
-    // }
-
     @Transactional
     public void update(Cliente cliente){
         clienteRepository.save(cliente);

@@ -3,6 +3,8 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="medicamento")
@@ -10,13 +12,18 @@ import java.util.*;
 public class Medicamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String nombre;
     private Double precio_venta;
     private Double precio_compra;
     private Integer unidades_disponibles;
     private Integer unidades_vendidas;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL)
+    private List<TratamientoMedicamento> tratamientoMedicamentos = new ArrayList<>();
+
 
     public Medicamento() {
     }
@@ -29,11 +36,11 @@ public class Medicamento {
         this.unidades_vendidas = unidades_vendidas;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,5 +82,14 @@ public class Medicamento {
 
     public void setUnidades_vendidas(Integer unidades_vendidas) {
         this.unidades_vendidas = unidades_vendidas;
+    }
+
+    public List<TratamientoMedicamento> getTratamientoMedicamentos() {
+        return tratamientoMedicamentos;
+    }
+
+    public void setTratamientoMedicamentos(List<TratamientoMedicamento> tratamientoMedicamentos) {
+        this.tratamientoMedicamentos = tratamientoMedicamentos;
     } 
+
 }

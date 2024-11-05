@@ -3,7 +3,6 @@ package com.example.demo.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -14,7 +13,7 @@ import jakarta.persistence.*;
 public class Especialidad{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String nombreEspecialidad;
@@ -27,15 +26,20 @@ public class Especialidad{
         this.nombreEspecialidad = nombreEspecialidad;
     }
 
+    public Especialidad(Long id, String nombreEspecialidad) {
+        this.id = id;
+        this.nombreEspecialidad = nombreEspecialidad;
+    }
+
     public Especialidad() {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
