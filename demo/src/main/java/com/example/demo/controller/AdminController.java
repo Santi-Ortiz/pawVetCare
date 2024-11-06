@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
 import com.example.demo.entity.Mascota;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.entity.Cliente;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.ClienteService;
+import com.example.demo.security.CustomUserDetailsService;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -25,6 +27,12 @@ public class AdminController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailsService customUserDetailService;
 
     // Obtener todas las mascotas
     @GetMapping("/mascotas")

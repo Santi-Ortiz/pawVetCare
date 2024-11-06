@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
+import com.example.demo.entity.UserEntity;
 import com.example.demo.entity.Veterinario;
 import com.example.demo.entity.VeterinarioDTO;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.security.CustomUserDetailsService;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.ClienteService;
 import com.example.demo.service.MascotaService;
@@ -40,6 +43,12 @@ public class VeterinarioController {
 
     @Autowired
     private VeterinarioService veterinarioService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailsService customUserDetailService;
 
     // Obtener todas las mascotas (Veterinario)
     @GetMapping("/mascotas")
@@ -130,8 +139,19 @@ public class VeterinarioController {
     // Se agrega un veterinario nuevo
     @PostMapping("/agregar")
     public ResponseEntity<Veterinario> agregarVet(@RequestBody Veterinario veterinario) {
-        veterinarioService.agregarVet(veterinario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(null);
+        /*veterinarioService.agregarVet(veterinario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(null);*/
+        if(userRepository.existsByUsername(String.valueOf(veterinario.getCedula()))) {
+            return new ResponseEntity<Veterinario>(veterinario, HttpStatus.BAD_REQUEST);
+        }
+
+        UserEntity userEntity = customUserDetailService.saveVet(veterinario);
+        veterinario.setUser(userEntity);
+        Veterinario newVeterinario= veterinarioService.agregarVet(veterinario);
+        if(newVeterinario == null){
+            return new ResponseEntity<Veterinario>(newVeterinario, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Veterinario>(newVeterinario, HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{cedula}")

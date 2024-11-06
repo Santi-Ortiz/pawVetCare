@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
+import com.example.demo.entity.UserEntity;
+import com.example.demo.entity.Veterinario;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.security.CustomUserDetailsService;
 import com.example.demo.service.ClienteService;
 import com.example.demo.service.MascotaService;
 
@@ -28,6 +32,12 @@ public class ClienteController {
 
     @Autowired 
     private ClienteService clienteService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailsService customUserDetailService;
 
     @Autowired 
     private MascotaService mascotaService;
@@ -91,8 +101,21 @@ public class ClienteController {
     // Agregar un nuevo cliente
     @PostMapping("/agregar")
     public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
+        /* 
         Cliente nuevoCliente = clienteService.add(cliente); // Guardar y obtener el cliente creado
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoCliente); // Devolver el cliente creado
+        */
+        if(userRepository.existsByUsername(String.valueOf(cliente.getCedula()))) {
+            return new ResponseEntity<Cliente>(cliente, HttpStatus.BAD_REQUEST);
+        }
+
+        UserEntity userEntity = customUserDetailService.saveCliente(cliente);
+        cliente.setUser(userEntity);
+        Cliente newCliente = clienteService.add(cliente);
+        if(newCliente == null){
+            return new ResponseEntity<Cliente>(newCliente, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Cliente>(newCliente, HttpStatus.CREATED);
     }
 
 

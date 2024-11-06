@@ -19,7 +19,8 @@ import lombok.NoArgsConstructor;
 @Table(name="cliente")
 
 public class Cliente{
-
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserEntity user;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

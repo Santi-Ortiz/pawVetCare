@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import java.util.*;
 
+import org.apache.xmlbeans.UserType;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -19,6 +21,8 @@ import lombok.NoArgsConstructor;
 @Table(name="veterinario")
 
 public class Veterinario{
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserEntity user;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
