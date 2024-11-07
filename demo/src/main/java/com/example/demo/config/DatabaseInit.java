@@ -20,6 +20,7 @@ import com.example.demo.entity.Role;
 import com.example.demo.entity.Tratamiento;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.entity.Veterinario;
+import com.example.demo.entity.TratamientoMedicamento;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.EspecialidadRepository;
@@ -511,7 +512,7 @@ public class DatabaseInit implements ApplicationRunner{
 
          //Creación TratamientoMedicamento
 
-        /*tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 80L).get()));
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 80L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 200L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(1L).get(), medicamentoRepository.findById( 345L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(2L).get(), medicamentoRepository.findById( 35L).get()));
@@ -530,7 +531,7 @@ public class DatabaseInit implements ApplicationRunner{
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(8L).get(), medicamentoRepository.findById( 137L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(9L).get(), medicamentoRepository.findById( 18L).get()));
         tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(10L).get(), medicamentoRepository.findById( 120L).get()));
-        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(10L).get(), medicamentoRepository.findById( 223L).get()));*/
+        tratamientoMedicamentoRepository.save(new TratamientoMedicamento(tratamientoRepository.findById(10L).get(), medicamentoRepository.findById( 223L).get()));
 
     }
 
