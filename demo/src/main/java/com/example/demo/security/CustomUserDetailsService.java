@@ -36,27 +36,22 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-     @Override
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //Buscar al usuario si no se encuentra traer una excepcion
-        //El usuario que se carga es de tipo User Entity, el que nosotros creamos
-       UserEntity userDB = userRepository.findByUsername(username).orElseThrow(
-           () -> new UsernameNotFoundException("User not found")
-       );
-       UserDetails userDetails = new User(userDB.getUsername(),
-        userDB.getPassword(),
-         mapRolesToAuthorities(userDB.getRoles()));
+        UserEntity userDB = userRepository.findByUsername(username).orElseThrow(
+            () -> new UsernameNotFoundException("User not found")
+        );
+        UserDetails userDetails = new User(userDB.getUsername(),
+            userDB.getPassword(),
+            mapRolesToAuthorities(userDB.getRoles()));
 
-        //El usuario que se retorna es de tipo UserDetail
-        //Se mapean los datos desde el UserEntity a UserDetail
-        //Es necesario pasar como tercer parametro grantedAutathorities
-       return userDetails;
+        return userDetails;
     }
 
-        //PAsar de roles a GrantedAuthoritys
     private Collection<GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
+
     public UserEntity saveAdmin(Admin admin){
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(admin.getUsuario());
@@ -66,15 +61,17 @@ public class CustomUserDetailsService implements UserDetailsService {
         userEntity.setRoles(List.of(roles));
         return userRepository.save(userEntity);
     }
+
     public UserEntity saveCliente(Cliente cliente){
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(String.valueOf(cliente.getCedula()));
-        userEntity.setPassword(passwordEncoder.encode("123"));
+        userEntity.setPassword(passwordEncoder.encode("123")); // Codificar la contraseña
 
         Role roles = roleRepository.findByName("CLIENTE").get();
         userEntity.setRoles(List.of(roles));
         return userRepository.save(userEntity);
     }
+
     public UserEntity saveVet(Veterinario vet){
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(String.valueOf(vet.getCedula()));
@@ -85,4 +82,3 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userRepository.save(userEntity);
     }
 }
-

@@ -38,11 +38,14 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable())) // Permite acceso a la consola H2
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/h2/**").permitAll()  // Permitir acceso a la consola H2
-                .requestMatchers("/api/admin/**").hasAuthority("ADMIN")  // Permitir acceso a ADMIN
-                .requestMatchers("/api/vet/**").hasAuthority("VET") 
+                .requestMatchers("/h2/**").permitAll()
+                .requestMatchers("/api/admin/agregar").permitAll()
+                .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
+                .requestMatchers("/api/vet/agregar").permitAll()
+                .requestMatchers("/api/vet/**").hasAuthority("VET")
+                .requestMatchers("/api/cliente/agregar").permitAll()
                 .requestMatchers("/api/cliente/**").hasAuthority("CLIENTE") 
-                .anyRequest().permitAll() // Permitir todas las demás solicitudes
+                .anyRequest().permitAll()
             ).exceptionHandling( exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
 
             http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,8 +60,10 @@ public class ClienteController {
 
     // Obtener todas las mascotas de un cliente
     @GetMapping("/mascotas/{id}")
-    public ResponseEntity<List<Mascota>> obtenerTodasMascotasCliente(@PathVariable("id") Long identificacion) {
-        Cliente cliente = clienteService.obtenerCliente(identificacion);
+    public ResponseEntity<List<Mascota>> obtenerTodasMascotasCliente() {
+        Cliente cliente = clienteService.obtenerClientePorCorreo(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
         if (cliente != null) {
             // Devolvemos la lista de mascotas asociadas al cliente
             List<Mascota> mascotas = cliente.getMascotas();

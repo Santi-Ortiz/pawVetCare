@@ -86,16 +86,15 @@ public class IniciarSesionController {
 
     // http://localhost:8090/api/sesion/veterinario
     @PostMapping("/veterinario")
-    public ResponseEntity<?> sesionVet(@RequestParam("cedula") Long cedula, @RequestParam("password") String password, HttpSession session){
+    public ResponseEntity<?> sesionVet(@RequestParam("cedula") Long cedula, @RequestParam("password") String password){
         try {
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(cedula, password)
             );
-            
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String token = jwtGenerator.generateToken(authentication);
 
-            // Envolver el token en un objeto JSON
             Map<String, String> response = new HashMap<>();
             response.put("token", token);
 
@@ -109,7 +108,7 @@ public class IniciarSesionController {
 
     // http://localhost:8090/api/sesion/admin
     @PostMapping("/admin")
-    public ResponseEntity<?> sesionAdmin(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) {
+    public ResponseEntity<?> sesionAdmin(@RequestParam("username") String username, @RequestParam("password") String password) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)

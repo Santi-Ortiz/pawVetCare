@@ -90,6 +90,10 @@ public class ClienteService {
         
     }
 
+    public Cliente obtenerClientePorCorreo(String correo){
+        return clienteRepository.findByCorreo(correo);
+    }
+
     @Transactional
     public void eliminarCliente(Long id){
     Cliente cliente = clienteRepository.findByCedula(id);
