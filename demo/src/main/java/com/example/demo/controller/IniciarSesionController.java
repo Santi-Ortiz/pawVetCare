@@ -57,7 +57,7 @@ public class IniciarSesionController {
     public ResponseEntity<?> loginCliente(@RequestParam("id") Long id) {
         try {
             Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(id, null)
+                new UsernamePasswordAuthenticationToken(id, "123")
             );
 
             SecurityContextHolder.getContext().setAuthentication(authentication);

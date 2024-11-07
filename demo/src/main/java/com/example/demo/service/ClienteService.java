@@ -15,6 +15,7 @@ import com.example.demo.entity.Tratamiento;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.TratamientoRepository;
+import com.example.demo.security.CustomUserDetailsService;
 
 import jakarta.transaction.Transactional;
 
@@ -28,6 +29,9 @@ public class ClienteService {
 
     @Autowired
     private TratamientoRepository tratamientoRepository;
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @Transactional
     public boolean agregarMascota(Long clienteId, Mascota mascota) {
@@ -117,6 +121,7 @@ public class ClienteService {
         if (clienteRepository.findByCedula(cliente.getCedula()) != null) {
             throw new ClientExistingException(cliente.getCedula());
         } else {
+            customUserDetailsService.saveCliente(cliente);
             return clienteRepository.save(cliente);
         }
     }
