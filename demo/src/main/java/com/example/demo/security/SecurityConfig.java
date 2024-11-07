@@ -38,13 +38,25 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable())) // Permite acceso a la consola H2
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(requests -> requests
+                    // Rutas públicas
                 .requestMatchers("/h2/**").permitAll()
                 .requestMatchers("/api/admin/agregar").permitAll()
-                .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
-                .requestMatchers("/api/vet/agregar").permitAll()
-                .requestMatchers("/api/vet/**").hasAuthority("VET")
+                .requestMatchers("/api/veterinario/agregar").permitAll()
                 .requestMatchers("/api/cliente/agregar").permitAll()
-                .requestMatchers("/api/cliente/**").hasAuthority("CLIENTE") 
+
+                // Rutas de ADMIN
+                .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
+                
+                // Rutas compartidas entre ADMIN y VET
+                .requestMatchers("/api/veterinario/**").hasAnyAuthority("ADMIN", "VET")
+                
+                // Rutas compartidas entre ADMIN y CLIENTE
+                .requestMatchers("/api/cliente/**").hasAnyAuthority("ADMIN", "CLIENTE")
+                .requestMatchers("/api/mascota/**").hasAnyAuthority("ADMIN", "CLIENTE")
+                
+                // Rutas exclusivas de ADMIN
+                .requestMatchers("/api/medicamento/**").hasAuthority("ADMIN")
+                
                 .anyRequest().permitAll()
             ).exceptionHandling( exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
 

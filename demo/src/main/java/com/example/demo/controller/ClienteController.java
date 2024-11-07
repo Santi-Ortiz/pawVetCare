@@ -64,6 +64,7 @@ public class ClienteController {
         Cliente cliente = clienteService.obtenerClientePorCorreo(
             SecurityContextHolder.getContext().getAuthentication().getName()
         );
+        //Cliente cliente = clienteService.obtenerCliente(id);
         if (cliente != null) {
             // Devolvemos la lista de mascotas asociadas al cliente
             List<Mascota> mascotas = cliente.getMascotas();
