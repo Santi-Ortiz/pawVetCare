@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,4 +24,5 @@ public class UsuarioService {
     public void eliminarUsuario(String tipo_usuario){
         usuarioRepository.delete(usuarioRepository.findByTipoUsuario(tipo_usuario));
     }
+
 }

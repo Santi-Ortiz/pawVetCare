@@ -51,8 +51,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/veterinario/**").hasAnyAuthority("ADMIN", "VET")
                 
                 // Rutas compartidas entre ADMIN y CLIENTE
-                .requestMatchers("/api/cliente/**").hasAnyAuthority("ADMIN", "CLIENTE")
-                .requestMatchers("/api/mascota/**").hasAnyAuthority("ADMIN", "CLIENTE")
+                .requestMatchers("/api/cliente/**").hasAnyAuthority("ADMIN", "CLIENTE", "VET")
+                .requestMatchers("/api/mascota/**").hasAnyAuthority("ADMIN", "CLIENTE", "VET")
                 
                 // Rutas exclusivas de ADMIN
                 .requestMatchers("/api/medicamento/**").hasAuthority("ADMIN")
