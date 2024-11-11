@@ -65,7 +65,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserEntity saveCliente(Cliente cliente){
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(String.valueOf(cliente.getCedula()));
-        userEntity.setPassword(passwordEncoder.encode("123")); // Codificar la contraseña
+        userEntity.setPassword(null); // Codificar la contraseña
 
         Role roles = roleRepository.findByName("CLIENTE").get();
         userEntity.setRoles(List.of(roles));

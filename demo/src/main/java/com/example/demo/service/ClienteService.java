@@ -125,10 +125,18 @@ public class ClienteService {
         if (clienteRepository.findByCedula(cliente.getCedula()) != null) {
             throw new ClientExistingException(cliente.getCedula());
         } else {
-            customUserDetailsService.saveCliente(cliente);
-            return clienteRepository.save(cliente);
+            System.out.println("Holi estoy añadiendo cliente: " + cliente.toString());
+            try {
+                Cliente savedCliente = clienteRepository.save(cliente);
+                System.out.println("Cliente guardado: " + savedCliente.toString());
+                return savedCliente;
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw e;
+            }
         }
     }
+
     
     @Transactional
     public void update(Cliente cliente){

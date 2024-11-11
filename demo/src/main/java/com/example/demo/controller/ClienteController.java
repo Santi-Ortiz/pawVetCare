@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +28,7 @@ import com.example.demo.service.ClienteService;
 import com.example.demo.service.MascotaService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -103,23 +107,34 @@ public class ClienteController {
 
     // Agregar un nuevo cliente
     @PostMapping("/agregar")
-    public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
-        /* 
-        Cliente nuevoCliente = clienteService.add(cliente); // Guardar y obtener el cliente creado
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoCliente); // Devolver el cliente creado
-        */
-        if(userRepository.existsByUsername(String.valueOf(cliente.getCedula()))) {
-            return new ResponseEntity<Cliente>(cliente, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> agregarCliente(@Valid @RequestBody Cliente cliente, BindingResult result) {
+        if (result.hasErrors()) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(result.getAllErrors().stream()
+                            .map(ObjectError::getDefaultMessage)
+                            .collect(Collectors.toList()));
         }
 
-        UserEntity userEntity = customUserDetailService.saveCliente(cliente);
-        cliente.setUser(userEntity);
-        Cliente newCliente = clienteService.add(cliente);
-        if(newCliente == null){
-            return new ResponseEntity<Cliente>(newCliente, HttpStatus.BAD_REQUEST);
+        // Verificar si el username ya existe
+        if (userRepository.existsByUsername(cliente.getCedula().toString())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("El username ya existe");
         }
-        return new ResponseEntity<Cliente>(newCliente, HttpStatus.CREATED);
+        
+        try {
+            Cliente clienteaux = new Cliente(cliente.getCedula(), cliente.getNombre(), cliente.getCorreo(), cliente.getCelular());
+            UserEntity userEntity = customUserDetailService.saveCliente(clienteaux);
+            clienteaux.setUser(userEntity);
+
+            Cliente newCliente = clienteService.add(clienteaux);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newCliente);
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Ocurrió un error al agregar el cliente: " + e.getMessage());
+        }
     }
+
 
 
     // Actualizar información de un cliente (admin)
