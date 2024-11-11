@@ -31,4 +31,15 @@ public class VeterinarioDTO {
         this.especialidad_id = veterinario.getEspecialidad().getId();
     }
 
+    private VeterinarioDTO convertirAVeterinarioDTO(Veterinario vet) {
+        VeterinarioDTO dto = new VeterinarioDTO();
+        dto.setCedula(vet.getCedula());
+        dto.setFoto(vet.getFoto());
+        dto.setNombre(vet.getNombre());
+        dto.setEstado(vet.getEstado());
+        dto.setNombreEspecialidad(vet.getEspecialidad() != null ? vet.getEspecialidad().getNombreEspecialidad() : null);
+        return dto;
+    }
+    
+
 }

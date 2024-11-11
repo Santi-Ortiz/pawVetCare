@@ -54,13 +54,14 @@ public class VeterinarioService {
 
         // Actualiza los campos
         vetExistente.setNombre(veterinarioDTO.getNombre());
-        vetExistente.setContrasena(veterinarioDTO.getContrasena());
+        vetExistente.setContrasena(vetExistente.getContrasena());
         vetExistente.setFoto(veterinarioDTO.getFoto());
         vetExistente.setEstado(veterinarioDTO.getEstado());
 
-        // Busca la especialidad existente en la base de datos
-        Especialidad especialidad = especialidadRepository.findById((long) veterinarioDTO.getEspecialidad_id())
-                .orElseThrow(() -> new NoSuchElementException("La especialidad con el ID " + veterinarioDTO.getEspecialidad_id() + " no existe."));
+       // Busca la especialidad existente en la base de datos
+        Especialidad especialidad = especialidadRepository.findByNombreEspecialidad(veterinarioDTO.getNombreEspecialidad())
+            .orElseThrow(() -> new NoSuchElementException("La especialidad con el nombre '" + veterinarioDTO.getNombreEspecialidad() + "' no existe."));
+
         
         vetExistente.setEspecialidad(especialidad);
 

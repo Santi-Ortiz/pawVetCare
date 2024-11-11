@@ -97,6 +97,7 @@ public class IniciarSesionController {
 
             Map<String, String> response = new HashMap<>();
             response.put("token", token);
+            System.out.println(token);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (NoSuchElementException e) {
@@ -119,6 +120,7 @@ public class IniciarSesionController {
 
             Map<String, String> response = new HashMap<>();
             response.put("token", token);
+            System.out.println(token);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (NoSuchElementException e) {

@@ -24,6 +24,7 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.security.CustomUserDetailsService;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.ClienteService;
+import com.example.demo.service.EspecialidadService;
 import com.example.demo.service.MascotaService;
 import com.example.demo.service.VeterinarioService;
 
@@ -43,6 +44,9 @@ public class VeterinarioController {
 
     @Autowired
     private VeterinarioService veterinarioService;
+
+    @Autowired
+    private EspecialidadService especialidadService;
 
     @Autowired
     UserRepository userRepository;
@@ -165,14 +169,6 @@ public class VeterinarioController {
                 // Si la cédula ya está en uso por otro veterinario, retornar error
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(null); 
             }
-
-            // Actualizar datos del veterinario
-            existingVet.setCedula(existingVet.getCedula());
-            existingVet.setContrasena(veterinarioActualizado.getContrasena());
-            existingVet.setFoto(veterinarioActualizado.getFoto());
-            existingVet.setNombre(veterinarioActualizado.getNombre());
-            existingVet.setEstado(veterinarioActualizado.getEstado());
-            existingVet.setEspecialidad(existingVet.getEspecialidad());
 
             // Guardar cambios
             veterinarioService.actualizarVet(veterinarioActualizado);
