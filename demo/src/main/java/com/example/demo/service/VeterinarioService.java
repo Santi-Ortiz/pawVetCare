@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Tratamiento;
 import com.example.demo.entity.Veterinario;
@@ -35,9 +36,14 @@ public class VeterinarioService {
 
     @Transactional
     public Veterinario agregarVet(Veterinario veterinario){
-        if(veterinarioRepository.findByCedula(veterinario.getCedula()) == null){
-            return veterinarioRepository.save(veterinario);
+        Veterinario prueba = veterinarioRepository.findByCedula(veterinario.getCedula());
+        if(prueba == null){
+            System.out.println("aqui");
+            Veterinario savedVet = veterinarioRepository.save(veterinario);
+            System.out.println("Cliente guardado: " + savedVet.toString());
+            return savedVet;
         } else {
+            System.out.println("no");
             return new Veterinario();
         }
     }

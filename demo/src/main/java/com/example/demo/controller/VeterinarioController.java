@@ -144,9 +144,10 @@ public class VeterinarioController {
     // Se agrega un veterinario nuevo
     @PostMapping("/agregar")
     public ResponseEntity<?> agregarVet(@RequestBody Veterinario veterinario) {
+        System.out.println("nombre:" + veterinario.getNombre());
         try {
             // Verificar si el veterinario ya existe por la cédula (username)
-            if (userRepository.existsByUsername(String.valueOf(veterinario.getCedula()))) {
+            if (userRepository.existsByUsername(veterinario.getCedula().toString())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: La cédula ya está en uso.");
             }
 
@@ -154,8 +155,10 @@ public class VeterinarioController {
             UserEntity userEntity = customUserDetailService.saveVet(veterinario);
             veterinario.setUser(userEntity);
 
+
             // Guardar el veterinario en la base de datos
-            Veterinario newVeterinario = veterinarioService.agregarVet(veterinario);
+            Veterinario auxVet = new Veterinario(veterinario.getCedula(), veterinario.getContrasena(), veterinario.getFoto(), veterinario.getNombre(), veterinario.getEstado(), veterinario.getEspecialidad());
+            Veterinario newVeterinario = veterinarioService.agregarVet(auxVet);
 
             if (newVeterinario == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: No se pudo guardar el veterinario.");

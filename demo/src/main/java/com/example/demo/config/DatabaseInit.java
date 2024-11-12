@@ -165,6 +165,10 @@ public class DatabaseInit implements ApplicationRunner{
         userEntity = saveUserVet(veterinarioSave);
         veterinarioSave.setUser(userEntity);
         veterinarioRepository.save(veterinarioSave);
+        veterinarioSave = Veterinario.builder().cedula(1025321192L).contrasena("123").foto("https://img.freepik.com/vector-gratis/grupo-personas-sonrientes-felices-mirando-vista-superior-ilustracion-vector-plano-fondo-blanco_1284-78599.jpg").nombre("Alejandra Casas").estado(true).especialidad(especialidadRepository.findById(1L).get()).build();
+        userEntity = saveUserVet(veterinarioSave);
+        veterinarioSave.setUser(userEntity);
+        veterinarioRepository.save(veterinarioSave);
 
         //Creación clientes
         Cliente clienteSave;
