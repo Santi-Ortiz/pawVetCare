@@ -128,8 +128,9 @@ public class VeterinarioController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); 
     }
+    
 
-    // Se obtiene un veterinario por su cedula
+    // Se obtiene un veterinario por su ID
     @GetMapping("/findID/{id}")
     public ResponseEntity<VeterinarioDTO> obtenerVetPorID(@PathVariable("id") Long id) {
         VeterinarioDTO veterinario = veterinarioService.obtenerPorID(id);
@@ -142,21 +143,32 @@ public class VeterinarioController {
 
     // Se agrega un veterinario nuevo
     @PostMapping("/agregar")
-    public ResponseEntity<Veterinario> agregarVet(@RequestBody Veterinario veterinario) {
-        /*veterinarioService.agregarVet(veterinario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(null);*/
-        if(userRepository.existsByUsername(String.valueOf(veterinario.getCedula()))) {
-            return new ResponseEntity<Veterinario>(veterinario, HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> agregarVet(@RequestBody Veterinario veterinario) {
+        try {
+            // Verificar si el veterinario ya existe por la cédula (username)
+            if (userRepository.existsByUsername(String.valueOf(veterinario.getCedula()))) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: La cédula ya está en uso.");
+            }
 
-        UserEntity userEntity = customUserDetailService.saveVet(veterinario);
-        veterinario.setUser(userEntity);
-        Veterinario newVeterinario= veterinarioService.agregarVet(veterinario);
-        if(newVeterinario == null){
-            return new ResponseEntity<Veterinario>(newVeterinario, HttpStatus.BAD_REQUEST);
+            // Crear el usuario asociado al veterinario
+            UserEntity userEntity = customUserDetailService.saveVet(veterinario);
+            veterinario.setUser(userEntity);
+
+            // Guardar el veterinario en la base de datos
+            Veterinario newVeterinario = veterinarioService.agregarVet(veterinario);
+
+            if (newVeterinario == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: No se pudo guardar el veterinario.");
+            }
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(newVeterinario);
+        } catch (Exception ex) {
+            // Manejar errores generales y devolver un mensaje genérico
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                .body("Ocurrió un error al guardar el veterinario: " + ex.getMessage());
         }
-        return new ResponseEntity<Veterinario>(newVeterinario, HttpStatus.CREATED);
     }
+
 
     @PutMapping("/update/{cedula}")
     public ResponseEntity<VeterinarioDTO> actualizarInfoVet(@PathVariable("cedula") Long cedula, @RequestBody VeterinarioDTO veterinarioActualizado) {

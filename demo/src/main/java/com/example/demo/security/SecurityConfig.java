@@ -49,13 +49,14 @@ public class SecurityConfig {
                 
                 // Rutas compartidas entre ADMIN y VET
                 .requestMatchers("/api/veterinario/**").hasAnyAuthority("ADMIN", "VET")
+                .requestMatchers("/api/medicamento/**").hasAnyAuthority("ADMIN", "VET")
                 
                 // Rutas compartidas entre ADMIN y CLIENTE
                 .requestMatchers("/api/cliente/**").hasAnyAuthority("ADMIN", "CLIENTE", "VET")
                 .requestMatchers("/api/mascota/**").hasAnyAuthority("ADMIN", "CLIENTE", "VET")
                 
                 // Rutas exclusivas de ADMIN
-                .requestMatchers("/api/medicamento/**").hasAuthority("ADMIN")
+                //.requestMatchers("/api/medicamento/**").hasAuthority("ADMIN")
                 
                 .anyRequest().permitAll()
             ).exceptionHandling( exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));

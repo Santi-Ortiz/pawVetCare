@@ -75,6 +75,19 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
+    // Obtener todas las mascotas del cliente autenticado
+    @GetMapping("/mascotasCID/{id}")
+    public ResponseEntity<List<Mascota>> obtenerTodasMascotasClienteExacto(@PathVariable("id") Long idCliente) {
+        String correo = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println("Correo autenticado: " + idCliente);
+        Cliente cliente = clienteService.obtenerClientePorCedula(Long.valueOf(idCliente));
+        if (cliente != null) {
+            List<Mascota> mascotas = cliente.getMascotas();
+            return ResponseEntity.ok(mascotas);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
 
 
     // Obtener todos los clientes
