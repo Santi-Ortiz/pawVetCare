@@ -2,6 +2,16 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="usuario")
 
@@ -14,26 +24,7 @@ public class Usuario {
     @Column(nullable = false, unique = true)
     private String tipoUsuario;
 
-    public Usuario() {}
-
     public Usuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTipo_usuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipo_usuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-     
 }

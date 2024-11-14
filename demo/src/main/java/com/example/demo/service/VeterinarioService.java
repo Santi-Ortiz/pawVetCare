@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Tratamiento;
 import com.example.demo.entity.Veterinario;
@@ -35,9 +36,14 @@ public class VeterinarioService {
 
     @Transactional
     public Veterinario agregarVet(Veterinario veterinario){
-        if(veterinarioRepository.findByCedula(veterinario.getCedula()) == null){
-            return veterinarioRepository.save(veterinario);
+        Veterinario prueba = veterinarioRepository.findByCedula(veterinario.getCedula());
+        if(prueba == null){
+            System.out.println("aqui");
+            Veterinario savedVet = veterinarioRepository.save(veterinario);
+            System.out.println("Cliente guardado: " + savedVet.toString());
+            return savedVet;
         } else {
+            System.out.println("no");
             return new Veterinario();
         }
     }
@@ -58,14 +64,12 @@ public class VeterinarioService {
         vetExistente.setFoto(veterinarioDTO.getFoto());
         vetExistente.setEstado(veterinarioDTO.getEstado());
 
-        // Verifica si especialidad_id no es null antes de intentar obtener la especialidad
-        if (veterinarioDTO.getEspecialidad_id() != null) {
-            Especialidad especialidad = especialidadRepository.findById((long) veterinarioDTO.getEspecialidad_id())
-                    .orElseThrow(() -> new NoSuchElementException("La especialidad con el ID " + veterinarioDTO.getEspecialidad_id() + " no existe."));
-            vetExistente.setEspecialidad(especialidad);
-        } else {
-            vetExistente.setEspecialidad(null); // Opcionalmente, establece la especialidad en null si no se proporciona un ID
-        }
+       // Busca la especialidad existente en la base de datos
+        Especialidad especialidad = especialidadRepository.findByNombreEspecialidad(veterinarioDTO.getNombreEspecialidad())
+            .orElseThrow(() -> new NoSuchElementException("La especialidad con el nombre '" + veterinarioDTO.getNombreEspecialidad() + "' no existe."));
+
+        
+        vetExistente.setEspecialidad(especialidad);
 
         // Guarda los cambios
         veterinarioRepository.save(vetExistente);
@@ -96,7 +100,7 @@ public class VeterinarioService {
         veterinarioDTO.setFoto(veterinario.getFoto());
     
         if (veterinario.getEspecialidad() != null) {
-            veterinarioDTO.setNombreEspecialidad(veterinario.getEspecialidad().getNombre_especialidad());
+            veterinarioDTO.setNombreEspecialidad(veterinario.getEspecialidad().getNombreEspecialidad());
         } else {
             veterinarioDTO.setNombreEspecialidad("Sin Especialidad");
         }

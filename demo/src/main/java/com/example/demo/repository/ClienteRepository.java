@@ -11,7 +11,10 @@ import org.springframework.data.repository.query.Param;
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 
     Cliente findByCedula(Long cedula);
+
     boolean existsByCedula(Long cedula);
+
+    Cliente findByCorreo(String correo);
 
     @Query("SELECT COUNT(m) FROM Mascota m WHERE m.cliente.cedula = :cedula")
     long countMascotasByClienteId(@Param("cedula") Long cedula);

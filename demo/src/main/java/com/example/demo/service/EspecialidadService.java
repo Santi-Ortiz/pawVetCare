@@ -22,8 +22,13 @@ public class EspecialidadService {
     }
 
     @Transactional
+    public Especialidad buscarPorNombre(String nombre_espe){
+      return especialidadRepository.findByNombreEspecialidad(nombre_espe).get();
+    }
+
+    @Transactional
     public void eliminarEspecialidad(String nombre_espe){
-      especialidadRepository.delete(especialidadRepository.findByNombreEspecialidad(nombre_espe));
+      especialidadRepository.delete(especialidadRepository.findByNombreEspecialidad(nombre_espe).get());
     }
 
     @Transactional

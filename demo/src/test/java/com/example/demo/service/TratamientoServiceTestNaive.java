@@ -1,33 +1,21 @@
 package com.example.demo.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Mascota;
 import com.example.demo.entity.Medicamento;
 import com.example.demo.entity.Tratamiento;
-import com.example.demo.entity.TratamientoMedicamento;
 import com.example.demo.entity.Veterinario;
-import com.example.demo.repository.EspecialidadRepository;
 import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.MedicamentoRepository;
-import com.example.demo.repository.TratamientoMedicamentoRepository;
 import com.example.demo.repository.TratamientoRepository;
 import com.example.demo.repository.VeterinarioRepository;
 
@@ -42,9 +30,6 @@ public class TratamientoServiceTestNaive {
     private TratamientoRepository tratamientoRepository;
 
     @Autowired
-    private TratamientoMedicamentoRepository tratamientoMedicamentoRepository;
-
-    @Autowired
     private MedicamentoRepository medicamentoRepository;
 
     @Autowired
@@ -52,9 +37,6 @@ public class TratamientoServiceTestNaive {
 
     @Autowired
     private MascotaRepository mascotaRepository;
-
-    @Autowired
-    private EspecialidadRepository especialidadRepository;
 
     @Test
     public void TratamientoService_agregarTratamiento_Tratamiento() {

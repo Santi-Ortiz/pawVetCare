@@ -1,10 +1,14 @@
 package com.example.demo.controller;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,10 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Mascota;
+import com.example.demo.entity.UserEntity;
+import com.example.demo.entity.Veterinario;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.security.CustomUserDetailsService;
 import com.example.demo.service.ClienteService;
 import com.example.demo.service.MascotaService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -28,6 +37,12 @@ public class ClienteController {
 
     @Autowired 
     private ClienteService clienteService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailsService customUserDetailService;
 
     @Autowired 
     private MascotaService mascotaService;
@@ -47,17 +62,32 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Mascota no encontrada
     }
 
-    // Obtener todas las mascotas de un cliente
-    @GetMapping("/mascotas/{id}")
-    public ResponseEntity<List<Mascota>> obtenerTodasMascotasCliente(@PathVariable("id") Long identificacion) {
-        Cliente cliente = clienteService.obtenerCliente(identificacion);
+    // Obtener todas las mascotas del cliente autenticado
+    @GetMapping("/mascotas")
+    public ResponseEntity<List<Mascota>> obtenerTodasMascotasCliente() {
+        String correo = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println("Correo autenticado: " + correo);
+        Cliente cliente = clienteService.obtenerClientePorCedula(Long.valueOf(correo));
         if (cliente != null) {
-            // Devolvemos la lista de mascotas asociadas al cliente
             List<Mascota> mascotas = cliente.getMascotas();
             return ResponseEntity.ok(mascotas);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Cliente no encontrado
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
+
+    // Obtener todas las mascotas del cliente autenticado
+    @GetMapping("/mascotasCID/{id}")
+    public ResponseEntity<List<Mascota>> obtenerTodasMascotasClienteExacto(@PathVariable("id") Long idCliente) {
+        String correo = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println("Correo autenticado: " + idCliente);
+        Cliente cliente = clienteService.obtenerClientePorCedula(Long.valueOf(idCliente));
+        if (cliente != null) {
+            List<Mascota> mascotas = cliente.getMascotas();
+            return ResponseEntity.ok(mascotas);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
 
 
     // Obtener todos los clientes
@@ -90,10 +120,34 @@ public class ClienteController {
 
     // Agregar un nuevo cliente
     @PostMapping("/agregar")
-    public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
-        Cliente nuevoCliente = clienteService.add(cliente); // Guardar y obtener el cliente creado
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoCliente); // Devolver el cliente creado
+    public ResponseEntity<?> agregarCliente(@Valid @RequestBody Cliente cliente, BindingResult result) {
+        if (result.hasErrors()) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(result.getAllErrors().stream()
+                            .map(ObjectError::getDefaultMessage)
+                            .collect(Collectors.toList()));
+        }
+
+        // Verificar si el username ya existe
+        if (userRepository.existsByUsername(cliente.getCedula().toString())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("El username ya existe");
+        }
+        
+        try {
+            Cliente clienteaux = new Cliente(cliente.getCedula(), cliente.getNombre(), cliente.getCorreo(), cliente.getCelular());
+            UserEntity userEntity = customUserDetailService.saveCliente(clienteaux);
+            clienteaux.setUser(userEntity);
+
+            Cliente newCliente = clienteService.add(clienteaux);
+            return ResponseEntity.status(HttpStatus.CREATED).body(newCliente);
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Ocurrió un error al agregar el cliente: " + e.getMessage());
+        }
     }
+
 
 
     // Actualizar información de un cliente (admin)

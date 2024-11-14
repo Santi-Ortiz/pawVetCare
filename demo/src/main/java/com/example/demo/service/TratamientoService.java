@@ -6,20 +6,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Tratamiento;
 import com.example.demo.entity.TratamientoMedicamento;
-import com.example.demo.entity.Veterinario;
-import com.example.demo.entity.Mascota;
 import com.example.demo.entity.Medicamento;
-import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.MedicamentoRepository;
 import com.example.demo.repository.TratamientoMedicamentoRepository;
 import com.example.demo.repository.TratamientoRepository;
-import com.example.demo.repository.VeterinarioRepository;
 
 @Service
 public class TratamientoService {

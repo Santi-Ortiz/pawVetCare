@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Especialidad;
 import com.example.demo.entity.Mascota;
+import com.example.demo.entity.UserEntity;
 import com.example.demo.entity.Veterinario;
 import com.example.demo.entity.VeterinarioDTO;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.security.CustomUserDetailsService;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.ClienteService;
 import com.example.demo.service.EspecialidadService;
@@ -45,6 +48,12 @@ public class VeterinarioController {
 
     @Autowired
     private EspecialidadService especialidadService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CustomUserDetailsService customUserDetailService;
 
     // Obtener todas las mascotas (Veterinario)
     @GetMapping("/mascotas")
@@ -120,8 +129,9 @@ public class VeterinarioController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); 
     }
+    
 
-    // Se obtiene un veterinario por su cedula
+    // Se obtiene un veterinario por su ID
     @GetMapping("/findID/{id}")
     public ResponseEntity<VeterinarioDTO> obtenerVetPorID(@PathVariable("id") Long id) {
         VeterinarioDTO veterinario = veterinarioService.obtenerPorID(id);
@@ -134,21 +144,50 @@ public class VeterinarioController {
 
     // Se agrega un veterinario nuevo
     @PostMapping("/agregar")
-    public ResponseEntity<Veterinario> agregarVet(@RequestBody Veterinario veterinario) {
-        veterinarioService.agregarVet(veterinario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(null);
+    public ResponseEntity<?> agregarVet(@RequestBody Veterinario veterinario) {
+        System.out.println("nombre:" + veterinario.getNombre());
+        try {
+            // Verificar si el veterinario ya existe por la cédula (username)
+            if (userRepository.existsByUsername(veterinario.getCedula().toString())) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: La cédula ya está en uso.");
+            }
+
+            // Crear el usuario asociado al veterinario
+            UserEntity userEntity = customUserDetailService.saveVet(veterinario);
+            veterinario.setUser(userEntity);
+
+
+            // Guardar el veterinario en la base de datos
+            Veterinario auxVet = new Veterinario(veterinario.getCedula(), veterinario.getContrasena(), veterinario.getFoto(), veterinario.getNombre(), veterinario.getEstado(), veterinario.getEspecialidad());
+            Veterinario newVeterinario = veterinarioService.agregarVet(auxVet);
+
+            if (newVeterinario == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: No se pudo guardar el veterinario.");
+            }
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(newVeterinario);
+        } catch (Exception ex) {
+            // Manejar errores generales y devolver un mensaje genérico
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                .body("Ocurrió un error al guardar el veterinario: " + ex.getMessage());
+        }
     }
+
 
     @PutMapping("/update/{cedula}")
     public ResponseEntity<VeterinarioDTO> actualizarInfoVet(@PathVariable("cedula") Long cedula, @RequestBody VeterinarioDTO veterinarioActualizado) {
         // Buscar el veterinario existente por cédula
         Veterinario existingVet = veterinarioService.buscarVetPorCedula(cedula);
+        
+        if (existingVet != null) {
+            // Verificar si la cédula ya pertenece a otro veterinario
+            Veterinario vetConMismaCedula = veterinarioService.buscarVetPorCedula(veterinarioActualizado.getCedula());
+            if (vetConMismaCedula != null && !vetConMismaCedula.getId().equals(existingVet.getId())) {
+                // Si la cédula ya está en uso por otro veterinario, retornar error
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(null); 
+            }
 
-        if (existingVet == null) {
-            // Si el veterinario no existe, retornar 404
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        } else {
-            // Actualizar el veterinario con los datos del DTO recibido
+            // Guardar cambios
             veterinarioService.actualizarVet(veterinarioActualizado);
             
             // Obtener el veterinario actualizado después de la modificación
